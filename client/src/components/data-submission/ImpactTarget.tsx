@@ -45,6 +45,7 @@ const ImpactTarget = () => {
         dispatch(setUserRecord(data));
         await dataActor.addUserRecord(data);
         dispatch(setDataComponent("Measurements"));
+        dispatch(setUserRecord(data));
       } catch (error) {
         console.log("Error adding impact targets", error);
       }
@@ -53,6 +54,8 @@ const ImpactTarget = () => {
       console.log("Error adding impact targets, no dataActor or userRecord");
     }
   };
+
+  console.log("selectedTargets", selectedTargets)
 
   return (
     <div>
@@ -65,7 +68,7 @@ const ImpactTarget = () => {
             key={target.id}
             className="rounded-lg flex items-center justify-center"
           >
-            <TargetCard {...{ target, setSelectedTargets }} />
+            <TargetCard {...{ target, setSelectedTargets, userRecord }} />
           </div>
         ))}
       </div>

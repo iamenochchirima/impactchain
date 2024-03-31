@@ -23,11 +23,8 @@ const MeasurementCard: FC<Props> = ({
 }) => {
   const measurement = targetOptions.find((t) => t.id === Number(target.id));
   const [localTarget, setLocalTarget] = useState<ImpactTarget>(target);
-  const [selectedMeasurements, setSelectedMeasurements] = useState<string[]>(
-    []
-  );
+  const [selectedMeasurements, setSelectedMeasurements] = useState<string[]>(target.measurements[0] || []);
 
-  console.log("Local Target", localTarget);
 
   useEffect(() => {
     const updatedTarget: ImpactTarget = {
@@ -38,17 +35,18 @@ const MeasurementCard: FC<Props> = ({
     const updatedTargets = targets.map((t) =>
       t.id === target.id ? updatedTarget : t
     );
+    setTargets(updatedTargets);
     if (record) {
       const updatedRecord: UserRecord = {
         ...record,
         impactTargets: [updatedTargets],
       };
       setRecord(updatedRecord);
+      
     }
   }, [selectedMeasurements]);
 
-  console.log("Local Target", localTarget);
-  console.log("Record", record);
+
   return (
     <div className="flex flex-col rounded-3xl bg-black p-10 slide-fwd-center">
       <div className="flex items-center justify-center">
@@ -60,7 +58,7 @@ const MeasurementCard: FC<Props> = ({
       </div>
       <div className="flex flex-col gap-3 mt-5">
         {measurement?.measurements.map((m) => (
-          <MeasurementItem key={m.id} {...{ m, setSelectedMeasurements }} />
+          <MeasurementItem key={m.id} {...{ m, setSelectedMeasurements , selectedMeasurements}} />
         ))}
       </div>
     </div>

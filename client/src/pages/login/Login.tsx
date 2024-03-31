@@ -71,7 +71,7 @@ const Login = () => {
           <h3 className=" font-NeueMachinaRegular text-5xl text-custom-green">
             Login
           </h3>
-          <h3 className="text-2xl py-3 font-PoppinsRegular text-center w-full ">
+          <h3 className="text-2xl py-3 font-TelegraphBold text-center w-full ">
             Sign in to continue
           </h3>
         </div>

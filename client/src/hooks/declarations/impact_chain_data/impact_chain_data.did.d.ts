@@ -8,18 +8,18 @@ export interface IOTDevice {
   'platform' : string,
   'ipAdress' : string,
 }
-export interface ImpactTarget {
-  'id' : bigint,
-  'name' : string,
-  'targetRecords' : [] | [TargetRecords],
-  'measurements' : [] | [Array<string>],
-}
 export type Result = { 'ok' : UserRecord } |
   { 'err' : string };
 export interface TargetRecords {
   'documents' : [] | [Array<string>],
   'goal' : [] | [string],
   'iotDevice' : [] | [IOTDevice],
+}
+export interface ImpactTarget {
+  'id' : bigint,
+  'name' : string,
+  'targetRecords' : [] | [TargetRecords],
+  'measurements' : [] | [Array<string>],
 }
 export interface UserRecord {
   'aboutCompany' : {

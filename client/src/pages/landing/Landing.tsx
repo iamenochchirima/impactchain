@@ -24,7 +24,7 @@ const LandingPage = () => {
 
       <Link
         to="login"
-        className=" mt-20 bg-custom-green px-20 py-2 items-center font-['PP Telegraf'] font-extrabold text-xl text-center rounded-full"
+        className=" mt-20 bg-custom-green px-20 py-2 items-center font-TelegraphRegular font-extrabold text-xl text-center rounded-full"
       >
         Login
       </Link>

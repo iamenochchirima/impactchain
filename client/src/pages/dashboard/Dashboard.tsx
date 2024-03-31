@@ -1,20 +1,51 @@
-import React from 'react'
+import React, {useState, useEffect, useRef} from 'react';
+
 
 const Dashboard = () => {
+
+  const[isOpen, setIsOpen] = useState(false);
+  const[selectedItem, setSelectedItem] = useState('Time Period');
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if(dropdownRef.current && !dropdownRef.current.contains(event.target)){
+        setIsOpen(false);
+      
+      }
+  }
+
+  document.addEventListener("mousedown", handleClickOutside);
+  return()=> document.removeEventListener("mousedown", handleClickOutside);
+},[dropdownRef]);
+
   return (
     <div>
       <div className="flex">
-    <div className="w-[393px] h-[50px] text-center text-white text-[40px] font-NeueMachinaUltrabold"> 
-    Impact Overview
-    </div>
-    
-    <div className="w-[200px] h-[50px] justify-center items-center inline-flex">
-    <div className="w-[200px] h-[50px] relative">
-        <div className="w-[200px] h-[50px] left-0 top-0 absolute bg-zinc-300 rounded-[20px] border-2 border-neutral-800" />
-        <div className="w-[130.43px] h-[22.86px] left-[35px] top-[14px] absolute text-neutral-800 text-xl font-normal font-['PP Telegraf']">Time Period</div>
-        <img className="w-[33.99px] h-[29.29px] left-[153.36px] top-[7.86px] absolute" src="https://via.placeholder.com/34x29" />
-    </div>
-</div>
+      <div className="w-[393px] h-[50px] text-center text-white text-[40px] font-NeueMachinaUltrabold"> 
+      Impact Overview
+      </div>
+
+      {/* Drop down Menu */}
+      <div className="relative" ref={dropdownRef}>
+        <button onClick={() => setIsOpen(!isOpen)} className="bg-[#d9d9d9] text-black font-TelegraphRegular text-center items-center">
+          <span>{selectedItem}</span>
+        </button>
+        {isOpen && (
+          <div className="absolute bg-[#d9d9d9] shadow-lg rounded">
+            {['Week', 'Month', '3 Months', '6 Months', 'Year'].map((item) =>(
+              <a href ="#" key={item} onClick={(e) => {
+                e.preventDefault();
+                setSelectedItem(item);
+                setIsOpen(false);
+              }} className="block px-4 py-2 text-sm text-black hover:bg-gray-100">
+                {item}
+              </a>
+            ))}
+            </div>
+        )}
+      </div>
+
     </div>
 
 

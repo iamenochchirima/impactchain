@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
-const TargetCard = ({ target, setSelectedTargets, userRecord }) => {
+const TargetCard = ({ target, setSelectedTargets}) => {
   const [selectedButton, setSelectedButton] = useState<boolean>(false);
+  const { userRecord } = useSelector((state: RootState) => state.app);
 
   useEffect(() => {
-    console.log("userRecord", userRecord);
-    if (
-          userRecord.impactTargets.length > 0 &&
-          (userRecord.impactTargets[0]?.length ?? 0) > 0
-        ) {
-      const _innerTargets = Array.isArray(userRecord.impactTargets[0]?.[0])
-        ? userRecord.impactTargets[0]?.[0]
+if (userRecord) {
+  if (userRecord.impactTargets.length > 0 && (userRecord.impactTargets[0]?.length ?? 0) > 0) {
+    const _innerTargets = Array.isArray(userRecord.impactTargets[0])
+        ? userRecord.impactTargets[0]
         : [];
-      const _sortedTargets = [..._innerTargets].sort(
+
+    const _sortedTargets = [..._innerTargets].sort(
         (a, b) => Number(a.id) - Number(b.id)
-      );
-      console.log("sortedTargets", _sortedTargets)
-      if (_sortedTargets.find((t) => t.id === target.id)) {
+    )
+
+    if (Array.isArray(_sortedTargets[0])) {
+      const found = _sortedTargets[0].find((t) => Number(t.id) === target.id);
+      if (found) {
         setSelectedTargets((prev) => {
           const prevArray = Array.isArray(prev) ? prev : [];
           if (prevArray.some((t) => t.id === target.id)) {
@@ -27,47 +30,24 @@ const TargetCard = ({ target, setSelectedTargets, userRecord }) => {
         });
         setSelectedButton(true);
       }
-      console.log("selectedTargets", selectedButton, target.id);
+    } else {
+      const found = _sortedTargets.find((t) => Number(t.id) === target.id);
+      if (found) {
+        setSelectedTargets((prev) => {
+          const prevArray = Array.isArray(prev) ? prev : [];
+          if (prevArray.some((t) => t.id === target.id)) {
+            return prevArray;
+          } else {
+            return [...prevArray, target];
+          }
+        });
+        setSelectedButton(true);
+      }
     }
+  }
+}
   }, [userRecord, target, setSelectedButton]);
-
-
-  // useEffect(() => {
-  //   if (userRecord) {
-  //     console.log("userRecord", userRecord);
-  //   console.log("userRecord", userRecord);
-  //   if (
-  //     userRecord.impactTargets.length > 0 &&
-  //     (userRecord.impactTargets[0]?.length ?? 0) > 0
-  //   ) {
-  //     const _innerTargets = Array.isArray(userRecord.impactTargets[0])
-  //       ? userRecord.impactTargets[0] as ImpactTarget[]
-  //       : [];
-  //     const _sortedTargets = _innerTargets.sort(
-  //       (a, b) => Number(a.id) - Number(b.id)
-  //     );
-
-  //     console.log("Inner Targets", _innerTargets);
-  //     console.log("sortedTargets", _sortedTargets);
-  //     console.log("Target ID:", target.id);
-  //     const flatTargets = _sortedTargets
-  //     console.log("flatTargets", flatTargets[0]);
-  //     console.log("find: ", flatTargets[0].find((t) => Number(t.id) === Number(target.id)));
-      
-  //     if (_sortedTargets.find((t) => Number(t.id) === Number(target.id))) {
-  //       setSelectedTargets((prev) => {
-  //         const prevArray = Array.isArray(prev) ? prev : [];
-  //         if (!prevArray.some((t) => Number(t.id) === Number(target.id))) {
-  //           return [...prevArray, target];
-  //         }
-  //         return prevArray;
-  //       });
-  //       setSelectedButton(true);
-  //     }
-      
-  //   }
-  //   }
-  // }, [userRecord, target, setSelectedButton]);
+  
   
   const handleClicked = () => {
     setSelectedButton(!selectedButton);

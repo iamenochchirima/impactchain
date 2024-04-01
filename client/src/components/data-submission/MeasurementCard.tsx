@@ -23,7 +23,7 @@ const MeasurementCard: FC<Props> = ({
 }) => {
   const measurement = targetOptions.find((t) => t.id === Number(target.id));
   const [localTarget, setLocalTarget] = useState<ImpactTarget>(target);
-  const [selectedMeasurements, setSelectedMeasurements] = useState<string[]>(target.measurements[0] || []);
+  const [selectedMeasurements, setSelectedMeasurements] = useState<string[]>(target?.measurements[0] || []);
 
 
   useEffect(() => {

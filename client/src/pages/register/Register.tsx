@@ -101,15 +101,15 @@ const Register = () => {
             </h3>
           </div>
           <div className="flex ">
-            <div className="w-full max-w-xs">
+            <div className="w-full max-w-sm">
               <form
                 onSubmit={handleSubmit(handleSave)}
-                className="bg-black shadow-md font-PoppinsRegular rounded px-8 pt-6 pb-8 mb-4"
+                className="bg-black shadow-md font-TelegraphRegular rounded px-8 pt-6 pb-8"
               >
                 <div className="flex gap-3 items-center">
                 <div className="mb-4">
                   <input
-                    className="shadow placeholder-white min-w-[150px]  placeholder:font-semibold  rounded-3xl appearance-none border-2 border-green-500 w-[100px] py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
+                    className="shadow placeholder-white min-w-[150px]  placeholder:font-semibold  rounded-3xl appearance-none border-2 border-green-500 w-full py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
                     id="firstname"
                     type="text"
                     placeholder="First Name"
@@ -119,7 +119,7 @@ const Register = () => {
                 </div>
                 <div className="mb-4">
                   <input
-                    className="shadow placeholder-white min-w-[150px]  placeholder:font-semibold  rounded-3xl appearance-none border-2 border-green-500 w-[100px] py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
+                    className="shadow placeholder-white min-w-[150px]  placeholder:font-semibold  rounded-3xl appearance-none border-2 border-green-500 w-1/5 py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
                     id="lastname"
                     type="text"
                     placeholder="Last Name"

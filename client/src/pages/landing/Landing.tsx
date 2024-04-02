@@ -15,7 +15,7 @@ const LandingPage = () => {
         <source src="video.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-      <div className="z-10 flex flex-col items-center ">
+      <div className="z-10 flex flex-col items-center justify-center">
       <img
         className="w-[250px] h-[250px]"
         src="/i.c.logo2.png"

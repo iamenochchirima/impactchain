@@ -155,15 +155,15 @@ const About = () => {
           onClick={handleSubmit}
           className="mx-32 px-10 py-1.5 bg-custom-green rounded-full text-black font-bold"
         >
-          {loading ? "Loading..." : "Save & Continue"}
+          {loading ? "Loading..." : "Continue"}
         </button>
-        {userRecord && (
+        {/* {userRecord && (
           <button
           onClick={handleNext}
           >
             <span className="text-custom-green mx-32">Next</span>
           </button>
-        )}
+        )} */}
       </div>
     </div>
   );

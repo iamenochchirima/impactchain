@@ -16,5 +16,11 @@ export const isDataIncomplete = (info: UserRecord) => {
   if (withoutMeasurements > 0) {
     return "Measurements";
   }
+
+  if (info.impactTargets[0].length > 0) {
+    if (info.impactTargets[0][0].targetRecords.length === 0) {
+      return "TargetRecords";
+    }
+  }
   return "ok";
 };

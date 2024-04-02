@@ -1,13 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaSquare } from "react-icons/fa";
 import { FaRegSquare } from "react-icons/fa";
 
-const MeasurementItem = ({ m, setSelectedMeasurements }) => {
+const MeasurementItem = ({
+  m,
+  setSelectedMeasurements,
+  selectedMeasurements,
+}) => {
   const [selectedButton, setSelectedButton] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (selectedMeasurements.includes(m.description)) {
+      setSelectedButton(true);
+    }
+  }, [selectedMeasurements]);
 
   const handleClicked = () => {
     setSelectedButton(!selectedButton);
-    setSelectedMeasurements((prev) => [...(prev || []), m.description]);
+    if (selectedMeasurements.includes(m.description)) {
+      setSelectedMeasurements(
+        selectedMeasurements.filter((item) => item !== m.description)
+      );
+    } else {
+      setSelectedMeasurements((prev) => [...(prev || []), m.description]);
+    }
   };
   return (
     <div
@@ -16,9 +32,9 @@ const MeasurementItem = ({ m, setSelectedMeasurements }) => {
     >
       <span>
         {selectedButton ? (
-            <FaSquare size={30} className=" text-white" />
+          <FaSquare size={30} className=" text-white" />
         ) : (
-            <FaRegSquare size={30} className=" text-white" />
+          <FaRegSquare size={30} className=" text-white" />
         )}
       </span>
       <span className="leading-tight">{m.description}</span>

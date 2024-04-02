@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 
 const LandingPage = () => {
+
+  
   return (
     <div className="min-h-screen overflow-hidden flex-col flex items-center ">
        {/* Background Video */}

@@ -3,6 +3,7 @@ export type TargetOption = {
   name: string;
   icon: string;
   color: string;
+  rectangle: string;
   measurements: Measurement[];
 };
 
@@ -17,6 +18,7 @@ export const targetOptions: TargetOption[] = [
     name: "No Poverty",
     icon: "/target/18.svg",
     color: "#E5243B",
+    rectangle: "#c44c5b",
     measurements: [
       {
         id: 1,
@@ -53,6 +55,7 @@ export const targetOptions: TargetOption[] = [
     name: "Zero Hunger",
     icon: "/target/19.svg",
     color: "#DDA63A",
+    rectangle: "#bc9a59",
     measurements: [
       {
         id: 1,
@@ -85,6 +88,7 @@ export const targetOptions: TargetOption[] = [
     name: "Good Health and Well-being",
     icon: "/target/20.svg",
     color: "#4C9F38",
+    rectangle: "#659858",
     measurements: [
       {
         id: 1,
@@ -117,6 +121,7 @@ export const targetOptions: TargetOption[] = [
     name: "Quality Education",
     icon: "/target/4.svg",
     color: "#C5192D",
+    rectangle: "#b24552",
     measurements: [
       {
         id: 1,
@@ -149,6 +154,7 @@ export const targetOptions: TargetOption[] = [
     name: "Gender Equality",
     icon: "/target/5.svg",
     color: "#FF3A21",
+    rectangle: "#d45a4a",
     measurements: [
       {
         id: 1,
@@ -181,6 +187,7 @@ export const targetOptions: TargetOption[] = [
     name: "Clean Water and Sanitation",
     icon: "/target/6.svg",
     color: "#26BDE2",
+    rectangle: "#4ea9c1",
     measurements: [
       {
         id: 1,
@@ -213,6 +220,7 @@ export const targetOptions: TargetOption[] = [
     name: "Affordable and Clean Energy",
     icon: "/target/7.svg",
     color: "#FCC30B",
+    rectangle: "#ceac3c",
     measurements: [
       {
         id: 1,
@@ -245,6 +253,7 @@ export const targetOptions: TargetOption[] = [
     name: "Decent Work and Economic Growth",
     icon: "/target/8.svg",
     color: "#A21942",
+    rectangle: "#9a465e",
     measurements: [
       {
         id: 1,
@@ -277,6 +286,7 @@ export const targetOptions: TargetOption[] = [
     name: "Industry, Innovation and Infrastructure",
     icon: "/target/9.svg",
     color: "#FD6925",
+    rectangle: "#d4774c",
     measurements: [
       {
         id: 1,
@@ -309,6 +319,7 @@ export const targetOptions: TargetOption[] = [
     name: "Reduced Inequality",
     icon: "/target/10.svg",
     color: "#DD1367",
+    rectangle: "#be4275",
     measurements: [
       {
         id: 1,
@@ -341,6 +352,7 @@ export const targetOptions: TargetOption[] = [
     name: "Sustainable Cities and Communities",
     icon: "/target/22.svg",
     color: "#FD9D24",
+    rectangle: "#d3974c",
     measurements: [
       {
         id: 1,
@@ -373,6 +385,7 @@ export const targetOptions: TargetOption[] = [
     name: "Responsible Consumption and Production",
     icon: "/target/12.svg",
     color: "#BF8B2E",
+    rectangle: "#ad8d52",
     measurements: [
       {
         id: 1,
@@ -405,6 +418,7 @@ export const targetOptions: TargetOption[] = [
     name: "Climate Action",
     icon: "/target/23.svg",
     color: "#48773C",
+    rectangle: "#637f5b",
     measurements: [
       {
         id: 1,
@@ -437,6 +451,7 @@ export const targetOptions: TargetOption[] = [
     name: "Life Below Water",
     icon: "/target/14.svg",
     color: "#0A97D9",
+    rectangle: "#3c95bf",
     measurements: [
       {
         id: 1,
@@ -469,6 +484,7 @@ export const targetOptions: TargetOption[] = [
     name: "Life on Land",
     icon: "/target/15.svg",
     color: "#56C02B",
+    rectangle: "#6db051",
     measurements: [
       {
         id: 1,
@@ -501,6 +517,7 @@ export const targetOptions: TargetOption[] = [
     name: "Peace, Justice and Strong Institutions",
     icon: "/target/16.svg",
     color: "#00689D",
+    rectangle: "#367697",
     measurements: [
       {
         id: 1,
@@ -533,6 +550,7 @@ export const targetOptions: TargetOption[] = [
     name: "Partnerships for the Goals",
     icon: "/target/17.svg",
     color: "#19486A",
+    rectangle: "#456277",
     measurements: [
       {
         id: 1,

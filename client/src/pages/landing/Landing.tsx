@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 
 const LandingPage = () => {
+
+  
   return (
     <div className=" min-h-screen bg-gradient-to-t from-black to-green-500 overflow-hidden flex-col flex items-center">
       <img

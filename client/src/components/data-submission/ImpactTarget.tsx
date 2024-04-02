@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import TargetCard from "./TargetCard";
 import {
   setDataComponent,
-  setShowDataForm,
   setUserRecord,
 } from "../../redux/slices/app";
 import { useDispatch, useSelector } from "react-redux";
@@ -37,8 +36,6 @@ const ImpactTarget = () => {
       }
     }
   }, [userRecord]);
-
-  console.log("Initial Targets", initialTargets);
 
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();

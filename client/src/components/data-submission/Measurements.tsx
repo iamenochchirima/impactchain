@@ -50,10 +50,10 @@ const Measurements = () => {
   };
 
   const handleBack = () => {
-    console.log("Back");
     dispatch(setDataComponent("ImpactTarget"));
   };
   const handleNext = async () => {
+    console.log("currentIndex", currentIndex +3, targets.length)
     setCurrentIndex((prevIndex) => Math.min(prevIndex + 3, targets.length - 3));
   };
 
@@ -64,9 +64,12 @@ const Measurements = () => {
         await dataActor?.updateUserRecord(record);
         dispatch(setUserRecord(record));
         setSaving(false);
-        if (currentIndex + 3 <= targets.length) {
+        if (currentIndex + 3 < targets.length) {
          await  handleNext();
          return;
+        }
+        if (currentIndex + 3 >= targets.length) {
+          dispatch(setDataComponent("TargetRecords"));
         }
       }
     } catch (error) {
@@ -74,6 +77,7 @@ const Measurements = () => {
       setSaving(false);
     }
   };
+  
 
   return (
     <div>

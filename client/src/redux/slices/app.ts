@@ -1,10 +1,20 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { UserRecord } from "../../hooks/declarations/impact_chain_data/impact_chain_data.did";
 
+export type TargetRecordStateType = {
+  color: string;
+  name: string;
+};
+
+type TargetRecordRequest = {
+  targetRecord: TargetRecordStateType | null;
+};
+
 export interface GlobalState {
   isAuthenticated: boolean;
   userInfo: any | null;
-  storageInitiated: boolean,
+  targetRecord: TargetRecordStateType | null;
+  storageInitiated: boolean;
   showDataForm: boolean;
   dataComponent: string;
   userRecord: UserRecord | null;
@@ -15,6 +25,7 @@ const initialState: GlobalState = {
   storageInitiated: false,
   userInfo: null,
   showDataForm: false,
+  targetRecord: null,
   dataComponent: "Loading",
   userRecord: null,
 };
@@ -39,9 +50,16 @@ export const appSlice = createSlice({
     setUserRecord: (state: GlobalState, action: PayloadAction<UserRecord>) => {
       state.userRecord = action.payload;
     },
-    setStorageInit : (state: GlobalState, action: PayloadAction<boolean>) => {
+    setStorageInit: (state: GlobalState, action: PayloadAction<boolean>) => {
       state.storageInitiated = action.payload;
     },
+    setTargetRecord: (
+      state: GlobalState,
+      action: PayloadAction<TargetRecordRequest>
+    ) => {
+      state.targetRecord = action.payload.targetRecord;
+    },
+
     logout: (state: GlobalState) => {
       state.isAuthenticated = false;
       state.userInfo = null;
@@ -57,7 +75,8 @@ export const {
   setShowDataForm,
   setDataComponent,
   setUserRecord,
-  setStorageInit
+  setStorageInit,
+  setTargetRecord,
 } = appSlice.actions;
 
 export default appSlice.reducer;

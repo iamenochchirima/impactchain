@@ -119,7 +119,7 @@ const ProfileLogo = () => {
             logourl ? "bg-custom-green" : "bg-green-700"
           } px-10 py-1.5  rounded-full text-black font-bold`}
         >
-       {loading ? "Loading..." : "Save & Continue"}
+       {loading ? "Loading..." : "Continue"}
         </button>
         <button onClick={handleNext}>
           <span className="text-custom-green">Skip</span>

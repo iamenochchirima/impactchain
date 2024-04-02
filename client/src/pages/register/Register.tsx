@@ -84,48 +84,48 @@ const Register = () => {
   return (
     <>
       <div className="bg-black min-h-screen font-NeueMachinaRegular text-custom-green">
-        <h1 className="font-NeueMachinaUltrabold text-8xl pt-9 text-center">
+        <h1 className="font-NeueMachinaUltrabold text-7xl pt-16 text-center">
           <span className="text-custom-green ">impact.</span>
           <span className="text-white">chain</span>{" "}
         </h1>
         <div className="flex flex-col justify-center items-center">
-          <div className="flex flex-col items-center mt-5">
-            <h3 className=" font-NeueMachinaRegular text-5xl text-custom-green">
+          <div className="flex flex-col items-center ">
+            <h3 className=" font-NeueMachinaRegular text-3xl pt-3 text-custom-green">
               Create new account
             </h3>
-            <h3 className="text-2xl py-5 font-PoppinsRegular text-center w-full ">
+            <h3 className="text-2xl pt-3 font-TelegraphRegular text-center w-full ">
               Already have an account?{" "}
               <Link className="text-white" to="/login">
                 Login here
               </Link>
             </h3>
           </div>
-          <div className="flex items-center justify-center">
+          <div className="flex ">
             <div className="w-full max-w-xs">
               <form
                 onSubmit={handleSubmit(handleSave)}
                 className="bg-black shadow-md font-PoppinsRegular rounded px-8 pt-6 pb-8 mb-4"
               >
-                <div className="flex gap-5 items-center">
+                <div className="flex gap-3 items-center">
                 <div className="mb-4">
                   <input
-                    className="shadow placeholder-white min-w-[150px]  placeholder:font-semibold  rounded-3xl appearance-none border-2 border-green-500 w-full py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
+                    className="shadow placeholder-white min-w-[150px]  placeholder:font-semibold  rounded-3xl appearance-none border-2 border-green-500 w-[100px] py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
                     id="firstname"
                     type="text"
                     placeholder="First Name"
                     {...register("firstname", { required: "First name is required" })}
                   />
-                  <p>{errors.firstname?.message}</p>
+                  <p className="pt-2 text-[12px]">{errors.firstname?.message}</p>
                 </div>
                 <div className="mb-4">
                   <input
-                    className="shadow placeholder-white min-w-[150px]  placeholder:font-semibold  rounded-3xl appearance-none border-2 border-green-500 w-full py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
+                    className="shadow placeholder-white min-w-[150px]  placeholder:font-semibold  rounded-3xl appearance-none border-2 border-green-500 w-[100px] py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
                     id="lastname"
                     type="text"
                     placeholder="Last Name"
                     {...register("lastname", { required: "Last name is required" })}
                   />
-                  <p>{errors.lastname?.message}</p>
+                  <p className="pt-2 text-[12px]">{errors.lastname?.message}</p>
                 </div>
                 </div>
                 <div className="mb-4">
@@ -136,7 +136,7 @@ const Register = () => {
                     placeholder="Email"
                     {...register("email", { required: "Email is required" })}
                   />
-                  <p>{errors.email?.message}</p>
+                  <p className="pt-2 text-[12px]">{errors.email?.message}</p>
                 </div>
                 <div className="mb-6">
                   <input
@@ -148,7 +148,7 @@ const Register = () => {
                       required: "Password is required",
                     })}
                   />
-                  <p>{errors.password?.message}</p>
+                  <p className="pt-2 text-[12px]">{errors.password?.message}</p>
                 </div>
                 <div className="mb-6">
                   <input
@@ -160,7 +160,7 @@ const Register = () => {
                       required: "Password is required",
                     })}
                   />
-                  <p>{errors.confirmPassword?.message}</p>
+                  <p className="pt-2 text-[12px]">{errors.confirmPassword?.message}</p>
                 </div>
                 <div className="flex items-center justify-center">
                   <button
@@ -173,14 +173,14 @@ const Register = () => {
               </form>
             </div>
           </div>
-          <div className="">
-            <p>
+          <div className="mb-5">
+            <p className="text-white">
               By signing up, you agree to our{" "}
-              <a className="text-white" href="#">
+              <a className="text-green-500" href="#">
                 Terms of Service
               </a>{" "}
               and{" "}
-              <a className="text-white" href="#">
+              <a className="text-green-500" href="#">
                 Privacy Policy
               </a>
             </p>

@@ -61,17 +61,17 @@ const Login = () => {
     }
   };
   return (
-    <div className="bg-black min-h-screen font-NeueMachinaRegular text-custom-green">
-      <h1 className="font-NeueMachinaUltrabold text-8xl pt-20 text-center">
+    <div className="bg-black min-h-screen text-custom-green">
+      <h1 className="font-NeueMachinaUltrabold text-7xl pt-16 text-center">
         <span className="text-custom-green ">impact.</span>
         <span className="text-white">chain</span>{" "}
       </h1>
       <div className="flex flex-col justify-center items-center">
-        <div className="flex flex-col items-center mt-5">
-          <h3 className=" font-NeueMachinaRegular text-5xl text-custom-green">
+        <div className="flex flex-col items-center ">
+          <h3 className=" font-TelegraphBold text-3xl pt-3 text-custom-green">
             Login
           </h3>
-          <h3 className="text-2xl py-3 font-TelegraphBold text-center w-full ">
+          <h3 className="text-xl py-3 font-TelegraphBold text-center w-full ">
             Sign in to continue
           </h3>
         </div>
@@ -79,18 +79,18 @@ const Login = () => {
           <div className="w-full max-w-xs">
             <form
             onSubmit={handleSubmit(handleLogin)}
-             className="bg-black shadow-md font-PoppinsRegular rounded px-8 pt-6 pb-8 mb-4">
+             className="bg-black shadow-md font-TelegraphRegular rounded px-3 pt-3 pb-8 ">
               <div className="mb-4">
                 <input
-                  className="shadow placeholder-white min-w-[300px]  placeholder:font-semibold  rounded-3xl appearance-none border-2 border-green-500 w-full py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
+                  className="shadow placeholder-white min-w-[300px] placeholder:font-semibold  rounded-3xl appearance-none border-2 border-green-500 w-full py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
                   id="email"
                   type="email"
                   placeholder="Email"
                   {...register("email", { required: "Email is required" })}
                 />
-                <p>{errors.email?.message}</p>
+                <p className="pt-2">{errors.email?.message}</p>
               </div>
-              <div className="mb-6">
+              <div className="mb-6 ">
                 <input
                   className="shadow placeholder-white min-w-[300px]  placeholder:font-semibold  rounded-3xl appearance-none border-2 border-green-500 w-full py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
                   id="password"
@@ -98,11 +98,11 @@ const Login = () => {
                   placeholder="Password"
                   {...register("password", { required: "Password is required" })}
                 />
-                <p>{errors.password?.message}</p>
+                <p className="pt-2 ">{errors.password?.message}</p>
               </div>
               <div className="flex items-center justify-center">
                 <button
-                  className="bg-green-500 rounded-3xl px-20 py-1.5 text-black font-semibold  hover:bg-green-600font-bold focus:outline-none focus:shadow-outline"
+                  className="bg-green-500 rounded-3xl w-[150px] py-1.5 text-black   hover:bg-green-600 font-bold focus:outline-none focus:shadow-outline"
                   type="submit"
                 >
                   {isLoading ? "Loading" : "Login"}
@@ -111,7 +111,7 @@ const Login = () => {
             </form>
           </div>
         </div>
-        <div className="flex flex-col gap-5 text-xl items-center">
+        <div className="flex flex-col gap-2 text-xl font-TelegraphRegular mb-3">
         <Link to="/forgot-password">Forgot password?</Link>
         <Link to="/signup">Create an account</Link>
       </div>

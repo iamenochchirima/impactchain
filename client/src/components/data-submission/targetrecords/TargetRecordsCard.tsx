@@ -46,7 +46,7 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets }) => {
 
   };
 
-  console.log("displayedMeasurements", displayedMeasurements)
+  console.log("displayedMeasurements in TRC", displayedMeasurements)
 
 
   return (

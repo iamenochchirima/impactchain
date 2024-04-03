@@ -1,6 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
 import { IOTDevice, Measurement } from '../../../hooks/declarations/impact_chain_data/impact_chain_data.did'
-import { boolean } from 'zod'
 import UploadDocs from './UploadDocs'
 import LinkDevice from './LinkDevice'
 
@@ -18,15 +17,14 @@ const MeasurementRecords: FC<Props> = ({measurement,  displayedMeasurements, set
     const [iotDevice, setIotDevice] = useState<IOTDevice| null>(null)
     const [docs, setDocsUrls] = useState<string[]|  null>(null)
 
+    useEffect(() => {
+        setGoal("")
+        setDocsUrls(null)
+        setIotDevice(null)
+    }, [])
 
     useEffect(() => {
-        if (iotDevice) {
-            const updatedMeasurement : Measurement = {
-                ...measurement,
-                iotDevice: [iotDevice]
-            }
-            setDisplayedMeasurements(displayedMeasurements.map((m) => m.name === measurement.name ? updatedMeasurement : m))
-        }
+    
         if (docs) {
             const updatedMeasurement : Measurement = {
                 ...measurement,
@@ -41,7 +39,23 @@ const MeasurementRecords: FC<Props> = ({measurement,  displayedMeasurements, set
             }
             setDisplayedMeasurements(displayedMeasurements.map((m) => m.name === measurement.name ? updatedMeasurement : m))
         }
-    }, [docs, iotDevice, goal])
+    }, [docs, goal])
+
+    useEffect(() => {
+        if (iotDevice) {
+            const updatedMeasurement : Measurement = {
+                ...measurement,
+                iotDevice: [iotDevice]
+            }
+            const updatedMeasurements = displayedMeasurements.map((m) => m.name === measurement.name ? updatedMeasurement : m)
+            console.log("updated measurements", updatedMeasurements)
+            setDisplayedMeasurements(updatedMeasurements)
+        }
+    }, [iotDevice])
+
+    console.log("displayed measurements in MR", displayedMeasurements)
+
+    console.log("iot device in MR", iotDevice)
    
   return (
     <div className='text-white px-5 py-3'>

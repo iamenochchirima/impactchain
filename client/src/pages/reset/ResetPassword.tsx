@@ -69,13 +69,13 @@ const ResetPassword = () => {
     <div className="flex flex-col gap-3 justify-center items-center py-10 font-TelegraphRegular">
       <p className="text-3xl">Forgot Password</p>
       <p className=" text-lg">New Password</p>
-      </div>
+      
 
       <form
       onSubmit={handleSubmit(handleSave)}
-      className="bg-black  items-center shadow-md font-TelegraphRegular rounded px-8 pt-6 pb-8 max-w-sm">
+      className="bg-black shadow-md font-TelegraphRegular rounded px-8 pt-6 pb-8 max-w-sm">
 
-      <div className="mb-4">
+        <div className="mb-4">
                   <input
                     className="shadow placeholder-white  placeholder:font-semibold  rounded-3xl appearance-none border-2 border-green-500 w-full py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
                     id="email"
@@ -84,9 +84,26 @@ const ResetPassword = () => {
                     {...register("email", { required: "Email is required" })}
                   />
                   <p className="pt-2 text-[12px]">{errors.email?.message}</p>
-                </div>
+        </div>
+        <div className="flex flex-col gap-3">
+            
+            <button
+                    className="bg-green-500 w-full rounded-3xl px-20 py-1.5 text-black font-semibold  hover:bg-green-600 focus:outline-none focus:shadow-outline"
+                    type="submit"
+                  >
+                    {isLoading ? "Loading..." : "Submit"}
+            </button>
+            <button
+                    className="bg-green-500  w-full rounded-3xl px-20 py-1.5 text-black font-semibold  hover:bg-green-600 focus:outline-none focus:shadow-outline"
+                    type="submit"
+                  >
+                    {isLoading ? "Loading..." : "Return to Login"}
+            </button>
+        </div>
+
+
       </form>
-    
+      </div>
     </div>
   )
 }

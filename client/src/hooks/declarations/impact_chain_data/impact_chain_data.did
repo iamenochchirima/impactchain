@@ -5,29 +5,29 @@ type UserRecord =
     record {
       companySize: text;
       industry: text;
-      logo: opt text;
+      logo: text;
       name: text;
     };
    email: text;
    impactTargets: opt vec ImpactTarget;
- };
-type TargetRecords = 
- record {
-   documents: opt vec text;
-   goal: opt text;
-   iotDevice: opt IOTDevice;
  };
 type Result = 
  variant {
    err: text;
    ok: UserRecord;
  };
+type Measurement = 
+ record {
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   name: text;
+ };
 type ImpactTarget = 
  record {
    id: nat;
-   measurements: opt vec text;
+   measurements: vec Measurement;
    name: text;
-   targetRecords: opt TargetRecords;
  };
 type IOTDevice = 
  record {

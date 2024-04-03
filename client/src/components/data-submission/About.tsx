@@ -37,7 +37,7 @@ const About = () => {
     try {
       const data: UserRecord = {
         aboutCompany: {
-          logo: [],
+          logo: "",
           name: companyName,
           companySize: companySize,
           industry: industry,

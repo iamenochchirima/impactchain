@@ -1,7 +1,7 @@
 import { UserRecord } from "../hooks/declarations/impact_chain_data/impact_chain_data.did";
 
 export const isDataIncomplete = (info: UserRecord) => {
-  if (info.aboutCompany.logo.length === 0) {
+  if (info.aboutCompany.logo === "") {
     return "ProfileLogo";
   }
   if (info.impactTargets.length === 0) {
@@ -17,8 +17,15 @@ export const isDataIncomplete = (info: UserRecord) => {
     return "Measurements";
   }
 
+  let measurementWithoutRecords = 0;
+
   if (info.impactTargets[0].length > 0) {
-    if (info.impactTargets[0][0].targetRecords.length === 0) {
+    for (const measurement of info.impactTargets[0][0].measurements) {
+      if (measurement.documents.length === 0 && measurement.goal.length === 0) {
+        measurementWithoutRecords++;
+      }
+    }
+    if (measurementWithoutRecords > 0) {
       return "TargetRecords";
     }
   }

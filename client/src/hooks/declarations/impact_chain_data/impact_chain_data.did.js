@@ -5,20 +5,20 @@ export const idlFactory = ({ IDL }) => {
     'platform' : IDL.Text,
     'ipAdress' : IDL.Text,
   });
-  const TargetRecords = IDL.Record({
-    'documents' : IDL.Opt(IDL.Vec(IDL.Text)),
+  const Measurement = IDL.Record({
+    'documents' : IDL.Vec(IDL.Text),
     'goal' : IDL.Opt(IDL.Text),
+    'name' : IDL.Text,
     'iotDevice' : IDL.Opt(IOTDevice),
   });
   const ImpactTarget = IDL.Record({
     'id' : IDL.Nat,
     'name' : IDL.Text,
-    'targetRecords' : IDL.Opt(TargetRecords),
-    'measurements' : IDL.Opt(IDL.Vec(IDL.Text)),
+    'measurements' : IDL.Vec(Measurement),
   });
   const UserRecord = IDL.Record({
     'aboutCompany' : IDL.Record({
-      'logo' : IDL.Opt(IDL.Text),
+      'logo' : IDL.Text,
       'name' : IDL.Text,
       'companySize' : IDL.Text,
       'industry' : IDL.Text,

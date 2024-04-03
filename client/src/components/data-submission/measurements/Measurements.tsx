@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { RootState } from "../../../redux/store";
 import MeasurementCard from "./MeasurementCard";
 import {
   ImpactTarget,
   UserRecord,
-} from "../../hooks/declarations/impact_chain_data/impact_chain_data.did";
-import { useAuth } from "../../hooks/AppContext";
-import { setDataComponent, setUserRecord } from "../../redux/slices/app";
+} from "../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
+import { useAuth } from "../../../hooks/AppContext";
+import { setDataComponent, setUserRecord } from "../../../redux/slices/app";
 
 const Measurements = () => {
   const { dataActor } = useAuth();

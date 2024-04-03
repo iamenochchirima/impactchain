@@ -8,22 +8,22 @@ export interface IOTDevice {
   'platform' : string,
   'ipAdress' : string,
 }
-export type Result = { 'ok' : UserRecord } |
-  { 'err' : string };
-export interface TargetRecords {
-  'documents' : [] | [Array<string>],
-  'goal' : [] | [string],
-  'iotDevice' : [] | [IOTDevice],
-}
 export interface ImpactTarget {
   'id' : bigint,
   'name' : string,
-  'targetRecords' : [] | [TargetRecords],
-  'measurements' : [] | [Array<string>],
+  'measurements' : Array<Measurement>,
 }
+export interface Measurement {
+  'documents' : Array<string>,
+  'goal' : [] | [string],
+  'name' : string,
+  'iotDevice' : [] | [IOTDevice],
+}
+export type Result = { 'ok' : UserRecord } |
+  { 'err' : string };
 export interface UserRecord {
   'aboutCompany' : {
-    'logo' : [] | [string],
+    'logo' : string,
     'name' : string,
     'companySize' : string,
     'industry' : string,

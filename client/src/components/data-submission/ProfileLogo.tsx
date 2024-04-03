@@ -42,7 +42,7 @@ const ProfileLogo = () => {
         }
         const updatedRecord: UserRecord = {
           ...userRecord,
-          aboutCompany: { ...userRecord.aboutCompany, logo: [url] },
+          aboutCompany: { ...userRecord.aboutCompany, logo: url },
         };
         await dataActor?.updateUserRecord(updatedRecord);
         dispatch(setUserRecord(updatedRecord));

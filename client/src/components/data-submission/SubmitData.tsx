@@ -5,8 +5,8 @@ import Loading from "../Loading";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import ImpactTarget from "./ImpactTarget";
-import Measurements from "./Measurements";
-import { TargetRecords } from "./TargetRecords";
+import Measurements from "./measurements/Measurements";
+import { TargetRecords } from "./targetrecords/TargetRecords";
 import { useEffect, useState } from "react";
 
 type GradientStyle = {

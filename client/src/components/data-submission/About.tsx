@@ -56,12 +56,12 @@ const About = () => {
   };
 
   return (
-    <div className="text-white">
+    <div className="text-white ">
       {" "}
-      <h3 className="text-3xl font-bold text-white mt-4 text-center font-TelegraphBold ">
+      <h3 className="text-3xl font-bold text-white mt-4 text-center font-TelegraphBold mr-12 ">
         Tell us about your company.
       </h3>
-      <div className="min-h-96 px-32">
+      <div className="min-h-96 pr-24 pl-12">
         <form action="" className="mt-10">
           <div className="mb-4 ">
             <input
@@ -150,10 +150,10 @@ const About = () => {
           </div>
         </form>
       </div>
-      <div className="flex justify-end items-center mt-20 mb-10 ">
+      <div className="flex justify-end items-center  mb-5 ">
         <button
           onClick={handleSubmit}
-          className="mx-32 px-10 py-1.5 bg-custom-green rounded-full text-black font-bold"
+          className="mr-24 px-10 py-1.5 bg-custom-green rounded-full text-black font-bold"
         >
           {loading ? "Loading..." : "Continue"}
         </button>

@@ -34,7 +34,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <nav className="md:left-0 md:block bg-custom-gray rounded-r-xl border-r border-r-green-600 border-r-0.5 text-white md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
+      <nav className="md:left-0 fixed md:block bg-custom-gray rounded-r-xl border-r border-r-green-600 border-r-0.5 text-white md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl flex flex-wrap items-center justify-between md:w-64 z-10 py-4 px-6">
         <div className="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
           <button
             className="cursor-pointer opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded  border-transparent"

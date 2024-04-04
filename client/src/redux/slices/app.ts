@@ -45,10 +45,10 @@ export const appSlice = createSlice({
       state.userInfo = action.payload;
       localStorage.setItem("userInfo", JSON.stringify(action.payload));
     },
-    setShowDataForm: (state: GlobalState, action: PayloadAction<any>) => {
+    setShowDataForm: (state: GlobalState, action: PayloadAction<boolean>) => {
       state.showDataForm = action.payload;
     },
-    setDataComponent: (state: GlobalState, action: PayloadAction<any>) => {
+    setDataComponent: (state: GlobalState, action: PayloadAction<string>) => {
       state.dataComponent = action.payload;
     },
     setUserRecord: (state: GlobalState, action: PayloadAction<UserRecord>) => {

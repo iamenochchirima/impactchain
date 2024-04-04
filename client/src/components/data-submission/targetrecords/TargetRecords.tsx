@@ -13,8 +13,7 @@ export const TargetRecords = () => {
   const [displayedTargets, setDisplayedTargets] = useState<TargetOption[]>([]);
   const [impactTargets, setImpactTargets] = useState<ImpactTarget[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const [uploaded, setUploaded] = useState(false);
+  const [finished, setFinished] = useState(false);
 
   useEffect(() => {
     if (userRecord) {
@@ -64,54 +63,25 @@ export const TargetRecords = () => {
     }
   }, [nextTarget]);
 
-  const handleSubmit = async () => {
-    console.log("submitting target records");
-  };
-
-  const handlePrevious = () => {
-    setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-  };
+ useEffect(() => {
+    if (currentIndex === targets.length - 1) {
+      setFinished(true);
+    } else {
+      setFinished(false);
+    }
+  }, [currentIndex]);
 
   const handleBack = () => {
     dispatch(setDataComponent("Measurements"));
     dispatch(setTargetRecord({ targetRecord: null }));
   };
-  const handleNext = async () => {
-    setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, targets.length - 1));
-  };
 
   return (
     <div>
       {displayedTargets.map((target, index) => {
-        return <TargetRecordsCard {...{ target, impactTargets }} key={index} />;
+        return <TargetRecordsCard {...{ target, impactTargets, finished }} key={index} />;
       })}
-      <div className=" flex justify-center items-center gap-5">
-        <button onClick={handleBack}>
-          <span className="text-custom-green">Back</span>
-        </button>
-        {currentIndex > 0 && (
-          <button onClick={handlePrevious}>
-            <span className="text-custom-green">Previous</span>
-          </button>
-        )}
-
-        {currentIndex === targets.length - 1 && (
-          <button
-            onClick={handleSubmit}
-            className={` ${
-              uploaded ? "bg-custom-green" : "bg-green-700"
-            } px-10 py-1.5  rounded-full text-black font-bold`}
-          >
-            {loading ? "Saving..." : "Continue"}
-          </button>
-        )}
-
-        {currentIndex < targets.length - 1 && (
-          <button onClick={handleNext}>
-            <span className="text-custom-green">Next</span>
-          </button>
-        )}
-      </div>
+      
     </div>
   );
 };

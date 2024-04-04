@@ -67,7 +67,7 @@ const MeasurementRecords: FC<Props> = ({measurement,  displayedMeasurements, set
   return (
     <div className='text-white px-5 py-3'>
         <h1>{measurement.name}</h1>
-        <div className="mt-3 flex items-center gap-5">
+        <div className="mt-3 flex items-center justify-between">
             <button
             disabled={docs !== null}
             onClick={() => setUploadDocs(true)}

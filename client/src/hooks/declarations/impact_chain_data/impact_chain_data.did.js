@@ -1,9 +1,8 @@
 export const idlFactory = ({ IDL }) => {
   const IOTDevice = IDL.Record({
-    'id' : IDL.Text,
     'name' : IDL.Text,
     'platform' : IDL.Text,
-    'ipAdress' : IDL.Text,
+    'ipAddress' : IDL.Text,
   });
   const Measurement = IDL.Record({
     'documents' : IDL.Vec(IDL.Text),

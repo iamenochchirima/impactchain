@@ -3,10 +3,9 @@ import type { ActorMethod } from '@dfinity/agent';
 import type { IDL } from '@dfinity/candid';
 
 export interface IOTDevice {
-  'id' : string,
   'name' : string,
   'platform' : string,
-  'ipAdress' : string,
+  'ipAddress' : string,
 }
 export interface ImpactTarget {
   'id' : bigint,

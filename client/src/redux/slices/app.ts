@@ -18,6 +18,8 @@ export interface GlobalState {
   showDataForm: boolean;
   dataComponent: string;
   userRecord: UserRecord | null;
+
+  nextTarget: boolean;
 }
 
 const initialState: GlobalState = {
@@ -28,6 +30,8 @@ const initialState: GlobalState = {
   targetRecord: null,
   dataComponent: "Loading",
   userRecord: null,
+
+  nextTarget: false,
 };
 
 export const appSlice = createSlice({
@@ -59,7 +63,9 @@ export const appSlice = createSlice({
     ) => {
       state.targetRecord = action.payload.targetRecord;
     },
-
+    setNextTarget: (state: GlobalState, action: PayloadAction<boolean>) => {
+      state.nextTarget = action.payload;
+    },
     logout: (state: GlobalState) => {
       state.isAuthenticated = false;
       state.userInfo = null;
@@ -77,6 +83,7 @@ export const {
   setUserRecord,
   setStorageInit,
   setTargetRecord,
+  setNextTarget,
 } = appSlice.actions;
 
 export default appSlice.reducer;

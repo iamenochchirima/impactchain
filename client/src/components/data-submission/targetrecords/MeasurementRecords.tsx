@@ -7,9 +7,11 @@ type Props = {
     measurement: Measurement
     displayedMeasurements: Measurement[]
     setDisplayedMeasurements: (measurements: Measurement[]) => void
+    clearGoal: boolean
+    setClearGoal: (clearGoal: boolean) => void
     }
 
-const MeasurementRecords: FC<Props> = ({measurement,  displayedMeasurements, setDisplayedMeasurements}) => {
+const MeasurementRecords: FC<Props> = ({measurement,  displayedMeasurements, setDisplayedMeasurements, clearGoal, setClearGoal}) => {
 
     const [uploadDocs, setUploadDocs] = useState<boolean>(false)
     const [linkDevice, setLinkDevice] = useState<boolean>(false)
@@ -17,11 +19,21 @@ const MeasurementRecords: FC<Props> = ({measurement,  displayedMeasurements, set
     const [iotDevice, setIotDevice] = useState<IOTDevice| null>(null)
     const [docs, setDocsUrls] = useState<string[]|  null>(null)
 
+
     useEffect(() => {
-        setGoal("")
-        setDocsUrls(null)
-        setIotDevice(null)
-    }, [])
+        setUploadDocs(false);
+        setLinkDevice(false);
+        setIotDevice(null);
+        setDocsUrls(null);
+    }, [measurement]);
+
+    useEffect(() => {
+        if (clearGoal) {
+            setGoal('')
+            setClearGoal(false)
+        }
+    }, [clearGoal])
+
 
     useEffect(() => {
     
@@ -52,11 +64,6 @@ const MeasurementRecords: FC<Props> = ({measurement,  displayedMeasurements, set
             setDisplayedMeasurements(updatedMeasurements)
         }
     }, [iotDevice])
-
-    console.log("displayed measurements in MR", displayedMeasurements)
-
-    console.log("iot device in MR", iotDevice)
-   
   return (
     <div className='text-white px-5 py-3'>
         <h1>{measurement.name}</h1>
@@ -65,12 +72,12 @@ const MeasurementRecords: FC<Props> = ({measurement,  displayedMeasurements, set
             disabled={docs !== null}
             onClick={() => setUploadDocs(true)}
              className='bg-white px-4 py-2 text-black rounded-3xl'>
-                {docs ? 'Documents uploaded' : 'Upload your documents'}
+                {measurement.documents.length > 0 ? 'Documents uploaded' : 'Upload your documents'}
             </button>
             <button 
             onClick={() => setLinkDevice(true)}
             className='bg-white px-4 py-2 text-black rounded-3xl'>
-                Link your IoT device
+            {measurement.iotDevice.length > 0 ? "Device Linked" : "Link your IoT device"}    
             </button>
         </div>
         <div className="w-full flex flex-col p-3 bg-gray-400 rounded-3xl mt-3">

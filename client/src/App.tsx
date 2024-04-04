@@ -60,7 +60,6 @@ const App = () => {
         <Routes>
           <Route element={<PrivateRoutes />}>
             <Route element={<Layout />}>
-              <Route path="/home" element={<Home />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/analytics" element={<Analytics />} />
               <Route path="/askai" element={<AskAI />} />
@@ -72,16 +71,16 @@ const App = () => {
           <Route
             path="/"
             element={
-              isAuthenticated ? <Navigate to="/home" /> : <LandingPage />
+              isAuthenticated ? <Navigate to="/dashboard" /> : <LandingPage />
             }
           />
           <Route
             path="/login"
-            element={isAuthenticated ? <Navigate to="/home" /> : <Login />}
+            element={isAuthenticated ? <Navigate to="/dashboard" /> : <Login />}
           />
           <Route
             path="/signup"
-            element={isAuthenticated ? <Navigate to="/home" /> : <Register />}
+            element={isAuthenticated ? <Navigate to="/dashboard" /> : <Register />}
           />
           <Route path="/forgot-password" element={<ResetPassword />} />
           <Route path="*" element={<Notfound />} />

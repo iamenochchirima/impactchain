@@ -31,8 +31,7 @@ type ImpactTarget =
  };
 type IOTDevice = 
  record {
-   id: text;
-   ipAdress: text;
+   ipAddress: text;
    name: text;
    platform: text;
  };

@@ -3,12 +3,12 @@ import { TargetOption, targetOptions } from "../../../data/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import TargetRecordsCard from "./TargetRecordsCard";
-import { setDataComponent, setTargetRecord } from "../../../redux/slices/app";
+import { setDataComponent, setNextTarget, setTargetRecord } from "../../../redux/slices/app";
 import { ImpactTarget } from "../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
 
 export const TargetRecords = () => {
   const dispatch = useDispatch();
-  const { userRecord } = useSelector((state: RootState) => state.app);
+  const { userRecord, nextTarget } = useSelector((state: RootState) => state.app);
   const [targets, setTargets] = useState<TargetOption[]>([]);
   const [displayedTargets, setDisplayedTargets] = useState<TargetOption[]>([]);
   const [impactTargets, setImpactTargets] = useState<ImpactTarget[]>([]);
@@ -21,22 +21,27 @@ export const TargetRecords = () => {
       const _innerTargets = Array.isArray(userRecord.impactTargets[0])
         ? userRecord.impactTargets[0]
         : [];
-      // remove all the targets with 0 measurements
-      const filteredTargets = _innerTargets.filter(
-        (target) => target.measurements?.length > 0
-      );
-      const _sortedTargets = [...filteredTargets].sort(
-        (a, b) => Number(a.id) - Number(b.id)
-      );
-      if (Array.isArray(_sortedTargets[0])) {
-        setImpactTargets(_sortedTargets[0]);
+      if (Array.isArray(_innerTargets[0])) {
+        const filteredTargets = _innerTargets[0].filter(
+          (target) => target.measurements?.length > 0
+        );
+        const _sortedTargets = [...filteredTargets].sort(
+          (a, b) => Number(a.id) - Number(b.id)
+        );
+        setImpactTargets(_sortedTargets);
         const matchingTargetOption = targetOptions.filter((targetOption) => {
-          return _sortedTargets[0].some(
+          return _sortedTargets.some(
             (target) => Number(target.id) === targetOption.id
           );
         });
         setTargets(matchingTargetOption);
       } else {
+        const filteredTargets = _innerTargets.filter(
+          (target) => target.measurements?.length > 0
+        );
+        const _sortedTargets = [...filteredTargets].sort(
+          (a, b) => Number(a.id) - Number(b.id)
+        );
         setImpactTargets(_sortedTargets);
         const matchingTargetOption = targetOptions.filter((targetOption) => {
           return _sortedTargets.some(
@@ -51,6 +56,13 @@ export const TargetRecords = () => {
   useEffect(() => {
     setDisplayedTargets(targets.slice(currentIndex, currentIndex + 1));
   }, [currentIndex, targets]);
+
+  useEffect(() => {
+    if (nextTarget) {
+      setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, targets.length - 1));
+      dispatch(setNextTarget(false));
+    }
+  }, [nextTarget]);
 
   const handleSubmit = async () => {
     console.log("submitting target records");
@@ -67,8 +79,6 @@ export const TargetRecords = () => {
   const handleNext = async () => {
     setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, targets.length - 1));
   };
-
-  console.log(currentIndex);
 
   return (
     <div>

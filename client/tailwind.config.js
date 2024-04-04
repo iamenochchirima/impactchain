@@ -8,7 +8,8 @@ export default {
     extend: {
       colors: {
         'custom-green': '#4FEF64',
-        'custom-gray': '#191919'
+        'custom-gray': '#191919',
+        'light-green': '#A3FEAC'
       },
       fontFamily: {
         NeueMachinalight: ['NeueMachina-light', 'sans-serif'],

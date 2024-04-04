@@ -66,21 +66,21 @@ const Dashboard = () => {
         </button>
       </div>
       <div className="bg-custom-gray grid grid-cols-2 justify-between border-r border-t border-l border-b border-green-600 rounded-3xl px-5  mt-5 font-TelegraphRegular">
-        <div className="flex flex-col gap-5 py-5 pr-5">
+        <div className="flex flex-col gap-5 py-5 pr-16">
           <h1 className=""> ESG Performance</h1>
           <div className="flex justify-between items-center">
             <span>R250</span>
-            <span className="flex items-center gap-1 bg-light-green text-green-700 rounded-lg">
+            <span className="flex items-center gap-1 px-1 bg-light-green text-green-700 rounded-lg">
               <IoIosArrowRoundUp />
               <span>25%</span>
             </span>
           </div>
         </div>
-        <div className="flex flex-col gap-5 py-5 border-x  pl-5 pr-5 border-custom-green ">
+        <div className="flex flex-col gap-5 py-5 border-l  pl-5 pr-5 border-custom-green ">
           <h1 className="">Carbon Credit </h1>
           <div className="flex justify-between items-center">
             <span>R800</span>
-            <span className="flex items-center gap-1 bg-light-green text-green-700 rounded-lg">
+            <span className="flex items-center gap-1 px-1 bg-red-400 text-red-950 rounded-lg">
               <IoIosArrowRoundDown />
               <span>0.5%</span>
             </span>

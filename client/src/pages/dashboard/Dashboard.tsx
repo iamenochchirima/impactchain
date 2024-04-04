@@ -33,13 +33,13 @@ const Dashboard = () => {
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="bg-[#d9d9d9] text-black font-TelegraphRegular flex gap-2 rounded-xl p-1 text-center items-center"
+              className="bg-[#d9d9d9] text-black font-TelegraphRegular flex gap-2 rounded-3xl px-3 py-2 text-center items-center"
             >
               <span>{selectedItem}</span>
               <FaChevronDown />
             </button>
             {isOpen && (
-              <div className="absolute z-20 bg-[#d9d9d9] shadow-lg rounded">
+              <div className="absolute z-20 bg-[#d9d9d9] shadow-lg rounded ">
                 {["Week", "Month", "3 Months", "6 Months", "Year"].map(
                   (item) => (
                     <a
@@ -60,34 +60,34 @@ const Dashboard = () => {
             )}
           </div>
         </div>
-        <button className="flex items-center bg-custom-green text-black rounded-full px-2">
+        <button className="flex items-center bg-custom-green text-black rounded-full px-3 py-1 ">
           <img src="/smiley.svg" alt="logo" className="h-8 w-8" />
           <span>Generate Report</span>
         </button>
       </div>
-      <div className="bg-custom-gray grid grid-cols-3 justify-between border-r border-t border-l border-b border-green-600 rounded-3xl px-5  mt-5 font-NeueMachinaRegular">
-        <div className="flex flex-col gap-5 py-5 pr-5">
-          <h1 className=""> ESG - ROI Return of Investment</h1>
+      <div className="bg-custom-gray grid grid-cols-2 justify-between border-r border-t border-l border-b border-green-600 rounded-3xl px-5  mt-5 font-TelegraphRegular">
+        <div className="flex flex-col gap-5 py-5 pr-16">
+          <h1 className=""> ESG Performance</h1>
           <div className="flex justify-between items-center">
             <span>R250</span>
-            <span className="flex items-center gap-1 bg-light-green text-green-700 rounded-lg">
+            <span className="flex items-center gap-1 px-1 bg-light-green text-green-700 rounded-lg">
               <IoIosArrowRoundUp />
               <span>25%</span>
             </span>
           </div>
         </div>
-        <div className="flex flex-col gap-5 py-5 border-x  pl-5 pr-5 border-custom-green ">
-          <h1 className="">Carbon Credit Revenue</h1>
+        <div className="flex flex-col gap-5 py-5 border-l  pl-5 pr-5 border-custom-green ">
+          <h1 className="">Carbon Credit </h1>
           <div className="flex justify-between items-center">
             <span>R800</span>
-            <span className="flex items-center gap-1 bg-light-green text-green-700 rounded-lg">
+            <span className="flex items-center gap-1 px-1 bg-red-400 text-red-950 rounded-lg">
               <IoIosArrowRoundDown />
               <span>0.5%</span>
             </span>
           </div>
         </div>
 
-        <div className="flex flex-col gap-5 py-5 pl-5">
+       {/*} <div className="flex flex-col gap-5 py-5 pl-5">
           <h1 className="">ESG Compliance Cost</h1>
           <div className="flex justify-between items-center">
             <span>R250</span>
@@ -96,7 +96,7 @@ const Dashboard = () => {
               <span>0.0%</span>
             </span>
           </div>
-        </div>
+                    </div>*/}
       </div>
 
       <div>

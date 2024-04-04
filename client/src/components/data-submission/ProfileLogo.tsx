@@ -71,14 +71,14 @@ const ProfileLogo = () => {
   return (
     <div className="">
       <div className=""></div>
-      <h3 className="text-3xl font-bold text-white mt-4 text-center font-TelegraphBold ">
+      <h3 className="text-3xl font-bold text-white mt-4 text-center font-TelegraphBold mr-12">
         Upload your company logo.
       </h3>
       <div className="flex justify-center">
         <div
           className={`${
-            logourl ? "flex-col gap-5 p-5 min-w-[350px]" : "min-w-[300px]"
-          } mt-10 min-h-[250px]  bg-black flex justify-center items-center rounded-3xl`}
+            logourl ? "flex-col gap-5 p-5 min-w-[460px]" : "min-w-[400px]"
+          } mt-10 min-h-[310px]  bg-black flex justify-center items-center rounded-3xl `}
         >
           {logourl && (
             <img

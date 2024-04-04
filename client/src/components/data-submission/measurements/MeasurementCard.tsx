@@ -67,12 +67,12 @@ const MeasurementCard: FC<Props> = ({
 
 
   return (
-    <div className="flex flex-col rounded-3xl bg-black p-10 slide-fwd-center">
+    <div className="flex flex-col rounded-3xl bg-black p-10 slide-fwd-center  ">
       <div className="flex items-center justify-center">
         <img
           src={measurement?.icon}
           alt={target.name}
-          className="h-[150px] w-[150px]"
+          className="h-[100px] w-[100px]"
         />
       </div>
       <div className="flex flex-col gap-3 mt-5">

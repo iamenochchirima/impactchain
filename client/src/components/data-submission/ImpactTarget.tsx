@@ -114,7 +114,7 @@ const ImpactTarget = () => {
           </div>
         ))}
       </div>
-      <div className="flex justify-between mt-20 mb-10  ">
+      <div className="flex justify-between mt-10 mb-10  ">
         <div className="flex cursor-pointer relative h-24 rounded-lg items-end  mt- ">
           <img
             src="/smiley.svg"

@@ -80,7 +80,7 @@ const MeasurementRecords: FC<Props> = ({measurement,  displayedMeasurements, set
             {measurement.iotDevice.length > 0 ? "Device Linked" : "Link your IoT device"}    
             </button>
         </div>
-        <div className="w-full flex flex-col p-3 bg-gray-400 rounded-3xl mt-3">
+        <div className="w-full flex flex-col p-3 bg-gray-400  rounded-3xl mt-3">
             <label className='text-white'>Your Goal</label>
             <textarea
             value={goal}    

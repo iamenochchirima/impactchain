@@ -136,7 +136,7 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
       <div className="flex flex-col items-center bg-gray mx-[100px] mt">
         <div className="text-3xl font-bold text-white mt-4 bg-gra text-center font-TelegraphBold flex gap-3 items-center">
           <span>How do you record your data for {target.name}</span>{" "}
-          <img className="h-14 w-14 ml-2" src={target.icon} alt={target.name} />
+          <img className="h-20 w-20 ml-2 rounded-lg" src={target.icon} alt={target.name} />
         </div>
         <div
           style={gradientStyle}

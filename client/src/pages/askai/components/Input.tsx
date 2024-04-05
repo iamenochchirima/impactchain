@@ -50,7 +50,7 @@ const Input = () => {
     }
   };
   return (
-    <div className="fixed z-100 bottom-10 left-64 right-10">
+    <div className="fixed z-100 bottom-10 left-64 right-10 ">
       <div className="mb-4 mx-10 flex items-center justify-between">
         <button
          className="bg-custom-gray border-x border-y border-custom-green h-14 w-56  px-2 rounded-lg py-1.5">
@@ -70,7 +70,7 @@ const Input = () => {
         onSubmit={getMessages}
         className=" bg-white shadow-md ml-10 rounded-lg px-2"
       >
-        <div className="flex items-center max-w-screen-xl mx-auto">
+        <div className="flex items-center mx-auto">
           <textarea
             ref={textareaRef}
             value={text}

@@ -4,7 +4,7 @@ const AskAI = () => {
   return (
     <div className="relative">
       <div className="">
-        <div className="flex absolute top-[400px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-lg items-end">
+        <div className="flex absolute top-[300px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-lg items-end">
           <img
             src="/smiley.svg"
             alt="smiley-icon"

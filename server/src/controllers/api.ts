@@ -12,7 +12,7 @@ export const chatGPT = async (req: Request, res: Response) => {
             },
             body: JSON.stringify({
                 model: 'gpt-3.5-turbo',
-                messages: [{ role: 'user', content: 'How are you!?' }],
+                messages: [{ role: 'user', content: req.body.message }],
                 max_tokens: 100,
             }),
         }

@@ -269,7 +269,7 @@ const Sidebar = () => {
                   `}
                 >
                   <img
-                    src="/Seedling.svg"
+                    src="/seedling.svg"
                     alt="carbon-credits-icon"
                     className="w-7 h-7"
                   />

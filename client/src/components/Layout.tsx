@@ -34,7 +34,7 @@ const Layout = () => {
   }
 
   return (
-    <div className=" font-TelegraphBold bg-black text-white ">
+    <div className=" font-TelegraphRegular bg-black text-white ">
       <Sidebar />
       <div className="relative md:ml-64 bg-blueGray-100 min-h-screen">
         <Navbar />

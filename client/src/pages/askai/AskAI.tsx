@@ -1,24 +1,22 @@
+import { useState } from "react";
+import Chats from "./components/Chats";
 import Input from "./components/Input";
+import Welcome from "./components/Welcome";
+
+export type Message = {
+  id: string;
+  from: "user" | "AI";
+  message: string;
+};
 
 const AskAI = () => {
+  const [messages, setMessages] = useState<Message[]| null>(null);
+  const [livetext, setLiveText] = useState<string>("");
+
   return (
     <div className="relative">
-      <div className="">
-        <div className="flex absolute top-[300px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-lg items-end">
-          <img
-            src="/smiley.svg"
-            alt="smiley-icon"
-            className="w-24 h-24 mr-2 mb-1"
-          />
-          <div className="text-white w-[250px] mb-[70px] bg-black rounded-3xl p-3">
-            <p className="text-center">
-              Hi I’m your dedicated AI, ask me any questions about the
-              platform..
-            </p>
-          </div>
-        </div>
-      </div>
-      <Input />
+      {!messages ? <Welcome /> : <Chats {...{messages, livetext}} />}
+      <Input {...{messages, setMessages, livetext, setLiveText}} />
     </div>
   );
 };

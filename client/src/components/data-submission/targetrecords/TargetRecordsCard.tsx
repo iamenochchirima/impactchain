@@ -97,7 +97,7 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
         );
         const updatedUserRecord: UserRecord = {
           ...userRecord,
-          impactTargets: [updatedImpactTargets],
+          impactTargets: updatedImpactTargets,
         };
         await dataActor?.updateUserRecord(updatedUserRecord);
         dispatch(setUserRecord(updatedUserRecord));

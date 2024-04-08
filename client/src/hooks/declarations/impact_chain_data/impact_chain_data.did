@@ -9,7 +9,7 @@ type UserRecord =
       name: text;
     };
    email: text;
-   impactTargets: opt vec ImpactTarget;
+   impactTargets: vec ImpactTarget;
  };
 type Result = 
  variant {

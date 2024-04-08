@@ -86,7 +86,8 @@ const Header = () => {
   return (
     <>
       {showDataForm && <SubmitData />}
-      <div className="pt-5">
+     <div className="fixed bg-black z-50 left-64 right-0">
+     <div className="pt-4">
         <div className="h-5 flex items-center justify-end bg-custom-gray mx-10 py-10 rounded-xl border border-green-700">
           <div className="flex items-center justify-between gap-5">
             <Link to="/askai">
@@ -99,6 +100,7 @@ const Header = () => {
           </div>
         </div>
       </div>
+     </div>
     </>
   );
 };

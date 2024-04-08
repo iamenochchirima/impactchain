@@ -23,7 +23,7 @@ export const idlFactory = ({ IDL }) => {
       'industry' : IDL.Text,
     }),
     'email' : IDL.Text,
-    'impactTargets' : IDL.Opt(IDL.Vec(ImpactTarget)),
+    'impactTargets' : IDL.Vec(ImpactTarget),
   });
   const email = IDL.Text;
   const Result = IDL.Variant({ 'ok' : UserRecord, 'err' : IDL.Text });

@@ -11,12 +11,11 @@ export type Message = {
 
 const AskAI = () => {
   const [messages, setMessages] = useState<Message[]| null>(null);
-  const [livetext, setLiveText] = useState<string>("");
 
   return (
     <div className="relative">
-      {!messages ? <Welcome /> : <Chats {...{messages, livetext}} />}
-      <Input {...{messages, setMessages, livetext, setLiveText}} />
+      {!messages ? <Welcome /> : <Chats {...{messages}} />}
+      <Input {...{messages, setMessages}} />
     </div>
   );
 };

@@ -2,11 +2,15 @@ import React, { useState, useEffect, useRef } from "react";
 import { FaChevronDown } from "react-icons/fa6";
 import { IoIosArrowRoundDown } from "react-icons/io";
 import { IoIosArrowRoundUp } from "react-icons/io";
-import { IoReload } from "react-icons/io5";
 import { IoMdAdd } from "react-icons/io";
+import MainChart from "./components/MainChat";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+import TartgetsCharts from "./components/TartgetsCharts";
 
 
 const Dashboard = () => {
+  const {userRecord} = useSelector((state: RootState) => state.app);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState("Time Period");
   const dropdownRef = useRef(null);
@@ -21,6 +25,9 @@ const Dashboard = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [dropdownRef]);
+
+
+  console.log("userRecord", userRecord)
 
   return (
     <div className="mx-10">
@@ -86,17 +93,6 @@ const Dashboard = () => {
             </span>
           </div>
         </div>
-
-       {/*} <div className="flex flex-col gap-5 py-5 pl-5">
-          <h1 className="">ESG Compliance Cost</h1>
-          <div className="flex justify-between items-center">
-            <span>R250</span>
-            <span className="flex items-center gap-1 bg-green-200 text-green-700 rounded-lg p-0.5">
-              <IoReload size={10} />
-              <span>0.0%</span>
-            </span>
-          </div>
-                    </div>*/}
       </div>
 
       <div>
@@ -136,6 +132,8 @@ const Dashboard = () => {
           </li>
         </ul>
       </div>
+      <MainChart />
+      <TartgetsCharts />
     </div>
   );
 };

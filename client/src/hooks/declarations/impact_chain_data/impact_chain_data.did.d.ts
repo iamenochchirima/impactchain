@@ -28,7 +28,7 @@ export interface UserRecord {
     'industry' : string,
   },
   'email' : string,
-  'impactTargets' : [] | [Array<ImpactTarget>],
+  'impactTargets' : Array<ImpactTarget>,
 }
 export type email = string;
 export interface _SERVICE {

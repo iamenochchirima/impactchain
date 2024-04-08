@@ -58,7 +58,7 @@ const MeasurementCard: FC<Props> = ({
     if (record) {
       const updatedRecord: UserRecord = {
         ...record,
-        impactTargets: [updatedTargets],
+        impactTargets: updatedTargets,
       };
       setRecord(updatedRecord);
       

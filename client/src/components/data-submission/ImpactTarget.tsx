@@ -56,7 +56,7 @@ const ImpactTarget = () => {
         setLoading(true);
 
         const tragets: ImpactTargetType[] = selectedTargets.map((target) => {
-          const existingTargets = userRecord.impactTargets[0];
+          const existingTargets = userRecord.impactTargets;
 
           if (existingTargets) {
             const existingTarget = existingTargets.find(
@@ -83,7 +83,7 @@ const ImpactTarget = () => {
         });
         const data: UserRecord = {
           ...userRecord,
-          impactTargets: [tragets],
+          impactTargets: tragets,
         };
         dispatch(setUserRecord(data));
         await dataActor.addUserRecord(data);

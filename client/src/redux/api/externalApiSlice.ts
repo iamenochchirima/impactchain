@@ -1,6 +1,5 @@
 import { apiSlice } from "./apiSlice";
 
-
 export const usersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     completions: builder.mutation({
@@ -9,10 +8,15 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-    })
     }),
-    });
+    stream: builder.mutation({
+      query: (data) => ({
+        url: "/api/stream",
+        method: "POST",
+        body: data,
+      }),
+    }),
+  }),
+});
 
-export const {
-    useCompletionsMutation,
-    } = usersApiSlice;
+export const { useCompletionsMutation, useStreamMutation } = usersApiSlice;

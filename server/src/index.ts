@@ -10,6 +10,8 @@ import 'dotenv/config';
 import router from "./router";
 import { errorHandler, notFound } from "./middlewares/error";
 const MONGO_URI = process.env.MONGO_URI
+import { setupSocketIO } from './sockets/socketController';
+
 
 const app = express();
 app.use(cors({
@@ -25,6 +27,8 @@ app.use(errorHandler)
 const PORT = 5000;
 
 const server = http.createServer(app);
+
+setupSocketIO(server);
 
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

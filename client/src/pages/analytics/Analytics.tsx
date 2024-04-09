@@ -21,7 +21,7 @@ const Analytics = () => {
       {/*Social Impact Report Button*/}
       
       <div className="w-[249px] h-[352px] left-[450px] top-10 ml-5 absolute bg-neutral-800 rounded-[56px]" />
-        <div className="w-[120px] h-[120px] left-[525px] top-[80px] absolute justify-center items-center inline-flex">
+        <div className="w-[120px] h-[120px] left-[425px] top-[80px] absolute justify-center items-center inline-flex">
           <img className="w-[120px] h-[120px]" src="./couple.svg" />
         </div>
         <div className="w-[175px] h-12 left-[505px] top-[234px] absolute text-center text-white text-2xl font-normal font-TelegraphBold">Social Impact Report</div>
@@ -29,7 +29,7 @@ const Analytics = () => {
 
        {/*Governance Impact Report Button*/} 
       <div className="w-[249px] h-[352px] left-[900px] top-10 ml-5 absolute bg-neutral-800 rounded-[56px]" />
-        <div className="w-[120px] h-[120px] left-[980px] top-[80px] absolute justify-center items-center inline-flex">
+        <div className="w-[120px] h-[120px] left-[880px] top-[80px] absolute justify-center items-center inline-flex">
           <img className="w-[120px] h-[120px]" src="./scale.svg" />
         </div>
       <div className="w-[175px] h-12 left-[955px] top-[234px] absolute text-center text-white text-2xl font-normal font-TelegraphBold">Governance Impact Report</div>

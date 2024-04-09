@@ -24,13 +24,10 @@ const Dashboard = () => {
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [dropdownRef]);
-
-
-  console.log("userRecord", userRecord)
+  }, [dropdownRef])
 
   return (
-    <div className="mx-10">
+    <div className="mx-10 flex flex-col gap-5">
       <div className="flex items-center justify-between ">
         <div className="flex items-center gap-4">
           <div className=" text-center text-white text-4xl font-NeueMachinaUltrabold">
@@ -95,43 +92,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div>
-        <ul className="flex items-center justify-between mt-20">
-          <li className="flex flex-col items-center gap-2">
-            <h3>Poverty</h3>
-            <div className="bg-custom-gray p-3 rounded-full border-x border-y border-custom-green">
-              <img src="/House.svg" alt="logo" className="h-14 w-14" />
-            </div>
-          </li>
-          <li className="flex flex-col items-center gap-2">
-            <h3>Water</h3>
-            <div className="bg-custom-gray p-3 rounded-full border-x border-y border-custom-green">
-            <img src="/Droplet.svg" alt="logo" className="h-14 w-14" />
-            </div>
-          </li>
-          <li className="flex flex-col items-center gap-2">
-            <h3>Industry</h3>
-            <div className="bg-custom-gray p-3 rounded-full border-x border-y border-custom-green">
-            <img src="/innovation.svg" alt="logo" className="h-14 w-14" />
-            </div>
-          </li>
-          <li>
-          <div className="bg-custom-gray p-3 rounded-full border-x border-y border-custom-green">
-            <IoMdAdd size={30} className="w-14 h-14" />
-            </div>
-          </li>
-          <li>
-          <div className="bg-custom-gray p-3 rounded-full border-x border-y border-custom-green">
-            <IoMdAdd size={30} className="w-14 h-14" />
-            </div>
-          </li>
-          <li>
-          <div className="bg-custom-gray p-3 rounded-full border-x border-y border-custom-green">
-            <IoMdAdd size={30} className="w-14 h-14" />
-            </div>
-          </li>
-        </ul>
-      </div>
+   
       <MainChart />
       <TartgetsCharts />
     </div>

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { RootState } from "../redux/store";
 import { CiSearch } from "react-icons/ci";
 import SubmitData from "./data-submission/SubmitData";
@@ -50,16 +50,17 @@ const Header = () => {
         const res = await dataActor?.getUserRecord(userInfo.email);
         if (res) {
           if ("ok" in res) {
-            const convertedImpactTargets: ImpactTarget[] = res.ok.impactTargets.map(targetArray => 
-              targetArray.map(target => ({
-                ...target,
-                id: Number(target.id),
-              }))
-            );
+            const convertedImpactTargets: ImpactTarget[] = res.ok.impactTargets.map(target => 
+          {
+            return {
+              ...target,
+             id: BigInt(target.id),
+            };
+          })
             
             const convertedUserRecord: UserRecord = {
               ...res.ok,
-              impactTargets: [convertedImpactTargets],
+              impactTargets: convertedImpactTargets,
             };
             dispatch(setUserRecord(convertedUserRecord));
             const _res = isDataIncomplete(res.ok);

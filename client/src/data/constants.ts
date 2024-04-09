@@ -4,6 +4,7 @@ export type TargetOption = {
   icon: string;
   color: string;
   rectangle: string;
+  emoji: string;
   measurements: Measurement[];
 };
 
@@ -19,6 +20,7 @@ export const targetOptions: TargetOption[] = [
     icon: "/target/18.svg",
     color: "#E5243B",
     rectangle: "#c44c5b",
+    emoji: "/targetIcons/1.svg",
     measurements: [
       {
         id: 1,
@@ -56,6 +58,7 @@ export const targetOptions: TargetOption[] = [
     icon: "/target/19.svg",
     color: "#DDA63A",
     rectangle: "#bc9a59",
+    emoji: "/targetIcons/2.svg",
     measurements: [
       {
         id: 1,
@@ -89,6 +92,7 @@ export const targetOptions: TargetOption[] = [
     icon: "/target/20.svg",
     color: "#4C9F38",
     rectangle: "#659858",
+    emoji: "/targetIcons/3.svg",
     measurements: [
       {
         id: 1,
@@ -122,6 +126,7 @@ export const targetOptions: TargetOption[] = [
     icon: "/target/4.svg",
     color: "#C5192D",
     rectangle: "#b24552",
+    emoji: "/targetIcons/4.svg",
     measurements: [
       {
         id: 1,
@@ -155,6 +160,7 @@ export const targetOptions: TargetOption[] = [
     icon: "/target/5.svg",
     color: "#FF3A21",
     rectangle: "#d45a4a",
+    emoji: "/targetIcons/5.svg",
     measurements: [
       {
         id: 1,
@@ -188,6 +194,7 @@ export const targetOptions: TargetOption[] = [
     icon: "/target/6.svg",
     color: "#26BDE2",
     rectangle: "#4ea9c1",
+    emoji: "/targetIcons/6.svg",
     measurements: [
       {
         id: 1,
@@ -221,6 +228,7 @@ export const targetOptions: TargetOption[] = [
     icon: "/target/7.svg",
     color: "#FCC30B",
     rectangle: "#ceac3c",
+    emoji: "/targetIcons/7.svg",
     measurements: [
       {
         id: 1,
@@ -254,6 +262,7 @@ export const targetOptions: TargetOption[] = [
     icon: "/target/8.svg",
     color: "#A21942",
     rectangle: "#9a465e",
+    emoji: "/targetIcons/8.svg",
     measurements: [
       {
         id: 1,
@@ -287,6 +296,7 @@ export const targetOptions: TargetOption[] = [
     icon: "/target/9.svg",
     color: "#FD6925",
     rectangle: "#d4774c",
+    emoji: "/targetIcons/9.svg",
     measurements: [
       {
         id: 1,
@@ -320,6 +330,7 @@ export const targetOptions: TargetOption[] = [
     icon: "/target/10.svg",
     color: "#DD1367",
     rectangle: "#be4275",
+    emoji: "/targetIcons/10.svg",
     measurements: [
       {
         id: 1,
@@ -353,6 +364,7 @@ export const targetOptions: TargetOption[] = [
     icon: "/target/22.svg",
     color: "#FD9D24",
     rectangle: "#d3974c",
+    emoji: "/targetIcons/11.svg",
     measurements: [
       {
         id: 1,
@@ -386,6 +398,7 @@ export const targetOptions: TargetOption[] = [
     icon: "/target/12.svg",
     color: "#BF8B2E",
     rectangle: "#ad8d52",
+    emoji : "/targetIcons/12.svg",
     measurements: [
       {
         id: 1,
@@ -419,6 +432,7 @@ export const targetOptions: TargetOption[] = [
     icon: "/target/23.svg",
     color: "#48773C",
     rectangle: "#637f5b",
+    emoji: "/targetIcons/13.svg",
     measurements: [
       {
         id: 1,
@@ -452,6 +466,7 @@ export const targetOptions: TargetOption[] = [
     icon: "/target/14.svg",
     color: "#0A97D9",
     rectangle: "#3c95bf",
+    emoji: "/targetIcons/14.svg",
     measurements: [
       {
         id: 1,
@@ -485,6 +500,7 @@ export const targetOptions: TargetOption[] = [
     icon: "/target/15.svg",
     color: "#56C02B",
     rectangle: "#6db051",
+    emoji: "/targetIcons/15.svg",
     measurements: [
       {
         id: 1,
@@ -518,6 +534,7 @@ export const targetOptions: TargetOption[] = [
     icon: "/target/16.svg",
     color: "#00689D",
     rectangle: "#367697",
+    emoji: "/targetIcons/10.svg",
     measurements: [
       {
         id: 1,
@@ -551,6 +568,7 @@ export const targetOptions: TargetOption[] = [
     icon: "/target/17.svg",
     color: "#19486A",
     rectangle: "#456277",
+    emoji: "/targetIcons/16.svg",
     measurements: [
       {
         id: 1,

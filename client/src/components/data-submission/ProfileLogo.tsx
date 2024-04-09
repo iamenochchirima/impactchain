@@ -72,7 +72,7 @@ const ProfileLogo = () => {
     <div className="">
       <div className=""></div>
       <h3 className="text-3xl font-bold text-white mt-4 text-center font-TelegraphBold mr-12">
-        Upload your company logo.
+        Upload your company logo
       </h3>
       <div className="flex justify-center">
         <div
@@ -100,7 +100,7 @@ const ProfileLogo = () => {
               {" "}
               <label
                 htmlFor="logo"
-                className="bg-custom-green text-white px-10 py-2 rounded-full cursor-pointer"
+                className="bg-custom-green text-black px-10 py-2 rounded-full cursor-pointer"
               >
                 {logourl ? "Change Logo" : "Upload Logo"}
               </label>

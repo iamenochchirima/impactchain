@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-import { toast } from "react-toastify";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,9 +8,6 @@ type FormData = {
 };
 
 const LinkDevice = ({ setLinkDevice, setIotDevice }) => {
-  const [name, setName] = useState<string>("");
-  const [platform, setPlatform] = useState<string>("");
-  const [ipAddress, setIpAddress] = useState<string>("");
 
   const schema = z.object({
     name: z

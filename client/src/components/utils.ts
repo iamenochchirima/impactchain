@@ -8,7 +8,7 @@ export const isDataIncomplete = (info: UserRecord) => {
     return "ImpactTarget";
   }
   let withoutMeasurements = 0;
-  for (const target of info.impactTargets[0]) {
+  for (const target of info.impactTargets) {
     if (target.measurements.length === 0) {
       withoutMeasurements++;
     }
@@ -19,8 +19,8 @@ export const isDataIncomplete = (info: UserRecord) => {
 
   let measurementWithoutRecords = 0;
 
-  if (info.impactTargets[0].length > 0) {
-    for (const measurement of info.impactTargets[0][0].measurements) {
+  if (info.impactTargets.length > 0) {
+    for (const measurement of info.impactTargets[0].measurements) {
       if (measurement.documents.length === 0 && measurement.goal.length === 0) {
         measurementWithoutRecords++;
       }

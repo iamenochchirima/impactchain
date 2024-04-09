@@ -17,7 +17,6 @@ import MeasurementRecords from "./MeasurementRecords";
 import { toast } from "react-toastify";
 import { RootState } from "../../../redux/store";
 import { useAuth } from "../../../hooks/AppContext";
-import { set } from "zod";
 
 type Props = {
   target: TargetOption;
@@ -97,7 +96,7 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
         );
         const updatedUserRecord: UserRecord = {
           ...userRecord,
-          impactTargets: [updatedImpactTargets],
+          impactTargets: updatedImpactTargets,
         };
         await dataActor?.updateUserRecord(updatedUserRecord);
         dispatch(setUserRecord(updatedUserRecord));

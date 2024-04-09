@@ -2,9 +2,8 @@ import React, { FC } from "react";
 import { Message } from "../AskAI";
 type Props = {
   message: Message;
-  livetext: string;
 };
-const AIResponse: FC<Props> = ({ message, livetext }) => {
+const AIResponse: FC<Props> = ({ message }) => {
   return (
     <div className="flex items-startborder-gray-200 rounded-2xl p-2 bg-gray-800 gap-2.5">
       <img src="/smiley.svg" alt="smiley" className="h-8 w-8" />

@@ -2,11 +2,15 @@ import React, { useState, useEffect, useRef } from "react";
 import { FaChevronDown } from "react-icons/fa6";
 import { IoIosArrowRoundDown } from "react-icons/io";
 import { IoIosArrowRoundUp } from "react-icons/io";
-import { IoReload } from "react-icons/io5";
 import { IoMdAdd } from "react-icons/io";
+import MainChart from "./components/MainChat";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+import TartgetsCharts from "./components/TartgetsCharts";
 
 
 const Dashboard = () => {
+  const {userRecord} = useSelector((state: RootState) => state.app);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState("Time Period");
   const dropdownRef = useRef(null);
@@ -20,10 +24,10 @@ const Dashboard = () => {
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [dropdownRef]);
+  }, [dropdownRef])
 
   return (
-    <div className="mx-10">
+    <div className="mx-10 flex flex-col gap-5">
       <div className="flex items-center justify-between ">
         <div className="flex items-center gap-4">
           <div className=" text-center text-white text-4xl font-NeueMachinaUltrabold">
@@ -86,56 +90,11 @@ const Dashboard = () => {
             </span>
           </div>
         </div>
-
-       {/*} <div className="flex flex-col gap-5 py-5 pl-5">
-          <h1 className="">ESG Compliance Cost</h1>
-          <div className="flex justify-between items-center">
-            <span>R250</span>
-            <span className="flex items-center gap-1 bg-green-200 text-green-700 rounded-lg p-0.5">
-              <IoReload size={10} />
-              <span>0.0%</span>
-            </span>
-          </div>
-                    </div>*/}
       </div>
 
-      <div>
-        <ul className="flex items-center justify-between mt-20">
-          <li className="flex flex-col items-center gap-2">
-            <h3>Poverty</h3>
-            <div className="bg-custom-gray p-3 rounded-full border-x border-y border-custom-green">
-              <img src="/House.svg" alt="logo" className="h-14 w-14" />
-            </div>
-          </li>
-          <li className="flex flex-col items-center gap-2">
-            <h3>Water</h3>
-            <div className="bg-custom-gray p-3 rounded-full border-x border-y border-custom-green">
-            <img src="/Droplet.svg" alt="logo" className="h-14 w-14" />
-            </div>
-          </li>
-          <li className="flex flex-col items-center gap-2">
-            <h3>Industry</h3>
-            <div className="bg-custom-gray p-3 rounded-full border-x border-y border-custom-green">
-            <img src="/innovation.svg" alt="logo" className="h-14 w-14" />
-            </div>
-          </li>
-          <li>
-          <div className="bg-custom-gray p-3 rounded-full border-x border-y border-custom-green">
-            <IoMdAdd size={30} className="w-14 h-14" />
-            </div>
-          </li>
-          <li>
-          <div className="bg-custom-gray p-3 rounded-full border-x border-y border-custom-green">
-            <IoMdAdd size={30} className="w-14 h-14" />
-            </div>
-          </li>
-          <li>
-          <div className="bg-custom-gray p-3 rounded-full border-x border-y border-custom-green">
-            <IoMdAdd size={30} className="w-14 h-14" />
-            </div>
-          </li>
-        </ul>
-      </div>
+   
+      <MainChart />
+      <TartgetsCharts />
     </div>
   );
 };

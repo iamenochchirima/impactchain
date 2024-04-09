@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { RootState } from "../redux/store";
 import { CiSearch } from "react-icons/ci";
 import SubmitData from "./data-submission/SubmitData";
@@ -50,16 +50,17 @@ const Header = () => {
         const res = await dataActor?.getUserRecord(userInfo.email);
         if (res) {
           if ("ok" in res) {
-            const convertedImpactTargets: ImpactTarget[] = res.ok.impactTargets.map(targetArray => 
-              targetArray.map(target => ({
-                ...target,
-                id: Number(target.id),
-              }))
-            );
+            const convertedImpactTargets: ImpactTarget[] = res.ok.impactTargets.map(target => 
+          {
+            return {
+              ...target,
+             id: BigInt(target.id),
+            };
+          })
             
             const convertedUserRecord: UserRecord = {
               ...res.ok,
-              impactTargets: [convertedImpactTargets],
+              impactTargets: convertedImpactTargets,
             };
             dispatch(setUserRecord(convertedUserRecord));
             const _res = isDataIncomplete(res.ok);
@@ -86,7 +87,8 @@ const Header = () => {
   return (
     <>
       {showDataForm && <SubmitData />}
-      <div className="pt-5">
+     <div className="fixed bg-black z-50 left-64 right-0">
+     <div className="pt-4">
         <div className="h-5 flex items-center justify-end bg-custom-gray mx-10 py-10 rounded-xl border border-green-700">
           <div className="flex items-center justify-between gap-5">
             <Link to="/askai">
@@ -99,6 +101,7 @@ const Header = () => {
           </div>
         </div>
       </div>
+     </div>
     </>
   );
 };

@@ -2,6 +2,7 @@ import React, { FC, useEffect, useRef } from "react";
 import { Message } from "../AskAI";
 import { useAuth } from "../../../hooks/AppContext";
 import { v4 as uuid } from "uuid";
+import { set } from "zod";
 
 type SetMessagesFunction = React.Dispatch<
   React.SetStateAction<Message[] | null>
@@ -15,10 +16,10 @@ type WsResponse = {
 type Props = {
   messages: Message[] | null;
   setMessages: SetMessagesFunction;
-  livetext: string;
-  setLiveText: React.Dispatch<React.SetStateAction<string>>;
 };
-const Input: FC<Props> = ({ messages, setMessages, livetext, setLiveText }) => {
+let aiMessageId = "";
+
+const Input: FC<Props> = ({ messages, setMessages }) => {
   const { socket } = useAuth();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [text, setText] = React.useState("");
@@ -30,14 +31,36 @@ const Input: FC<Props> = ({ messages, setMessages, livetext, setLiveText }) => {
 
   useEffect(() => {
     if (textareaRef.current) {
-      textareaRef.current.style.height = `${calcHeight(livetext)}px`;
+      textareaRef.current.style.height = `${calcHeight(text)}px`;
     }
-  }, [livetext]);
+  }, [text]);
 
-  const fetchSomeData = (e) => {
+  const handleChatGPTResponse = (aiMessageId: string) => (res: WsResponse) => {
+    if (res.type === "data") {
+      setMessages((prevMessages) => {
+        if (!prevMessages) return [];
+        return prevMessages.map((message) => {
+          if (message.id === aiMessageId) {
+            return {
+              ...message,
+              message: message.message + (res.content || ""),
+            };
+          } else {
+            return message;
+          }
+        });
+      });
+    } else if (res.type === "end") {
+      aiMessageId = "";
+      console.log("Stream ended.");
+    }
+  };
+
+  const fetchSomeData = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (socket) {
       socket.emit("streamChatGPT", text);
+      setText("");
 
       setMessages((prev) => {
         const _message: Message = { id: uuid(), from: "user", message: text };
@@ -45,44 +68,14 @@ const Input: FC<Props> = ({ messages, setMessages, livetext, setLiveText }) => {
         return [...prev, _message];
       });
 
-      const aiMessageid = uuid();
-
       setMessages((prev) => {
-        const _message: Message = { id: aiMessageid, from: "AI", message: "" };
+        const _message: Message = { id: aiMessageId, from: "AI", message: "" };
         if (!prev) return [_message];
         return [...prev, _message];
       });
 
-      console.log("AI message id:", aiMessageid);
-
-      socket.on("chatGPTResponse", (res: WsResponse) => {
-        if (res.type === "data") {
-          console.log("Target aiMessageid for update:", aiMessageid);
-
-          setMessages((prevMessages) => {
-            if (!prevMessages) return [];
-
-            return prevMessages.map((message) => {
-              if (message.id === aiMessageid) {
-                console.log("Check reuslt:", message.id === aiMessageid);
-                console.log(`Updating message ${message.id} with new content.`);
-                return {
-                  ...message,
-                  message: message.message + (res.content || ""),
-                };
-              } else {
-                console.log(
-                  `Message ${message.id} does not match target ID and will not be updated.`
-                );
-
-                return message;
-              }
-            });
-          });
-        } else if (res.type === "end") {
-          console.log("Stream ended.");
-        }
-      });
+      aiMessageId = uuid();
+      socket.on("chatGPTResponse", handleChatGPTResponse(aiMessageId));
       socket.on("chatGPTError", (errorMessage) => {
         console.error("Error from server:", errorMessage);
       });
@@ -91,9 +84,8 @@ const Input: FC<Props> = ({ messages, setMessages, livetext, setLiveText }) => {
     }
   };
 
-  console.log("Messages:", messages);
-
   return (
+    <div className="fixed z-50 bottom-0 bg-black h-[100px] left-64 right-0 p-10 ">
     <div className="fixed z-100 bottom-10 left-64 right-10 ">
       {!messages && (
         <div className="mb-4 ml-10 flex items-center justify-between">
@@ -130,6 +122,7 @@ const Input: FC<Props> = ({ messages, setMessages, livetext, setLiveText }) => {
           </button>
         </div>
       </form>
+    </div>
     </div>
   );
 };

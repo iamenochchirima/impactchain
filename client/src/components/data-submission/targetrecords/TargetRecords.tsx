@@ -17,24 +17,8 @@ export const TargetRecords = () => {
 
   useEffect(() => {
     if (userRecord) {
-      const _innerTargets = Array.isArray(userRecord.impactTargets[0])
-        ? userRecord.impactTargets[0]
-        : [];
-      if (Array.isArray(_innerTargets[0])) {
-        const filteredTargets = _innerTargets[0].filter(
-          (target) => target.measurements?.length > 0
-        );
-        const _sortedTargets = [...filteredTargets].sort(
-          (a, b) => Number(a.id) - Number(b.id)
-        );
-        setImpactTargets(_sortedTargets);
-        const matchingTargetOption = targetOptions.filter((targetOption) => {
-          return _sortedTargets.some(
-            (target) => Number(target.id) === targetOption.id
-          );
-        });
-        setTargets(matchingTargetOption);
-      } else {
+      const _innerTargets =userRecord.impactTargets
+
         const filteredTargets = _innerTargets.filter(
           (target) => target.measurements?.length > 0
         );
@@ -48,7 +32,6 @@ export const TargetRecords = () => {
           );
         });
         setTargets(matchingTargetOption);
-      }
     }
   }, [userRecord]);
 

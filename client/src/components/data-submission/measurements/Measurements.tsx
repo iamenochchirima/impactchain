@@ -23,18 +23,12 @@ const Measurements = () => {
   useEffect(() => {
     if (userRecord) {
       setRecord(userRecord);
-      const _innerTargets = Array.isArray(userRecord.impactTargets[0])
-        ? userRecord.impactTargets[0]
-        : [];
+      const _innerTargets =userRecord.impactTargets
+       
       const _sortedTargets = [..._innerTargets].sort(
         (a, b) => Number(a.id) - Number(b.id)
-      );
-
-      if (Array.isArray(_sortedTargets[0])) {
-        setTargets(_sortedTargets[0]);
-      } else {
+      )
         setTargets(_sortedTargets);
-      }
     }
   }, [userRecord]);
 

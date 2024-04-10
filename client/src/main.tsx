@@ -5,6 +5,7 @@ import "./index.css";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import 'react-tooltip/dist/react-tooltip.css'
 import { store } from "./redux/store.ts";
 import { ContextProvider } from "./hooks/AppContext.tsx";
 

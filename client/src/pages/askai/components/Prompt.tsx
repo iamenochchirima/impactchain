@@ -6,7 +6,7 @@ type Props = {
     }
 const Prompt: FC<Props> = ({message}) => {
   return (
-    <div className="flex items-startborder-gray-200 rounded-2xl p-2 bg-custom-gray gap-2.5">
+    <div className="flex w-full items-startborder-gray-200 rounded-2xl p-2 bg-custom-gray gap-2.5">
     <CiUser className="w-8 h-8 text-white" />
     <div className="flex flex-col gap-1 w-full">
         <h1 className="font-bold mb-2 mt-2">You</h1>

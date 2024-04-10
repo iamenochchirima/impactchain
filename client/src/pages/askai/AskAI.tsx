@@ -13,7 +13,7 @@ const AskAI = () => {
   const [messages, setMessages] = useState<Message[]| null>(null);
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       {!messages ? <Welcome /> : <Chats {...{messages}} />}
       <Input {...{messages, setMessages}} />
     </div>

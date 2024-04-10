@@ -163,13 +163,6 @@ const MainChart: React.FC = () => {
   return (
     <div className="col-span-12 border-x border-y rounded-xl border-custom-green p-4 text-white bg-custom-gray px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-8">
       <div className="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
-        <div className="flex w-full flex-wrap gap-3 sm:gap-5">
-          <div className="flex min-w-47.5">
-            <div className="w-full">
-              <p className="font-bold text-xl">Impact Overview</p>
-            </div>
-          </div>
-        </div>
         <div className="flex w-full max-w-45 justify-end">
           <div className="inline-flex items-center rounded-md bg-whiter p-1.5 dark:bg-meta-4">
             <button className="rounded py-1 px-3 text-xs font-medium shadow-card hover:bg-gray-500 hover:shadow-card dark:bg-boxdark dark:text-white dark:hover:bg-boxdark">

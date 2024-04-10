@@ -5,7 +5,7 @@ type Props = {
 };
 const AIResponse: FC<Props> = ({ message }) => {
   return (
-    <div className="flex items-startborder-gray-200 rounded-2xl p-2 bg-gray-800 gap-2.5">
+    <div className="flex w-full items-startborder-gray-200 rounded-2xl p-2 bg-gray-800 gap-2.5">
       <img src="/smiley.svg" alt="smiley" className="h-8 w-8" />
       <div className="flex flex-col gap-1 w-full">
         <h1 className="font-bold mb-2 mt-2">AI</h1>

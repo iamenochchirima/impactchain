@@ -15,8 +15,8 @@ type Props = {
   target: ImpactTarget;
 };
 
-const ChartThree: React.FC<Props> = ({target}) => {
-const data: ChartData = getData(target);
+const ChartThree: React.FC<Props> = ({ target }) => {
+  const data: ChartData = getData(target);
 
   const options: ApexOptions = {
     chart: {
@@ -29,7 +29,7 @@ const data: ChartData = getData(target);
       show: false,
       position: "bottom",
     },
-  
+
     plotOptions: {
       pie: {
         donut: {
@@ -60,7 +60,7 @@ const data: ChartData = getData(target);
       },
     ],
   };
-  
+
   const [state, setState] = useState<ChartThreeState>({
     series: data.percentArray,
   });
@@ -73,38 +73,34 @@ const data: ChartData = getData(target);
 
   handleReset;
 
-  console.log(data)
-
-  const  truncateMiddle = (text: string, maxLength: number = 15): string => {
-    if (text.length <= maxLength) {
-      return text;
-    }
-  
-    const half = Math.floor(maxLength / 2) - 1;
-    return `${text.slice(0, half)}...${text.slice(-half)}`;
-  }
-
   const truncateEnd = (text: string, maxLength: number): string => {
     if (text.length <= maxLength) {
       return text;
     }
     return `${text.slice(0, maxLength)}...`;
-  }
+  };
 
   const matchingTarget = targetOptions.find((t) => t.name === target.name);
 
-
   return (
-    <div 
-     className={`sm:px-7.5 bg-custom-gray rounded-sm border-x border-y border-stroke border-custom-green px-2 h-full pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-5 p-3`}>
+    <div
+      className={`sm:px-7.5 bg-custom-gray rounded-sm border-x border-y border-stroke border-custom-green px-2 h-full pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-5 p-3`}
+    >
       <div className="mb-3 justify-between items-center gap-2 sm:flex">
         <div className="flex items-center gap-2">
-          <img src={`${matchingTarget ? `${matchingTarget.emoji}` : ""}`} alt="emoji" className="w-6 h-6" />
-          <a data-tooltip-id="my-tooltip" data-tooltip-content={`${target.name}`}>
-        <Tooltip id="my-tooltip" />
-          <h5 className="text-sm  text-white dark:text-white">
-            {truncateEnd(target.name, 20)}
-          </h5>
+          <img
+            src={`${matchingTarget ? `${matchingTarget.emoji}` : ""}`}
+            alt="emoji"
+            className="w-6 h-6"
+          />
+          <a
+            data-tooltip-id="my-tooltip"
+            data-tooltip-content={`${target.name}`}
+          >
+            <Tooltip id="my-tooltip" />
+            <h5 className="text-sm  text-white dark:text-white">
+              {truncateEnd(target.name, 20)}
+            </h5>
           </a>
         </div>
         <div>
@@ -139,20 +135,29 @@ const data: ChartData = getData(target);
       </div>
 
       <div className="-mx-8 flex flex-col items-center justify-center gap-y-3">
-       {data.data.map((item, index) => (
-         <div key={index} className="sm:w-1/2 w-full px-">
-         <div className="flex w-full items-center">
-           <span style={{backgroundColor: item.color}} className="mr-2 block h-3 w-full max-w-3 rounded-full "></span>
-           <p className="flex w-full justify-between text-sm font-medium text-white dark:text-white">
-            <a data-tooltip-id="my-tooltip" data-tooltip-content={`${item.name}`}>
-              <Tooltip id="my-tooltip" />
-             <span className="text-xs"> {truncateEnd(item.name, 20)} </span>
-            </a>
-             <span> {item.percentage}</span>
-           </p>
-         </div>
-       </div>
-       ))}
+        {data.data.map((item, index) => (
+          <div key={index} className="sm:w-1/2 w-full px-">
+            <div className="flex w-full items-center">
+              <span
+                style={{ backgroundColor: item.color }}
+                className="mr-2 block h-3 w-full max-w-3 rounded-full "
+              ></span>
+              <p className="flex w-full justify-between text-sm font-medium text-white dark:text-white">
+                <a
+                  data-tooltip-id="my-tooltip"
+                  data-tooltip-content={`${item.name}`}
+                >
+                  <Tooltip id="my-tooltip" />
+                  <span className="text-xs">
+                    {" "}
+                    {truncateEnd(item.name, 20)}{" "}
+                  </span>
+                </a>
+                <span> {item.percentage}</span>
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

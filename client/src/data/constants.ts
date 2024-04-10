@@ -6,6 +6,7 @@ export type TargetOption = {
   rectangle: string;
   emoji: string;
   measurements: Measurement[];
+  category: string;
 };
 
 type Measurement = {
@@ -21,6 +22,7 @@ export const targetOptions: TargetOption[] = [
     color: "#E5243B",
     rectangle: "#c44c5b",
     emoji: "/targetIcons/1.svg",
+    category: "Social",
     measurements: [
       {
         id: 1,
@@ -59,6 +61,7 @@ export const targetOptions: TargetOption[] = [
     color: "#DDA63A",
     rectangle: "#bc9a59",
     emoji: "/targetIcons/2.svg",
+    category: "Social",
     measurements: [
       {
         id: 1,
@@ -93,6 +96,7 @@ export const targetOptions: TargetOption[] = [
     color: "#4C9F38",
     rectangle: "#659858",
     emoji: "/targetIcons/3.svg",
+    category: "Social",
     measurements: [
       {
         id: 1,
@@ -127,6 +131,7 @@ export const targetOptions: TargetOption[] = [
     color: "#C5192D",
     rectangle: "#b24552",
     emoji: "/targetIcons/4.svg",
+    category: "Social",
     measurements: [
       {
         id: 1,
@@ -161,6 +166,7 @@ export const targetOptions: TargetOption[] = [
     color: "#FF3A21",
     rectangle: "#d45a4a",
     emoji: "/targetIcons/5.svg",
+    category: "Social",
     measurements: [
       {
         id: 1,
@@ -195,6 +201,7 @@ export const targetOptions: TargetOption[] = [
     color: "#26BDE2",
     rectangle: "#4ea9c1",
     emoji: "/targetIcons/6.svg",
+    category: "Environmental",
     measurements: [
       {
         id: 1,
@@ -229,6 +236,7 @@ export const targetOptions: TargetOption[] = [
     color: "#FCC30B",
     rectangle: "#ceac3c",
     emoji: "/targetIcons/7.svg",
+    category: "Environmental",
     measurements: [
       {
         id: 1,
@@ -263,6 +271,7 @@ export const targetOptions: TargetOption[] = [
     color: "#A21942",
     rectangle: "#9a465e",
     emoji: "/targetIcons/8.svg",
+    category: "Social",
     measurements: [
       {
         id: 1,
@@ -297,6 +306,7 @@ export const targetOptions: TargetOption[] = [
     color: "#FD6925",
     rectangle: "#d4774c",
     emoji: "/targetIcons/9.svg",
+    category: "Governance",
     measurements: [
       {
         id: 1,
@@ -331,6 +341,7 @@ export const targetOptions: TargetOption[] = [
     color: "#DD1367",
     rectangle: "#be4275",
     emoji: "/targetIcons/10.svg",
+    category: "Social",
     measurements: [
       {
         id: 1,
@@ -365,6 +376,7 @@ export const targetOptions: TargetOption[] = [
     color: "#FD9D24",
     rectangle: "#d3974c",
     emoji: "/targetIcons/11.svg",
+    category: "Social",
     measurements: [
       {
         id: 1,
@@ -399,6 +411,7 @@ export const targetOptions: TargetOption[] = [
     color: "#BF8B2E",
     rectangle: "#ad8d52",
     emoji : "/targetIcons/12.svg",
+    category: "Environmental",
     measurements: [
       {
         id: 1,
@@ -433,6 +446,7 @@ export const targetOptions: TargetOption[] = [
     color: "#48773C",
     rectangle: "#637f5b",
     emoji: "/targetIcons/13.svg",
+    category: "Environmental",
     measurements: [
       {
         id: 1,
@@ -467,6 +481,7 @@ export const targetOptions: TargetOption[] = [
     color: "#0A97D9",
     rectangle: "#3c95bf",
     emoji: "/targetIcons/14.svg",
+    category: "Environmental",
     measurements: [
       {
         id: 1,
@@ -501,6 +516,7 @@ export const targetOptions: TargetOption[] = [
     color: "#56C02B",
     rectangle: "#6db051",
     emoji: "/targetIcons/15.svg",
+    category: "Environmental",
     measurements: [
       {
         id: 1,
@@ -535,6 +551,7 @@ export const targetOptions: TargetOption[] = [
     color: "#00689D",
     rectangle: "#367697",
     emoji: "/targetIcons/10.svg",
+    category: "Social",
     measurements: [
       {
         id: 1,
@@ -569,6 +586,7 @@ export const targetOptions: TargetOption[] = [
     color: "#19486A",
     rectangle: "#456277",
     emoji: "/targetIcons/16.svg",
+    category: "Governance",
     measurements: [
       {
         id: 1,

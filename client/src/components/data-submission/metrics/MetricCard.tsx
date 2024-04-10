@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { targetOptions } from "../../../data/constants";
-import MeasurementItem from "./MeasurementItem";
+import MeasurementItem from "./MetricItem";
 import {
   ImpactTarget,
   Measurement,

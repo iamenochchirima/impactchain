@@ -56,8 +56,8 @@ const Input: FC<Props> = ({ messages, setMessages }) => {
     }
   };
 
-  const fetchSomeData = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const runPrompt = () => {
+    if (!text) return;
     if (socket) {
       socket.emit("streamChatGPT", text);
       setText("");
@@ -104,7 +104,6 @@ const Input: FC<Props> = ({ messages, setMessages }) => {
         </div>
       )}
       <form
-        onSubmit={fetchSomeData}
         className=" bg-white shadow-md ml-10 rounded-lg px-2"
       >
         <div className="flex items-center mx-auto">
@@ -113,11 +112,22 @@ const Input: FC<Props> = ({ messages, setMessages }) => {
             value={text}
             onInput={(e) => setText(e.currentTarget.value)}
             placeholder="Ask AI"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                runPrompt();
+              }
+            }}
             className="flex-1 text-black pt-2.5 focus:outline-none outline-none appearance-none overflow-hidden "
             required
             style={{ overflow: "hidden", resize: "none", height: "50px" }}
           />
-          <button type="submit" className=" focus:outline-none bottom-0">
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              runPrompt();
+            }}
+           type="button" className=" focus:outline-none bottom-0">
             <img src="/send.svg" alt="" className="size-8" />
           </button>
         </div>

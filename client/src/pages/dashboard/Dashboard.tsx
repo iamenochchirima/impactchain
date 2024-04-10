@@ -28,9 +28,9 @@ const Dashboard = () => {
   }, [dropdownRef])
 
   return (
-    <div className="mx-10 flex flex-col gap-5">
+    <div className=" ml-5 flex flex-col gap-5">
       <div className="flex items-center justify-between ">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 mt-10">
           <div className=" text-center text-white text-4xl font-NeueMachinaUltrabold">
             Impact Overview
           </div>

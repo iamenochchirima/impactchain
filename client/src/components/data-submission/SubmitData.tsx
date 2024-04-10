@@ -5,7 +5,7 @@ import Loading from "../Loading";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import ImpactTarget from "./ImpactTarget";
-import Measurements from "./metrics/Metrics";
+import Metrics from "./metrics/Metrics";
 import { TargetRecords } from "./targetrecords/TargetRecords";
 import { useEffect, useState } from "react";
 
@@ -39,7 +39,7 @@ const SubmitData = () => {
               {dataComponent === "About" && <About />}
               {dataComponent === "ProfileLogo" && <ProfileLogo />}
               {dataComponent === "ImpactTarget" && <ImpactTarget />}
-              {dataComponent === "Measurements" && <Measurements />}
+              {dataComponent === "Metrics" && <Metrics />}
               {dataComponent === "TargetRecords" && <TargetRecords />}
               {dataComponent === "Success" && <h1>Success</h1>}
             </div>

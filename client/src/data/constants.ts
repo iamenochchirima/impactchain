@@ -5,11 +5,11 @@ export type TargetOption = {
   color: string;
   rectangle: string;
   emoji: string;
-  measurements: Measurement[];
+  metrics: Metric[];
   category: string;
 };
 
-type Measurement = {
+type Metric = {
   id: number;
   description: string;
 };
@@ -23,7 +23,7 @@ export const targetOptions: TargetOption[] = [
     rectangle: "#c44c5b",
     emoji: "/targetIcons/1.svg",
     category: "Social",
-    measurements: [
+    metrics: [
       {
         id: 1,
         description: "Financial aid for poverty alleviation",
@@ -62,7 +62,7 @@ export const targetOptions: TargetOption[] = [
     rectangle: "#bc9a59",
     emoji: "/targetIcons/2.svg",
     category: "Social",
-    measurements: [
+    metrics: [
       {
         id: 1,
         description: "Food Donated",
@@ -97,7 +97,7 @@ export const targetOptions: TargetOption[] = [
     rectangle: "#659858",
     emoji: "/targetIcons/3.svg",
     category: "Social",
-    measurements: [
+    metrics: [
       {
         id: 1,
         description: "Funding for healthcare"
@@ -132,7 +132,7 @@ export const targetOptions: TargetOption[] = [
     rectangle: "#b24552",
     emoji: "/targetIcons/4.svg",
     category: "Social",
-    measurements: [
+    metrics: [
       {
         id: 1,
         description: "Schools built or supported"
@@ -167,7 +167,7 @@ export const targetOptions: TargetOption[] = [
     rectangle: "#d45a4a",
     emoji: "/targetIcons/5.svg",
     category: "Social",
-    measurements: [
+    metrics: [
       {
         id: 1,
         description: "Women’s empowerment programs"
@@ -202,7 +202,7 @@ export const targetOptions: TargetOption[] = [
     rectangle: "#4ea9c1",
     emoji: "/targetIcons/6.svg",
     category: "Environmental",
-    measurements: [
+    metrics: [
       {
         id: 1,
         description: "Water purification systems"
@@ -237,7 +237,7 @@ export const targetOptions: TargetOption[] = [
     rectangle: "#ceac3c",
     emoji: "/targetIcons/7.svg",
     category: "Environmental",
-    measurements: [
+    metrics: [
       {
         id: 1,
         description: "Renewable energy projects"
@@ -272,7 +272,7 @@ export const targetOptions: TargetOption[] = [
     rectangle: "#9a465e",
     emoji: "/targetIcons/8.svg",
     category: "Social",
-    measurements: [
+    metrics: [
       {
         id: 1,
         description: "Job creation initiatives"
@@ -307,7 +307,7 @@ export const targetOptions: TargetOption[] = [
     rectangle: "#d4774c",
     emoji: "/targetIcons/9.svg",
     category: "Governance",
-    measurements: [
+    metrics: [
       {
         id: 1,
         description: "Infrastructure projects"
@@ -342,7 +342,7 @@ export const targetOptions: TargetOption[] = [
     rectangle: "#be4275",
     emoji: "/targetIcons/10.svg",
     category: "Social",
-    measurements: [
+    metrics: [
       {
         id: 1,
         description: "Income inequality reduction"
@@ -377,7 +377,7 @@ export const targetOptions: TargetOption[] = [
     rectangle: "#d3974c",
     emoji: "/targetIcons/11.svg",
     category: "Social",
-    measurements: [
+    metrics: [
       {
         id: 1,
         description: "Urban sustainability projects"
@@ -412,7 +412,7 @@ export const targetOptions: TargetOption[] = [
     rectangle: "#ad8d52",
     emoji : "/targetIcons/12.svg",
     category: "Environmental",
-    measurements: [
+    metrics: [
       {
         id: 1,
         description: "Waste reduction and recycling"
@@ -447,7 +447,7 @@ export const targetOptions: TargetOption[] = [
     rectangle: "#637f5b",
     emoji: "/targetIcons/13.svg",
     category: "Environmental",
-    measurements: [
+    metrics: [
       {
         id: 1,
         description: "Carbon emission reduction"
@@ -482,7 +482,7 @@ export const targetOptions: TargetOption[] = [
     rectangle: "#3c95bf",
     emoji: "/targetIcons/14.svg",
     category: "Environmental",
-    measurements: [
+    metrics: [
       {
         id: 1,
         description: "Marine conservation projects"
@@ -517,7 +517,7 @@ export const targetOptions: TargetOption[] = [
     rectangle: "#6db051",
     emoji: "/targetIcons/15.svg",
     category: "Environmental",
-    measurements: [
+    metrics: [
       {
         id: 1,
         description: "Land conservation and reforestation"
@@ -552,7 +552,7 @@ export const targetOptions: TargetOption[] = [
     rectangle: "#367697",
     emoji: "/targetIcons/10.svg",
     category: "Social",
-    measurements: [
+    metrics: [
       {
         id: 1,
         description: "Law enforcement support"
@@ -587,7 +587,7 @@ export const targetOptions: TargetOption[] = [
     rectangle: "#456277",
     emoji: "/targetIcons/16.svg",
     category: "Governance",
-    measurements: [
+    metrics: [
       {
         id: 1,
         description: "Collaborative SDG projects"

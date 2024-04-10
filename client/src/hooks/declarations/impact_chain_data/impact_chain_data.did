@@ -16,7 +16,7 @@ type Result =
    err: text;
    ok: UserRecord;
  };
-type Measurement = 
+type Metric = 
  record {
    documents: vec text;
    goal: opt text;
@@ -26,7 +26,7 @@ type Measurement =
 type ImpactTarget = 
  record {
    id: nat;
-   measurements: vec Measurement;
+   metrics: vec Metric;
    name: text;
  };
 type IOTDevice = 

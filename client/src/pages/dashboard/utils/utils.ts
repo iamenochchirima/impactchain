@@ -18,7 +18,7 @@ export type ChartData = {
 };
 
 export const getData = (target: ImpactTarget) => {
-  const measurementNames = target.measurements.map((m) => m.name);
+  const metricNames = target.metrics.map((m) => m.name);
 
   const colors = [
     "#3C50E0",
@@ -43,16 +43,16 @@ export const getData = (target: ImpactTarget) => {
 
   const data: ChartData = {
     targetName: target.name,
-    data: measurementNames.map((name) => {
+    data: metricNames.map((name) => {
       return {
         name,
         color: getColorForName(name, colors),
         percentage: generateRandomPercentage(),
       };
     }),
-    percentArray: measurementNames.map(() => generateRandomPercentage()),
-    colors: measurementNames.map((name) => getColorForName(name, colors)),
-    names: measurementNames,
+    percentArray: metricNames.map(() => generateRandomPercentage()),
+    colors: metricNames.map((name) => getColorForName(name, colors)),
+    names: metricNames,
     targetColor: targetColor || "gray-900",
   };
   return data;

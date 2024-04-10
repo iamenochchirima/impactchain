@@ -9,10 +9,10 @@ export interface IOTDevice {
 }
 export interface ImpactTarget {
   'id' : bigint,
+  'metrics' : Array<Metric>,
   'name' : string,
-  'measurements' : Array<Measurement>,
 }
-export interface Measurement {
+export interface Metric {
   'documents' : Array<string>,
   'goal' : [] | [string],
   'name' : string,

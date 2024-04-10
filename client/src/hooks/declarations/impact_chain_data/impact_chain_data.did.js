@@ -4,7 +4,7 @@ export const idlFactory = ({ IDL }) => {
     'platform' : IDL.Text,
     'ipAddress' : IDL.Text,
   });
-  const Measurement = IDL.Record({
+  const Metric = IDL.Record({
     'documents' : IDL.Vec(IDL.Text),
     'goal' : IDL.Opt(IDL.Text),
     'name' : IDL.Text,
@@ -12,8 +12,8 @@ export const idlFactory = ({ IDL }) => {
   });
   const ImpactTarget = IDL.Record({
     'id' : IDL.Nat,
+    'metrics' : IDL.Vec(Metric),
     'name' : IDL.Text,
-    'measurements' : IDL.Vec(Measurement),
   });
   const UserRecord = IDL.Record({
     'aboutCompany' : IDL.Record({

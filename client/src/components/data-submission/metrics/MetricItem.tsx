@@ -2,27 +2,27 @@ import { useEffect, useState } from "react";
 import { FaSquare } from "react-icons/fa";
 import { FaRegSquare } from "react-icons/fa";
 
-const MeasurementItem = ({
+const MetricItem = ({
   m,
-  setSelectedMeasurements,
-  selectedMeasurements,
+  setSelectedMetrics,
+  selectedMetrics,
 }) => {
   const [selectedButton, setSelectedButton] = useState<boolean>(false);
 
   useEffect(() => {
-    if (selectedMeasurements.includes(m.description)) {
+    if (selectedMetrics.includes(m.description)) {
       setSelectedButton(true);
     }
-  }, [selectedMeasurements]);
+  }, [selectedMetrics, m.description]);
 
   const handleClicked = () => {
     setSelectedButton(!selectedButton);
-    if (selectedMeasurements.includes(m.description)) {
-      setSelectedMeasurements(
-        selectedMeasurements.filter((item) => item !== m.description)
+    if (selectedMetrics.includes(m.description)) {
+      setSelectedMetrics(
+        selectedMetrics.filter((item) => item !== m.description)
       );
     } else {
-      setSelectedMeasurements((prev) => [...(prev || []), m.description]);
+      setSelectedMetrics((prev) => [...(prev || []), m.description]);
     }
   };
   return (
@@ -42,4 +42,4 @@ const MeasurementItem = ({
   );
 };
 
-export default MeasurementItem;
+export default MetricItem;

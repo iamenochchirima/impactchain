@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from "react";
 import { targetOptions } from "../../../data/constants";
-import MeasurementItem from "./MetricItem";
+import MetricItem from "./MetricItem";
 import {
   ImpactTarget,
-  Measurement,
+  Metric,
   UserRecord,
 } from "../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
 
@@ -15,40 +15,40 @@ type Props = {
   targets: ImpactTarget[];
 };
 
-const MeasurementCard: FC<Props> = ({
+const MetricCard: FC<Props> = ({
   target,
   setRecord,
   record,
   setTargets,
   targets,
 }) => {
-  const measurement = targetOptions.find((t) => t.id === Number(target.id));
+  const metric = targetOptions.find((t) => t.id === Number(target.id));
   const [localTarget, setLocalTarget] = useState<ImpactTarget>(target);
-  const [existingMeasurements, setExistingMeasurements] = useState<Measurement[]>(target.measurements);
-  const [selectedMeasurements, setSelectedMeasurements] = useState<string[]>(target.measurements.map((m) => m.name));
+  const [selectedMetrics, setSelectedMetrics] = useState<string[]>(target.metrics.map((m) => m.name));
+  const existingmetrics = target.metrics
 
 
 
 
   useEffect(() => {
 
-    const _updatedMeasurements: Measurement[] = selectedMeasurements.map((m) => {
-      const existing = existingMeasurements.find((em) => em.name === m);
+    const _updatedmetrics: Metric[] = selectedMetrics.map((m) => {
+      const existing = existingmetrics.find((em) => em.name === m);
       if (existing) {
         return existing;
       }
-      const newMeasurement: Measurement = {
+      const newmetric: Metric = {
         name: m,
         documents: [],
         goal: [],
         iotDevice: [],
       };
-      return newMeasurement;
+      return newmetric;
     });
 
     const updatedTarget: ImpactTarget = {
       ...localTarget,
-      measurements: _updatedMeasurements,
+      metrics: _updatedmetrics,
     };
     setLocalTarget(updatedTarget);
     const updatedTargets = targets.map((t) =>
@@ -63,25 +63,25 @@ const MeasurementCard: FC<Props> = ({
       setRecord(updatedRecord);
       
     }
-  }, [selectedMeasurements ]);
+  }, [selectedMetrics  ]);
 
 
   return (
     <div className="flex flex-col rounded-3xl bg-black p-10 slide-fwd-center  ">
       <div className="flex items-center justify-center">
         <img
-          src={measurement?.icon}
+          src={metric?.icon}
           alt={target.name}
           className="h-[100px] w-[100px]"
         />
       </div>
       <div className="flex flex-col gap-3 mt-5">
-        {measurement?.measurements.map((m) => (
-          <MeasurementItem key={m.id} {...{ m, setSelectedMeasurements , selectedMeasurements}} />
+        {metric?.metrics.map((m) => (
+          <MetricItem key={m.id} {...{ m, setSelectedMetrics , selectedMetrics}} />
         ))}
       </div>
     </div>
   );
 };
 
-export default MeasurementCard;
+export default MetricCard;

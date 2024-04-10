@@ -1,17 +1,17 @@
 import React, { FC, useEffect, useState } from 'react'
-import { IOTDevice, Measurement } from '../../../hooks/declarations/impact_chain_data/impact_chain_data.did'
+import { IOTDevice, Metric } from '../../../hooks/declarations/impact_chain_data/impact_chain_data.did'
 import UploadDocs from './UploadDocs'
 import LinkDevice from './LinkDevice'
 
 type Props = {
-    measurement: Measurement
-    displayedMeasurements: Measurement[]
-    setDisplayedMeasurements: (measurements: Measurement[]) => void
+    metric: Metric
+    displayedMetrics: Metric[]
+    setDisplayedMetrics: (metric: Metric[]) => void
     clearGoal: boolean
     setClearGoal: (clearGoal: boolean) => void
     }
 
-const MeasurementRecords: FC<Props> = ({measurement,  displayedMeasurements, setDisplayedMeasurements, clearGoal, setClearGoal}) => {
+const MetricRecords: FC<Props> = ({metric,  displayedMetrics, setDisplayedMetrics, clearGoal, setClearGoal}) => {
 
     const [uploadDocs, setUploadDocs] = useState<boolean>(false)
     const [linkDevice, setLinkDevice] = useState<boolean>(false)
@@ -25,7 +25,7 @@ const MeasurementRecords: FC<Props> = ({measurement,  displayedMeasurements, set
         setLinkDevice(false);
         setIotDevice(null);
         setDocsUrls(null);
-    }, [measurement]);
+    }, [metric]);
 
     useEffect(() => {
         if (clearGoal) {
@@ -38,46 +38,46 @@ const MeasurementRecords: FC<Props> = ({measurement,  displayedMeasurements, set
     useEffect(() => {
     
         if (docs) {
-            const updatedMeasurement : Measurement = {
-                ...measurement,
+            const updatedMetric : Metric = {
+                ...metric,
                 documents: docs
             }
-            setDisplayedMeasurements(displayedMeasurements.map((m) => m.name === measurement.name ? updatedMeasurement : m))
+            setDisplayedMetrics(displayedMetrics.map((m) => m.name === metric.name ? updatedMetric : m))
         }
         if (goal !== '') {
-            const updatedMeasurement : Measurement = {
-                ...measurement,
+            const updatedMetric : Metric = {
+                ...metric,
                 goal: [goal]
             }
-            setDisplayedMeasurements(displayedMeasurements.map((m) => m.name === measurement.name ? updatedMeasurement : m))
+            setDisplayedMetrics(displayedMetrics.map((m) => m.name === metric.name ? updatedMetric : m))
         }
     }, [docs, goal])
 
     useEffect(() => {
         if (iotDevice) {
-            const updatedMeasurement : Measurement = {
-                ...measurement,
+            const updatedMetric : Metric = {
+                ...metric,
                 iotDevice: [iotDevice]
             }
-            const updatedMeasurements = displayedMeasurements.map((m) => m.name === measurement.name ? updatedMeasurement : m)
-            console.log("updated measurements", updatedMeasurements)
-            setDisplayedMeasurements(updatedMeasurements)
+            const updatedMetrics = displayedMetrics.map((m) => m.name === metric.name ? updatedMetric : m)
+            console.log("updated metric", updatedMetrics)
+            setDisplayedMetrics(updatedMetrics)
         }
     }, [iotDevice])
   return (
     <div className='text-white px-5 py-3'>
-        <h1>{measurement.name}</h1>
+        <h1>{metric.name}</h1>
         <div className="mt-3 flex items-center justify-between">
             <button
             disabled={docs !== null}
             onClick={() => setUploadDocs(true)}
              className='bg-white px-4 py-2 text-black rounded-3xl'>
-                {measurement.documents.length > 0 ? 'Documents uploaded' : 'Upload your documents'}
+                {metric.documents.length > 0 ? 'Documents uploaded' : 'Upload your documents'}
             </button>
             <button 
             onClick={() => setLinkDevice(true)}
             className='bg-white px-4 py-2 text-black rounded-3xl'>
-            {measurement.iotDevice.length > 0 ? "Device Linked" : "Link your IoT device"}    
+            {metric.iotDevice.length > 0 ? "Device Linked" : "Link your IoT device"}    
             </button>
         </div>
         <div className="w-full flex flex-col p-3 bg-gray-400  rounded-3xl mt-3">
@@ -93,4 +93,4 @@ const MeasurementRecords: FC<Props> = ({measurement,  displayedMeasurements, set
   )
 }
 
-export default MeasurementRecords
+export default MetricRecords

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
-import MeasurementCard from "./MetricCard";
+import MetricCard from "./MetricCard";
 import {
   ImpactTarget,
   UserRecord,
@@ -9,7 +9,7 @@ import {
 import { useAuth } from "../../../hooks/AppContext";
 import { setDataComponent, setUserRecord } from "../../../redux/slices/app";
 
-const Measurements = () => {
+const Metrics = () => {
   const { dataActor } = useAuth();
   const { userRecord } = useSelector((state: RootState) => state.app);
   const [record, setRecord] = useState<UserRecord | null>(null);
@@ -80,7 +80,7 @@ const Measurements = () => {
       </h3>
       <div className="grid grid-cols-3 gap-4 mt-5">
         {displayedTargets.map((target: ImpactTarget) => (
-          <MeasurementCard
+          <MetricCard
             key={target.id}
             {...{ target, record, setRecord, setTargets, targets }}
           />
@@ -113,4 +113,4 @@ const Measurements = () => {
   );
 };
 
-export default Measurements;
+export default Metrics;

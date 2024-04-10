@@ -47,7 +47,7 @@ const ImpactTarget = () => {
     if (selectedTargets) {
       const finalTargets = selectedTargets.map((t) => Number(t.id));
       if (JSON.stringify(finalTargets) === JSON.stringify(initialTargets)) {
-        dispatch(setDataComponent("Measurements"));
+        dispatch(setDataComponent("Metrics"));
         return;
       }
     }
@@ -68,7 +68,7 @@ const ImpactTarget = () => {
               return {
                 id: BigInt(target.id),
                 name: target.name,
-                measurements: [],
+                metrics: [],
                 targetRecords: [],
               };
             }
@@ -76,7 +76,7 @@ const ImpactTarget = () => {
             return {
               id: BigInt(target.id),
               name: target.name,
-              measurements: [],
+              metrics: [],
               targetRecords: [],
             };
           }
@@ -87,7 +87,7 @@ const ImpactTarget = () => {
         };
         dispatch(setUserRecord(data));
         await dataActor.addUserRecord(data);
-        dispatch(setDataComponent("Measurements"));
+        dispatch(setDataComponent("Metrics"));
         dispatch(setUserRecord(data));
         setLoading(false);
       } catch (error) {

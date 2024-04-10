@@ -10,10 +10,10 @@ import {
 } from "../../../redux/slices/app";
 import {
   ImpactTarget,
-  Measurement,
+  Metric,
   UserRecord,
 } from "../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
-import MeasurementRecords from "./MeasurementRecords";
+import MetricRecords from "./MetricRecords";
 import { toast } from "react-toastify";
 import { RootState } from "../../../redux/store";
 import { useAuth } from "../../../hooks/AppContext";
@@ -36,8 +36,8 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
   const [gradientStyle, setGradientStyle] = useState<GradientStyle>({
     backgroundImage: `linear-gradient(to top, #354b5b, ${target.color} 50%, ${target.color})`,
   });
-  const [displayedMeasurements, setDisplayedMeasurements] = useState<
-    Measurement[]
+  const [displayedMetrics, setDisplayedMetrics] = useState<
+    Metric[]
   >([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [clearGoal, setClearGoal] = useState<boolean>(false);
@@ -45,8 +45,8 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
 
   useEffect(() => {
     if (impact) {
-      setDisplayedMeasurements(
-        impact.measurements.slice(currentIndex, currentIndex + 2)
+      setDisplayedMetrics(
+        impact.metrics.slice(currentIndex, currentIndex + 2)
       );
     }
   }, [currentIndex, impact]);
@@ -62,14 +62,14 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
     setGradientStyle({
       backgroundImage: `linear-gradient(to top,#354b5b, ${target.color} 50%, ${target.color})`,
     });
-  }, [dispatch, target]);
+  }, [dispatch, target, impactTargets]);
 
   const handleNext = async () => {
     if (impact) {
-      for (const measurement of displayedMeasurements) {
-        if (measurement.goal.length === 0) {
+      for (const metric of displayedMetrics) {
+        if (metric.goal.length === 0) {
           toast.error(
-            "Please set a goal for all measurements before proceeding"
+            "Please set a goal for all metrics before proceeding"
           );
           return;
         }
@@ -80,16 +80,16 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
           toast.error("User record not found");
           return;
         }
-        const updatedImpactMeasurements: Measurement[] =
-          impact.measurements.map((measurement) => {
-            const updatedMeasurement = displayedMeasurements.find(
-              (m) => m.name === measurement.name
+        const updatedImpactMetrics: Metric[] =
+          impact.metrics.map((metric) => {
+            const updatedMetric = displayedMetrics.find(
+              (m) => m.name === metric.name
             );
-            return updatedMeasurement ? updatedMeasurement : measurement;
+            return updatedMetric ? updatedMetric : metric;
           });
         const updatedImpact: ImpactTarget = {
           ...impact,
-          measurements: updatedImpactMeasurements,
+          metrics: updatedImpactMetrics,
         };
         const updatedImpactTargets: ImpactTarget[] = impactTargets.map((t) =>
           Number(t.id) === target.id ? updatedImpact : t
@@ -120,7 +120,7 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
           window.location.reload();
           return;
         }
-        if (currentIndex + 2 >= impact.measurements.length) {
+        if (currentIndex + 2 >= impact.metrics.length) {
           toast.success(`Data for ${impact.name} saved successfully`, {
             autoClose: 5000,
           });
@@ -131,11 +131,11 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
         }
         setSaving(false);
         setCurrentIndex((prevIndex) =>
-          Math.min(prevIndex + 2, impact.measurements.length - 2)
+          Math.min(prevIndex + 2, impact.metrics.length - 2)
         );
       } catch (error) {
         setSaving(false);
-        console.log("Error updating impact measurements", error);
+        console.log("Error updating impact metrics", error);
       }
     }
   };
@@ -155,13 +155,13 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
         >
           {impact && (
             <>
-              {displayedMeasurements.map((measurement, index) => (
-                <MeasurementRecords
+              {displayedMetrics.map((metric, index) => (
+                <MetricRecords
                   key={index}
                   {...{
-                    measurement,
-                    displayedMeasurements,
-                    setDisplayedMeasurements,
+                    metric,
+                    displayedMetrics,
+                    setDisplayedMetrics,
                     clearGoal,
                     setClearGoal,
                   }}

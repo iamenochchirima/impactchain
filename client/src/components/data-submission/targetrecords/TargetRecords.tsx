@@ -20,7 +20,7 @@ export const TargetRecords = () => {
       const _innerTargets =userRecord.impactTargets
 
         const filteredTargets = _innerTargets.filter(
-          (target) => target.measurements?.length > 0
+          (target) => target.metrics?.length > 0
         );
         const _sortedTargets = [...filteredTargets].sort(
           (a, b) => Number(a.id) - Number(b.id)
@@ -55,7 +55,7 @@ export const TargetRecords = () => {
   }, [currentIndex]);
 
   const handleBack = () => {
-    dispatch(setDataComponent("Measurements"));
+    dispatch(setDataComponent("Metrics"));
     dispatch(setTargetRecord({ targetRecord: null }));
   };
 

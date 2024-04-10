@@ -7,25 +7,25 @@ export const isDataIncomplete = (info: UserRecord) => {
   if (info.impactTargets.length === 0) {
     return "ImpactTarget";
   }
-  let withoutMeasurements = 0;
+  let withoutMetrics = 0;
   for (const target of info.impactTargets) {
-    if (target.measurements.length === 0) {
-      withoutMeasurements++;
+    if (target.metrics.length === 0) {
+      withoutMetrics++;
     }
   }
-  if (withoutMeasurements > 0) {
-    return "Measurements";
+  if (withoutMetrics > 0) {
+    return "Metrics";
   }
 
-  let measurementWithoutRecords = 0;
+  let metricsWithoutRecords = 0;
 
   if (info.impactTargets.length > 0) {
-    for (const measurement of info.impactTargets[0].measurements) {
-      if (measurement.documents.length === 0 && measurement.goal.length === 0) {
-        measurementWithoutRecords++;
+    for (const metric of info.impactTargets[0].metrics) {
+      if (metric.documents.length === 0 && metric.goal.length === 0) {
+        metricsWithoutRecords++;
       }
     }
-    if (measurementWithoutRecords > 0) {
+    if (metricsWithoutRecords > 0) {
       return "TargetRecords";
     }
   }

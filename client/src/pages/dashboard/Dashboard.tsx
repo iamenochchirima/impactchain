@@ -17,8 +17,8 @@ const Dashboard = () => {
   const dropdownRef = useRef(null);
 
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !((dropdownRef.current as unknown) as HTMLElement).contains(event.target as Node)) {
         setIsOpen(false);
       }
     }

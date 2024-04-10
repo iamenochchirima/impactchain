@@ -5,7 +5,7 @@ import Loading from "../Loading";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import ImpactTarget from "./ImpactTarget";
-import Measurements from "./measurements/Measurements";
+import Measurements from "./metrics/Metrics";
 import { TargetRecords } from "./targetrecords/TargetRecords";
 import { useEffect, useState } from "react";
 

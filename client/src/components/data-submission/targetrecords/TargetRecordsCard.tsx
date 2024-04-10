@@ -101,6 +101,15 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
         await dataActor?.updateUserRecord(updatedUserRecord);
         dispatch(setUserRecord(updatedUserRecord));
         setClearGoal(true);
+        if (impactTargets.length === 1) {
+          toast.success("All data saved successfully", {
+            autoClose: 5000,
+            position: "top-center",
+          });
+          dispatch(setShowDataForm(false));
+          window.location.reload();
+          return;
+        }
         if (finished) {
           toast.success("All data saved successfully", {
             autoClose: 5000,
@@ -108,6 +117,7 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
           });
 
           dispatch(setShowDataForm(false));
+          window.location.reload();
           return;
         }
         if (currentIndex + 2 >= impact.measurements.length) {
@@ -129,6 +139,8 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
       }
     }
   };
+
+  console.log("Impact Targets", impactTargets)
 
   return (
     <>

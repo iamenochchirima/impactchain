@@ -16,6 +16,7 @@ export const idlFactory = ({ IDL }) => {
     'name' : IDL.Text,
   });
   const UserRecord = IDL.Record({
+    'created' : IDL.Int,
     'aboutCompany' : IDL.Record({
       'logo' : IDL.Text,
       'name' : IDL.Text,

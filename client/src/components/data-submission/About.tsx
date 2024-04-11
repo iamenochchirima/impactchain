@@ -23,10 +23,6 @@ const About = () => {
   );
   const [selectedButton, setSelectedButton] = useState("");
 
-  const handleNext = () => {
-    dispatch(setDataComponent("ProfileLogo"));
-  };
-
   const handleSubmit = async () => {
     if (companyName === "" || companySize === "" || industry === "") {
       toast.error("Please fill in all fields"), { autoClose: 3000 };
@@ -44,6 +40,7 @@ const About = () => {
         },
         email: userInfo.email,
         impactTargets: [],
+        created: BigInt(Date.now()),
       };
       await dataActor?.addUserRecord(data);
       dispatch(setUserRecord(data));

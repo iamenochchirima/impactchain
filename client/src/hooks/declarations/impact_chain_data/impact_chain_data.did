@@ -8,6 +8,7 @@ type UserRecord =
       logo: text;
       name: text;
     };
+   created: int;
    email: text;
    impactTargets: vec ImpactTarget;
  };

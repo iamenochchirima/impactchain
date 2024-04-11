@@ -3,11 +3,13 @@ import { TargetOption } from "../../../data/constants";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import ALMetricItem from "./ALMetricItem";
+import { CategoryType } from "../types";
 
 type Props = {
   target: TargetOption;
+  category: CategoryType
 };
-const ALMetricCard: FC<Props> = ({ target }) => {
+const ALMetricCard: FC<Props> = ({ target, category }) => {
   const { userRecord } = useSelector((state: RootState) => state.app);
 
   const matchingTarget = userRecord?.impactTargets.find(
@@ -25,7 +27,7 @@ const ALMetricCard: FC<Props> = ({ target }) => {
       </div>
       <div className="flex flex-col gap-4 mt-5 ">
         {matchingTarget?.metrics.map((item, index) => (
-          <ALMetricItem key={index} {...{ item }} />
+          <ALMetricItem key={index} {...{ item, category }} />
         ))}
       </div>
     </div>

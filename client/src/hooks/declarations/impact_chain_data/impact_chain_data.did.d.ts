@@ -21,6 +21,7 @@ export interface Metric {
 export type Result = { 'ok' : UserRecord } |
   { 'err' : string };
 export interface UserRecord {
+  'created' : bigint,
   'aboutCompany' : {
     'logo' : string,
     'name' : string,

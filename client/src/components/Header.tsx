@@ -8,11 +8,12 @@ import { setDataComponent, setShowDataForm, setUserRecord } from "../redux/slice
 import { useAuth } from "../hooks/AppContext";
 import { isDataIncomplete } from "./utils";
 import { ImpactTarget, UserRecord } from "../hooks/declarations/impact_chain_data/impact_chain_data.did";
+import Report from "../pages/analytics/components/Report";
 
 const Header = () => {
   const { 
     showDataForm,
-     userInfo } = useSelector((state: RootState) => state.app);
+     userInfo, reportModal } = useSelector((state: RootState) => state.app);
   const userMenuRef = useRef<HTMLDivElement>(null);
   const loginMenuRef = useRef<HTMLDivElement>(null);
   const [userMenu, setUserMenu] = useState(false);
@@ -87,6 +88,7 @@ const Header = () => {
   return (
     <>
       {showDataForm && <SubmitData />}
+      {reportModal && <Report />}
      <div className="fixed bg-black z-40 left-64 right-0">
      <div className="pt-4">
         <div className="h-5 flex items-center justify-end bg-custom-gray mx-10 py-10 rounded-xl border border-green-700">

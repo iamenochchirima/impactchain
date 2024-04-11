@@ -56,7 +56,7 @@ const Metrics: FC<Props> = ({ setOpenModal, category }) => {
   }
 
   return (
-    <div className="fixed z-50 inset-0 text-cyan-700 overflow-y-auto bg-black bg-opacity-75">
+    <div className="fixed z-40 inset-0 text-cyan-700 overflow-y-auto bg-black bg-opacity-75">
       <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-TelegraphRegular">
         <div className="bg-custom-gray fixed rounded-xl w-3/4 px-6 py-2 min-w-min max-w-full space-y-8">
           <div className="mb-10">
@@ -74,7 +74,7 @@ const Metrics: FC<Props> = ({ setOpenModal, category }) => {
                 <>
                   <div className="grid grid-cols-3 gap-4 mt-5">
                     {displayedTargets.map((target: TargetOption) => (
-                      <ALMetricCard key={target.id} target={target} />
+                      <ALMetricCard key={target.id} {...{target, category}} />
                     ))}
                   </div>
                   <div className="flex justify-center gap-2 items-center mt-4">
@@ -90,7 +90,7 @@ const Metrics: FC<Props> = ({ setOpenModal, category }) => {
                     </div>
                   
                     <span className="text-white">
-                      Page {currentPage} of {totalPages}
+                      {currentPage} of {totalPages}
                     </span>
 
                    <div className="">

@@ -23,6 +23,7 @@ const Settings = () => {
     </div>
     <div className="w-[800px] h-[50px] left-[50px] top-[119px] absolute">
         <div className="w-[800px] h-[50px] left-0 top-0 absolute bg-black rounded-[56px]" />
+        <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Dark</button>
         <div className="w-[152px] h-[45px] left-[64px] top-[3px] absolute text-white text-xl font-normal font-['PP Telegraf']">Profile</div>
     </div>
     <div className="w-[800px] h-[50px] left-[50px] top-[179px] absolute">

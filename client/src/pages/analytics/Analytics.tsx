@@ -1,21 +1,25 @@
 import React from "react";
 import Category from "./components/Category";
+import { CategoryType } from "./types";
 
-const categories = [
+const categories: CategoryType[] = [
   {
     id: 1,
     title: "Environmental Impact Report",
     icon: "./earth.svg",
+    category: "Environmental",
   },
   {
     id: 2,
     title: "Social Impact Report",
     icon: "./couple.svg",
+    category: "Social",
   },
   {
     id: 3,
     title: "Governance Impact Report",
     icon: "./scale.svg",
+    category: "Governance",
   },
 ];
 

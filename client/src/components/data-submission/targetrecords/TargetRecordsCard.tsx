@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { TargetOption } from "../../../data/constants";
 import {
   TargetRecordStateType,
+  setDataComponent,
   setNextTarget,
   setShowDataForm,
   setTargetRecord,
@@ -36,20 +37,32 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
   const [gradientStyle, setGradientStyle] = useState<GradientStyle>({
     backgroundImage: `linear-gradient(to top, #354b5b, ${target.color} 50%, ${target.color})`,
   });
-  const [displayedMetrics, setDisplayedMetrics] = useState<
-    Metric[]
-  >([]);
+  const [displayedMetrics, setDisplayedMetrics] = useState<Metric[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [clearGoal, setClearGoal] = useState<boolean>(false);
   const [saving, setSaving] = useState<boolean>(false);
 
+  const metricsPerPage = 2;
+  const [totalPages, setTotalPages] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+
   useEffect(() => {
     if (impact) {
-      setDisplayedMetrics(
-        impact.metrics.slice(currentIndex, currentIndex + 2)
-      );
+      setTotalPages(Math.ceil(impact.metrics.length / metricsPerPage));
     }
-  }, [currentIndex, impact]);
+  }, [impact, metricsPerPage]);
+
+  useEffect(() => {
+    if (impact) {
+      const start = currentIndex;
+      const end = start + metricsPerPage;
+      setDisplayedMetrics(impact.metrics.slice(start, end));
+    }
+  }, [currentIndex, impact, metricsPerPage]);
+
+  useEffect(() => {
+    setCurrentPage(Math.floor(currentIndex / metricsPerPage) + 1);
+  }, [currentIndex, metricsPerPage]);
 
   useEffect(() => {
     const _record: TargetRecordStateType = {
@@ -64,13 +77,16 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
     });
   }, [dispatch, target, impactTargets]);
 
+  const handleBack = () => {
+    dispatch(setDataComponent("Metrics"));
+    dispatch(setTargetRecord({ targetRecord: null }));
+  };
+
   const handleNext = async () => {
     if (impact) {
       for (const metric of displayedMetrics) {
         if (metric.goal.length === 0) {
-          toast.error(
-            "Please set a goal for all metrics before proceeding"
-          );
+          toast.error("Please set a goal for all metrics before proceeding");
           return;
         }
       }
@@ -80,13 +96,12 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
           toast.error("User record not found");
           return;
         }
-        const updatedImpactMetrics: Metric[] =
-          impact.metrics.map((metric) => {
-            const updatedMetric = displayedMetrics.find(
-              (m) => m.name === metric.name
-            );
-            return updatedMetric ? updatedMetric : metric;
-          });
+        const updatedImpactMetrics: Metric[] = impact.metrics.map((metric) => {
+          const updatedMetric = displayedMetrics.find(
+            (m) => m.name === metric.name
+          );
+          return updatedMetric ? updatedMetric : metric;
+        });
         const updatedImpact: ImpactTarget = {
           ...impact,
           metrics: updatedImpactMetrics,
@@ -140,14 +155,27 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
     }
   };
 
-  console.log("Impact Targets", impactTargets)
+  const impactIndex = impactTargets.findIndex(
+    (t) => Number(t.id) === target.id
+  );
 
   return (
     <>
       <div className="flex flex-col items-center bg-gray mx-[100px] mt">
         <div className="text-3xl font-bold text-white mt-4 bg-gra text-center font-TelegraphBold flex gap-3 items-center">
           <span>How do you record your data for {target.name}</span>{" "}
-          <img className="h-20 w-20 ml-2 rounded-lg" src={target.icon} alt={target.name} />
+          <img
+            className="h-20 w-20 ml-2 rounded-lg"
+            src={target.icon}
+            alt={target.name}
+          />
+        </div>
+        <div className="mt-5">
+          <span
+            className={`text-white text-xl font-bold mt-4 text-center font-TelegraphBold`}
+          >
+            {impactIndex + 1} of {impactTargets.length}
+          </span>
         </div>
         <div
           style={gradientStyle}
@@ -169,16 +197,29 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
               ))}
             </>
           )}
+          <div className="text-center my-4">
+            <span className="text-white">
+              {currentPage} of {totalPages}
+            </span>
+          </div>
         </div>
-        <div className="w-full flex justify-end my-4">
+        <div className="w-full flex justify-between my-4">
+          <button
+            className={` bg-custom-green px-10 py-1 rounded-full text-black font-bold`}
+            onClick={handleBack}
+          >
+            <span className="">Back</span>
+          </button>
           <button
             className={` bg-custom-green px-10 py-1 rounded-full text-black font-bold`}
             disabled={saving}
             onClick={handleNext}
           >
             <span className="">
-              {finished ? `${saving ? "Saving" : "Finish" }` : `${saving ? "Saving" : "Next" }`}
-              </span>
+              {finished
+                ? `${saving ? "Saving" : "Finish"}`
+                : `${saving ? "Saving" : "Next"}`}
+            </span>
           </button>
         </div>
       </div>

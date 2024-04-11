@@ -337,7 +337,7 @@ export const targetOptions: TargetOption[] = [
     icon: "/target/10.svg",
     color: "#DD1367",
     rectangle: "#be4275",
-    emoji: "/targetIcons/10.svg",
+    emoji: "/targetIcons/17.svg",
     category: "Social",
     metrics: [
       {

@@ -4,6 +4,7 @@ type Props = {
   message: Message;
 };
 const AIResponse: FC<Props> = ({ message }) => {
+  
   return (
     <div className="flex w-full items-startborder-gray-200 rounded-2xl p-2 bg-gray-800 gap-2.5">
       <img src="/smiley.svg" alt="smiley" className="h-8 w-8" />

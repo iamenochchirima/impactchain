@@ -3,7 +3,7 @@ import { TargetOption, targetOptions } from "../../../data/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import TargetRecordsCard from "./TargetRecordsCard";
-import { setDataComponent, setNextTarget, setTargetRecord } from "../../../redux/slices/app";
+import { setNextTarget } from "../../../redux/slices/app";
 import { ImpactTarget } from "../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
 
 export const TargetRecords = () => {
@@ -44,7 +44,7 @@ export const TargetRecords = () => {
       setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, targets.length - 1));
       dispatch(setNextTarget(false));
     }
-  }, [nextTarget]);
+  }, [nextTarget, targets, dispatch]);
 
  useEffect(() => {
     if (currentIndex === targets.length - 1) {
@@ -52,12 +52,7 @@ export const TargetRecords = () => {
     } else {
       setFinished(false);
     }
-  }, [currentIndex]);
-
-  const handleBack = () => {
-    dispatch(setDataComponent("Metrics"));
-    dispatch(setTargetRecord({ targetRecord: null }));
-  };
+  }, [currentIndex, targets]);
 
   return (
     <div>

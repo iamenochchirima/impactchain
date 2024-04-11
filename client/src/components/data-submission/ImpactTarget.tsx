@@ -14,31 +14,26 @@ import {
 } from "../../hooks/declarations/impact_chain_data/impact_chain_data.did";
 
 const ImpactTarget = () => {
-  const { userRecord } = useSelector((state: RootState) => state.app);
   const { dataActor } = useAuth();
+  const { userRecord } = useSelector((state: RootState) => state.app);
   const [selectedTargets, setSelectedTargets] = useState<TargetOption[] >(
     []
   );
   const [initialTargets, setInitialTargets] = useState<number[]>([]);
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (userRecord) {
-      const _innerTargets = Array.isArray(userRecord.impactTargets[0])
-        ? userRecord.impactTargets[0]
-        : [];
-      const _sortedTargets = [..._innerTargets].sort(
+      const _targets = userRecord.impactTargets
+     
+      const _sortedTargets = [..._targets].sort(
         (a, b) => Number(a.id) - Number(b.id)
       );
-      if (Array.isArray(_sortedTargets[0])) {
-        setInitialTargets(_sortedTargets[0].map((t) => Number(t.id)));
-      } else {
         setInitialTargets(_sortedTargets.map((t) => Number(t.id)));
-      }
     }
   }, [userRecord]);
 
-  const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
   const handleBack = () => {
     dispatch(setDataComponent("ProfileLogo"));
   };
@@ -54,7 +49,6 @@ const ImpactTarget = () => {
     if (selectedTargets && dataActor && userRecord) {
       try {
         setLoading(true);
-
         const tragets: ImpactTargetType[] = selectedTargets.map((target) => {
           const existingTargets = userRecord.impactTargets;
 

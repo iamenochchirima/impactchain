@@ -20,6 +20,7 @@ export interface GlobalState {
   userRecord: UserRecord | null;
 
   nextTarget: boolean;
+  metricsUpdated: boolean;
 }
 
 const initialState: GlobalState = {
@@ -32,6 +33,8 @@ const initialState: GlobalState = {
   userRecord: null,
 
   nextTarget: false,
+  metricsUpdated: false,
+
 };
 
 export const appSlice = createSlice({
@@ -66,6 +69,9 @@ export const appSlice = createSlice({
     setNextTarget: (state: GlobalState, action: PayloadAction<boolean>) => {
       state.nextTarget = action.payload;
     },
+    setMetricsUpdated: (state: GlobalState, action: PayloadAction<boolean>) => {
+      state.metricsUpdated = action.payload;
+    },
     logout: (state: GlobalState) => {
       state.isAuthenticated = false;
       state.userInfo = null;
@@ -84,6 +90,7 @@ export const {
   setStorageInit,
   setTargetRecord,
   setNextTarget,
+  setMetricsUpdated,
 } = appSlice.actions;
 
 export default appSlice.reducer;

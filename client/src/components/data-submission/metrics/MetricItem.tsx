@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { FaSquare } from "react-icons/fa";
 import { FaRegSquare } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { setMetricsUpdated } from "../../../redux/slices/app";
 
 const MetricItem = ({
   m,
@@ -8,6 +10,7 @@ const MetricItem = ({
   selectedMetrics,
 }) => {
   const [selectedButton, setSelectedButton] = useState<boolean>(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (selectedMetrics.includes(m.description)) {
@@ -24,6 +27,7 @@ const MetricItem = ({
     } else {
       setSelectedMetrics((prev) => [...(prev || []), m.description]);
     }
+    dispatch(setMetricsUpdated(true))
   };
   return (
     <div

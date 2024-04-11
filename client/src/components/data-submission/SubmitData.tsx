@@ -27,7 +27,7 @@ const SubmitData = () => {
   }, [targetRecord]);
 
   return (
-    <div className="fixed z-20 inset-0 text-cyan-700 overflow-y-auto bg-black bg-opacity-75">
+    <div className="fixed z-50 inset-0 text-cyan-700 overflow-y-auto bg-black bg-opacity-75">
       <div className=" flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-TelegraphRegular">
         <div style={gradientStyle} className={`${targetRecord ? "" : "bg-[#191919]"} rounded-xl w-3/4 px-6 py-2 min-w-min max-w-full space-y-8`}>
           <div className="flex">

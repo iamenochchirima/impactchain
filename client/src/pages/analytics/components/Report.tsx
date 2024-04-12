@@ -1,10 +1,22 @@
+import React, { useState, FunctionComponent } from 'react';
 import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { formatDate } from "../../../utils/time";
 import { RoportModalRequest, setReportModal } from "../../../redux/slices/app";
+import { pdfjs, Document, Page } from 'react-pdf';
+import { PDFDocumentProxy, PDFPageProxy } from 'pdfjs-dist'
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+
+interface PdfTextExtractorProps {
+    file: string | File | ArrayBuffer; 
+  }
+  
+
 
 const Report = () => {
+    const [text, setText] = useState<string>('');
   const dispatch = useDispatch();
   const { userRecord, reportCategory, reportMetric, userInfo } = useSelector(
     (state: RootState) => state.app

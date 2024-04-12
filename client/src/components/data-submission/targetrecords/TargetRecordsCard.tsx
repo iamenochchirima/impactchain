@@ -30,39 +30,43 @@ type GradientStyle = {
 };
 
 const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
+  const [gradientStyle, setGradientStyle] = useState<GradientStyle>({
+    backgroundImage: `linear-gradient(to top, #354b5b, ${target.color} 50%, ${target.color})`,
+  });
+  const [clearGoal, setClearGoal] = useState<boolean>(false);
   const { dataActor } = useAuth();
   const { userRecord } = useSelector((state: RootState) => state.app);
   const [impact, setImpact] = useState<ImpactTarget | undefined>(undefined);
   const dispatch = useDispatch();
-  const [gradientStyle, setGradientStyle] = useState<GradientStyle>({
-    backgroundImage: `linear-gradient(to top, #354b5b, ${target.color} 50%, ${target.color})`,
-  });
-  const [displayedMetrics, setDisplayedMetrics] = useState<Metric[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [clearGoal, setClearGoal] = useState<boolean>(false);
-  const [saving, setSaving] = useState<boolean>(false);
-
   const metricsPerPage = 2;
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
+  const [displayedMetrics, setDisplayedMetrics] = useState<Metric[]>([]);
+  const [saving, setSaving] = useState<boolean>(false);
 
   useEffect(() => {
     if (impact) {
       setTotalPages(Math.ceil(impact.metrics.length / metricsPerPage));
-    }
-  }, [impact, metricsPerPage]);
-
-  useEffect(() => {
-    if (impact) {
-      const start = currentIndex;
-      const end = start + metricsPerPage;
-      setDisplayedMetrics(impact.metrics.slice(start, end));
+      const end = currentIndex + metricsPerPage;
+      setDisplayedMetrics(impact.metrics.slice(currentIndex, end));
     }
   }, [currentIndex, impact, metricsPerPage]);
 
   useEffect(() => {
+    const _impact = impactTargets.find((t) => Number(t.id) === target.id);
+    setImpact(_impact);
+    setCurrentPage(Math.floor(currentIndex / metricsPerPage) + 1);
+  }, [impactTargets, target, currentIndex, metricsPerPage]);
+
+  useEffect(() => {
     setCurrentPage(Math.floor(currentIndex / metricsPerPage) + 1);
   }, [currentIndex, metricsPerPage]);
+
+  const handlePrevious = () => {
+    setCurrentIndex(prev => Math.max(prev - metricsPerPage, 0));
+  };
+
 
   useEffect(() => {
     const _record: TargetRecordStateType = {
@@ -145,9 +149,7 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
           return;
         }
         setSaving(false);
-        setCurrentIndex((prevIndex) =>
-          Math.min(prevIndex + 2, impact.metrics.length - 2)
-        );
+        setCurrentIndex(prev => prev + metricsPerPage);
       } catch (error) {
         setSaving(false);
         console.log("Error updating impact metrics", error);
@@ -204,12 +206,19 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
           </div>
         </div>
         <div className="w-full flex justify-between my-4">
+
           <button
             className={` bg-custom-green px-10 py-1 rounded-full text-black font-bold`}
             onClick={handleBack}
           >
             <span className="">Back</span>
           </button>
+        <div className="">
+        {currentPage > 1 && (
+          <button onClick={handlePrevious} className="px-10 py-1 text-custom-green font-bold">
+            <span>Previous</span>
+          </button>
+        )}
           <button
             className={` bg-custom-green px-10 py-1 rounded-full text-black font-bold`}
             disabled={saving}
@@ -221,6 +230,7 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
                 : `${saving ? "Saving" : "Next"}`}
             </span>
           </button>
+        </div>
         </div>
       </div>
     </>

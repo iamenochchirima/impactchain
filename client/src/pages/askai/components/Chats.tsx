@@ -9,7 +9,7 @@ type Props = {
 
 const Chats: FC<Props> = ({ messages }) => {
   return (
-   <div className="fixed left-72 right-10 bottom-28 top-28  overflow-hidden">
+   <div className="fixed left-[297px] right-10 bottom-28 top-36  overflow-hidden">
        <div className="flex  flex-col gap-3  overflow-auto max-h-full">
       {messages?.map((message, index) => {
         if (message.from === "user")

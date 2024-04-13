@@ -20,7 +20,6 @@ export const setupSocketIO = (server: HttpServer): void => {
     console.log('A user connected');
 
     socket.on('streamChatGPT', async (msg: string) => {
-      console.log('Message from client:', msg);
       try {
         const stream = await openai.chat.completions.create({
           model: "gpt-3.5-turbo",

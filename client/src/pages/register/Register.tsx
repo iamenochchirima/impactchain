@@ -4,9 +4,7 @@ import { Link } from "react-router-dom";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
 import {
-  useLazyAuthenticateQuery,
   useSignupMutation,
 } from "../../redux/api/usersApiSlice";
 import { toast } from "react-toastify";
@@ -46,18 +44,24 @@ const Register = () => {
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   const handleSave = async (data: FormData) => {
+    if (data.password !== data.confirmPassword) {
+      toast.error("Passwords do not match"),
+        {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: true,
+        };
+      return;
+    }
     try {
-      // let ress = await check({}).unwrap();
-      // console.log("Check response", ress);
-
       const body = {
         firstname: data.firstname,
         lastname: data.lastname,
         email: data.email,
         password: data.password,
+        confirmPassword: data.confirmPassword,
       };
       const res = await signup(body).unwrap();
-      console.log("Finished");
       dispatch(setIsAuthenticated(true));
       dispatch(setUserInfo(res));
     } catch (error) {

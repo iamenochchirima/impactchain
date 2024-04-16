@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setIsAuthenticated, setUserInfo } from "../../redux/slices/app";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  useSignupMutation,
-} from "../../redux/api/usersApiSlice";
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import { generateOTP, getUser } from "../../helpers/helpers";
 
 type FormData = {
   email: string;
@@ -14,7 +13,7 @@ type FormData = {
 
 const ResetPassword = () => {
   const dispatch = useDispatch();
-  const [signup, { isLoading}] = useSignupMutation();
+  const [isLoading, setIsLoading] = useState(false);
 
   const schema = z.object({
     email: z.string().email({ message: "Invalid email" }),
@@ -27,32 +26,11 @@ const ResetPassword = () => {
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   const handleSave = async (data: FormData) => {
-    try {
-      // let ress = await check({}).unwrap();
-      // console.log("Check response", ress);
-
-      const body = {
-        email: data.email,
-      };
-
-      const res = await signup(body).unwrap();
-      console.log("Finished");
-      dispatch(setIsAuthenticated(true));
-      dispatch(setUserInfo(res));
-    } catch (error) {
-      // if ((error)?.status === 400) {
-      //   toast.error("Something went wrong"),
-      //     {
-      //       position: "top-right",
-      //       autoClose: 5000,
-      //       hideProgressBar: true,
-      //       closeOnClick: true,
-      //       pauseOnHover: true,
-      //       draggable: true,
-      //     };
-      // }
-      console.log(error);
-    }
+    generateOTP(data.email).then((OTP) => {
+      console.log(OTP);
+      if (OTP) return toast.success("OTP sent to your email");
+      return toast.error("Something went wrong");
+    });
   };
 
   return (
@@ -64,7 +42,7 @@ const ResetPassword = () => {
 
       <div className="flex flex-col gap-3 justify-center items-center py-10 font-TelegraphRegular">
         <p className="text-3xl">Forgot Password</p>
-        <p className=" text-lg">New Password</p>
+        <p className=" text-lg">Enter your email address</p>
 
         <form
           onSubmit={handleSubmit(handleSave)}
@@ -87,12 +65,9 @@ const ResetPassword = () => {
             >
               {isLoading ? "Loading..." : "Submit"}
             </button>
-            <button
-              className="bg-green-500  w-full rounded-3xl px-20 py-1.5 text-black font-semibold  hover:bg-green-600 focus:outline-none focus:shadow-outline"
-              type="submit"
-            >
-              {isLoading ? "Loading..." : "Return to Login"}
-            </button>
+            <Link to="/login" className="text-center text-white">
+              Return to Login
+            </Link>
           </div>
         </form>
       </div>

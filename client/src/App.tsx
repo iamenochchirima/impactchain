@@ -18,7 +18,7 @@ const Register = lazy(() => import("./pages/register/Register"));
 const Dashboard = lazy(() => import("./pages/dashboard/Dashboard"));
 const Analytics = lazy(() => import("./pages/analytics/Analytics"));
 const AskAI = lazy(() => import("./pages/askai/AskAI"));
-const Settings = lazy(() => import("./pages/settings/Settings"));
+const SettingsPage = lazy(() => import("./pages/settings/SettingsPage"));
 const CarbonCredits = lazy(
   () => import("./pages/carbon-credits/CarbonCredits")
 );
@@ -64,7 +64,7 @@ const App = () => {
               <Route path="/analytics" element={<Analytics />} />
               <Route path="/askai" element={<AskAI />} />
               <Route path="/carbon-credits" element={<CarbonCredits />} />
-              <Route path="/settings" element={<Settings />} />
+              <Route path="/settings" element={<SettingsPage />} />
               <Route path="/help" element={<Help />} />
             </Route>
           </Route>

@@ -6,12 +6,19 @@ import otpGenerator from "otp-generator";
 
 export const register = async (req: Request, res: Response) => {
   try {
-    const { email, password, firstname, lastname } = req.body;
-
+    const { email, password, confirmPassword, firstname, lastname } = req.body;
+    if (password !== confirmPassword) {
+      return res.status(400).json({ message: "Passwords do not match" });
+    }
     if (!email || !password || !firstname || !lastname) {
       return res.status(400).json({ message: "Invalid data" });
     }
-    if (firstname === "" || lastname === "" || email === "" || password === "") {
+    if (
+      firstname === "" ||
+      lastname === "" ||
+      email === "" ||
+      password === ""
+    ) {
       return res.status(400).json({ message: "Invalid data: Empty fields" });
     }
     if (!email.includes("@") || !email.includes(".")) {
@@ -117,10 +124,9 @@ export const createResetSession = async (req: Request, res: Response) => {
 };
 
 export const resetPassword = async (req: Request, res: Response) => {
-if (!req.app.locals.resetSession) {
+  if (!req.app.locals.resetSession) {
     return res.status(400).json({ message: "Session expired" });
   }
-
 
   const { email, password } = req.body;
   if (!email || !password) {

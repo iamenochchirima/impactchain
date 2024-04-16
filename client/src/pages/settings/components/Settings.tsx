@@ -28,9 +28,10 @@ const Settings: FC<Props> = ({ setPage }) => {
             </div>
 
             <div className="flex flex-col mt-4 gap-2">
-              <button 
+              <button
                 onClick={() => setPage("Profile")}
-              className=" bg-black rounded-[56px] flex justify-between items-center py-2 px-5">
+                className=" bg-black rounded-[56px] flex justify-between items-center py-2 px-5"
+              >
                 <span className="text-white text-xl font-normal font-['PP Telegraf']">
                   Profile
                 </span>
@@ -39,7 +40,8 @@ const Settings: FC<Props> = ({ setPage }) => {
 
               <button
                 onClick={() => setPage("Password")}
-               className=" bg-black rounded-[56px] flex justify-between items-center py-2 px-5">
+                className=" bg-black rounded-[56px] flex justify-between items-center py-2 px-5"
+              >
                 <span className="text-white text-xl font-normal font-['PP Telegraf']">
                   Password
                 </span>
@@ -47,12 +49,6 @@ const Settings: FC<Props> = ({ setPage }) => {
               </button>
             </div>
           </div>
-
-          {/* Section 2*/}
-          <div></div>
-
-          {/* Section 3*/}
-          <div></div>
         </div>
       </div>
     </div>

@@ -2,15 +2,12 @@
 import { useState } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
-import { IoCardOutline } from "react-icons/io5";
-import { CiSettings } from "react-icons/ci";
-import { CiHome } from "react-icons/ci";
 import { TiThMenu } from "react-icons/ti";
 import { AiOutlineClose } from "react-icons/ai";
 import NotificationDropdown from "./NotificationDropdown";
 import { useLogoutMutation } from "../redux/api/usersApiSlice";
-import { logout } from "../redux/slices/app";
-import { useDispatch } from "react-redux";
+import { logout, setHelpModal } from "../redux/slices/app";
+import { useDispatch, useSelector } from "react-redux";
 
 const Sidebar = () => {
   const [tab, setTab] = useState<string>("");
@@ -304,9 +301,11 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li className="items-center">
-                <Link
-                  to="/help"
-                  onClick={() => setTab("help")}
+                <button
+                  onClick={() => {
+                    setTab("help");
+                    dispatch(setHelpModal(true));
+                  }}
                   className={`
                    py-2 w-full flex items-center gap-2 px-3  ${
                      tab === "help"
@@ -318,7 +317,7 @@ const Sidebar = () => {
                 >
                   <img src="/help.svg" alt="help-icon" className="w-7 h-7" />
                   <span>Help</span>
-                </Link>
+                </button>
               </li>
               <li className="items-center">
                 <button

@@ -4,22 +4,30 @@ import { Link } from "react-router-dom";
 import { RootState } from "../redux/store";
 import { CiSearch } from "react-icons/ci";
 import SubmitData from "./data-submission/SubmitData";
-import { setDataComponent, setShowDataForm, setUserRecord } from "../redux/slices/app";
+import {
+  setDataComponent,
+  setShowDataForm,
+  setUserRecord,
+} from "../redux/slices/app";
 import { useAuth } from "../hooks/AppContext";
 import { isDataIncomplete } from "./utils";
-import { ImpactTarget, UserRecord } from "../hooks/declarations/impact_chain_data/impact_chain_data.did";
+import {
+  ImpactTarget,
+  UserRecord,
+} from "../hooks/declarations/impact_chain_data/impact_chain_data.did";
 import Report from "../pages/analytics/components/Report";
+import Help from "./Help";
 
 const Header = () => {
-  const { 
-    showDataForm,
-     userInfo, reportModal } = useSelector((state: RootState) => state.app);
+  const { showDataForm, userInfo, reportModal, openHelp } = useSelector(
+    (state: RootState) => state.app
+  );
   const userMenuRef = useRef<HTMLDivElement>(null);
   const loginMenuRef = useRef<HTMLDivElement>(null);
   const [userMenu, setUserMenu] = useState(false);
   const dispatch = useDispatch();
-  
-  const {dataActor} = useAuth();
+
+  const { dataActor } = useAuth();
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -43,29 +51,27 @@ const Header = () => {
     };
   }, [userMenuRef, loginMenuRef]);
 
-  
-
   useEffect(() => {
     const getOnChainData = async () => {
       try {
         const res = await dataActor?.getUserRecord(userInfo.email);
         if (res) {
           if ("ok" in res) {
-            const convertedImpactTargets: ImpactTarget[] = res.ok.impactTargets.map(target => 
-          {
-            return {
-              ...target,
-             id: BigInt(target.id),
-            };
-          })
-            
+            const convertedImpactTargets: ImpactTarget[] =
+              res.ok.impactTargets.map((target) => {
+                return {
+                  ...target,
+                  id: BigInt(target.id),
+                };
+              });
+
             const convertedUserRecord: UserRecord = {
               ...res.ok,
               impactTargets: convertedImpactTargets,
             };
             dispatch(setUserRecord(convertedUserRecord));
             const _res = isDataIncomplete(res.ok);
-             if (_res !== "ok") {
+            if (_res !== "ok") {
               console.log("Data is incomplete", _res);
               dispatch(setShowDataForm(true));
               dispatch(setDataComponent(_res));
@@ -89,21 +95,22 @@ const Header = () => {
     <>
       {showDataForm && <SubmitData />}
       {reportModal && <Report />}
-     <div className="fixed bg-black z-40 left-64 right-0">
-     <div className="pt-4">
-        <div className="h-5 flex items-center justify-end bg-custom-gray mx-10 py-10 rounded-xl border border-green-700">
-          <div className="flex items-center justify-between gap-5">
-            <Link to="/askai">
-              <img src="/smiley.svg" alt="smiley" className="h-10 w-10" />
-            </Link>
-            <button className="flex items-center gap-12 bg-custom-green text-black py-1 rounded-full px-5 mr-5">
-              <span>Search</span>
-              <CiSearch size={18} />
-            </button>
+      {openHelp && <Help />}
+      <div className="fixed bg-black z-40 left-64 right-0">
+        <div className="pt-4">
+          <div className="h-5 flex items-center justify-end bg-custom-gray mx-10 py-10 rounded-xl border border-green-700">
+            <div className="flex items-center justify-between gap-5">
+              <Link to="/askai">
+                <img src="/smiley.svg" alt="smiley" className="h-10 w-10" />
+              </Link>
+              <button className="flex items-center gap-12 bg-custom-green text-black py-1 rounded-full px-5 mr-5">
+                <span>Search</span>
+                <CiSearch size={18} />
+              </button>
+            </div>
           </div>
         </div>
       </div>
-     </div>
     </>
   );
 };

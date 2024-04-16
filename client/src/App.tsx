@@ -25,7 +25,7 @@ const CarbonCredits = lazy(
 const LandingPage = lazy(() => import("./pages/landing/Landing"));
 const Notfound = lazy(() => import("./components/Notfound"));
 const ResetPassword = lazy(() => import("./pages/reset/ResetPassword"));
-const Help = lazy(() => import("./pages/help/Help"));
+const Help = lazy(() => import("./components/Help"));
 import { initActors } from "./config/storage/functions"
 
 const App = () => {
@@ -65,7 +65,6 @@ const App = () => {
               <Route path="/askai" element={<AskAI />} />
               <Route path="/carbon-credits" element={<CarbonCredits />} />
               <Route path="/settings" element={<SettingsPage />} />
-              <Route path="/help" element={<Help />} />
             </Route>
           </Route>
           <Route

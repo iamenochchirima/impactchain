@@ -11,6 +11,10 @@ const Integrations: FC<Props> = ({ setPage }) => {
             Integrations
         </span>
       </div>
+
+      <div className="w-11/12 h-screen ml-5 mt-5 bg-neutral-800 rounded-[56px] p-5">
+
+      </div>
     </div>
   )
 }

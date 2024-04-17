@@ -11,6 +11,11 @@ const ESG: FC<Props> = ({setPage}) => {
           Your ESG Goals
         </span>
       </div>
+
+      <div className="w-full flex flex-col">
+        <div className=" w-11/12 h-full ml-5 mt-5  bg-[#202020] rounded-2xl p-5"></div>
+        <div className=" w-11/12 h-screen ml-5 mt-5  bg-[#202020] rounded-2xl p-5"></div>
+        </div>
     </div>
   )
 }

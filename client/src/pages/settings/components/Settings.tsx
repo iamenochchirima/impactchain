@@ -17,7 +17,7 @@ const Settings: FC<Props> = ({ setPage }) => {
       </div>
 
       <div className="w-full flex flex-col">
-        <div className=" w-11/12 h-screen ml-5 mt-5 bg-neutral-800 rounded-[56px] p-5">
+        <div className=" w-11/12 h-full ml-5 mt-5  bg-neutral-800 rounded-[56px] p-5">
           <div>
             <div className="flex items-center gap-3">
               <img className="" src="./user_icon.svg" />

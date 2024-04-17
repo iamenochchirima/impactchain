@@ -7,6 +7,7 @@ export type TargetOption = {
   emoji: string;
   metrics: Metric[];
   category: string;
+  
 };
 
 type Metric = {
@@ -26,29 +27,17 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Poverty aid",
+        description: "Job training or educational programs"
+        
       },
       {
         id: 2,
-        description: "Housing units",
+        description: "Microloans or grants provided",
       },
       {
         id: 3,
-        description: "Essential distribution"
-      },
-      {
-        id: 4,
-        description: "Skills training",
-      },
-      {
-        id: 5,
-        description: "Financial grants",
-      },
-      {
-        id: 6,
-        description: "Poverty reduction",
-      },
-      
+        description: "People assisted out of poverty"
+      }
     ],
   },
   {
@@ -66,23 +55,11 @@ export const targetOptions: TargetOption[] = [
       },
       {
         id: 2,
-        description: "Agriculture investment",
+        description: "Investment in sustainable agriculture",
       },
       {
         id: 3,
-        description: "Garden support",
-      },
-      {
-        id: 4,
-        description: "Nutrition education"
-      },
-      {
-        id: 5,
-        description: "Farming support",
-      },
-      {
-        id: 6,
-        description: "Nutritional access",
+        description: "People with regular nutritious food",
       }
     ],
   },
@@ -97,27 +74,15 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Healthcare funding"
+        description: "Funding for healthcare"
       },
       {
         id: 2,
-        description: "Health drives"
+        description: "Health check-ups or vaccination drives"
       },
       {
         id: 3,
-        description: "Worker training"
-      },
-      {
-        id: 4,
-        description: "Mental initiatives"
-      },
-      {
-        id: 5,
-        description: "Research investment"
-      },
-      {
-        id: 6,
-        description: "Healthcare access"
+        description: "People accessing healthcare"
       }
     ],
   },
@@ -132,27 +97,15 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "School support"
+        description: "Schools built or supported"
       },
       {
         id: 2,
-        description: "Grants awarded"
+        description: "Educational grants awarded"
       },
       {
         id: 3,
-        description: "Teacher development"
-      },
-      {
-        id: 4,
-        description: "Material provision"
-      },
-      {
-        id: 5,
-        description: "Ed-tech aid"
-      },
-      {
-        id: 6,
-        description: "Student benefit"
+        description: "Students benefiting from education"
       }
     ],
   },
@@ -167,27 +120,15 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Empowerment programs"
+        description: "Women's empowerment programs"
       },
       {
         id: 2,
-        description: "Equality workshops"
+        description: "Gender equality workshops"
       },
       {
         id: 3,
-        description: "Leadership support"
-      },
-      {
-        id: 4,
-        description: "Violence prevention"
-      },
-      {
-        id: 5,
-        description: "Health education"
-      },
-      {
-        id: 6,
-        description : "Equality policies"
+        description: "Workplace gender equality policies"
       }
     ]
   },
@@ -202,27 +143,15 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Water systems"
-      },
-      {
-        id: 2,
         description: "Sanitation facilities"
       },
       {
+        id: 2,
+        description: "Water conservation initiatives"
+      },
+      {
         id: 3,
-        description: "Conservation initiatives"
-      },
-      {
-        id: 4,
-        description: "Hygiene education"
-      },
-      {
-        id: 5,
-        description: "Recycling investment"
-      },
-      {
-        id: 6,
-        description: "Access improvement"
+        description: "People with water and sanitation access"
       }
     ]
   },
@@ -237,27 +166,15 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Renewable projects"
+        description: "Renewable energy projects"
       },
       {
         id: 2,
-        description: "Efficiency systems"
+        description: "Energy-efficient systems"
       },
       {
         id: 3,
-        description: "Energy training"
-      },
-      {
-        id: 4,
-        description: "Energy research"
-      },
-      {
-        id: 5,
-        description: "Consumption cut"
-      },
-      {
-        id: 6,
-        description: "Energy access"
+        description: "Energy consumption reduction"
       }
     ]
   },
@@ -272,27 +189,15 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Employment initiatives"
+        description: "Job creation initiatives"
       },
       {
         id: 2,
-        description: "Vocational training"
+        description: "Vocational training programs"
       },
       {
         id: 3,
-        description: "SME support"
-      },
-      {
-        id: 4,
-        description: "Economic projects"
-      },
-      {
-        id: 5,
-        description: "Safety programs"
-      },
-      {
-        id: 6,
-        description: "Condition improvement"
+        description: "Employment or work condition improvements"
       }
     ]
   },
@@ -307,27 +212,15 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Infrastructure development"
+        description: "STEM and innovation education"
       },
       {
         id: 2,
-        description: "Innovation investment"
+        description: "Sustainable infrastructure development"
       },
       {
         id: 3,
-        description: "Upgrading support"
-      },
-      {
-        id: 4,
-        description: "STEM education"
-      },
-      {
-        id: 5,
-        description: "Sustainable development"
-      },
-      {
-        id: 6,
-        description: "Infrastructure benefit"
+        description: "People benefiting from infrastructure"
       }
     ]
   },
@@ -342,27 +235,15 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Inequality reduction"
+        description: "Marginalized community support"
       },
       {
         id: 2,
-        description: "Community support"
-      },
-      {
-        id: 3,
-        description: "Service access"
-      },
-      {
-        id: 4,
         description: "Inclusion policies"
       },
       {
-        id: 5,
-        description: "Accessibilty investment"
-      },
-      {
-        id: 6,
-        description: "Inequality beneficiaries"
+        id: 3,
+        description: "Beneficiaries of inequality reduction"
       }
     ]
   },
@@ -377,27 +258,15 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Urban projects"
+        description: "Urban sustainability projects"
       },
       {
         id: 2,
-        description: "Green development"
+        description: "Affordable housing support"
       },
       {
         id: 3,
-        description: "Air quality"
-      },
-      {
-        id: 4,
-        description: "Housing support"
-      },
-      {
-        id: 5,
-        description: "Safety initiatives"
-      },
-      {
-        id: 6,
-        description: "Living improvement"
+        description: "Improved urban living conditions"
       }
     ]
   },
@@ -412,27 +281,15 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Waste recycling"
+        description: "Waste reduction and recycling"
       },
       {
         id: 2,
-        description: "Resource use"
+        description: "Sustainable supply chain investment"
       },
       {
         id: 3,
-        description: "Eco-product support"
-      },
-      {
-        id: 4,
-        description: "Sustainability awareness"
-      },
-      {
-        id: 5,
-        description: "Supply investment"
-      },
-      {
-        id: 6,
-        description: "Footprint reduction"
+        description: "Organizational resource footprint reduction"
       }
     ]
   },
@@ -447,27 +304,15 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Emission reduction"
+        description: "Carbon emission reduction"
       },
       {
         id: 2,
-        description: "Climate resilience"
+        description: "Renewable energy investment"
       },
       {
         id: 3,
-        description: "Renewable investment"
-      },
-      {
-        id: 4,
-        description: "Climate education"
-      },
-      {
-        id: 5,
-        description: "Reforestation effort"
-      },
-      {
-        id: 6,
-        description: "Climate beneficiaries"
+        description: "Reforestation projects"
       }
     ]
   },
@@ -482,27 +327,15 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Ecosystem protection"
+        description: "Marine ecosystem protection"
       },
       {
         id: 2,
-        description: "Pollution reduction"
+        description: "Ocean pollution reduction"
       },
       {
         id: 3,
-        description: "Fishing support"
-      },
-      {
-        id: 4,
-        description: "Biodiversity research"
-      },
-      {
-        id: 5,
-        description: "Conservation education"
-      },
-      {
-        id: 6,
-        description: "Ocean impact"
+        description: "Sustainable fishing support"
       }
     ]
   },
@@ -517,27 +350,15 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Land conservation"
+        description: "Land conservation and reforestation"
       },
       {
         id: 2,
-        description: "Species protection"
+        description: "Endangered species protection"
       },
       {
         id: 3,
-        description: "Land use"
-      },
-      {
-        id: 4,
-        description: "Desertification combat"
-      },
-      {
-        id: 5,
-        description: "Biodiversity investments"
-      },
-      {
-        id: 6,
-        description: "Land recovery"
+        description: "Land rehabilitated or conserved"
       }
     ]
   },
@@ -552,27 +373,15 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Enforcement support"
+        description: "Anti-corruption programs"
       },
       {
         id: 2,
-        description: "Anti-corruption"
+        description: "Human rights and justice initiatives"
       },
       {
         id: 3,
-        description: "Rights initiatives"
-      },
-      {
-        id: 4,
-        description: "Transparency support"
-      },
-      {
-        id: 5,
-        description: "Peace programs"
-      },
-      {
-        id: 6,
-        description: "Peace beneficiaries"
+        description: "Community peace programs"
       }
     ]
   },
@@ -587,27 +396,15 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "SDG collaboration"
+        description: "Collaborative SDG projects"
       },
       {
         id: 2,
-        description: "Financial contributions"
+        description: "Global partnership financial contributions"
       },
       {
         id: 3,
-        description: "Sharing initiatives"
-      },
-      {
-        id: 4,
-        description: "Advocacy campaigns"
-      },
-      {
-        id: 5,
-        description: "Country support"
-      },
-      {
-        id: 6,
-        description: "Partnership formation"
+        description: "SDG advocacy campaigns"
       }
     ]
   },

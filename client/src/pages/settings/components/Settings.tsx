@@ -71,15 +71,6 @@ const Settings: FC<Props> = ({ setPage }) => {
               </button>
 
               <button
-                onClick={() => setPage("Integrations")}
-               className=" bg-black rounded-[56px] flex justify-between items-center py-2 px-5">
-                <span className="text-white text-xl font-normal font-['PP Telegraf']">
-                    Integrations
-                </span>
-                <MdOutlineChevronRight size={25} className="text-white" />
-              </button>
-
-              <button
                 onClick={() => setPage("ESG")}
                className=" bg-black rounded-[56px] flex justify-between items-center py-2 px-5">
                 <span className="text-white text-xl font-normal font-['PP Telegraf']">

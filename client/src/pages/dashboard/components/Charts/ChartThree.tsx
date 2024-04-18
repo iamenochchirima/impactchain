@@ -84,7 +84,7 @@ const ChartThree: React.FC<Props> = ({ target }) => {
 
   return (
     <div
-      className={`sm:px-7.5 bg-custom-gray rounded-sm border-x border-y border-stroke border-custom-green px-2 h-full pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-5 p-3`}
+      className={`sm:px-7.5 bg-custom-gray rounded-xl border-x border-y border-stroke border-custom-green px-2 h-full pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-5 p-3`}
     >
       <div className="mb-3 justify-between items-center gap-2 sm:flex">
         <div className="flex items-center gap-2">

@@ -9,7 +9,7 @@ const TargetsCircles = () => {
   const { userRecord } = useSelector((state: RootState) => state.app);
   return (
     <div>
-      <ul className="flex items-center flex-wrap  mb-5">
+      <ul className="flex items-center flex-wrap ">
         {userRecord?.impactTargets.map((target, index) => (
           <CircleItem key={index} target={target} />
         ))}

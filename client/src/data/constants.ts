@@ -7,12 +7,20 @@ export type TargetOption = {
   emoji: string;
   metrics: Metric[];
   category: string;
-  
 };
 
 type Metric = {
   id: number;
   description: string;
+  key: string;
+  graphs: Graph[];
+};
+
+type Graph = {
+  type: string;
+  name: string;
+  x: string;
+  y: string;
 };
 
 export const targetOptions: TargetOption[] = [
@@ -27,17 +35,61 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Job training or educational programs"
-        
+        key: "jobTraining",
+        description: "Job training or educational programs",
+        graphs: [
+          {
+            name: "ParticipationOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of participants",
+          },
+          {
+            name: "CompletyionByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of participants",
+          },
+        ],
       },
       {
         id: 2,
+        key: "microloans",
         description: "Microloans or grants provided",
+        graphs: [
+          {
+            name: "FundsDisbursedOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Amount disbursed",
+          },
+          {
+            name: "FundsDisbursedByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Avarage Amount disbursed",
+          },
+        ],
       },
       {
         id: 3,
-        description: "People assisted out of poverty"
-      }
+        key: "peopleAssisted",
+        description: "People assisted out of poverty",
+        graphs: [
+          {
+            name: "PeopleAssistedOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of people",
+          },
+          {
+            name: "PeopleAssistedByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of people",
+          },
+        ],
+      },
     ],
   },
   {
@@ -51,16 +103,67 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
+        key: "foodDonation",
         description: "Food donation",
+        graphs: [
+          {
+            name: "FoodDonatedOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of food items(killograms or equivalent)",
+          },
+          {
+            name: "FoodDonatedByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of food items(killograms or equivalent)",
+          },
+        ],
       },
       {
         id: 2,
+        key: "sustainableAgriculture",
         description: "Investment in sustainable agriculture",
+        graphs: [
+          {
+            name: "InvestmentOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Amount invested",
+          },
+          {
+            name: "InvestmentByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Amount invested",
+          },
+          {
+            name: "ImpactOnAgriculturalOutput",
+            type: "bar",
+            x: "Before and After investment",
+            y: "Agricultural output(killograms or equivalent)",
+          },
+        ],
       },
       {
         id: 3,
+        key: "peopleFed",
         description: "People with regular nutritious food",
-      }
+        graphs: [
+          {
+            name: "PeopleFedOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of people",
+          },
+          {
+            name: "DistributionOfMealsTypes",
+            type: "pie",
+            x: "Type of meal",
+            y: "Number of people",
+          },
+        ],
+      },
     ],
   },
   {
@@ -74,16 +177,67 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Funding for healthcare"
+        key: "healthcareFunding",
+        description: "Funding for healthcare",
+        graphs: [
+          {
+            name: "FundingOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Amount funded",
+          },
+          {
+            name: "DistributionOfFundsOnHealthProjects",
+            type: "bar",
+            x: "Project",
+            y: "Amount funded",
+          },
+        ],
       },
       {
         id: 2,
-        description: "Health check-ups or vaccination drives"
+        key: "healthCheckups",
+        description: "Health check-ups or vaccination drives",
+        graphs: [
+          {
+            name: "CheckupsOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of check-ups",
+          },
+          {
+            name: "CheckupsByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of check-ups",
+          },
+        ],
       },
       {
         id: 3,
-        description: "People accessing healthcare"
-      }
+        key: "peopleAccessingHealthcare",
+        description: "People accessing healthcare",
+        graphs: [
+          {
+            name: "PeopleAccessingHealthcareOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of people",
+          },
+          {
+            name: "PeopleAccessingHealthcareByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of people",
+          },
+          {
+            name: "DestributionOfHealthcareServices",
+            type: "bar",
+            x: " Types of healthcare services provided",
+            y: "Number of patients per service",
+          },
+        ],
+      },
     ],
   },
   {
@@ -97,16 +251,61 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Schools built or supported"
+        key: "schoolsBuilt",
+        description: "Schools built or supported",
+        graphs: [
+          {
+            name: "SchoolsBuiltOrSupportedOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of schools",
+          },
+          {
+            name: "SchoolsBuiltOrSupportedByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of schools",
+          },
+        ],
       },
       {
         id: 2,
-        description: "Educational grants awarded"
+        key: "educationalGrants",
+        description: "Educational grants awarded",
+        graphs: [
+          {
+            name: "GrantsAwardedOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of grants",
+          },
+          {
+            name: "DemographicsOfGrantsRecipients",
+            type: "pie",
+            x: "Demographics eg (Categories such as age, education level, or field of study)",
+            y: "Number of grants",
+          },
+        ],
       },
       {
         id: 3,
-        description: "Students benefiting from education"
-      }
+        key: "studentsBenefiting",
+        description: "Students benefiting from education",
+        graphs: [
+          {
+            name: "StudentsBenefitingOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of students",
+          },
+          {
+            name: "StudentsBenefitingByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of students",
+          },
+        ],
+      },
     ],
   },
   {
@@ -120,17 +319,50 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Women's empowerment programs"
+        key: "womensEmpowerment",
+        description: "Women's empowerment programs",
+        graphs: [
+          {
+            name: "EmpowermentOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of participants",
+          },
+        ],
       },
       {
         id: 2,
-        description: "Gender equality workshops"
+        key: "genderEqualityWorkshops",
+        description: "Gender equality workshops",
+        graphs: [
+          {
+            name: "WorkshopsOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of workshops",
+          },
+          {
+            name: "ParticipantsOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of participants",
+          },
+        ],
       },
       {
         id: 3,
-        description: "Workplace gender equality policies"
-      }
-    ]
+        key: "workplaceGenderEquality",
+        description: "Workplace gender equality policies",
+        graphs: [
+          {
+            name: "PoliciesOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of policies",
+          },
+        ],
+      },
+    ],
   },
   {
     id: 6,
@@ -143,17 +375,74 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Sanitation facilities"
+        key: "sanitationFacilities",
+        description: "Sanitation facilities",
+        graphs: [
+          {
+            name: "FacilitiesOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of facilities",
+          },
+          {
+            name: "FacilitiesByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of facilities",
+          },
+          {
+            name: "FacilitiesByType",
+            type: "pie",
+            x: "Type of facility",
+            y: "Number of facilities",
+          },
+        ],
       },
       {
         id: 2,
-        description: "Water conservation initiatives"
+        key: "waterConservation",
+        description: "Water conservation initiatives",
+        graphs: [
+          {
+            name: "WaterConservationOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Amount of water conserved",
+          },
+          {
+            name: "InitiativesOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of initiatives",
+          },
+          {
+            name: "InitiativesByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of initiatives",
+          },
+        ],
       },
       {
         id: 3,
-        description: "People with water and sanitation access"
-      }
-    ]
+        key: "peopleWithAccess",
+        description: "People with water and sanitation access",
+        graphs: [
+          {
+            name: "AccessOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of people",
+          },
+          {
+            name: "AccessByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of people",
+          },
+        ],
+      },
+    ],
   },
   {
     id: 7,
@@ -166,17 +455,62 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Renewable energy projects"
+        key: "renewableEnergyProjects",
+        description: "Renewable energy projects",
+        graphs: [
+          {
+            name: "ProjectsOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of projects",
+          },
+          {
+            name: "ProjectsByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of projects",
+          },
+        ],
       },
       {
         id: 2,
-        description: "Energy-efficient systems"
+        key: "energyEfficientSystems",
+        description: "Energy-efficient systems",
+        graphs: [
+          {
+            name: "SystemsOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of systems",
+          },
+          {
+            name: "SystemsByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of systems",
+          },
+        ],
       },
       {
         id: 3,
-        description: "Energy consumption reduction"
-      }
-    ]
+        key: "energyConsumptionReduction",
+        description: "Energy consumption reduction",
+        graphs: [
+          {
+            name: "ConsumptionOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Amount of energy saved",
+          },
+          {
+            name: "ConsumptionByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Amount of energy saved",
+          },
+        ],
+      },
+    ],
   },
   {
     id: 8,
@@ -189,17 +523,68 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Job creation initiatives"
+        key: "jobCreation",
+        description: "Job creation initiatives",
+        graphs: [
+          {
+            name: "JobsCreatedOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of jobs",
+          },
+          {
+            name: "JobsCreatedByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of jobs",
+          },
+          {
+            name: "SectorsOfJobCreation",
+            type: "pie",
+            x: "Sector",
+            y: "Number of jobs",
+          },
+        ],
       },
       {
         id: 2,
-        description: "Vocational training programs"
+        key: "vocationalTraining",
+        description: "Vocational training programs",
+        graphs: [
+          {
+            name: "TrainingOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of participants",
+          },
+          {
+            name: "TrainingByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of participants",
+          },
+        ],
       },
       {
         id: 3,
-        description: "Employment or work condition improvements"
-      }
-    ]
+        key: "employmentImprovements",
+        description: "Employment or work condition improvements",
+        graphs: [
+          {
+            name: "ImprovementsOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of improvements",
+          },
+          {
+            name: "ImprovementsByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of improvements",
+          },
+        ],
+      },
+    ],
   },
   {
     id: 9,
@@ -212,17 +597,69 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "STEM and innovation education"
+        key: "stemEducation",
+        description: "STEM and innovation education",
+        graphs: [
+          {
+            name: "ProgramsHelpedOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of programs",
+          },
+          
+          {
+            name: "EducationOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of participants",
+          },
+          {
+            name: "EducationByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of participants",
+          },
+        ],
       },
       {
         id: 2,
-        description: "Sustainable infrastructure development"
+        key: "sustainableInfrastructure",
+        description: "Sustainable infrastructure development",
+        graphs: [
+          {
+            name: "ProjectsOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of projects",
+          },
+          {
+            name: "ProjectsByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of projects",
+          },
+        ],
       },
       {
         id: 3,
-        description: "People benefiting from infrastructure"
-      }
-    ]
+        key: "peopleBenefiting",
+        description: "People benefiting from infrastructure",
+        graphs: [
+          {
+            name: "PeopleBenefitingOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of people",
+          },
+          {
+            name: "PeopleBenefitingByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of people",
+          },
+        ],
+      },
+    ],
   },
   {
     id: 10,
@@ -235,17 +672,56 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Marginalized community support"
+        key: "marginalizedCommunitySupport",
+        description: "Marginalized community support",
+        graphs: [
+          {
+            name: "SupportOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of programs",
+          },
+          {
+            name: "SupportByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of programs",
+          },
+        ],
       },
       {
         id: 2,
-        description: "Inclusion policies"
+        key: "inclusionPolicies",
+        description: "Inclusion policies",
+        graphs: [
+          {
+            name: "PoliciesOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of policies",
+          },
+        ],
       },
       {
         id: 3,
-        description: "Beneficiaries of inequality reduction"
-      }
-    ]
+        key: "beneficiaries",
+        description: "Beneficiaries of inequality reduction",
+        graphs: [
+          {
+            name: "BeneficiariesOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of beneficiaries",
+          },
+          {
+            name: "BeneficiariesByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of beneficiaries",
+          },
+        ],
+      },
+    ],
   },
   {
     id: 11,
@@ -258,17 +734,74 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Urban sustainability projects"
+        key: "urbanSustainability",
+        description: "Urban sustainability projects",
+        graphs: [
+          {
+            name: "ProjectsOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of projects",
+          },
+          {
+            name: "ProjectsByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of projects",
+          },
+          {
+            name: "ProjectsByType",
+            type: "pie",
+            x: "Type of project",
+            y: "Number of projects",
+          },
+        ],
       },
       {
         id: 2,
-        description: "Affordable housing support"
+        key: "affordableHousing",
+        description: "Affordable housing support",
+        graphs: [
+          {
+            name: "HousingOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of housing units",
+          },
+          {
+            name: "HousingByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of housing units",
+          },
+        ],
       },
       {
         id: 3,
-        description: "Improved urban living conditions"
-      }
-    ]
+        key: "urbanLivingConditions",
+        description: "Improved urban living conditions",
+        graphs: [
+          {
+            name: "LivingConditionsOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of improvements",
+          },
+          {
+            name: "LivingConditionsByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of improvements",
+          },
+          {
+            name: "TotalInvestmentOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Amount invested",
+          }
+        ],
+      },
+    ],
   },
   {
     id: 12,
@@ -276,22 +809,73 @@ export const targetOptions: TargetOption[] = [
     icon: "/target/12.svg",
     color: "#BF8B2E",
     rectangle: "#ad8d52",
-    emoji : "/targetIcons/12.svg",
+    emoji: "/targetIcons/12.svg",
     category: "Environmental",
     metrics: [
       {
         id: 1,
-        description: "Waste reduction and recycling"
+        key: "wasteReduction",
+        description: "Waste reduction and recycling",
+        graphs: [
+          {
+            name: "WasteReductionOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Amount of waste reduced",
+          },
+          {
+            name: "WasteReductionByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Amount of waste reduced",
+          }
+        ]
       },
       {
         id: 2,
-        description: "Sustainable supply chain investment"
+        key: "sustainableSupplyChain",
+        description: "Sustainable supply chain investment",
+        graphs: [
+          {
+            name: "InvestmentOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Amount invested",
+          },
+          {
+            name: "InvestmentByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Amount invested",
+          },
+          {
+            name: "SupplyChainImpact",
+            type: "bar",
+            x: "Impact",
+            y: "Number of suppliers impacted"
+          }
+        ]
       },
       {
         id: 3,
-        description: "Organizational resource footprint reduction"
-      }
-    ]
+        key: "resourceFootprintReduction",
+        description: "Organizational resource footprint reduction",
+        graphs: [
+          {
+            name: "ReductionOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Amount of resources reduced",
+          },
+          {
+            name: "ReductionByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Amount of resources reduced",
+          }
+        ]
+      },
+    ],
   },
   {
     id: 13,
@@ -304,17 +888,62 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Carbon emission reduction"
+        key: "carbonEmissionReduction",
+        description: "Carbon emission reduction",
+        graphs: [
+          {
+            name: "EmissionReductionOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Amount of emissions reduced",
+          },
+          {
+            name: "EmissionReductionByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Amount of emissions reduced",
+          }
+        ]
       },
       {
         id: 2,
-        description: "Renewable energy investment"
+        key: "renewableEnergyInvestment",
+        description: "Renewable energy investment",
+        graphs: [
+          {
+            name: "InvestmentOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Amount invested",
+          },
+          {
+            name: "InvestmentByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Amount invested",
+          }
+        ]
       },
       {
         id: 3,
-        description: "Reforestation projects"
-      }
-    ]
+        key: "reforestationProjects",
+        description: "Reforestation projects",
+        graphs: [
+          {
+            name: "ProjectsOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of projects",
+          },
+          {
+            name: "ProjectsByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of projects",
+          }
+        ]
+      },
+    ],
   },
   {
     id: 14,
@@ -327,17 +956,62 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Marine ecosystem protection"
+        key: "marineEcosystemProtection",
+        description: "Marine ecosystem protection",
+        graphs: [
+          {
+            name: "ProtectionOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of ecosystems protected",
+          },
+          {
+            name: "ProtectionByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of ecosystems protected",
+          }
+        ]
       },
       {
         id: 2,
-        description: "Ocean pollution reduction"
+        key: "oceanPollutionReduction",
+        description: "Ocean pollution reduction",
+        graphs: [
+          {
+            name: "ReductionOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Amount of pollution reduced",
+          },
+          {
+            name: "ReductionByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Amount of pollution reduced",
+          }
+        ]
       },
       {
         id: 3,
-        description: "Sustainable fishing support"
-      }
-    ]
+        key: "sustainableFishing",
+        description: "Sustainable fishing support",
+        graphs: [
+          {
+            name: "SupportOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of fishing communities supported",
+          },
+          {
+            name: "SupportByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of fishing communities supported",
+          }
+        ]
+      },
+    ],
   },
   {
     id: 15,
@@ -350,17 +1024,62 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Land conservation and reforestation"
+        key: "landConservation",
+        description: "Land conservation and reforestation",
+        graphs: [
+          {
+            name: "ConservationOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of hectares conserved",
+          },
+          {
+            name: "ConservationByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of hectares conserved",
+          }
+        ]
       },
       {
         id: 2,
-        description: "Endangered species protection"
+        key: "endangeredSpeciesProtection",
+        description: "Endangered species protection",
+        graphs: [
+          {
+            name: "ProtectionOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of species protected",
+          },
+          {
+            name: "ProtectionByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of species protected",
+          }
+        ]
       },
       {
         id: 3,
-        description: "Land rehabilitated or conserved"
-      }
-    ]
+        key: "landRehabilitation",
+        description: "Land rehabilitated or conserved",
+        graphs: [
+          {
+            name: "RehabilitationOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of hectares rehabilitated",
+          },
+          {
+            name: "RehabilitationByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of hectares rehabilitated",
+          }
+        ]
+      },
+    ],
   },
   {
     id: 16,
@@ -373,17 +1092,62 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Anti-corruption programs"
+        key: "antiCorruptionPrograms",
+        description: "Anti-corruption programs",
+        graphs: [
+          {
+            name: "ProgramsOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of programs",
+          },
+          {
+            name: "ProgramsByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of programs",
+          }
+        ]
       },
       {
         id: 2,
-        description: "Human rights and justice initiatives"
+        key: "humanRightsInitiatives",
+        description: "Human rights and justice initiatives",
+        graphs: [
+          {
+            name: "InitiativesOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of initiatives",
+          },
+          {
+            name: "InitiativesByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of initiatives",
+          }
+        ]
       },
       {
         id: 3,
-        description: "Community peace programs"
-      }
-    ]
+        key: "communityPeacePrograms",
+        description: "Community peace programs",
+        graphs: [
+          {
+            name: "ProgramsOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of programs",
+          },
+          {
+            name: "ProgramsByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of programs",
+          }
+        ]
+      },
+    ],
   },
   {
     id: 17,
@@ -396,16 +1160,61 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        description: "Collaborative SDG projects"
+        key: "collaborativeProjects",
+        description: "Collaborative SDG projects",
+        graphs: [
+          {
+            name: "ProjectsOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of projects",
+          },
+          {
+            name: "ProjectsByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of projects",
+          }
+        ]
       },
       {
         id: 2,
-        description: "Global partnership financial contributions"
+        key: "financialContributions",
+        description: "Global partnership financial contributions",
+        graphs: [
+          {
+            name: "ContributionsOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Amount contributed",
+          },
+          {
+            name: "ContributionsByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Amount contributed",
+          }
+        ]
       },
       {
         id: 3,
-        description: "SDG advocacy campaigns"
-      }
-    ]
+        key: "sdgAdvocacy",
+        description: "SDG advocacy campaigns",
+        graphs: [
+          {
+            name: "CampaignsOvertime",
+            type: "line",
+            x: "Time (Months/quaters)",
+            y: "Number of campaigns",
+          },
+          {
+            name: "CampaignsByLocation",
+            type: "bar",
+            x: "Location",
+            y: "Number of campaigns",
+          }
+        ]
+      },
+    ],
   },
 ];

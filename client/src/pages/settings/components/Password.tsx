@@ -14,17 +14,17 @@ const Password: FC<Props> = ({setPage}) => {
       </div>
 
       <div className="flex flex-col gap-2 ml-5 mt-10">
-        <p className="  text-white text-xl font-TelegraphBold">Current Password</p>
+        <p className="  text-white text-lg font-TelegraphRegular">Current Password</p>
         <input type="password" className="bg-black border-2 border-custom-green rounded-2xl p-2"></input>
       </div>
 
       <div className="flex flex-col gap-2 ml-5 mt-10">
-        <p className="  text-white text-xl font-TelegraphBold">New Password</p>
+        <p className="  text-white text-lg font-TelegraphRegular">New Password</p>
         <input type="password" className="bg-black border-2 border-custom-green rounded-2xl p-2"></input>
       </div>
 
       <div className="flex flex-col gap-2 ml-5 mt-10">
-        <p className="  text-white text-xl font-TelegraphBold">Confirm New Password</p>
+        <p className="  text-white text-lg font-TelegraphRegular">Confirm New Password</p>
         <input type="password" className="bg-black border-2 border-custom-green rounded-2xl p-2"></input>
       </div>
 

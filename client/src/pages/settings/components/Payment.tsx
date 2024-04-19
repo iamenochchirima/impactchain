@@ -28,6 +28,8 @@ const Payment: FC<Props> = ({setPage}) => {
 
       </div>
 
+
+      {/*Payment Method Section*/}
       <div>
       <div className="flex flex-col gap-2 ml-5 mt-10">
         <p className=" uppercase text-white text-xl font-TelegraphBold">Payment Method</p>
@@ -35,22 +37,22 @@ const Payment: FC<Props> = ({setPage}) => {
 
         <div className="flex gap-5">
           <p>Account Holder</p>
-          <p>W 3 O L A B S</p>
+          <input type="account" className="bg-black border-2 border-custom-green rounded-2xl p-2"></input>
         </div>
 
         <div className="flex gap-5">
           <p>Bank</p>
-          <p>Nedbank</p>
+          <input type="bank" className="bg-black border-2 border-custom-green rounded-2xl p-2"></input>
         </div>
 
         <div className="flex gap-5">
           <p>Card Number</p>
-          <p>9603 **** **** **58</p>
+          <input type="card number" className="bg-black border-2 border-custom-green rounded-2xl p-2"></input>
         </div>
 
         <div className="flex gap-5">
           <p>CSS</p>
-          <p>***</p>
+          <input type="css" className="bg-black border-2 border-custom-green rounded-2xl p-2"></input>
         </div>
 
         <div className="flex gap-4">
@@ -70,34 +72,31 @@ const Payment: FC<Props> = ({setPage}) => {
       </div>
 
     
+      {/*Billing Information Section*/}
       <div className="flex flex-col gap-2 ml-5 mt-10">
         <p className=" uppercase text-white text-xl font-TelegraphBold">Billing Information</p>
         <hr className=" w-4/6 text-custom-green "></hr>
 
         <div className="flex gap-5">
           <p>Email</p>
-          <p>radiyya@w3olabs.xyz</p>
+          <input type="email" className="bg-black border-2 border-custom-green rounded-2xl p-2"></input>
         </div>
 
         <div className="flex gap-5">
           <p>Company Name</p>
-          <p>W 3 O L A B S</p>
+          <input type="company" className="bg-black border-2 border-custom-green rounded-2xl p-2"></input>
         </div>
 
         <div className="flex gap-5">
           <p>Address</p>
-          <p>The Unit, 123 Prestwich St</p>
+          <input type="address" className="bg-black border-2 border-custom-green rounded-2xl p-2"></input>
         </div>
 
         <div className="flex gap-5">
           <p>Tax Number</p>
-          <p>**************</p>
+          <input type="tax" className="bg-black border-2 border-custom-green rounded-2xl p-2"></input>
         </div>
-
-        
-
       </div>
-      
 
       </div>
     </div>

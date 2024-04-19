@@ -71,13 +71,14 @@ const About = () => {
   };
 
   return (
-    <div className="text-white ">
+    <div className="text-white">
       {" "}
       <h3 className="text-3xl font-bold text-white mt-4 text-center font-TelegraphBold mr-12 ">
-        Tell us about your company.
+        Basic Organisation Information.
       </h3>
-      <div className="min-h-96 pr-24 pl-12">
-        <form action="" className="mt-10">
+      <div className="min-h-96 pr-24 pl-12 mt-10">
+      <h3>Name of Organisation?</h3>
+        <form action="" className="mt-3">
           <div className="mb-4 ">
             <input
               className="shadow placeholder-gray-500 text-white min-w-[300px] rounded-xl appearance-none border-2 border-green-500 w-full py-3.5 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
@@ -89,7 +90,7 @@ const About = () => {
             />
           </div>
           <div className="mt-5">
-            <h3>Company Industry</h3>
+            <h3>In Which Industry Does the Organisation Operate?</h3>
             <div className="relative mt-3">
               <select
                 className="appearance-none shadow placeholder-white text-white min-w-[300px] rounded-xl border-2 border-green-500 w-full py-3.5 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
@@ -111,7 +112,7 @@ const About = () => {
           </div>
 
           <div className="mt-5">
-            <h2>Company Size</h2>
+            <h2>What Is The Size of Your Organisation?</h2>
             <div className="mt-4 flex items-center gap-3">
               <button
                 className={` ${

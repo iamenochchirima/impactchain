@@ -16,23 +16,23 @@ const Profile: FC<Props> = ({setPage}) => {
 
       <div>
       <div className="flex flex-col gap-2 ml-5 mt-10">
-        <p className="  text-white text-xl font-TelegraphBold">Full Name:</p>
+        <p className="  text-white text-lg font-TelegraphRegular">Full Name:</p>
         <input type="password" className="bg-black border-2 border-custom-green rounded-2xl p-2"></input>
       </div>
 
       <div className="flex flex-col gap-2 ml-5 mt-10">
-        <p className="  text-white text-xl font-TelegraphBold">Email:</p>
+        <p className="  text-white text-lg font-TelegraphRegualr">Email:</p>
         <input type="password" className="bg-black border-2 border-custom-green rounded-2xl p-2"></input>
       </div>
 
       <div className="flex flex-col gap-2 ml-5 mt-10">
-        <p className="  text-white text-xl font-TelegraphBold">Company Name:</p>
+        <p className="  text-white text-lg font-TelegraphRegular">Company Name:</p>
         <input type="password" className="bg-black border-2 border-custom-green rounded-2xl p-2"></input>
       </div>
 
       
       <div className="ml-5 mt-5">
-        <p className=" text-white text-xl font-TelegraphBold"> Appearance</p>
+        <p className=" text-white text-lg font-TelegraphRegular"> Appearance:</p>
         <div className="flex gap-4">
           <button className=" bg-custom-green px-5 py-2 mt-3 rounded-3xl">
             <span className=" text-white font-TelegraphRegular text-xl">

@@ -34,8 +34,8 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="bg-black min-h-screen font-NeueMachinaRegular text-custom-green">
-      <h1 className="font-NeueMachinaUltrabold text-7xl pt-16 text-center">
+    <div className="bg-black min-h-screen font-NeueMachinaRegular text-custom-green pt-44">
+      <h1 className="font-NeueMachinaUltrabold text-7xl text-center">
         <span className="text-custom-green ">impact.</span>
         <span className="text-white">chain</span>{" "}
       </h1>
@@ -65,7 +65,7 @@ const ResetPassword = () => {
             >
               {isLoading ? "Loading..." : "Submit"}
             </button>
-            <Link to="/login" className="text-center text-white">
+            <Link to="/login" className="text-center font-TelegraphRegular text-white">
               Return to Login
             </Link>
           </div>

@@ -1,38 +1,37 @@
 import React, { useEffect, useState } from "react";
 import TargetCard from "./TargetCard";
-import {
-  setDataComponent,
-  setUserRecord,
-} from "../../redux/slices/app";
+import { setDataComponent, setImpactTargets, setUserRecord } from "../../redux/slices/app";
 import { useDispatch, useSelector } from "react-redux";
 import { TargetOption, targetOptions } from "../../data/constants";
 import { RootState } from "../../redux/store";
 import { useAuth } from "../../hooks/AppContext";
 import {
-  ImpactTarget as ImpactTargetType,
   UserRecord,
 } from "../../hooks/declarations/impact_chain_data/impact_chain_data.did";
+import { ImpactTargetType } from "../../utils/types";
+import { getTargetMetrics } from "../../utils/targets";
 
 const ImpactTarget = () => {
   const { dataActor } = useAuth();
-  const { userRecord } = useSelector((state: RootState) => state.app);
-  const [selectedTargets, setSelectedTargets] = useState<TargetOption[] >(
-    []
+  const { impactTargets, userRecord } = useSelector(
+    (state: RootState) => state.app
   );
+  const [selectedTargets, setSelectedTargets] = useState<TargetOption[]>([]);
+  // Intial targets so that we can compare if the user has changed the targets or not before saving
   const [initialTargets, setInitialTargets] = useState<number[]>([]);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (userRecord) {
-      const _targets = userRecord.impactTargets
-     
+    if (impactTargets && impactTargets.length > 0) {
+      const _targets = impactTargets;
+
       const _sortedTargets = [..._targets].sort(
         (a, b) => Number(a.id) - Number(b.id)
       );
-        setInitialTargets(_sortedTargets.map((t) => Number(t.id)));
+      setInitialTargets(_sortedTargets.map((t) => Number(t.id)));
     }
-  }, [userRecord]);
+  }, [impactTargets]);
 
   const handleBack = () => {
     dispatch(setDataComponent("ProfileLogo"));
@@ -49,42 +48,53 @@ const ImpactTarget = () => {
     if (selectedTargets && dataActor && userRecord) {
       try {
         setLoading(true);
-        const tragets: ImpactTargetType[] = selectedTargets.map((target) => {
-          const existingTargets = userRecord.impactTargets;
+        const targets: ImpactTargetType[] = selectedTargets.map((target) => {
+          const existingTargets = impactTargets;
 
           if (existingTargets) {
             const existingTarget = existingTargets.find(
-              (t) => t.id === BigInt(target.id)
+              (t) => t.id === target.id
             );
             if (existingTarget) {
               return existingTarget;
             } else {
               return {
-                id: BigInt(target.id),
+                id: target.id,
                 name: target.name,
                 metrics: [],
-                targetRecords: [],
               };
             }
           } else {
             return {
-              id: BigInt(target.id),
+              id: target.id,
               name: target.name,
               metrics: [],
-              targetRecords: [],
             };
           }
         });
+        const updatedImpactTargets = {...userRecord.impactTargets};
+
+        targets.forEach(target => {
+         const metrics = getTargetMetrics(target);
+            updatedImpactTargets[`ImpactTarget${target.id}`] = [{
+                id: target.id,
+                name: target.name,
+                metrics: metrics,
+            }];
+        });
+    
         const data: UserRecord = {
           ...userRecord,
-          impactTargets: tragets,
+          impactTargets: updatedImpactTargets,
         };
-        dispatch(setUserRecord(data));
         await dataActor.addUserRecord(data);
+        dispatch(setUserRecord(data));
+        dispatch(setImpactTargets(targets));
         dispatch(setDataComponent("Metrics"));
         dispatch(setUserRecord(data));
         setLoading(false);
       } catch (error) {
+        setLoading(false);
         console.log("Error adding impact targets", error);
       }
     } else {
@@ -129,7 +139,7 @@ const ImpactTarget = () => {
           <button
             onClick={handleSubmit}
             className={` ${
-              selectedTargets.length > 0  ? "bg-custom-green" : "bg-green-700"
+              selectedTargets.length > 0 ? "bg-custom-green" : "bg-green-700"
             } px-10 py-1.5  rounded-full text-black font-bold mr-20`}
           >
             {loading ? "Saving..." : "Continue"}

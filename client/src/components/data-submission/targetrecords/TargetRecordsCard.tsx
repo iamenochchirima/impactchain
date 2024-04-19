@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TargetOption } from "../../../data/constants";
 import {
@@ -7,40 +7,36 @@ import {
   setNextTarget,
   setShowDataForm,
   setTargetRecord,
-  setUserRecord,
 } from "../../../redux/slices/app";
-import {
-  ImpactTarget,
-  Metric,
-  UserRecord,
-} from "../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
 import MetricRecords from "./MetricRecords";
 import { toast } from "react-toastify";
 import { RootState } from "../../../redux/store";
 import { useAuth } from "../../../hooks/AppContext";
+import { ImpactTargetType, Metric } from "../../../utils/types";
 
 type Props = {
   target: TargetOption;
-  impactTargets: ImpactTarget[];
+  impactTargets: ImpactTargetType[] 
   finished: boolean;
+  setLastOfLast: (lastOfLast: boolean) => void;
 };
 
 type GradientStyle = {
   backgroundImage: string;
 };
 
-const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
+const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished, setLastOfLast }) => {
   const [gradientStyle, setGradientStyle] = useState<GradientStyle>({
     backgroundImage: `linear-gradient(to top, #354b5b, ${target.color} 50%, ${target.color})`,
   });
   const [clearGoal, setClearGoal] = useState<boolean>(false);
   const { dataActor } = useAuth();
   const { userRecord } = useSelector((state: RootState) => state.app);
-  const [impact, setImpact] = useState<ImpactTarget | undefined>(undefined);
+  const [impact, setImpact] = useState<ImpactTargetType | undefined>(undefined);
   const dispatch = useDispatch();
   const metricsPerPage = 2;
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [totalPages, setTotalPages] = useState(1);
+  const [totalPages, setTotalPages] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [displayedMetrics, setDisplayedMetrics] = useState<Metric[]>([]);
   const [saving, setSaving] = useState<boolean>(false);
@@ -53,10 +49,25 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
     }
   }, [currentIndex, impact, metricsPerPage]);
 
+  
   useEffect(() => {
-    const _impact = impactTargets.find((t) => Number(t.id) === target.id);
+    console.log("Checking page status", { totalPages, currentPage });
+    if (totalPages === null) {
+      console.log("Total pages is still null");
+    }
+    if (totalPages && currentPage === totalPages) {
+      console.log("Last page, setting lastOfLast");
+      setLastOfLast(true);
+    }
+  }, [totalPages, currentPage]);
+
+
+  useEffect(() => {
+    if (impactTargets) {
+      const _impact = impactTargets.find((t) => Number(t.id) === target.id);
     setImpact(_impact);
     setCurrentPage(Math.floor(currentIndex / metricsPerPage) + 1);
+    }
   }, [impactTargets, target, currentIndex, metricsPerPage]);
 
   useEffect(() => {
@@ -69,6 +80,7 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
 
 
   useEffect(() => {
+    if (!impactTargets) return;
     const _record: TargetRecordStateType = {
       color: target.color,
       name: target.name,
@@ -87,7 +99,8 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
   };
 
   const handleNext = async () => {
-    if (impact) {
+    if (!impact) return;
+   
       for (const metric of displayedMetrics) {
         if (metric.goal.length === 0) {
           toast.error("Please set a goal for all metrics before proceeding");
@@ -106,19 +119,19 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
           );
           return updatedMetric ? updatedMetric : metric;
         });
-        const updatedImpact: ImpactTarget = {
+        const updatedImpact: ImpactTargetType = {
           ...impact,
           metrics: updatedImpactMetrics,
         };
-        const updatedImpactTargets: ImpactTarget[] = impactTargets.map((t) =>
+        const updatedImpactTargets: ImpactTargetType[] = impactTargets.map((t) =>
           Number(t.id) === target.id ? updatedImpact : t
         );
-        const updatedUserRecord: UserRecord = {
-          ...userRecord,
-          impactTargets: updatedImpactTargets,
-        };
-        await dataActor?.updateUserRecord(updatedUserRecord);
-        dispatch(setUserRecord(updatedUserRecord));
+        // const updatedUserRecord: UserRecord = {
+        //   ...userRecord,
+        //   impactTargets: updatedImpactTargets,
+        // };
+        // await dataActor?.updateUserRecord(updatedUserRecord);
+        // dispatch(setUserRecord(updatedUserRecord));
         setClearGoal(true);
         if (impactTargets.length === 1) {
           toast.success("All data saved successfully", {
@@ -154,13 +167,12 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished }) => {
         setSaving(false);
         console.log("Error updating impact metrics", error);
       }
-    }
+    
   };
 
   const impactIndex = impactTargets.findIndex(
     (t) => Number(t.id) === target.id
   );
-
   return (
     <>
       <div className="flex flex-col items-center bg-gray mx-[100px] mt">

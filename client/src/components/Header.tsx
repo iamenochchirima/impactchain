@@ -6,17 +6,17 @@ import { CiSearch } from "react-icons/ci";
 import SubmitData from "./data-submission/SubmitData";
 import {
   setDataComponent,
+  setImpactTargets,
   setShowDataForm,
   setUserRecord,
 } from "../redux/slices/app";
 import { useAuth } from "../hooks/AppContext";
 import { isDataIncomplete } from "./utils";
-import {
-  ImpactTarget,
-  UserRecord,
-} from "../hooks/declarations/impact_chain_data/impact_chain_data.did";
 import Report from "../pages/analytics/components/Report";
 import Help from "./Help";
+import { ImpactTargetType } from "../utils/types";
+import { getImpactTargetsArray } from "../utils/targets";
+
 
 const Header = () => {
   const { showDataForm, userInfo, reportModal, openHelp } = useSelector(
@@ -57,22 +57,15 @@ const Header = () => {
         const res = await dataActor?.getUserRecord(userInfo.email);
         if (res) {
           if ("ok" in res) {
-            const convertedImpactTargets: ImpactTarget[] =
-              res.ok.impactTargets.map((target) => {
-                return {
-                  ...target,
-                  id: BigInt(target.id),
-                };
-              });
 
-            const convertedUserRecord: UserRecord = {
-              ...res.ok,
-              impactTargets: convertedImpactTargets,
-            };
-            dispatch(setUserRecord(convertedUserRecord));
-            const _res = isDataIncomplete(res.ok);
+            const customImpacts: ImpactTargetType[] = getImpactTargetsArray(res.ok.impactTargets)
+            const _sortedTargets = [...customImpacts].sort(
+              (a, b) => Number(a.id) - Number(b.id)
+            );
+            dispatch(setImpactTargets(_sortedTargets));
+            dispatch(setUserRecord(res.ok));
+            const _res = isDataIncomplete(res.ok, customImpacts);
             if (_res !== "ok") {
-              console.log("Data is incomplete", _res);
               dispatch(setShowDataForm(true));
               dispatch(setDataComponent(_res));
             }

@@ -1,14 +1,15 @@
 import { UserRecord } from "../hooks/declarations/impact_chain_data/impact_chain_data.did";
+import { ImpactTargetType } from "../utils/types";
 
-export const isDataIncomplete = (info: UserRecord) => {
+export const isDataIncomplete = (info: UserRecord, impactTargets: ImpactTargetType[]) => {
   if (info.aboutCompany.logo === "") {
     return "ProfileLogo";
   }
-  if (info.impactTargets.length === 0) {
+  if (impactTargets.length === 0) {
     return "ImpactTarget";
   }
   let withoutMetrics = 0;
-  for (const target of info.impactTargets) {
+  for (const target of impactTargets) {
     if (target.metrics.length === 0) {
       withoutMetrics++;
     }
@@ -19,10 +20,12 @@ export const isDataIncomplete = (info: UserRecord) => {
 
   let metricsWithoutRecords = 0;
 
-  if (info.impactTargets.length > 0) {
-    for (const metric of info.impactTargets[0].metrics) {
-      if (metric.documents.length === 0 && metric.goal.length === 0) {
-        metricsWithoutRecords++;
+  if (impactTargets.length > 0) {
+    for (const target of impactTargets) {
+      for (const metric of target.metrics) {
+        if (metric.documents.length === 0 && metric.goal.length === 0) {
+          metricsWithoutRecords++;
+        }
       }
     }
     if (metricsWithoutRecords > 0) {

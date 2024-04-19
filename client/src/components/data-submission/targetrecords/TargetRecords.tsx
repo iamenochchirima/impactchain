@@ -4,36 +4,35 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import TargetRecordsCard from "./TargetRecordsCard";
 import { setNextTarget } from "../../../redux/slices/app";
-import { ImpactTarget } from "../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
 
 export const TargetRecords = () => {
   const dispatch = useDispatch();
-  const { userRecord, nextTarget } = useSelector((state: RootState) => state.app);
+  const { impactTargets, nextTarget } = useSelector(
+    (state: RootState) => state.app
+  );
   const [targets, setTargets] = useState<TargetOption[]>([]);
   const [displayedTargets, setDisplayedTargets] = useState<TargetOption[]>([]);
-  const [impactTargets, setImpactTargets] = useState<ImpactTarget[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [finished, setFinished] = useState(false);
+  const [lastOfLast, setLastOfLast] = useState(false);
 
   useEffect(() => {
-    if (userRecord) {
-      const _innerTargets =userRecord.impactTargets
-
-        const filteredTargets = _innerTargets.filter(
-          (target) => target.metrics?.length > 0
+    if (impactTargets) {
+      const filteredTargets = impactTargets.filter(
+        (target) => target.metrics?.length > 0
+      );
+      const _sortedTargets = [...filteredTargets].sort(
+        (a, b) => Number(a.id) - Number(b.id)
+      );
+      const matchingTargetOption = targetOptions.filter((targetOption) => {
+        return _sortedTargets.some(
+          (target) => Number(target.id) === targetOption.id
         );
-        const _sortedTargets = [...filteredTargets].sort(
-          (a, b) => Number(a.id) - Number(b.id)
-        );
-        setImpactTargets(_sortedTargets);
-        const matchingTargetOption = targetOptions.filter((targetOption) => {
-          return _sortedTargets.some(
-            (target) => Number(target.id) === targetOption.id
-          );
-        });
-        setTargets(matchingTargetOption);
+      });
+      setTargets(matchingTargetOption);
     }
-  }, [userRecord]);
+
+  }, [impactTargets]);
 
   useEffect(() => {
     setDisplayedTargets(targets.slice(currentIndex, currentIndex + 1));
@@ -41,25 +40,35 @@ export const TargetRecords = () => {
 
   useEffect(() => {
     if (nextTarget) {
-      setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, targets.length - 1));
+      setCurrentIndex((prevIndex) =>
+        Math.min(prevIndex + 1, targets.length - 1)
+      );
       dispatch(setNextTarget(false));
     }
   }, [nextTarget, targets, dispatch]);
 
- useEffect(() => {
-    if (currentIndex === targets.length - 1) {
+  useEffect(() => {
+    if ((currentIndex === targets.length - 1) && lastOfLast) {
       setFinished(true);
     } else {
       setFinished(false);
     }
-  }, [currentIndex, targets]);
+  }, [currentIndex, targets, lastOfLast]);
 
   return (
     <div>
-      {displayedTargets.map((target, index) => {
-        return <TargetRecordsCard {...{ target, impactTargets, finished }} key={index} />;
-      })}
-      
+      {impactTargets && (
+        <>
+          {displayedTargets.map((target, index) => {
+            return (
+              <TargetRecordsCard
+                {...{ target, impactTargets, finished, setLastOfLast }}
+                key={index}
+              />
+            );
+          })}
+        </>
+      )}
     </div>
   );
 };

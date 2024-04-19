@@ -5,11 +5,11 @@ export type TargetOption = {
   color: string;
   rectangle: string;
   emoji: string;
-  metrics: Metric[];
+  metrics: TargetOptionMetric[];
   category: string;
 };
 
-type Metric = {
+export type TargetOptionMetric = {
   id: number;
   description: string;
   key: string;

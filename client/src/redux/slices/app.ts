@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Metric, UserRecord } from "../../hooks/declarations/impact_chain_data/impact_chain_data.did";
 import { CategoryType } from "../../pages/analytics/types";
+import { ImpactTargetType } from "../../utils/types";
 
 export type TargetRecordStateType = {
   color: string;
@@ -26,6 +27,8 @@ export interface GlobalState {
   dataComponent: string;
   userRecord: UserRecord | null;
 
+  impactTargets: ImpactTargetType[] | null;
+
   nextTarget: boolean;
   metricsUpdated: boolean;
 
@@ -44,6 +47,7 @@ const initialState: GlobalState = {
   targetRecord: null,
   dataComponent: "Loading",
   userRecord: null,
+  impactTargets: null,
 
   nextTarget: false,
   metricsUpdated: false,
@@ -99,6 +103,9 @@ export const appSlice = createSlice({
     setHelpModal: (state: GlobalState, action: PayloadAction<boolean>) => {
       state.openHelp = action.payload;
     },
+    setImpactTargets: (state: GlobalState, action: PayloadAction<ImpactTargetType[]>) => {
+      state.impactTargets = action.payload;
+    },
     logout: (state: GlobalState) => {
       state.isAuthenticated = false;
       state.userInfo = null;
@@ -120,6 +127,7 @@ export const {
   setMetricsUpdated,
   setReportModal,
   setHelpModal,
+  setImpactTargets,
 } = appSlice.actions;
 
 export default appSlice.reducer;

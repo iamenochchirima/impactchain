@@ -7,6 +7,6 @@ export { idlFactory as fileScalingManagerIdlFactory } from "./declarations/file_
 // export const scalingCanId = "ovnip-cyaaa-aaaal-qdvla-cai";
 
 export const network =  import.meta.env.DFX_NETWORK || "local"
-export const dataCanisterId = "br5f7-7uaaa-aaaaa-qaaca-cain";
+export const dataCanisterId = "br5f7-7uaaa-aaaaa-qaaca-cai";
 export const storageCanId = "be2us-64aaa-aaaaa-qaabq-cai";
 export const scalingCanId = "bkyz2-fmaaa-aaaaa-qaaaq-cai";

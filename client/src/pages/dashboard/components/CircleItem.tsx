@@ -1,13 +1,10 @@
-import React, { FC } from "react";
-import { ImpactTarget } from "../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
+
 import { targetOptions } from "../../../data/constants";
 import { Tooltip } from "react-tooltip";
 
-type Props = {
-  target: ImpactTarget;
-};
-const CircleItem: FC<Props> = ({ target }) => {
+const CircleItem = ({ target }) => {
   const matchOption = targetOptions.find((t) => t.name === target.name);
+
 
   const truncateEnd = (text: string, maxLength: number = 20): string => {
     if (text.length <= maxLength) {

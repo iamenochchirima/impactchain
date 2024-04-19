@@ -1,5 +1,5 @@
 import { targetOptions } from "../../../data/constants";
-import { ImpactTarget } from "../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
+import { ImpactTargetType } from "../../../utils/types";
 
 type NameData = {
   name: string;
@@ -17,7 +17,7 @@ export type ChartData = {
 
 };
 
-export const getData = (target: ImpactTarget) => {
+export const getData = (target: ImpactTargetType) => {
   const metricNames = target.metrics.map((m) => m.name);
 
   const colors = [

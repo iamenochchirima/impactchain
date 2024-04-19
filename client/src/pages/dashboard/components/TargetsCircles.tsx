@@ -6,11 +6,13 @@ import { IoMdAdd } from "react-icons/io";
 
 
 const TargetsCircles = () => {
-  const { userRecord } = useSelector((state: RootState) => state.app);
+  const { impactTargets } = useSelector((state: RootState) => state.app);
+
+
   return (
     <div>
       <ul className="flex items-center flex-wrap  mb-5">
-        {userRecord?.impactTargets.map((target, index) => (
+        {impactTargets?.map((target, index) => (
           <CircleItem key={index} target={target} />
         ))}
           <li className="flex flex-col w-1/6 items-center gap-2">

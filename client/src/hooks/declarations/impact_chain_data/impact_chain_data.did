@@ -1,4 +1,105 @@
 type email = text;
+type WorkplaceGenderEqualityPoliciesData = 
+ record {
+   challengesFaced: text;
+   complianceRate: nat;
+   dataVerification: bool;
+   feedbackFromEmployees: text;
+   implementationDate: text;
+   location: text;
+   measuresTaken: text;
+   numberOfEmployeesAffected: nat;
+   outcomesAchieved: text;
+   policyDescription: text;
+   policyName: text;
+   reviewDate: text;
+ };
+type WomensEmpowermentProgramData = 
+ record {
+   challengesFaced: text;
+   dataVerification: bool;
+   endDate: text;
+   feedbackFromParticipants: text;
+   followUpSupport: text;
+   impactOnParticipants: text;
+   location: text;
+   numberOfParticipants: nat;
+   outcomesAchieved: text;
+   partnershipsFormed: text;
+   programDescription: text;
+   programName: text;
+   startDate: text;
+   typeOfActivities: text;
+ };
+type WaterSanitationAccessData = 
+ record {
+   communityFeedback: text;
+   completionDate: text;
+   dataVerification: bool;
+   healthImpact: text;
+   location: text;
+   numberOfBeneficiaries: nat;
+   operationalChallenges: text;
+   projectDescription: text;
+   projectTitle: text;
+   qualityOfServicesProvided: text;
+   startDate: text;
+   totalFundsAllocated: nat;
+   typesOfInfrastructureBuilt: text;
+ };
+type WaterConservationInitiativesData = 
+ record {
+   challengesFaced: text;
+   communityInvolvement: text;
+   dataVerification: bool;
+   endDate: text;
+   feedbackFromCommunity: text;
+   impactOnLocalEnvironment: text;
+   initiativeDescription: text;
+   initiativeName: text;
+   location: text;
+   methodsUsed: text;
+   outcomesAchieved: text;
+   startDate: text;
+   totalInvestment: nat;
+   waterSaved: nat;
+ };
+type WasteReductionRecyclingData = 
+ record {
+   challengesFaced: text;
+   dataVerification: bool;
+   endDate: text;
+   feedbackFromCommunity: text;
+   impactOnEnvironmentalSustainability: text;
+   initiativeDescription: text;
+   initiativeName: text;
+   location: text;
+   measurableOutcomes: text;
+   partnershipsInvolved: text;
+   recyclingMethods: text;
+   recyclingRates: nat;
+   startDate: text;
+   totalFunding: nat;
+   wasteReduced: nat;
+   wasteTypesTargeted: text;
+ };
+type VocationalTrainingProgramsData = 
+ record {
+   certificationsEarned: nat;
+   challengesFaced: text;
+   dataVerification: bool;
+   employmentRatePostTraining: nat;
+   endDate: text;
+   impactOnCommunity: text;
+   location: text;
+   participantFeedback: text;
+   programDescription: text;
+   programName: text;
+   skillsAcquired: text;
+   startDate: text;
+   totalParticipants: nat;
+   typeOfTraining: text;
+ };
 type UserRecord = 
  record {
    aboutCompany:
@@ -10,31 +111,1478 @@ type UserRecord =
     };
    created: int;
    email: text;
-   impactTargets: vec ImpactTarget;
+   impactTargets: ImpactTargets;
+ };
+type UrbanSustainabilityProjectsData = 
+ record {
+   challengesFaced: text;
+   communityEngagement: text;
+   completionDate: text;
+   dataVerification: bool;
+   environmentalBenefits: text;
+   impactOnCommunity: text;
+   location: text;
+   measurableOutcomes: text;
+   projectDescription: text;
+   projectName: text;
+   projectScope: text;
+   startDate: text;
+   technologiesUsed: text;
+   totalFunding: nat;
+ };
+type UrbanLivingConditionsData = 
+ record {
+   areasImproved: text;
+   challengesFaced: text;
+   communityInvolvement: text;
+   completionDate: text;
+   dataVerification: bool;
+   environmentalImpact: text;
+   feedbackFromCommunity: text;
+   initiativeDescription: text;
+   initiativeName: text;
+   location: text;
+   outcomesAchieved: text;
+   populationImpacted: nat;
+   startDate: text;
+   technologiesImplemented: text;
+   totalInvestment: nat;
+ };
+type SustainableSupplyChainInvestmentData = 
+ record {
+   areasOfFocus: text;
+   challengesFaced: text;
+   dataVerification: bool;
+   economicImpact: text;
+   endDate: text;
+   environmentalImpact: text;
+   feedbackFromStakeholders: text;
+   impactOnSupplyChainEfficiency: text;
+   initiativeDescription: text;
+   initiativeName: text;
+   location: text;
+   startDate: text;
+   supplierEngagement: text;
+   technologiesImplemented: text;
+   totalInvestment: nat;
+ };
+type SustainableInfrastructureData = 
+ record {
+   challengesFaced: text;
+   dataVerification: bool;
+   endDate: text;
+   feedbackFromCommunity: text;
+   impactOnCommunity: text;
+   infrastructureType: text;
+   location: text;
+   projectDescription: text;
+   projectTitle: text;
+   startDate: text;
+   sustainabilityFeatures: text;
+   totalInvestment: nat;
+ };
+type SustainableFishingSupportData = 
+ record {
+   challengesFaced: text;
+   dataVerification: bool;
+   economicImpact: text;
+   endDate: text;
+   feedbackFromFishermen: text;
+   fishingPracticesImplemented: text;
+   impactOnFishPopulations: text;
+   initiativeDescription: text;
+   initiativeName: text;
+   location: text;
+   policyChanges: text;
+   startDate: text;
+   totalFisheriesSupported: nat;
+ };
+type SustainableAgricultureInvestment = 
+ record {
+   agriculturalOutput: nat;
+   challengesFaced: text;
+   dataVerification: bool;
+   endDate: text;
+   farmerFeedback: text;
+   impactOnLocalEconomy: text;
+   investmentSource: text;
+   location: text;
+   numberofBeneficiaries: nat;
+   projectDescription: text;
+   projectName: text;
+   startDate: text;
+   sustainabilityMetrics: text;
+   technologyUsed: text;
+   totalInvestment: nat;
+   typeOfInvestments: text;
+ };
+type StudentsBenefitingData = 
+ record {
+   challengesFaced: text;
+   dataVerification: bool;
+   educationalLevel: text;
+   endDate: text;
+   feedbackFromEducators: text;
+   feedbackFromStudents: text;
+   followUpSuccessRate: nat;
+   graduationRates: nat;
+   improvementsInPerformance: text;
+   location: text;
+   programDescription: text;
+   programName: text;
+   startDate: text;
+   totalStudentsBenefited: nat;
+   typeOfBenefits: text;
+ };
+type SchoolsBuiltSupportedData = 
+ record {
+   challengesFaced: text;
+   communityImpact: text;
+   dataVerification: bool;
+   endDate: text;
+   feedbackFromCommunity: text;
+   location: text;
+   numberOfSchoolsBuilt: nat;
+   numberOfSchoolsSupported: nat;
+   projectDescription: text;
+   projectName: text;
+   sourcesOfFunding: text;
+   startDate: text;
+   studentCapacityIncrease: nat;
+   totalInvestment: nat;
+ };
+type SanitationFacilitiesData = 
+ record {
+   completionDate: text;
+   complianceWithStandards: text;
+   dataVerification: bool;
+   facilityName: text;
+   feedbackFromCommunity: text;
+   impactOnHealth: text;
+   location: text;
+   numberOfFacilitiesBuilt: nat;
+   numberOfFacilitiesRenovated: nat;
+   operationalChallenges: text;
+   populationServed: nat;
+   projectDescription: text;
+   startDate: text;
+   totalInvestment: nat;
+   typesOfFacilities: text;
+ };
+type STEMInnovationEducationData = 
+ record {
+   ageRange: text;
+   certificationsEarned: nat;
+   challengesFaced: text;
+   dataVerification: bool;
+   endDate: text;
+   feedbackFromParticipants: text;
+   impactOnCareerOpportunities: text;
+   location: text;
+   partnershipsFormed: text;
+   programDescription: text;
+   programName: text;
+   skillsDeveloped: text;
+   startDate: text;
+   totalParticipants: nat;
+   typeOfEducation: text;
+ };
+type SDGAdvocacyCampaignsData = 
+ record {
+   campaignDescription: text;
+   campaignName: text;
+   challengesFaced: text;
+   dataVerification: bool;
+   endDate: text;
+   feedbackFromAudience: text;
+   impactOnAwareness: text;
+   mainMessages: text;
+   methodsUsed: text;
+   reach: nat;
+   startDate: text;
+   targetAudience: text;
  };
 type Result = 
  variant {
    err: text;
    ok: UserRecord;
  };
-type Metric = 
+type ResourceFootprintReductionData = 
  record {
+   challengesFaced: text;
+   dataVerification: bool;
+   endDate: text;
+   environmentalBenefits: text;
+   feedbackFromStakeholders: text;
+   impactOnOperationalCosts: text;
+   initiativeDescription: text;
+   initiativeName: text;
+   location: text;
+   reductionStrategiesImplemented: text;
+   startDate: text;
+   totalReductionAchieved: text;
+   totalResourcesTargeted: text;
+ };
+type RenewableEnergyProjectsData = 
+ record {
+   capacityInstalled: nat;
+   communityInvolvement: text;
+   completionDate: text;
+   dataVerification: bool;
+   energyProduced: nat;
+   impactOnLocalEnvironment: text;
+   location: text;
+   operationalChallenges: text;
+   projectDescription: text;
+   projectName: text;
+   startDate: text;
+   successesAchieved: text;
+   totalInvestment: nat;
+   typeOfRenewableEnergy: text;
+ };
+type RenewableEnergyInvestmentData = 
+ record {
+   capacityInstalled: nat;
+   challengesFaced: text;
+   dataVerification: bool;
+   endDate: text;
+   energyProduced: nat;
+   environmentalImpact: text;
+   feedbackFromStakeholders: text;
+   impactOnOperationalCosts: text;
+   initiativeDescription: text;
+   initiativeName: text;
+   location: text;
+   startDate: text;
+   totalInvestment: nat;
+   typeOfEnergy: text;
+ };
+type ReforestationProjectsData = 
+ record {
+   biodiversityImpact: text;
+   challengesFaced: text;
+   communityInvolvement: text;
+   dataVerification: bool;
+   endDate: text;
+   estimatedCarbonSequestration: nat;
+   feedbackFromCommunity: text;
+   location: text;
+   numberofTreesPlanted: nat;
+   projectDescription: text;
+   projectName: text;
+   startDate: text;
+   totalAreaReforested: nat;
+   totalFunding: nat;
+   typesOfTreesPlanted: text;
+ };
+type PeopleBenefitingFromInfrastructureData = 
+ record {
+   challengesFaced: text;
+   dataVerification: bool;
+   endDate: text;
+   feedbackFromBeneficiaries: text;
+   impactOnQualityOfLife: text;
+   initiativeDescription: text;
+   initiativeName: text;
+   location: text;
+   measurableOutcomes: text;
+   startDate: text;
+   totalBeneficiaries: nat;
+   typeOfBenefits: text;
+ };
+type PeopleAssistedOutOfPoverty = 
+ record {
+   averageIncomeAfterProgram: nat;
+   averageIncomeBeforeProgram: nat;
+   challengesFaced: text;
+   dataVerification: bool;
+   endDate: text;
+   followUpDuration: nat;
+   location: text;
+   longTermImpact: text;
+   participantFeedback: text;
+   programDescription: text;
+   programName: text;
+   startDate: text;
+   successfullyAssisted: nat;
+   totalParticipants: nat;
+ };
+type ParticipantsInfo = 
+ record {
+   completionRate: float64;
+   numberOfParticipants: nat;
+   targetDemographic: text;
+ };
+type OceanPollutionReductionData = 
+ record {
+   challengesFaced: text;
+   communityInvolvement: text;
+   dataVerification: bool;
+   endDate: text;
+   feedbackFromCommunity: text;
+   impactOnMarineLife: text;
+   initiativeDescription: text;
+   initiativeName: text;
+   location: text;
+   reductionMethods: text;
+   startDate: text;
+   totalPollutionReduced: nat;
+   typesOfPollutantsTargeted: text;
+ };
+type NutritiousFoodProgram = 
+ record {
+   challengesFaced: text;
+   dataVerification: bool;
+   endDate: text;
+   frequencyOfMeals: text;
+   impactOnHealth: text;
+   location: text;
+   mealsProvided: nat;
+   nutritionalContent: text;
+   participantFeedback: text;
+   programDescription: text;
+   programName: text;
+   sourceOfFood: text;
+   startDate: text;
+   totalParticipants: nat;
+   typeOfMeals: text;
+ };
+type MicroloanProgram = 
+ record {
+   averageLoanAmount: nat;
+   beneficiaryFeedback: text;
+   created: int;
+   dataVerification: bool;
+   description: text;
+   disbursementMethod: text;
+   economicImpact: text;
+   endDate: text;
+   fundingSource: text;
+   location: text;
+   numberOfBeneficiaries: nat;
+   programChallenges: text;
+   programName: text;
+   repaymentRate: float64;
+   startDate: text;
+   totalBudget: nat;
+ };
+type Metrics9 = 
+ record {
+   Metric91: opt Metric91;
+   Metric92: opt Metric92;
+   Metric93: opt Metric93;
+ };
+type Metrics8 = 
+ record {
+   Metric81: opt Metric81;
+   Metric82: opt Metric82;
+   Metric83: opt Metric83;
+ };
+type Metrics7 = 
+ record {
+   Metric71: opt Metric71;
+   Metric72: opt Metric72;
+   Metric73: opt Metric73;
+ };
+type Metrics6 = 
+ record {
+   Metric61: opt Metric61;
+   Metric62: opt Metric62;
+   Metric63: opt Metric63;
+ };
+type Metrics5 = 
+ record {
+   Metric51: opt Metric51;
+   Metric52: opt Metric52;
+   Metric53: opt Metric53;
+ };
+type Metrics4 = 
+ record {
+   Metric41: opt Metric41;
+   Metric42: opt Metric42;
+   Metric43: opt Metric43;
+ };
+type Metrics3 = 
+ record {
+   Metric31: opt Metric31;
+   Metric32: opt Metric32;
+   Metric33: opt Metric33;
+ };
+type Metrics2 = 
+ record {
+   Metric21: opt Metric21;
+   Metric22: opt Metric22;
+   Metric23: opt Metric23;
+ };
+type Metrics17 = 
+ record {
+   Metric171: opt Metric171;
+   Metric172: opt Metric172;
+   Metric173: opt Metric173;
+ };
+type Metrics16 = 
+ record {
+   Metric161: opt Metric161;
+   Metric162: opt Metric162;
+   Metric163: opt Metric163;
+ };
+type Metrics14 = 
+ record {
+   Metric141: opt Metric141;
+   Metric142: opt Metric142;
+   Metric143: opt Metric143;
+ };
+type Metrics13 = 
+ record {
+   Metric131: opt Metric131;
+   Metric132: opt Metric132;
+   Metric133: opt Metric133;
+ };
+type Metrics12 = 
+ record {
+   Metric121: opt Metric121;
+   Metric122: opt Metric122;
+   Metric123: opt Metric123;
+ };
+type Metrics11 = 
+ record {
+   Metric111: opt Metric111;
+   Metric112: opt Metric112;
+   Metric113: opt Metric113;
+ };
+type Metrics10 = 
+ record {
+   Metric101: opt Metric101;
+   Metric102: opt Metric102;
+   Metric103: opt Metric103;
+ };
+type Metrics1 = 
+ record {
+   Metric11: opt Metric11;
+   Metric12: opt Metric12;
+   Metric13: opt Metric13;
+ };
+type Metric93 = 
+ record {
+   data: vec PeopleBenefitingFromInfrastructureData;
    documents: vec text;
    goal: opt text;
    iotDevice: opt IOTDevice;
+   key: text;
    name: text;
  };
-type ImpactTarget = 
+type Metric92 = 
+ record {
+   data: vec SustainableInfrastructureData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric91 = 
+ record {
+   data: vec STEMInnovationEducationData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric83 = 
+ record {
+   data: vec EmploymentConditionsData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric82 = 
+ record {
+   data: vec VocationalTrainingProgramsData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric81 = 
+ record {
+   data: vec JobCreationInitiativesData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric73 = 
+ record {
+   data: vec EnergyConsumptionReductionData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric72 = 
+ record {
+   data: vec EnergyEfficientSystemsData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric71 = 
+ record {
+   data: vec RenewableEnergyProjectsData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric63 = 
+ record {
+   data: vec WaterSanitationAccessData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric62 = 
+ record {
+   data: vec WaterConservationInitiativesData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric61 = 
+ record {
+   data: vec SanitationFacilitiesData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric53 = 
+ record {
+   data: vec WorkplaceGenderEqualityPoliciesData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric52 = 
+ record {
+   data: vec GenderEqualityWorkshopsData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric51 = 
+ record {
+   data: vec WomensEmpowermentProgramData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric43 = 
+ record {
+   data: vec StudentsBenefitingData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric42 = 
+ record {
+   data: vec EducationalGrantsData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric41 = 
+ record {
+   data: vec SchoolsBuiltSupportedData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric33 = 
+ record {
+   data: vec HealthcareAccessData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric32 = 
+ record {
+   data: vec HealthCheckupVaccinationData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric31 = 
+ record {
+   data: vec HealthcareFunding;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric23 = 
+ record {
+   data: vec NutritiousFoodProgram;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric22 = 
+ record {
+   data: vec SustainableAgricultureInvestment;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric21 = 
+ record {
+   data: vec FoodDonation;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric173 = 
+ record {
+   data: vec SDGAdvocacyCampaignsData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric172 = 
+ record {
+   data: vec GlobalPartnershipFinancialContributionsData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric171 = 
+ record {
+   data: vec CollaborativeSDGProjectsData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric163 = 
+ record {
+   data: vec CommunityPeaceProgramsData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric162 = 
+ record {
+   data: vec HumanRightsInitiativesData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric161 = 
+ record {
+   data: vec AntiCorruptionProgramsData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric153 = 
+ record {
+   data: vec LandRehabilitationData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric152 = 
+ record {
+   data: vec EndangeredSpeciesProtectionData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric151 = 
+ record {
+   data: vec LandConservationReforestationData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric143 = 
+ record {
+   data: vec SustainableFishingSupportData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric142 = 
+ record {
+   data: vec OceanPollutionReductionData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric141 = 
+ record {
+   data: vec MarineEcosystemProtectionData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric133 = 
+ record {
+   data: vec ReforestationProjectsData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric132 = 
+ record {
+   data: vec RenewableEnergyInvestmentData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric131 = 
+ record {
+   data: vec CarbonEmissionReductionData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric13 = 
+ record {
+   data: vec PeopleAssistedOutOfPoverty;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric123 = 
+ record {
+   data: vec ResourceFootprintReductionData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric122 = 
+ record {
+   data: vec SustainableSupplyChainInvestmentData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric121 = 
+ record {
+   data: vec WasteReductionRecyclingData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric12 = 
+ record {
+   data: vec MicroloanProgram;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric113 = 
+ record {
+   data: vec UrbanLivingConditionsData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric112 = 
+ record {
+   data: vec AffordableHousingSupportData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric111 = 
+ record {
+   data: vec UrbanSustainabilityProjectsData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric11 = 
+ record {
+   data: vec JobTrainingProgram;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric103 = 
+ record {
+   data: vec InequalityReductionBeneficiariesData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric102 = 
+ record {
+   data: vec InclusionPoliciesData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Metric101 = 
+ record {
+   data: vec MarginalizedCommunitySupportData;
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   key: text;
+   name: text;
+ };
+type Matrics15 = 
+ record {
+   Metric151: opt Metric151;
+   Metric152: opt Metric152;
+   Metric153: opt Metric153;
+ };
+type MarineEcosystemProtectionData = 
+ record {
+   challengesFaced: text;
+   dataVerification: bool;
+   endDate: text;
+   feedbackFromStakeholders: text;
+   fundingAllocated: nat;
+   impactOnBiodiversity: text;
+   initiativeDescription: text;
+   initiativeName: text;
+   location: text;
+   protectionStrategies: text;
+   speciesBenefited: text;
+   startDate: text;
+   totalAreaProtected: nat;
+ };
+type MarginalizedCommunitySupportData = 
+ record {
+   challengesFaced: text;
+   completionDate: text;
+   dataVerification: bool;
+   feedbackFromCommunity: text;
+   initiativeDescription: text;
+   initiativeName: text;
+   location: text;
+   numberOfBeneficiaries: nat;
+   outcomesAchieved: text;
+   servicesProvided: text;
+   startDate: text;
+   targetGroups: text;
+   totalFunding: nat;
+ };
+type LandRehabilitationData = 
+ record {
+   areaRehabilitated: nat;
+   biodiversityImpact: text;
+   challengesFaced: text;
+   communityFeedback: text;
+   dataVerification: bool;
+   economicImpact: text;
+   endDate: text;
+   initiativeDescription: text;
+   initiativeName: text;
+   location: text;
+   rehabilitationMethods: text;
+   startDate: text;
+ };
+type LandConservationReforestationData = 
+ record {
+   challengesFaced: text;
+   communityInvolvement: text;
+   conservationMethods: text;
+   dataVerification: bool;
+   endDate: text;
+   feedbackFromCommunity: text;
+   fundingAllocated: nat;
+   impactOnEcosystem: text;
+   initiativeDescription: text;
+   initiativeName: text;
+   location: text;
+   speciesBenefited: text;
+   startDate: text;
+   totalAreaConserved: nat;
+ };
+type JobTrainingProgram = 
+ record {
+   basicProgramInfo: BasicProgramInfo;
+   created: int;
+   feedbackAndVerification: FeedbackAndVerification;
+   financialInfo: FinancialInfo;
+   impactAssessment: ImpactAssessment;
+   participantsInfo: ParticipantsInfo;
+ };
+type JobCreationInitiativesData = 
+ record {
+   challengesFaced: text;
+   completionDate: text;
+   dataVerification: bool;
+   demographicFocus: text;
+   economicImpact: text;
+   feedbackFromBeneficiaries: text;
+   initiativeDescription: text;
+   initiativeName: text;
+   location: text;
+   numberOfJobsCreated: nat;
+   sectorsImpacted: text;
+   startDate: text;
+   totalInvestment: nat;
+   typeOfJobs: text;
+ };
+type InequalityReductionBeneficiariesData = 
+ record {
+   challengesFaced: text;
+   dataVerification: bool;
+   endDate: text;
+   feedbackFromBeneficiaries: text;
+   impactAssessment: text;
+   initiativeDescription: text;
+   initiativeName: text;
+   location: text;
+   measurableOutcomes: text;
+   numberofBeneficiaries: nat;
+   startDate: text;
+   targetGroups: text;
+   totalFundsAllocated: nat;
+   typeOfSupportProvided: text;
+ };
+type InclusionPoliciesData = 
+ record {
+   challengesFaced: text;
+   complianceRate: nat;
+   dataVerification: bool;
+   feedbackFromBeneficiaries: text;
+   implementationDate: text;
+   measuresImplemented: text;
+   outcomesAchieved: text;
+   policyDescription: text;
+   policyName: text;
+   reviewDate: text;
+   sectorsAffected: text;
+   targetGroups: text;
+ };
+type ImpactTargets = 
+ record {
+   ImpactTarget1: opt ImpactTarget1;
+   ImpactTarget10: opt ImpactTarget10;
+   ImpactTarget11: opt ImpactTarget11;
+   ImpactTarget12: opt ImpactTarget12;
+   ImpactTarget13: opt ImpactTarget13;
+   ImpactTarget14: opt ImpactTarget14;
+   ImpactTarget15: opt ImpactTarget15;
+   ImpactTarget16: opt ImpactTarget16;
+   ImpactTarget17: opt ImpactTarget17;
+   ImpactTarget2: opt ImpactTarget2;
+   ImpactTarget3: opt ImpactTarget3;
+   ImpactTarget4: opt ImpactTarget4;
+   ImpactTarget5: opt ImpactTarget5;
+   ImpactTarget6: opt ImpactTarget6;
+   ImpactTarget7: opt ImpactTarget7;
+   ImpactTarget8: opt ImpactTarget8;
+   ImpactTarget9: opt ImpactTarget9;
+ };
+type ImpactTarget9 = 
  record {
    id: nat;
-   metrics: vec Metric;
+   metrics: Metrics9;
    name: text;
+ };
+type ImpactTarget8 = 
+ record {
+   id: nat;
+   metrics: Metrics8;
+   name: text;
+ };
+type ImpactTarget7 = 
+ record {
+   id: nat;
+   metrics: Metrics7;
+   name: text;
+ };
+type ImpactTarget6 = 
+ record {
+   id: nat;
+   metrics: Metrics6;
+   name: text;
+ };
+type ImpactTarget5 = 
+ record {
+   id: nat;
+   metrics: Metrics5;
+   name: text;
+ };
+type ImpactTarget4 = 
+ record {
+   id: nat;
+   metrics: Metrics4;
+   name: text;
+ };
+type ImpactTarget3 = 
+ record {
+   id: nat;
+   metrics: Metrics3;
+   name: text;
+ };
+type ImpactTarget2 = 
+ record {
+   id: nat;
+   metrics: Metrics2;
+   name: text;
+ };
+type ImpactTarget17 = 
+ record {
+   id: nat;
+   metrics: Metrics17;
+   name: text;
+ };
+type ImpactTarget16 = 
+ record {
+   id: nat;
+   metrics: Metrics16;
+   name: text;
+ };
+type ImpactTarget15 = 
+ record {
+   id: nat;
+   metrics: Matrics15;
+   name: text;
+ };
+type ImpactTarget14 = 
+ record {
+   id: nat;
+   metrics: Metrics14;
+   name: text;
+ };
+type ImpactTarget13 = 
+ record {
+   id: nat;
+   metrics: Metrics13;
+   name: text;
+ };
+type ImpactTarget12 = 
+ record {
+   id: nat;
+   metrics: Metrics12;
+   name: text;
+ };
+type ImpactTarget11 = 
+ record {
+   id: nat;
+   metrics: Metrics11;
+   name: text;
+ };
+type ImpactTarget10 = 
+ record {
+   id: nat;
+   metrics: Metrics10;
+   name: text;
+ };
+type ImpactTarget1 = 
+ record {
+   id: nat;
+   metrics: Metrics1;
+   name: text;
+ };
+type ImpactAssessment = 
+ record {
+   averageIncomeAfterProgram: nat;
+   averageIncomeBeforeProgram: nat;
+   employmentRatePostProgram: float64;
+   skillsDeveloped: text;
  };
 type IOTDevice = 
  record {
    ipAddress: text;
    name: text;
    platform: text;
+ };
+type HumanRightsInitiativesData = 
+ record {
+   areasCovered: text;
+   challengesFaced: text;
+   dataVerification: bool;
+   endDate: text;
+   feedbackFromBeneficiaries: text;
+   impactOnLegalOutcomes: text;
+   initiativeDescription: text;
+   initiativeName: text;
+   location: text;
+   numberofBeneficiaries: nat;
+   partnershipsFormed: text;
+   startDate: text;
+   totalFunding: nat;
+ };
+type HealthcareFunding = 
+ record {
+   challengesFaced: text;
+   dataVerification: bool;
+   endDate: text;
+   feedbackFromBeneficiaries: text;
+   fundingSources: text;
+   healthOutcomes: text;
+   impactOnHealthServices: text;
+   location: text;
+   numberofHealthProjects: nat;
+   programDescription: text;
+   programName: text;
+   startDate: text;
+   totalFundingAmount: nat;
+   typesOfServicesFunded: text;
+ };
+type HealthcareAccessData = 
+ record {
+   barriersToAccess: text;
+   communityImpact: text;
+   dataVerification: bool;
+   endDate: text;
+   feedbackFromPatients: text;
+   improvementsMade: text;
+   location: text;
+   operationalChallenges: text;
+   patientDemographics: text;
+   programDescription: text;
+   programName: text;
+   startDate: text;
+   totalHealthFacilities: nat;
+   totalPatientsServed: nat;
+   typesOfServicesProvided: text;
+ };
+type HealthCheckupVaccinationData = 
+ record {
+   communityImpact: text;
+   dataVerification: bool;
+   endDate: text;
+   feedbackFromParticipants: text;
+   followUpActions: text;
+   healthOutcomesMeasured: text;
+   location: text;
+   operationalChallenges: text;
+   programDescription: text;
+   programName: text;
+   startDate: text;
+   totalParticipants: nat;
+   totalServicesProvided: nat;
+   typeOfService: text;
+   vaccinationCoverage: nat;
+ };
+type GlobalPartnershipFinancialContributionsData = 
+ record {
+   amountContributed: nat;
+   challengesFaced: text;
+   contributionName: text;
+   dataVerification: bool;
+   date: text;
+   description: text;
+   donor: text;
+   feedbackFromBeneficiaries: text;
+   impactAssessment: text;
+   targetedSDGs: text;
+ };
+type GenderEqualityWorkshopsData = 
+ record {
+   challengesFaced: text;
+   dataVerification: bool;
+   endDate: text;
+   feedbackFromParticipants: text;
+   location: text;
+   numberOfParticipants: nat;
+   organizationalPartners: text;
+   outcomesMeasured: text;
+   participantDemographics: text;
+   startDate: text;
+   themesCovered: text;
+   workshopDescription: text;
+   workshopName: text;
+ };
+type FoodDonation = 
+ record {
+   challengesFaced: text;
+   communityImpact: text;
+   dataVerification: bool;
+   distributionMethods: text;
+   endDate: text;
+   feedbackFromRecipients: text;
+   foodSafetyStandards: text;
+   location: text;
+   numberOfBeneficiaries: nat;
+   programDescription: text;
+   programName: text;
+   sourcesOfFood: text;
+   startDate: text;
+   storageFacilities: text;
+   totalDonatedFood: nat;
+   typeOfFoodDonated: text;
+ };
+type FinancialInfo = 
+ record {
+   fundingSources: text;
+   programBudget: nat;
+   resourcesProvided: text;
+ };
+type FeedbackAndVerification = 
+ record {
+   dataVerification: bool;
+   participantFeedback: text;
+   successStories: text;
+   supportingDocuments: vec blob;
+ };
+type EnergyEfficientSystemsData = 
+ record {
+   ROI: text;
+   actualEnergySavings: nat;
+   challengesFaced: text;
+   communityFeedback: text;
+   dataVerification: bool;
+   estimatedEnergySavings: nat;
+   impactOnOperationalEfficiency: text;
+   installationDate: text;
+   location: text;
+   systemDescription: text;
+   systemName: text;
+   totalCost: nat;
+   typeOfSystem: text;
+ };
+type EnergyConsumptionReductionData = 
+ record {
+   completionDate: text;
+   costSavings: nat;
+   dataVerification: bool;
+   feedbackFromStakeholders: text;
+   impactOnEnvironmentalSustainability: text;
+   initiativeDescription: text;
+   initiativeName: text;
+   location: text;
+   methodsUsed: text;
+   operationalChallenges: text;
+   percentageReduction: nat;
+   startDate: text;
+   totalEnergySaved: nat;
+ };
+type EndangeredSpeciesProtectionData = 
+ record {
+   challengesFaced: text;
+   dataVerification: bool;
+   endDate: text;
+   feedbackFromStakeholders: text;
+   impactOnSpeciesPopulation: text;
+   initiativeDescription: text;
+   initiativeName: text;
+   location: text;
+   partnershipsFormed: text;
+   protectionStrategies: text;
+   speciesProtected: text;
+   startDate: text;
+ };
+type EmploymentConditionsData = 
+ record {
+   affectedEmployees: nat;
+   challengesFaced: text;
+   completionDate: text;
+   dataVerification: bool;
+   feedbackFromEmployees: text;
+   impactOnEmployeeSatisfaction: text;
+   impactOnProductivity: text;
+   initiativeDescription: text;
+   initiativeName: text;
+   location: text;
+   numberOfWorkplacesImproved: nat;
+   startDate: text;
+   totalInvestment: nat;
+   typesOfImprovements: text;
+ };
+type EducationalGrantsData = 
+ record {
+   averageGrantAmount: nat;
+   challengesFaced: text;
+   dataVerification: bool;
+   endDate: text;
+   feedbackFromRecipients: text;
+   impactOnEducation: text;
+   location: text;
+   programDescription: text;
+   programName: text;
+   recipientDemographics: text;
+   startDate: text;
+   totalAmountAwarded: nat;
+   totalGrantsAwarded: nat;
+   typesOfGrants: text;
+ };
+type CommunityPeaceProgramsData = 
+ record {
+   challengesFaced: text;
+   communityOutreach: text;
+   conflictResolutionStrategies: text;
+   dataVerification: bool;
+   endDate: text;
+   feedbackFromCommunity: text;
+   impactOnCommunityCohesion: text;
+   incidentsOfViolenceReduced: nat;
+   location: text;
+   programDescription: text;
+   programName: text;
+   startDate: text;
+   totalFunding: nat;
+ };
+type CollaborativeSDGProjectsData = 
+ record {
+   challengesFaced: text;
+   dataVerification: bool;
+   endDate: text;
+   feedbackFromParticipants: text;
+   impactOnSDGs: text;
+   outcomesAchieved: text;
+   participatingOrganizations: text;
+   projectDescription: text;
+   projectName: text;
+   projectScope: text;
+   startDate: text;
+   totalInvestment: nat;
+ };
+type CarbonEmissionReductionData = 
+ record {
+   challengesFaced: text;
+   dataVerification: bool;
+   endDate: text;
+   environmentalImpactAssessment: text;
+   feedbackFromStakeholders: text;
+   impactOnOperationalEfficiency: text;
+   initiativeDescription: text;
+   initiativeName: text;
+   location: text;
+   methodsUsed: text;
+   sectorsImpacted: text;
+   startDate: text;
+   totalEmissionsReduced: nat;
+   totalInvestment: nat;
+ };
+type BasicProgramInfo = 
+ record {
+   endDate: opt int;
+   programDescription: text;
+   programLocation: text;
+   programName: text;
+   startDate: int;
+ };
+type AntiCorruptionProgramsData = 
+ record {
+   Engagement: text;
+   challengesFaced: text;
+   dataVerification: bool;
+   endDate: text;
+   feedbackFromCommunity: text;
+   impactOnCorruptionLevels: text;
+   legalActionsTaken: nat;
+   location: text;
+   programDescription: text;
+   programName: text;
+   startDate: text;
+   strategiesImplemented: text;
+   totalFunding: nat;
+ };
+type AffordableHousingSupportData = 
+ record {
+   challengesFaced: text;
+   completionDate: text;
+   dataVerification: bool;
+   feedbackFromBeneficiaries: text;
+   housingTypes: text;
+   impactOnCommunity: text;
+   initiativeDescription: text;
+   initiativeName: text;
+   location: text;
+   numberofBeneficiaries: nat;
+   numberofUnitsConstructed: nat;
+   startDate: text;
+   sustainabilityFeatures: text;
+   totalFunding: nat;
  };
 service : {
   addUserRecord: (UserRecord) -> ();

@@ -1,18 +1,18 @@
 import { ApexOptions } from "apexcharts";
 import React, { useState } from "react";
 import ReactApexChart from "react-apexcharts";
-import { ImpactTarget } from "../../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
 import { ChartData, getData } from "../../utils/utils";
 import { IoIosArrowDown } from "react-icons/io";
 import { targetOptions } from "../../../../data/constants";
 import { Tooltip } from "react-tooltip";
+import { ImpactTargetType } from "../../../../utils/types";
 
 interface ChartThreeState {
   series: number[];
 }
 
 type Props = {
-  target: ImpactTarget;
+  target: ImpactTargetType;
 };
 
 const ChartThree: React.FC<Props> = ({ target }) => {

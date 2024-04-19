@@ -16,7 +16,7 @@ import { toast } from "react-toastify";
 
 const Metrics = () => {
   const { dataActor } = useAuth();
-  const { userRecord, metricsUpdated } = useSelector(
+  const { impactTargets, metricsUpdated , userRecord} = useSelector(
     (state: RootState) => state.app
   );
   const [record, setRecord] = useState<UserRecord | null>(null);
@@ -33,12 +33,14 @@ const Metrics = () => {
   useEffect(() => {
     if (userRecord) {
       setRecord(userRecord);
-      const _sortedTargets = [...userRecord.impactTargets].sort(
-        (a, b) => Number(a.id) - Number(b.id)
-      );
-      setTargets(_sortedTargets);
     }
   }, [userRecord]);
+
+  useEffect(() => {
+    if (impactTargets) {
+      setTargets(impactTargets);
+    }
+  }, [impactTargets]);
 
   useEffect(() => {
     const end = currentIndex + itemsPerPage;
@@ -49,7 +51,7 @@ const Metrics = () => {
     setCurrentPage(Math.floor(currentIndex / itemsPerPage) + 1);
   }, [currentIndex]);
 
-  if (!userRecord || !userRecord.impactTargets[0]) {
+  if (!impactTargets || !impactTargets[0]) {
     return null;
   }
 
@@ -110,6 +112,7 @@ const Metrics = () => {
       setSaving(false);
     }
   };
+
 
   return (
     <div>

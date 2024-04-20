@@ -7,16 +7,19 @@ import {
   setNextTarget,
   setShowDataForm,
   setTargetRecord,
+  setUserRecord,
 } from "../../../redux/slices/app";
 import MetricRecords from "./MetricRecords";
 import { toast } from "react-toastify";
 import { RootState } from "../../../redux/store";
 import { useAuth } from "../../../hooks/AppContext";
 import { ImpactTargetType, Metric } from "../../../utils/types";
+import { UserRecord } from "../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
+import { getTargetMetrics } from "../../../utils/targets";
 
 type Props = {
   target: TargetOption;
-  impactTargets: ImpactTargetType[] 
+  impactTargets: ImpactTargetType[];
   finished: boolean;
   setLastOfLast: (lastOfLast: boolean) => void;
 };
@@ -25,7 +28,12 @@ type GradientStyle = {
   backgroundImage: string;
 };
 
-const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished, setLastOfLast }) => {
+const TargetRecordsCard: FC<Props> = ({
+  target,
+  impactTargets,
+  finished,
+  setLastOfLast,
+}) => {
   const [gradientStyle, setGradientStyle] = useState<GradientStyle>({
     backgroundImage: `linear-gradient(to top, #354b5b, ${target.color} 50%, ${target.color})`,
   });
@@ -49,24 +57,17 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished, setLast
     }
   }, [currentIndex, impact, metricsPerPage]);
 
-  
   useEffect(() => {
-    console.log("Checking page status", { totalPages, currentPage });
-    if (totalPages === null) {
-      console.log("Total pages is still null");
-    }
     if (totalPages && currentPage === totalPages) {
-      console.log("Last page, setting lastOfLast");
       setLastOfLast(true);
     }
   }, [totalPages, currentPage]);
 
-
   useEffect(() => {
     if (impactTargets) {
       const _impact = impactTargets.find((t) => Number(t.id) === target.id);
-    setImpact(_impact);
-    setCurrentPage(Math.floor(currentIndex / metricsPerPage) + 1);
+      setImpact(_impact);
+      setCurrentPage(Math.floor(currentIndex / metricsPerPage) + 1);
     }
   }, [impactTargets, target, currentIndex, metricsPerPage]);
 
@@ -75,9 +76,8 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished, setLast
   }, [currentIndex, metricsPerPage]);
 
   const handlePrevious = () => {
-    setCurrentIndex(prev => Math.max(prev - metricsPerPage, 0));
+    setCurrentIndex((prev) => Math.max(prev - metricsPerPage, 0));
   };
-
 
   useEffect(() => {
     if (!impactTargets) return;
@@ -100,74 +100,86 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished, setLast
 
   const handleNext = async () => {
     if (!impact) return;
-   
-      for (const metric of displayedMetrics) {
-        if (metric.goal.length === 0) {
-          toast.error("Please set a goal for all metrics before proceeding");
-          return;
-        }
-      }
-      try {
-        setSaving(true);
-        if (!userRecord) {
-          toast.error("User record not found");
-          return;
-        }
-        const updatedImpactMetrics: Metric[] = impact.metrics.map((metric) => {
-          const updatedMetric = displayedMetrics.find(
-            (m) => m.name === metric.name
-          );
-          return updatedMetric ? updatedMetric : metric;
-        });
-        const updatedImpact: ImpactTargetType = {
-          ...impact,
-          metrics: updatedImpactMetrics,
-        };
-        const updatedImpactTargets: ImpactTargetType[] = impactTargets.map((t) =>
-          Number(t.id) === target.id ? updatedImpact : t
-        );
-        // const updatedUserRecord: UserRecord = {
-        //   ...userRecord,
-        //   impactTargets: updatedImpactTargets,
-        // };
-        // await dataActor?.updateUserRecord(updatedUserRecord);
-        // dispatch(setUserRecord(updatedUserRecord));
-        setClearGoal(true);
-        if (impactTargets.length === 1) {
-          toast.success("All data saved successfully", {
-            autoClose: 5000,
-            position: "top-center",
-          });
-          dispatch(setShowDataForm(false));
-          window.location.reload();
-          return;
-        }
-        if (finished) {
-          toast.success("All data saved successfully", {
-            autoClose: 5000,
-            position: "top-center",
-          });
 
-          dispatch(setShowDataForm(false));
-          window.location.reload();
-          return;
-        }
-        if (currentIndex + 2 >= impact.metrics.length) {
-          toast.success(`Data for ${impact.name} saved successfully`, {
-            autoClose: 5000,
-          });
-          setSaving(false);
-          setCurrentIndex(0);
-          dispatch(setNextTarget(true));
-          return;
-        }
-        setSaving(false);
-        setCurrentIndex(prev => prev + metricsPerPage);
-      } catch (error) {
-        setSaving(false);
-        console.log("Error updating impact metrics", error);
+    for (const metric of displayedMetrics) {
+      if (metric.goal.length === 0) {
+        toast.error("Please set a goal for all metrics before proceeding");
+        return;
       }
-    
+    }
+    try {
+      setSaving(true);
+      if (!userRecord) {
+        toast.error("User record not found");
+        return;
+      }
+      const updatedImpactMetrics: Metric[] = impact.metrics.map((metric) => {
+        const updatedMetric = displayedMetrics.find(
+          (m) => m.name === metric.name
+        );
+        return updatedMetric ? updatedMetric : metric;
+      });
+      const updatedImpact: ImpactTargetType = {
+        ...impact,
+        metrics: updatedImpactMetrics,
+      };
+      const _updatedImpactTargets: ImpactTargetType[] = impactTargets.map((t) =>
+        Number(t.id) === target.id ? updatedImpact : t
+      );
+
+      const updatedImpactTargets = { ...userRecord.impactTargets };
+
+      _updatedImpactTargets.forEach((target) => {
+        const metrics = getTargetMetrics(target);
+        updatedImpactTargets[`ImpactTarget${target.id}`] = [
+          {
+            id: target.id,
+            name: target.name,
+            metrics: metrics,
+          },
+        ];
+      });
+      const updatedUserRecord: UserRecord = {
+        ...userRecord,
+        impactTargets: updatedImpactTargets,
+      };
+      await dataActor?.updateUserRecord(updatedUserRecord);
+      dispatch(setUserRecord(updatedUserRecord));
+      setClearGoal(true);
+      if (impactTargets.length === 1) {
+        toast.success("All data saved successfully", {
+          autoClose: 5000,
+          position: "top-center",
+        });
+        dispatch(setShowDataForm(false));
+        window.location.reload();
+        return;
+      }
+      if (finished) {
+        toast.success("All data saved successfully", {
+          autoClose: 5000,
+          position: "top-center",
+        });
+
+        dispatch(setShowDataForm(false));
+        window.location.reload();
+        return;
+      }
+      if (currentIndex + 2 >= impact.metrics.length) {
+        toast.success(`Data for ${impact.name} saved successfully`, {
+          autoClose: 5000,
+        });
+        setSaving(false);
+        setCurrentIndex(0);
+        dispatch(setNextTarget(true));
+        return;
+      }
+      setSaving(false);
+      setCurrentIndex((prev) => prev + metricsPerPage);
+    } catch (error) {
+      setSaving(false);
+      console.log("Error updating impact metrics", error);
+    }
   };
 
   const impactIndex = impactTargets.findIndex(
@@ -218,31 +230,33 @@ const TargetRecordsCard: FC<Props> = ({ target, impactTargets, finished, setLast
           </div>
         </div>
         <div className="w-full flex justify-between my-4">
-
           <button
             className={` bg-custom-green px-10 py-1 rounded-full text-black font-bold`}
             onClick={handleBack}
           >
             <span className="">Back</span>
           </button>
-        <div className="">
-        {currentPage > 1 && (
-          <button onClick={handlePrevious} className="px-10 py-1 text-custom-green font-bold">
-            <span>Previous</span>
-          </button>
-        )}
-          <button
-            className={` bg-custom-green px-10 py-1 rounded-full text-black font-bold`}
-            disabled={saving}
-            onClick={handleNext}
-          >
-            <span className="">
-              {finished
-                ? `${saving ? "Saving" : "Finish"}`
-                : `${saving ? "Saving" : "Next"}`}
-            </span>
-          </button>
-        </div>
+          <div className="">
+            {currentPage > 1 && (
+              <button
+                onClick={handlePrevious}
+                className="px-10 py-1 text-custom-green font-bold"
+              >
+                <span>Previous</span>
+              </button>
+            )}
+            <button
+              className={` bg-custom-green px-10 py-1 rounded-full text-black font-bold`}
+              disabled={saving}
+              onClick={handleNext}
+            >
+              <span className="">
+                {finished
+                  ? `${saving ? "Saving" : "Finish"}`
+                  : `${saving ? "Saving" : "Next"}`}
+              </span>
+            </button>
+          </div>
         </div>
       </div>
     </>

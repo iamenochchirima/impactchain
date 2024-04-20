@@ -4,40 +4,44 @@ import { uploadFile } from "../../../config/storage/functions";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 
-const UploadDocs = ({setUploadDocs, setDocsUrls}) => {
+const UploadDocs = ({ setUploadDocs, setDocsUrls }) => {
   const [docs, setDocs] = useState<FileList | null>(null);
   const [saving, setSaving] = useState<boolean>(false);
   const { storageInitiated } = useSelector((state: RootState) => state.app);
 
   const handleSubmit = async () => {
     if (!docs) {
-        toast.error("Please upload a document", {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-        });
-        return;
+      toast.error("Please upload a document", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
     }
     setSaving(true);
     const urls = await uploadAsset();
     setDocsUrls(urls);
     setUploadDocs(false);
     setSaving(true);
-  }
+  };
 
   const uploadAsset = async () => {
     if (storageInitiated && docs) {
       const file_path = location.pathname;
       try {
-        const urls : string[] = [];
+        const urls: string[] = [];
         for (const doc of docs) {
-            const assetUrl = await uploadFile(doc, file_path);
-            console.log("This file was successfully uploaded:", doc.name, assetUrl);
-            urls.push(assetUrl);
+          const assetUrl = await uploadFile(doc, file_path);
+          console.log(
+            "This file was successfully uploaded:",
+            doc.name,
+            assetUrl
+          );
+          urls.push(assetUrl);
         }
         return urls;
       } catch (error) {
@@ -45,7 +49,7 @@ const UploadDocs = ({setUploadDocs, setDocsUrls}) => {
         console.error("Error uploading files:", error);
       }
     }
-  }
+  };
   return (
     <div className="fixed z-100 inset-0 text-cyan-700 overflow-y-auto bg-black bg-opacity-75">
       <div className=" flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-TelegraphRegular">
@@ -75,7 +79,7 @@ const UploadDocs = ({setUploadDocs, setDocsUrls}) => {
                         onChange={(e) => {
                           setDocs(e.target.files);
                         }}
-                        accept="image/*,application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv" 
+                        accept="image/*,application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv"
                         className="hidden"
                       />
                       <button>
@@ -89,34 +93,34 @@ const UploadDocs = ({setUploadDocs, setDocsUrls}) => {
                       </button>
                     </div>
                     {docs && (
-                        <div className="flex flex-col gap-2 mt-4">
-                            {Array.from(docs).map((doc, index) => (
-                                
-                                <div key={index} className="flex justify-between items-center gap-3 bg-gray-800 p-2 rounded-2xl">
-                                    <span className="text-white">{doc.name}</span>
-                                    <button className="text-white">Remove</button>
-                                </div>
-
-                            ))}
-                            </div>
+                      <div className="flex flex-col gap-2 mt-4">
+                        {Array.from(docs).map((doc, index) => (
+                          <div
+                            key={index}
+                            className="flex justify-between items-center gap-3 bg-gray-800 p-2 rounded-2xl"
+                          >
+                            <span className="text-white">{doc.name}</span>
+                            <button className="text-white">Remove</button>
+                          </div>
+                        ))}
+                      </div>
                     )}
-                            
                   </div>
                 </div>
               </div>
               <div className="flex justify-between items-center py-4">
                 <button
-                onClick={() => setUploadDocs(false)}
+                  onClick={() => setUploadDocs(false)}
                   className={`bg-custom-green px-10 py-1.5  rounded-full text-black font-bold`}
                 >
                   Cancel
                 </button>
                 <button
-                onClick={handleSubmit}
-                disabled={saving}
+                  onClick={handleSubmit}
+                  disabled={saving}
                   className={`bg-custom-green px-10 py-1.5  rounded-full text-black font-bold`}
                 >
-                 {saving ? "Uploading" : "Save & Continue" }
+                  {saving ? "Uploading" : "Save & Continue"}
                 </button>
               </div>
             </div>

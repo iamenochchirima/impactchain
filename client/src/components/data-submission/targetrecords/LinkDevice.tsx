@@ -56,7 +56,7 @@ const LinkDevice = ({ setLinkDevice, setIotDevice }) => {
               >
                 <div className="mb-4">
                     <input
-                      className="shadow placeholder-white min-w-[150px]  placeholder:font-semibold  rounded-3xl appearance-none border-2 border-green-500 w-full py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
+                      className="shadow placeholder-white min-w-[150px]  placeholder:text-sm placeholder:text-gray-300   rounded-3xl appearance-none border-2 border-green-500 w-full py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
                       id="name"
                       type="text"
                       placeholder="Name"
@@ -68,7 +68,7 @@ const LinkDevice = ({ setLinkDevice, setIotDevice }) => {
                   </div>
                 <div className="mb-4">
                     <input
-                      className="shadow placeholder-white min-w-[150px]  placeholder:font-semibold  rounded-3xl appearance-none border-2 border-green-500 w-full py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
+                      className="shadow placeholder-white min-w-[150px]  placeholder:text-sm placeholder:text-gray-300   rounded-3xl appearance-none border-2 border-green-500 w-full py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
                       id="platform"
                       type="text"
                       placeholder="Platform e.g Mac"
@@ -80,7 +80,7 @@ const LinkDevice = ({ setLinkDevice, setIotDevice }) => {
                   </div>
                 <div className="mb-4">
                   <input
-                    className="shadow placeholder-white min-w-[300px]  placeholder:font-semibold  rounded-3xl appearance-none border-2 border-green-500 w-full py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
+                    className="shadow placeholder-white min-w-[300px]  placeholder:text-sm placeholder:text-gray-300   rounded-3xl appearance-none border-2 border-green-500 w-full py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
                     id="ipAddress"
                     type="text"
                     placeholder="IP Address"

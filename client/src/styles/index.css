@@ -4,41 +4,41 @@
 
 @font-face {
   font-family: "NeueMachina-light";
-  src: url("./assets/fonts/NeueMachina-Light.otf") format("truetype");
+  src: url("../assets/fonts/NeueMachina-Light.otf") format("truetype");
   font-weight: light;
   font-style: normal;
 }
 @font-face {
   font-family: "NeueMachina-regular";
-  src: url("./assets/fonts/NeueMachina-Regular.otf") format("truetype");
+  src: url("../assets/fonts/NeueMachina-Regular.otf") format("truetype");
   font-weight: regular;
   font-style: normal;
 }
 
 @font-face {
   font-family: "NeueMachina-ultra-bold";
-  src: url("./assets/fonts/NeueMachina-Ultrabold.otf") format("truetype");
+  src: url("../assets/fonts/NeueMachina-Ultrabold.otf") format("truetype");
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Poppins-regular";
-  src: url("./assets/fonts/Poppins-Regular.ttf") format("truetype");
+  src: url("../assets/fonts/Poppins-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Telegraph-bold";
-  src: url("./assets/fonts/pptelegraf-ultrabold.otf") format("truetype");
+  src: url("../assets/fonts/pptelegraf-ultrabold.otf") format("truetype");
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Telegraph-regular";
-  src: url("./assets/fonts/pptelegraf-regular.otf") format("truetype");
+  src: url("../assets/fonts/pptelegraf-regular.otf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }

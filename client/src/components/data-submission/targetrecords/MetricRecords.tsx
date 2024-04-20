@@ -1,10 +1,9 @@
 import React, { FC, useEffect, useState } from "react";
-import {
-  IOTDevice,
-} from "../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
+import { IOTDevice } from "../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
 import UploadDocs from "./UploadDocs";
 import LinkDevice from "./LinkDevice";
 import { Metric } from "../../../utils/types";
+import ManuallyUpload from "./ManuallyUpload";
 
 type Props = {
   metric: Metric;
@@ -23,6 +22,8 @@ const MetricRecords: FC<Props> = ({
 }) => {
   const [uploadDocs, setUploadDocs] = useState<boolean>(false);
   const [linkDevice, setLinkDevice] = useState<boolean>(false);
+  const [uploadManually, setUploadManually] = useState<boolean>(false);
+  const [manualData, setManualData] = useState<any | null>(null);
   const [goal, setGoal] = useState<string>("");
   const [iotDevice, setIotDevice] = useState<IOTDevice | null>(null);
   const [docs, setDocsUrls] = useState<string[] | null>(null);
@@ -67,6 +68,20 @@ const MetricRecords: FC<Props> = ({
   }, [docs, goal]);
 
   useEffect(() => {
+    if (manualData) {
+      const updatedMetric: Metric = {
+        ...metric,
+        data: [manualData],
+      };
+      setDisplayedMetrics(
+        displayedMetrics.map((m) =>
+          m.name === metric.name ? updatedMetric : m
+        )
+      );
+    }
+  }, [manualData]);
+
+  useEffect(() => {
     if (iotDevice) {
       const updatedMetric: Metric = {
         ...metric,
@@ -93,6 +108,13 @@ const MetricRecords: FC<Props> = ({
             : "Upload your documents"}
         </button>
         <button
+          onClick={() => setUploadManually(true)}
+          disabled={manualData !== null}
+          className="bg-white px-4 py-2 text-black rounded-3xl"
+        >
+          {metric.data.length > 0 ? "Data recorded" : "Record data manually"}
+        </button>
+        <button
           onClick={() => setLinkDevice(true)}
           className="bg-white px-4 py-2 text-black rounded-3xl"
         >
@@ -111,6 +133,7 @@ const MetricRecords: FC<Props> = ({
       </div>
       {uploadDocs && <UploadDocs {...{ setUploadDocs, setDocsUrls }} />}
       {linkDevice && <LinkDevice {...{ setLinkDevice, setIotDevice }} />}
+      {uploadManually && <ManuallyUpload {...{ setUploadManually, setManualData, metric }} />}
     </div>
   );
 };

@@ -31,8 +31,10 @@ const MetricRecords: FC<Props> = ({
   useEffect(() => {
     setUploadDocs(false);
     setLinkDevice(false);
+    setUploadManually(false);
     setIotDevice(null);
     setDocsUrls(null);
+    setManualData(null);
   }, [metric]);
 
   useEffect(() => {
@@ -93,8 +95,6 @@ const MetricRecords: FC<Props> = ({
       setDisplayedMetrics(updatedMetrics);
     }
   }, [iotDevice]);
-
-
 
   return (
     <div className="text-white px-5 py-3">

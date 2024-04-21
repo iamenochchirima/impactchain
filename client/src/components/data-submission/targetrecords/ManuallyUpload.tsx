@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import { Metric } from "../../../utils/types";
-import JobTrainingProgram from "./metricsForms/JobTrainingProgram";
-import MircroloansProgram from "./metricsForms/MircroloansProgram";
-import PeopleAssistedOutOfPoverty from "./metricsForms/PeopleAssistedOutOfPoverty";
+import JobTrainingProgram from "./metricsForms/no-poverty/JobTrainingProgram";
+import MircroloansProgram from "./metricsForms/no-poverty/MircroloansProgram";
+import PeopleAssistedOutOfPoverty from "./metricsForms/no-poverty/PeopleAssistedOutOfPoverty";
 
 type Props = {
   setUploadManually: (manually: boolean) => void;

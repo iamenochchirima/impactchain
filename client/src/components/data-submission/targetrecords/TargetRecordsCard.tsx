@@ -4,6 +4,7 @@ import { TargetOption } from "../../../data/constants";
 import {
   TargetRecordStateType,
   setDataComponent,
+  setImpactTargets,
   setNextTarget,
   setShowDataForm,
   setTargetRecord,
@@ -129,6 +130,8 @@ const TargetRecordsCard: FC<Props> = ({
         Number(t.id) === target.id ? updatedImpact : t
       );
 
+      dispatch(setImpactTargets(_updatedImpactTargets));
+
       const updatedImpactTargets = { ...userRecord.impactTargets };
 
       _updatedImpactTargets.forEach((target) => {
@@ -179,7 +182,6 @@ const TargetRecordsCard: FC<Props> = ({
     (t) => Number(t.id) === target.id
   );
 
-  console.log("Finished is", finished, "Impact index is", impactIndex)
   return (
     <>
       <div className="flex flex-col items-center bg-gray mx-[100px] mt">

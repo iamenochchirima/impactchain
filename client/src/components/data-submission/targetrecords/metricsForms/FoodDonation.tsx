@@ -1,6 +1,3 @@
-
-
-
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -12,27 +9,27 @@ import { RootState } from "../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../styles/styles";
 import FilesInput from "./support/FilesInput";
-import { MicroloanProgram } from "../../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
-
+import { FoodDonation as FoodDonationType } from "../../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
 
 type FormData = {
-  programName : string;
-  description : string;
-  startDate : string;
-  endDate : string;
-  location : string;
-  totalBudget : number
-  fundingSource : string;
-  numberOfBeneficiaries : number
-  averageLoanAmount : number
-  disbursementMethod : string;
-  repaymentRate : string;
-  economicImpact : string;
-  beneficiaryFeedback : string;
-  programChallenges : string;
+  programName: string;
+  programDescription: string;
+  startDate: string;
+  endDate: string;
+  location: string;
+  totalDonatedFood: number;
+  numberOfBeneficiaries: number;
+  typeOfFoodDonated: string;
+  sourcesOfFood: string;
+  storageFacilities: string;
+  distributionMethods: string;
+  foodSafetyStandards: string;
+  communityImpact: string;
+  feedbackFromRecipients: string;
+  challengesFaced: string;
 };
 
-const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
+const FoodDonation = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
   const [supportFiles, setSupportFiles] = useState<File[] | null>(null);
   const { storageInitiated } = useSelector((state: RootState) => state.app);
@@ -43,7 +40,7 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
       .string()
       .min(1, { message: "Name must be at least 2 characters long" })
       .max(200, { message: "Name must be at most 200 characters long" }),
-    description: z
+    programDescription: z
       .string()
       .min(1, {
         message: "Description must be at least 2 characters long",
@@ -51,63 +48,70 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
       .max(500, { message: "Description must be at most 500 characters long" }),
     startDate: z.string().min(1, { message: "Start Date is required" }),
     endDate: z.string(),
-    location: z.string().min(1, { message: "Location is required" }),
-    totalBudget: z
+    location: z
       .string()
-      .min(1, { message: "Total budget is required" })
-      .max(100, {
-        message: "Total budget must be at most 100 characters long",
-      }),
-    fundingSource: z 
+      .min(1, { message: "Location is required" })
+      .max(200, { message: "Location must be at most 200 characters long" }),
+    totalDonatedFood: z
       .string()
-      .min(1, { message: "Funding source is required" })
-      .max(100, {
-        message: "Funding source must be at most 100 characters long",
+      .min(1, { message: "Total Donated Food is required" })
+      .max(200, {
+        message: "Total Donated Food must be at most 200 characters long",
       }),
     numberOfBeneficiaries: z
-      .string()
-      .min(1, { message: "Number of beneficiaries is required" })
-      .max(100, {
-        message: "Number of beneficiaries must be at most 100 characters long",
+      .number()
+      .min(1, { message: "Number of Beneficiaries is required" })
+      .max(200, {
+        message: "Number of Beneficiaries must be at most 200 characters long",
       }),
-    averageLoanAmount: z
+    typeOfFoodDonated: z
       .string()
-      .min(1, { message: "Average loan amount is required" })
-      .max(100, {
-        message: "Average loan amount must be at most 100 characters long",
+      .min(1, { message: "Type of Food Donated is required" })
+      .max(200, {
+        message: "Type of Food Donated must be at most 200 characters long",
       }),
-    disbursementMethod: z
+    sourcesOfFood: z
       .string()
-      .min(1, { message: "Disbursement method is required" })
-      .max(100, {
-        message: "Disbursement method must be at most 100 characters long",
+      .min(1, { message: "Sources of Food is required" })
+      .max(200, {
+        message: "Sources of Food must be at most 200 characters long",
       }),
-    repaymentRate: z
+    storageFacilities: z
       .string()
-      .min(1, { message: "Repayment rate is required" })
-      .max(100, {
-        message: "Repayment rate must be at most 100 characters long",
+      .min(1, { message: "Storage Facilities is required" })
+      .max(200, {
+        message: "Storage Facilities must be at most 200 characters long",
       }),
-    economicImpact: z
+    distributionMethods: z
       .string()
-      .min(1, { message: "Economic impact is required" })
-      .max(500, {
-        message: "Economic impact must be at most 100 characters long",
+      .min(1, { message: "Distribution Methods is required" })
+      .max(200, {
+        message: "Distribution Methods must be at most 200 characters long",
       }),
-    beneficiaryFeedback: z
+    foodSafetyStandards: z
       .string()
-      .min(1, { message: "Beneficiary feedback is required" })
-      .max(500, {
-        message: "Beneficiary feedback must be at most 100 characters long",
+      .min(1, { message: "Food Safety Standards is required" })
+      .max(200, {
+        message: "Food Safety Standards must be at most 200 characters long",
       }),
-    programChallenges: z
+    communityImpact: z
       .string()
-      .min(1, { message: "Program challenges is required" })
-      .max(500, {
-        message: "Program challenges must be at most 100 characters long",
+      .min(1, { message: "Community Impact is required" })
+      .max(200, {
+        message: "Community Impact must be at most 200 characters long",
       }),
-
-      
+    feedbackFromRecipients: z
+      .string()
+      .min(1, { message: "Feedback From Recipients is required" })
+      .max(200, {
+        message: "Feedback From Recipients must be at most 200 characters long",
+      }),
+    challengesFaced: z
+      .string()
+      .min(1, { message: "Challenges Faced is required" })
+      .max(200, {
+        message: "Challenges Faced must be at most 200 characters long",
+      }),
   });
   const {
     register,
@@ -143,21 +147,22 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
       const startDateMilliseconds = new Date(data.startDate).getTime();
       const endDateMilliseconds = new Date(data.endDate).getTime();
 
-      const jobTrainingProgram: MicroloanProgram = {
+      const jobTrainingProgram: FoodDonationType = {
         programName: data.programName,
-        description: data.description,
+        programDescription: data.programDescription,
         startDate: BigInt(startDateMilliseconds),
         endDate: BigInt(endDateMilliseconds),
         location: data.location,
-        totalBudget: BigInt(data.totalBudget),
-        fundingSource: data.fundingSource,
+        totalDonatedFood: BigInt(data.totalDonatedFood),
         numberOfBeneficiaries: BigInt(data.numberOfBeneficiaries),
-        averageLoanAmount: BigInt(data.averageLoanAmount),
-        disbursementMethod: data.disbursementMethod,
-        repaymentRate: data.repaymentRate,
-        economicImpact: data.economicImpact,
-        beneficiaryFeedback: data.beneficiaryFeedback,
-        programChallenges: data.programChallenges,
+        typeOfFoodDonated: data.typeOfFoodDonated,
+        sourcesOfFood: data.sourcesOfFood,
+        storageFacilities: data.storageFacilities,
+        distributionMethods: data.distributionMethods,
+        foodSafetyStandards: data.foodSafetyStandards,
+        communityImpact: data.communityImpact,
+        feedbackFromRecipients: data.feedbackFromRecipients,
+        challengesFaced: data.challengesFaced,
         dataVerification: false,
         supportingFiles: urls ? urls : [],
         created: BigInt(Date.now()),
@@ -165,7 +170,7 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
       setManualData(jobTrainingProgram);
       setUploadManually(false);
     } catch (error) {
-        setSaving(false);
+      setSaving(false);
       console.log("Error saving job training program", error);
     }
   };
@@ -199,7 +204,7 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
       <form className={`${styles.munualDataForm}`}>
         <div className={`${styles.formHeader}`}>
           <h3 className={`${styles.formTitle}`}>
-            Microloans Program Data Submission
+            Food Donation Program Information
           </h3>
         </div>
         <div className={`${styles.inputDiv}`}>
@@ -213,17 +218,18 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
           />
           <p className={`${styles.errorP}`}>{errors.programName?.message}</p>
         </div>
+       
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Program Description</label>
           <textarea
             className={`${styles.formInput}`}
-            id="description"
+            id="programDescription"
             placeholder="Program Description"
-            {...register("description")}
+            {...register("programDescription")}
             style={{ overflow: "hidden" }}
           />
           <p className={`${styles.errorP}`}>
-            {errors.description?.message}
+            {errors.programDescription?.message}
           </p>
         </div>
         <div className={`${styles.inputDiv}`}>
@@ -258,35 +264,18 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
             placeholder="Program Location"
             {...register("location")}
           />
-          <p className={`${styles.errorP}`}>
-            {errors.location?.message}
-          </p>
+          <p className={`${styles.errorP}`}>{errors.location?.message}</p>
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Total Budget</label>
+          <label htmlFor={`${styles.inputLabel}`}>Total Donated Food</label>
           <input
             className={`${styles.formInput}`}
-            id="totalBudget"
+            id="totalDonatedFood"
             type="number"
-            placeholder="Total Budget"
-            {...register("totalBudget")}
+            placeholder="Total Donated Food"
+            {...register("totalDonatedFood")}
           />
-          <p className={`${styles.errorP}`}>
-            {errors.totalBudget?.message}
-          </p>
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Funding Source</label>
-          <input
-            className={`${styles.formInput}`}
-            id="fundingSource"
-            type="string"
-            placeholder="Funding Source"
-            {...register("fundingSource")}
-          />
-          <p className={`${styles.errorP}`}>
-            {errors.fundingSource?.message}
-          </p>
+          <p className={`${styles.errorP}`}>{errors.totalDonatedFood?.message}</p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Number of Beneficiaries</label>
@@ -297,88 +286,96 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
             placeholder="Number of Beneficiaries"
             {...register("numberOfBeneficiaries")}
           />
-          <p className={`${styles.errorP}`}>
-            {errors.numberOfBeneficiaries?.message}
-          </p>
+          <p className={`${styles.errorP}`}>{errors.numberOfBeneficiaries?.message}</p>
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Average Loan Amount</label>
+          <label htmlFor={`${styles.inputLabel}`}>Type of Food Donated</label>
           <input
             className={`${styles.formInput}`}
-            id="averageLoanAmount"
-            type="number"
-            placeholder="Average Loan Amount"
-            {...register("averageLoanAmount")}
-          />
-          <p className={`${styles.errorP}`}>
-            {errors.averageLoanAmount?.message}
-          </p>
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Disbursement Method</label>
-          <input
-            className={`${styles.formInput}`}
-            id="disbursementMethod"
+            id="typeOfFoodDonated"
             type="string"
-            placeholder="Disbursement Method"
-            {...register("disbursementMethod")}
+            placeholder="Type of Food Donated"
+            {...register("typeOfFoodDonated")}
           />
-          <p className={`${styles.errorP}`}>
-            {errors.disbursementMethod?.message}
-          </p>
+          <p className={`${styles.errorP}`}>{errors.typeOfFoodDonated?.message}</p>
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Repayment Rate</label>
+          <label htmlFor={`${styles.inputLabel}`}>Sources of Food</label>
           <input
             className={`${styles.formInput}`}
-            id="repaymentRate"
+            id="sourcesOfFood"
             type="string"
-            placeholder="Repayment Rate"
-            {...register("repaymentRate")}
+            placeholder="Sources of Food"
+            {...register("sourcesOfFood")}
           />
-          <p className={`${styles.errorP}`}>
-            {errors.repaymentRate?.message}
-          </p>
+          <p className={`${styles.errorP}`}>{errors.sourcesOfFood?.message}</p>
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Economic Impact</label>
-          <textarea
+          <label htmlFor={`${styles.inputLabel}`}>Storage Facilities</label>
+          <input
             className={`${styles.formInput}`}
-            id="economicImpact"
-            placeholder="Economic Impact"
-            {...register("economicImpact")}
-            style={{ overflow: "hidden" }}
+            id="storageFacilities"
+            type="string"
+            placeholder="Storage Facilities"
+            {...register("storageFacilities")}
           />
-          <p className={`${styles.errorP}`}>
-            {errors.economicImpact?.message}
-          </p>
+          <p className={`${styles.errorP}`}>{errors.storageFacilities?.message}</p>
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Beneficiary Feedback</label>
-          <textarea
+          <label htmlFor={`${styles.inputLabel}`}>Distribution Methods</label>
+          <input
             className={`${styles.formInput}`}
-            id="beneficiaryFeedback"
-            placeholder="Beneficiary Feedback"
-            {...register("beneficiaryFeedback")}
-            style={{ overflow: "hidden" }}
+            id="distributionMethods"
+            type="string"
+            placeholder="Distribution Methods"
+            {...register("distributionMethods")}
           />
-          <p className={`${styles.errorP}`}>
-            {errors.beneficiaryFeedback?.message}
-          </p>
+          <p className={`${styles.errorP}`}>{errors.distributionMethods?.message}</p>
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Program Challenges</label>
-          <textarea
+          <label htmlFor={`${styles.inputLabel}`}>Food Safety Standards</label>
+          <input
             className={`${styles.formInput}`}
-            id="programChallenges"
-            placeholder="Program Challenges"
-            {...register("programChallenges")}
-            style={{ overflow: "hidden" }}
+            id="foodSafetyStandards"
+            type="string"
+            placeholder="Food Safety Standards"
+            {...register("foodSafetyStandards")}
           />
-          <p className={`${styles.errorP}`}>
-            {errors.programChallenges?.message}
-          </p>
+          <p className={`${styles.errorP}`}>{errors.foodSafetyStandards?.message}</p>
         </div>
+        <div className={`${styles.inputDiv}`}>
+          <label htmlFor={`${styles.inputLabel}`}>Community Impact</label>
+          <input
+            className={`${styles.formInput}`}
+            id="communityImpact"
+            type="string"
+            placeholder="Community Impact"
+            {...register("communityImpact")}
+          />
+          <p className={`${styles.errorP}`}>{errors.communityImpact?.message}</p>
+        </div>
+        <div className={`${styles.inputDiv}`}>
+          <label htmlFor={`${styles.inputLabel}`}>Feedback From Recipients</label>
+          <input
+            className={`${styles.formInput}`}
+            id="feedbackFromRecipients"
+            type="string"
+            placeholder="Feedback From Recipients"
+            {...register("feedbackFromRecipients")}
+          />
+          <p className={`${styles.errorP}`}>{errors.feedbackFromRecipients?.message}</p>
+        </div>
+        <div className={`${styles.inputDiv}`}>
+          <label htmlFor={`${styles.inputLabel}`}>Challenges Faced</label>
+          <input
+            className={`${styles.formInput}`}
+            id="challengesFaced"
+            type="string"
+            placeholder="Challenges Faced"
+            {...register("challengesFaced")}
+          />
+          <p className={`${styles.errorP}`}>{errors.challengesFaced?.message}</p>
+        </div>  
       </form>
 
       <FilesInput {...{ setSupportFiles, supportFiles }} />
@@ -402,4 +399,4 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
   );
 };
 
-export default  MircroloansProgram;
+export default FoodDonation;

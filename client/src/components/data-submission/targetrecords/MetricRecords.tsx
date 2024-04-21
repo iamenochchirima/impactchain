@@ -94,6 +94,8 @@ const MetricRecords: FC<Props> = ({
     }
   }, [iotDevice]);
 
+
+
   return (
     <div className="text-white px-5 py-3">
       <h1>{metric.name}</h1>

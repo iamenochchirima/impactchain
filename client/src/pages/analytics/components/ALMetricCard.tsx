@@ -10,9 +10,9 @@ type Props = {
   category: CategoryType
 };
 const ALMetricCard: FC<Props> = ({ target, category }) => {
-  const { userRecord } = useSelector((state: RootState) => state.app);
+  const { impactTargets } = useSelector((state: RootState) => state.app);
 
-  const matchingTarget = userRecord?.impactTargets.find(
+  const matchingTarget = impactTargets?.find(
     (t) => t.name === target.name
   );
 

@@ -12,7 +12,7 @@ type Props = {
 };
 
 const Metrics: FC<Props> = ({ setOpenModal, category }) => {
-  const { userRecord } = useSelector((state: RootState) => state.app);
+  const { impactTargets } = useSelector((state: RootState) => state.app);
   const [targets, setTargets] = useState<TargetOption[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
@@ -20,11 +20,9 @@ const Metrics: FC<Props> = ({ setOpenModal, category }) => {
   const [displayedTargets, setDisplayedTargets] = useState<TargetOption[]>([]);
 
   useEffect(() => {
-    if (userRecord) {
-      const _targets = userRecord.impactTargets;
-
+    if (impactTargets) {
       const matchingTargetsOptions = targetOptions.filter((option) =>
-        _targets.some(
+        impactTargets.some(
           (target) =>
             target.name === option.name && option.category === category.category
         )
@@ -35,7 +33,7 @@ const Metrics: FC<Props> = ({ setOpenModal, category }) => {
       );
       setTargets(_sorted);
     }
-  }, [userRecord, category]);
+  }, [impactTargets, category]);
 
   useEffect(() => {
     const start = (currentPage - 1) * itemsPerPage;
@@ -51,7 +49,7 @@ const Metrics: FC<Props> = ({ setOpenModal, category }) => {
     setCurrentPage((current) => Math.min(current + 1, totalPages));
   };
 
-  if (!userRecord || !userRecord.impactTargets[0]) {
+  if (!impactTargets || !impactTargets) {
     return null;
   }
 

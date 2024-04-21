@@ -2,13 +2,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { z } from "zod";
+import { set, z } from "zod";
 import { uploadFile } from "../../../../config/storage/functions";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../styles/styles";
 import FilesInput from "./support/FilesInput";
+import { JobTrainingProgram as JobTrainingProgramType } from "../../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
 
 type FormData = {
   programName: string;
@@ -34,6 +35,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
   const [supportFiles, setSupportFiles] = useState<File[] | null>(null);
   const { storageInitiated } = useSelector((state: RootState) => state.app);
+  const [countDown, setCountDown] = useState<number>(0);
 
   const schema = z.object({
     programName: z
@@ -106,35 +108,78 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   const handleSave = async (data: FormData) => {
-    console.log(data);
-    // if (!supportFiles) {
-    //     toast.error("Please upload support documents", {
-    //       position: "top-center",
-    //       autoClose: 5000,
-    //       hideProgressBar: false,
-    //       closeOnClick: true,
-    //     });
-    //     return;
-    //   }
-    //   setSaving(true);
-    //   const urls = await uploadAsset();
-    //   setUploadManually(false);
-    //   setSaving(true);
+    try {
+      setSaving(true);
+      const checkedFiles: File[] = [];
+      if (supportFiles) {
+        for (const file of supportFiles) {
+          if (file.size <= 4 * 1024 * 1024) {
+            checkedFiles.push(file);
+          }
+        }
+      }
+
+      if (checkedFiles.length === 0) {
+        toast.error("Please upload support documents", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+        });
+        setSaving(false);
+        return;
+      }
+
+      const urls = await uploadAsset(checkedFiles);
+
+      const startDateMilliseconds = new Date(data.startDate).getTime();
+      const endDateMilliseconds = new Date(data.endDate).getTime();
+
+      const jobTrainingProgram: JobTrainingProgramType = {
+        programName: data.programName,
+        programDescription: data.programDescription,
+        startDate: BigInt(startDateMilliseconds),
+        endDate: data.endDate ? [BigInt(endDateMilliseconds)] : [],
+        programLocation: data.programLocation,
+        targetDemographic: data.targetDemographic,
+        numberOfParticipants: BigInt(data.numberOfParticipants),
+        completionRate: data.completionRate.toString(),
+        programBudget: BigInt(data.programBudget),
+        fundingSources: data.fundingSources,
+        resourcesProvided: data.resourcesProvided,
+        skillsDeveloped: data.skillsDeveloped,
+        employmentRatePostProgram: data.employmentRatePostProgram.toString(),
+        averageIncomeBeforeProgram: BigInt(data.averageIncomeBeforeProgram),
+        averageIncomeAfterProgram: BigInt(data.averageIncomeAfterProgram),
+        participantFeedback: data.participantFeedback,
+        successStories: data.successStories,
+        dataVerification: false,
+        supportingFiles: urls ? urls : [],
+        created: BigInt(Date.now()),
+      };
+      setManualData(jobTrainingProgram);
+      setUploadManually(false);
+    } catch (error) {
+        setSaving(false);
+      console.log("Error saving job training program", error);
+    }
   };
 
-  const uploadAsset = async () => {
-    if (storageInitiated && supportFiles) {
+  const uploadAsset = async (files: File[]) => {
+    if (storageInitiated) {
       const file_path = location.pathname;
       try {
         const urls: string[] = [];
-        for (const doc of supportFiles) {
-          const assetUrl = await uploadFile(doc, file_path);
+        setCountDown((prev) => prev + files.length);
+        for (const file of files) {
+          const assetUrl = await uploadFile(file, file_path);
           console.log(
             "This file was successfully uploaded:",
-            doc.name,
+            file.name,
             assetUrl
           );
           urls.push(assetUrl);
+          setCountDown((prev) => prev - 1);
         }
         return urls;
       } catch (error) {
@@ -147,9 +192,8 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
   return (
     <div>
       <form className={`${styles.munualDataForm}`}>
-        <div className={`${styles.formHeader}`}
-        >
-            <h3 className={`${styles.formTitle}`}>Job Training Program</h3>
+        <div className={`${styles.formHeader}`}>
+          <h3 className={`${styles.formTitle}`}>Job Training Program</h3>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Program Name</label>
@@ -238,12 +282,12 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
           </p>
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Completion Rate</label>
+          <label htmlFor={`${styles.inputLabel}`}>Completion Rate (%)</label>
           <input
             className={`${styles.formInput}`}
             id="completionRate"
             type="number"
-            placeholder="Completion Rate"
+            placeholder="Completion Rate e.g 67.5"
             {...register("completionRate")}
           />
           <p className={`${styles.errorP}`}>{errors.completionRate?.message}</p>
@@ -305,7 +349,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
             className={`${styles.formInput}`}
             id="employmentRatePostProgram"
             type="number"
-            placeholder="Employment Rate Post Program"
+            placeholder="Employment Rate Post Program e.g 50.5"
             {...register("employmentRatePostProgram")}
           />
           <p className={`${styles.errorP}`}>
@@ -368,7 +412,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
         </div>
       </form>
 
-      <FilesInput {...{setSupportFiles, supportFiles}} />  
+      <FilesInput {...{ setSupportFiles, supportFiles }} />
 
       <div className="flex justify-between items-center py-4">
         <button
@@ -382,7 +426,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
           disabled={saving}
           className={`${styles.roundedButton}`}
         >
-          {saving ? "Uploading" : "Save"}
+          {saving ? `Uploading ${countDown}` : "Save"}
         </button>
       </div>
     </div>

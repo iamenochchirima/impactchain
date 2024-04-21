@@ -29,7 +29,7 @@ const FilesInput: FC<Props> = ({ setSupportFiles, supportFiles }) => {
       </h3>
       <div className="min-h-[200px]  bg-black rounded-2xl mb-3 mt-8">
         <div className=" justify-center items-center h-full">
-          <div className="flex min-h-[200px] flex-col justify-center items-center">
+          <div className="flex min-h-[200px] py-4 flex-col justify-center items-center">
             <p className="text-white ">Drag and Drop</p>
             <span className="text-white">Or</span>
             <div className="flex justify-center">

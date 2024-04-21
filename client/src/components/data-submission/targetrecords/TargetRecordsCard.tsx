@@ -60,6 +60,8 @@ const TargetRecordsCard: FC<Props> = ({
   useEffect(() => {
     if (totalPages && currentPage === totalPages) {
       setLastOfLast(true);
+    } else {
+      setLastOfLast(false);
     }
   }, [totalPages, currentPage]);
 
@@ -146,15 +148,6 @@ const TargetRecordsCard: FC<Props> = ({
       await dataActor?.updateUserRecord(updatedUserRecord);
       dispatch(setUserRecord(updatedUserRecord));
       setClearGoal(true);
-      if (impactTargets.length === 1) {
-        toast.success("All data saved successfully", {
-          autoClose: 5000,
-          position: "top-center",
-        });
-        dispatch(setShowDataForm(false));
-        window.location.reload();
-        return;
-      }
       if (finished) {
         toast.success("All data saved successfully", {
           autoClose: 5000,
@@ -185,6 +178,8 @@ const TargetRecordsCard: FC<Props> = ({
   const impactIndex = impactTargets.findIndex(
     (t) => Number(t.id) === target.id
   );
+
+  console.log("Finished is", finished, "Impact index is", impactIndex)
   return (
     <>
       <div className="flex flex-col items-center bg-gray mx-[100px] mt">

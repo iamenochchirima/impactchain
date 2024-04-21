@@ -1,8 +1,10 @@
 export const idlFactory = ({ IDL }) => {
   const MarginalizedCommunitySupportData = IDL.Record({
     'feedbackFromCommunity' : IDL.Text,
+    'created' : IDL.Int,
     'numberOfBeneficiaries' : IDL.Nat,
     'completionDate' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'initiativeName' : IDL.Text,
     'servicesProvided' : IDL.Text,
     'outcomesAchieved' : IDL.Text,
@@ -31,9 +33,11 @@ export const idlFactory = ({ IDL }) => {
     'complianceRate' : IDL.Nat,
     'implementationDate' : IDL.Text,
     'sectorsAffected' : IDL.Text,
+    'created' : IDL.Int,
     'feedbackFromBeneficiaries' : IDL.Text,
     'policyName' : IDL.Text,
     'reviewDate' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'outcomesAchieved' : IDL.Text,
     'dataVerification' : IDL.Bool,
     'policyDescription' : IDL.Text,
@@ -50,8 +54,10 @@ export const idlFactory = ({ IDL }) => {
     'iotDevice' : IDL.Opt(IOTDevice),
   });
   const InequalityReductionBeneficiariesData = IDL.Record({
+    'created' : IDL.Int,
     'feedbackFromBeneficiaries' : IDL.Text,
     'endDate' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'initiativeName' : IDL.Text,
     'dataVerification' : IDL.Bool,
     'initiativeDescription' : IDL.Text,
@@ -84,10 +90,12 @@ export const idlFactory = ({ IDL }) => {
     'name' : IDL.Text,
   });
   const UrbanSustainabilityProjectsData = IDL.Record({
+    'created' : IDL.Int,
     'completionDate' : IDL.Text,
     'projectName' : IDL.Text,
     'projectDescription' : IDL.Text,
     'technologiesUsed' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'communityEngagement' : IDL.Text,
     'dataVerification' : IDL.Bool,
     'impactOnCommunity' : IDL.Text,
@@ -108,9 +116,11 @@ export const idlFactory = ({ IDL }) => {
     'iotDevice' : IDL.Opt(IOTDevice),
   });
   const AffordableHousingSupportData = IDL.Record({
+    'created' : IDL.Int,
     'completionDate' : IDL.Text,
     'numberofUnitsConstructed' : IDL.Nat,
     'feedbackFromBeneficiaries' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'housingTypes' : IDL.Text,
     'initiativeName' : IDL.Text,
     'dataVerification' : IDL.Bool,
@@ -133,10 +143,12 @@ export const idlFactory = ({ IDL }) => {
   });
   const UrbanLivingConditionsData = IDL.Record({
     'feedbackFromCommunity' : IDL.Text,
+    'created' : IDL.Int,
     'totalInvestment' : IDL.Nat,
     'completionDate' : IDL.Text,
     'environmentalImpact' : IDL.Text,
     'populationImpacted' : IDL.Nat,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'initiativeName' : IDL.Text,
     'communityInvolvement' : IDL.Text,
     'outcomesAchieved' : IDL.Text,
@@ -168,7 +180,9 @@ export const idlFactory = ({ IDL }) => {
   });
   const WasteReductionRecyclingData = IDL.Record({
     'feedbackFromCommunity' : IDL.Text,
+    'created' : IDL.Int,
     'endDate' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'initiativeName' : IDL.Text,
     'wasteReduced' : IDL.Nat,
     'dataVerification' : IDL.Bool,
@@ -193,10 +207,12 @@ export const idlFactory = ({ IDL }) => {
     'iotDevice' : IDL.Opt(IOTDevice),
   });
   const SustainableSupplyChainInvestmentData = IDL.Record({
+    'created' : IDL.Int,
     'totalInvestment' : IDL.Nat,
     'endDate' : IDL.Text,
     'environmentalImpact' : IDL.Text,
     'supplierEngagement' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'feedbackFromStakeholders' : IDL.Text,
     'initiativeName' : IDL.Text,
     'dataVerification' : IDL.Bool,
@@ -218,8 +234,10 @@ export const idlFactory = ({ IDL }) => {
     'iotDevice' : IDL.Opt(IOTDevice),
   });
   const ResourceFootprintReductionData = IDL.Record({
+    'created' : IDL.Int,
     'endDate' : IDL.Text,
     'impactOnOperationalCosts' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'feedbackFromStakeholders' : IDL.Text,
     'initiativeName' : IDL.Text,
     'dataVerification' : IDL.Bool,
@@ -253,9 +271,11 @@ export const idlFactory = ({ IDL }) => {
   const CarbonEmissionReductionData = IDL.Record({
     'methodsUsed' : IDL.Text,
     'environmentalImpactAssessment' : IDL.Text,
+    'created' : IDL.Int,
     'totalInvestment' : IDL.Nat,
     'endDate' : IDL.Text,
     'impactOnOperationalEfficiency' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'totalEmissionsReduced' : IDL.Nat,
     'feedbackFromStakeholders' : IDL.Text,
     'initiativeName' : IDL.Text,
@@ -275,11 +295,13 @@ export const idlFactory = ({ IDL }) => {
     'iotDevice' : IDL.Opt(IOTDevice),
   });
   const RenewableEnergyInvestmentData = IDL.Record({
+    'created' : IDL.Int,
     'totalInvestment' : IDL.Nat,
     'endDate' : IDL.Text,
     'environmentalImpact' : IDL.Text,
     'capacityInstalled' : IDL.Nat,
     'impactOnOperationalCosts' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'feedbackFromStakeholders' : IDL.Text,
     'typeOfEnergy' : IDL.Text,
     'initiativeName' : IDL.Text,
@@ -300,10 +322,12 @@ export const idlFactory = ({ IDL }) => {
   });
   const ReforestationProjectsData = IDL.Record({
     'feedbackFromCommunity' : IDL.Text,
+    'created' : IDL.Int,
     'projectName' : IDL.Text,
     'endDate' : IDL.Text,
     'projectDescription' : IDL.Text,
     'biodiversityImpact' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'numberofTreesPlanted' : IDL.Nat,
     'communityInvolvement' : IDL.Text,
     'dataVerification' : IDL.Bool,
@@ -334,8 +358,10 @@ export const idlFactory = ({ IDL }) => {
     'name' : IDL.Text,
   });
   const MarineEcosystemProtectionData = IDL.Record({
+    'created' : IDL.Int,
     'endDate' : IDL.Text,
     'protectionStrategies' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'feedbackFromStakeholders' : IDL.Text,
     'initiativeName' : IDL.Text,
     'dataVerification' : IDL.Bool,
@@ -358,10 +384,12 @@ export const idlFactory = ({ IDL }) => {
   });
   const OceanPollutionReductionData = IDL.Record({
     'feedbackFromCommunity' : IDL.Text,
+    'created' : IDL.Int,
     'impactOnMarineLife' : IDL.Text,
     'reductionMethods' : IDL.Text,
     'endDate' : IDL.Text,
     'typesOfPollutantsTargeted' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'initiativeName' : IDL.Text,
     'communityInvolvement' : IDL.Text,
     'dataVerification' : IDL.Bool,
@@ -380,7 +408,9 @@ export const idlFactory = ({ IDL }) => {
     'iotDevice' : IDL.Opt(IOTDevice),
   });
   const SustainableFishingSupportData = IDL.Record({
+    'created' : IDL.Int,
     'endDate' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'fishingPracticesImplemented' : IDL.Text,
     'policyChanges' : IDL.Text,
     'initiativeName' : IDL.Text,
@@ -414,7 +444,9 @@ export const idlFactory = ({ IDL }) => {
   });
   const LandConservationReforestationData = IDL.Record({
     'feedbackFromCommunity' : IDL.Text,
+    'created' : IDL.Int,
     'endDate' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'conservationMethods' : IDL.Text,
     'initiativeName' : IDL.Text,
     'communityInvolvement' : IDL.Text,
@@ -437,9 +469,11 @@ export const idlFactory = ({ IDL }) => {
     'iotDevice' : IDL.Opt(IOTDevice),
   });
   const EndangeredSpeciesProtectionData = IDL.Record({
+    'created' : IDL.Int,
     'impactOnSpeciesPopulation' : IDL.Text,
     'endDate' : IDL.Text,
     'protectionStrategies' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'feedbackFromStakeholders' : IDL.Text,
     'initiativeName' : IDL.Text,
     'dataVerification' : IDL.Bool,
@@ -459,9 +493,11 @@ export const idlFactory = ({ IDL }) => {
     'iotDevice' : IDL.Opt(IOTDevice),
   });
   const LandRehabilitationData = IDL.Record({
+    'created' : IDL.Int,
     'areaRehabilitated' : IDL.Nat,
     'endDate' : IDL.Text,
     'biodiversityImpact' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'communityFeedback' : IDL.Text,
     'initiativeName' : IDL.Text,
     'dataVerification' : IDL.Bool,
@@ -493,8 +529,10 @@ export const idlFactory = ({ IDL }) => {
   const AntiCorruptionProgramsData = IDL.Record({
     'feedbackFromCommunity' : IDL.Text,
     'programDescription' : IDL.Text,
+    'created' : IDL.Int,
     'endDate' : IDL.Text,
     'strategiesImplemented' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'legalActionsTaken' : IDL.Nat,
     'dataVerification' : IDL.Bool,
     'totalFunding' : IDL.Nat,
@@ -514,10 +552,12 @@ export const idlFactory = ({ IDL }) => {
     'iotDevice' : IDL.Opt(IOTDevice),
   });
   const HumanRightsInitiativesData = IDL.Record({
+    'created' : IDL.Int,
     'feedbackFromBeneficiaries' : IDL.Text,
     'endDate' : IDL.Text,
     'areasCovered' : IDL.Text,
     'impactOnLegalOutcomes' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'initiativeName' : IDL.Text,
     'dataVerification' : IDL.Bool,
     'totalFunding' : IDL.Nat,
@@ -539,8 +579,10 @@ export const idlFactory = ({ IDL }) => {
   const CommunityPeaceProgramsData = IDL.Record({
     'feedbackFromCommunity' : IDL.Text,
     'programDescription' : IDL.Text,
+    'created' : IDL.Int,
     'communityOutreach' : IDL.Text,
     'endDate' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'conflictResolutionStrategies' : IDL.Text,
     'incidentsOfViolenceReduced' : IDL.Nat,
     'dataVerification' : IDL.Bool,
@@ -570,12 +612,14 @@ export const idlFactory = ({ IDL }) => {
     'name' : IDL.Text,
   });
   const CollaborativeSDGProjectsData = IDL.Record({
+    'created' : IDL.Int,
     'participatingOrganizations' : IDL.Text,
     'totalInvestment' : IDL.Nat,
     'projectName' : IDL.Text,
     'endDate' : IDL.Text,
     'projectDescription' : IDL.Text,
     'feedbackFromParticipants' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'outcomesAchieved' : IDL.Text,
     'dataVerification' : IDL.Bool,
     'challengesFaced' : IDL.Text,
@@ -592,8 +636,10 @@ export const idlFactory = ({ IDL }) => {
     'iotDevice' : IDL.Opt(IOTDevice),
   });
   const GlobalPartnershipFinancialContributionsData = IDL.Record({
+    'created' : IDL.Int,
     'feedbackFromBeneficiaries' : IDL.Text,
     'date' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'dataVerification' : IDL.Bool,
     'amountContributed' : IDL.Nat,
@@ -613,8 +659,10 @@ export const idlFactory = ({ IDL }) => {
   });
   const SDGAdvocacyCampaignsData = IDL.Record({
     'methodsUsed' : IDL.Text,
+    'created' : IDL.Int,
     'feedbackFromAudience' : IDL.Text,
     'endDate' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'mainMessages' : IDL.Text,
     'targetAudience' : IDL.Text,
     'impactOnAwareness' : IDL.Text,
@@ -643,42 +691,27 @@ export const idlFactory = ({ IDL }) => {
     'metrics' : Metrics17,
     'name' : IDL.Text,
   });
-  const ParticipantsInfo = IDL.Record({
-    'completionRate' : IDL.Float64,
+  const JobTrainingProgram = IDL.Record({
+    'skillsDeveloped' : IDL.Text,
+    'programDescription' : IDL.Text,
+    'created' : IDL.Int,
+    'fundingSources' : IDL.Text,
+    'endDate' : IDL.Opt(IDL.Int),
+    'completionRate' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
+    'programBudget' : IDL.Nat,
+    'programLocation' : IDL.Text,
+    'dataVerification' : IDL.Bool,
+    'programName' : IDL.Text,
+    'employmentRatePostProgram' : IDL.Text,
+    'averageIncomeBeforeProgram' : IDL.Nat,
+    'participantFeedback' : IDL.Text,
+    'resourcesProvided' : IDL.Text,
     'numberOfParticipants' : IDL.Nat,
     'targetDemographic' : IDL.Text,
-  });
-  const ImpactAssessment = IDL.Record({
-    'skillsDeveloped' : IDL.Text,
-    'employmentRatePostProgram' : IDL.Float64,
-    'averageIncomeBeforeProgram' : IDL.Nat,
-    'averageIncomeAfterProgram' : IDL.Nat,
-  });
-  const FeedbackAndVerification = IDL.Record({
-    'supportingDocuments' : IDL.Vec(IDL.Vec(IDL.Nat8)),
-    'dataVerification' : IDL.Bool,
-    'participantFeedback' : IDL.Text,
-    'successStories' : IDL.Text,
-  });
-  const BasicProgramInfo = IDL.Record({
-    'programDescription' : IDL.Text,
-    'endDate' : IDL.Opt(IDL.Int),
-    'programLocation' : IDL.Text,
-    'programName' : IDL.Text,
     'startDate' : IDL.Int,
-  });
-  const FinancialInfo = IDL.Record({
-    'fundingSources' : IDL.Text,
-    'programBudget' : IDL.Nat,
-    'resourcesProvided' : IDL.Text,
-  });
-  const JobTrainingProgram = IDL.Record({
-    'created' : IDL.Int,
-    'participantsInfo' : ParticipantsInfo,
-    'impactAssessment' : ImpactAssessment,
-    'feedbackAndVerification' : FeedbackAndVerification,
-    'basicProgramInfo' : BasicProgramInfo,
-    'financialInfo' : FinancialInfo,
+    'successStories' : IDL.Text,
+    'averageIncomeAfterProgram' : IDL.Nat,
   });
   const Metric11 = IDL.Record({
     'key' : IDL.Text,
@@ -692,6 +725,7 @@ export const idlFactory = ({ IDL }) => {
     'created' : IDL.Int,
     'numberOfBeneficiaries' : IDL.Nat,
     'endDate' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'fundingSource' : IDL.Text,
     'dataVerification' : IDL.Bool,
@@ -700,7 +734,7 @@ export const idlFactory = ({ IDL }) => {
     'beneficiaryFeedback' : IDL.Text,
     'programChallenges' : IDL.Text,
     'economicImpact' : IDL.Text,
-    'repaymentRate' : IDL.Float64,
+    'repaymentRate' : IDL.Text,
     'programName' : IDL.Text,
     'averageLoanAmount' : IDL.Nat,
     'location' : IDL.Text,
@@ -716,9 +750,11 @@ export const idlFactory = ({ IDL }) => {
   });
   const PeopleAssistedOutOfPoverty = IDL.Record({
     'programDescription' : IDL.Text,
+    'created' : IDL.Int,
     'endDate' : IDL.Text,
     'longTermImpact' : IDL.Text,
     'totalParticipants' : IDL.Nat,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'dataVerification' : IDL.Bool,
     'challengesFaced' : IDL.Text,
     'programName' : IDL.Text,
@@ -750,10 +786,12 @@ export const idlFactory = ({ IDL }) => {
   });
   const FoodDonation = IDL.Record({
     'programDescription' : IDL.Text,
+    'created' : IDL.Int,
     'numberOfBeneficiaries' : IDL.Nat,
     'totalDonatedFood' : IDL.Nat,
     'endDate' : IDL.Text,
     'feedbackFromRecipients' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'foodSafetyStandards' : IDL.Text,
     'dataVerification' : IDL.Bool,
     'communityImpact' : IDL.Text,
@@ -776,6 +814,7 @@ export const idlFactory = ({ IDL }) => {
   });
   const SustainableAgricultureInvestment = IDL.Record({
     'agriculturalOutput' : IDL.Nat,
+    'created' : IDL.Int,
     'totalInvestment' : IDL.Nat,
     'projectName' : IDL.Text,
     'endDate' : IDL.Text,
@@ -783,6 +822,7 @@ export const idlFactory = ({ IDL }) => {
     'farmerFeedback' : IDL.Text,
     'projectDescription' : IDL.Text,
     'sustainabilityMetrics' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'typeOfInvestments' : IDL.Text,
     'dataVerification' : IDL.Bool,
     'challengesFaced' : IDL.Text,
@@ -802,12 +842,14 @@ export const idlFactory = ({ IDL }) => {
   });
   const NutritiousFoodProgram = IDL.Record({
     'programDescription' : IDL.Text,
+    'created' : IDL.Int,
     'endDate' : IDL.Text,
     'nutritionalContent' : IDL.Text,
     'sourceOfFood' : IDL.Text,
     'totalParticipants' : IDL.Nat,
     'mealsProvided' : IDL.Nat,
     'typeOfMeals' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'dataVerification' : IDL.Bool,
     'frequencyOfMeals' : IDL.Text,
     'challengesFaced' : IDL.Text,
@@ -838,10 +880,12 @@ export const idlFactory = ({ IDL }) => {
   const HealthcareFunding = IDL.Record({
     'healthOutcomes' : IDL.Text,
     'programDescription' : IDL.Text,
+    'created' : IDL.Int,
     'fundingSources' : IDL.Text,
     'feedbackFromBeneficiaries' : IDL.Text,
     'endDate' : IDL.Text,
     'numberofHealthProjects' : IDL.Nat,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'totalFundingAmount' : IDL.Nat,
     'dataVerification' : IDL.Bool,
     'typesOfServicesFunded' : IDL.Text,
@@ -863,9 +907,11 @@ export const idlFactory = ({ IDL }) => {
     'operationalChallenges' : IDL.Text,
     'totalServicesProvided' : IDL.Nat,
     'programDescription' : IDL.Text,
+    'created' : IDL.Int,
     'endDate' : IDL.Text,
     'totalParticipants' : IDL.Nat,
     'feedbackFromParticipants' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'vaccinationCoverage' : IDL.Nat,
     'followUpActions' : IDL.Text,
     'healthOutcomesMeasured' : IDL.Text,
@@ -887,10 +933,12 @@ export const idlFactory = ({ IDL }) => {
   const HealthcareAccessData = IDL.Record({
     'operationalChallenges' : IDL.Text,
     'programDescription' : IDL.Text,
+    'created' : IDL.Int,
     'endDate' : IDL.Text,
     'totalHealthFacilities' : IDL.Nat,
     'improvementsMade' : IDL.Text,
     'typesOfServicesProvided' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'dataVerification' : IDL.Bool,
     'communityImpact' : IDL.Text,
     'totalPatientsServed' : IDL.Nat,
@@ -921,10 +969,12 @@ export const idlFactory = ({ IDL }) => {
   });
   const SchoolsBuiltSupportedData = IDL.Record({
     'feedbackFromCommunity' : IDL.Text,
+    'created' : IDL.Int,
     'totalInvestment' : IDL.Nat,
     'projectName' : IDL.Text,
     'endDate' : IDL.Text,
     'projectDescription' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'sourcesOfFunding' : IDL.Text,
     'numberOfSchoolsBuilt' : IDL.Nat,
     'studentCapacityIncrease' : IDL.Nat,
@@ -945,10 +995,12 @@ export const idlFactory = ({ IDL }) => {
   });
   const EducationalGrantsData = IDL.Record({
     'programDescription' : IDL.Text,
+    'created' : IDL.Int,
     'endDate' : IDL.Text,
     'typesOfGrants' : IDL.Text,
     'totalAmountAwarded' : IDL.Nat,
     'feedbackFromRecipients' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'dataVerification' : IDL.Bool,
     'impactOnEducation' : IDL.Text,
     'totalGrantsAwarded' : IDL.Nat,
@@ -970,8 +1022,10 @@ export const idlFactory = ({ IDL }) => {
   const StudentsBenefitingData = IDL.Record({
     'graduationRates' : IDL.Nat,
     'programDescription' : IDL.Text,
+    'created' : IDL.Int,
     'endDate' : IDL.Text,
     'totalStudentsBenefited' : IDL.Nat,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'followUpSuccessRate' : IDL.Nat,
     'dataVerification' : IDL.Bool,
     'challengesFaced' : IDL.Text,
@@ -1004,11 +1058,13 @@ export const idlFactory = ({ IDL }) => {
   });
   const WomensEmpowermentProgramData = IDL.Record({
     'programDescription' : IDL.Text,
+    'created' : IDL.Int,
     'endDate' : IDL.Text,
     'impactOnParticipants' : IDL.Text,
     'feedbackFromParticipants' : IDL.Text,
     'followUpSupport' : IDL.Text,
     'typeOfActivities' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'outcomesAchieved' : IDL.Text,
     'dataVerification' : IDL.Bool,
     'challengesFaced' : IDL.Text,
@@ -1027,9 +1083,11 @@ export const idlFactory = ({ IDL }) => {
     'iotDevice' : IDL.Opt(IOTDevice),
   });
   const GenderEqualityWorkshopsData = IDL.Record({
+    'created' : IDL.Int,
     'endDate' : IDL.Text,
     'workshopDescription' : IDL.Text,
     'feedbackFromParticipants' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'themesCovered' : IDL.Text,
     'outcomesMeasured' : IDL.Text,
     'dataVerification' : IDL.Bool,
@@ -1052,8 +1110,10 @@ export const idlFactory = ({ IDL }) => {
   const WorkplaceGenderEqualityPoliciesData = IDL.Record({
     'complianceRate' : IDL.Nat,
     'implementationDate' : IDL.Text,
+    'created' : IDL.Int,
     'policyName' : IDL.Text,
     'reviewDate' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'outcomesAchieved' : IDL.Text,
     'dataVerification' : IDL.Bool,
     'policyDescription' : IDL.Text,
@@ -1086,11 +1146,13 @@ export const idlFactory = ({ IDL }) => {
     'operationalChallenges' : IDL.Text,
     'numberOfFacilitiesBuilt' : IDL.Nat,
     'typesOfFacilities' : IDL.Text,
+    'created' : IDL.Int,
     'totalInvestment' : IDL.Nat,
     'completionDate' : IDL.Text,
     'projectDescription' : IDL.Text,
     'populationServed' : IDL.Nat,
     'facilityName' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'complianceWithStandards' : IDL.Text,
     'dataVerification' : IDL.Bool,
     'numberOfFacilitiesRenovated' : IDL.Nat,
@@ -1109,9 +1171,11 @@ export const idlFactory = ({ IDL }) => {
   const WaterConservationInitiativesData = IDL.Record({
     'feedbackFromCommunity' : IDL.Text,
     'methodsUsed' : IDL.Text,
+    'created' : IDL.Int,
     'totalInvestment' : IDL.Nat,
     'endDate' : IDL.Text,
     'waterSaved' : IDL.Nat,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'initiativeName' : IDL.Text,
     'impactOnLocalEnvironment' : IDL.Text,
     'communityInvolvement' : IDL.Text,
@@ -1132,9 +1196,11 @@ export const idlFactory = ({ IDL }) => {
   });
   const WaterSanitationAccessData = IDL.Record({
     'operationalChallenges' : IDL.Text,
+    'created' : IDL.Int,
     'numberOfBeneficiaries' : IDL.Nat,
     'completionDate' : IDL.Text,
     'projectDescription' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'communityFeedback' : IDL.Text,
     'healthImpact' : IDL.Text,
     'typesOfInfrastructureBuilt' : IDL.Text,
@@ -1165,12 +1231,14 @@ export const idlFactory = ({ IDL }) => {
   });
   const RenewableEnergyProjectsData = IDL.Record({
     'operationalChallenges' : IDL.Text,
+    'created' : IDL.Int,
     'totalInvestment' : IDL.Nat,
     'completionDate' : IDL.Text,
     'projectName' : IDL.Text,
     'capacityInstalled' : IDL.Nat,
     'successesAchieved' : IDL.Text,
     'projectDescription' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'impactOnLocalEnvironment' : IDL.Text,
     'communityInvolvement' : IDL.Text,
     'dataVerification' : IDL.Bool,
@@ -1189,8 +1257,10 @@ export const idlFactory = ({ IDL }) => {
   });
   const EnergyEfficientSystemsData = IDL.Record({
     'ROI' : IDL.Text,
+    'created' : IDL.Int,
     'estimatedEnergySavings' : IDL.Nat,
     'impactOnOperationalEfficiency' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'totalCost' : IDL.Nat,
     'communityFeedback' : IDL.Text,
     'typeOfSystem' : IDL.Text,
@@ -1213,7 +1283,9 @@ export const idlFactory = ({ IDL }) => {
   const EnergyConsumptionReductionData = IDL.Record({
     'methodsUsed' : IDL.Text,
     'operationalChallenges' : IDL.Text,
+    'created' : IDL.Int,
     'completionDate' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'costSavings' : IDL.Nat,
     'totalEnergySaved' : IDL.Nat,
     'feedbackFromStakeholders' : IDL.Text,
@@ -1244,10 +1316,12 @@ export const idlFactory = ({ IDL }) => {
     'name' : IDL.Text,
   });
   const JobCreationInitiativesData = IDL.Record({
+    'created' : IDL.Int,
     'totalInvestment' : IDL.Nat,
     'completionDate' : IDL.Text,
     'feedbackFromBeneficiaries' : IDL.Text,
     'demographicFocus' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'initiativeName' : IDL.Text,
     'dataVerification' : IDL.Bool,
     'economicImpact' : IDL.Text,
@@ -1269,9 +1343,11 @@ export const idlFactory = ({ IDL }) => {
   });
   const VocationalTrainingProgramsData = IDL.Record({
     'programDescription' : IDL.Text,
+    'created' : IDL.Int,
     'endDate' : IDL.Text,
     'skillsAcquired' : IDL.Text,
     'totalParticipants' : IDL.Nat,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'dataVerification' : IDL.Bool,
     'impactOnCommunity' : IDL.Text,
     'certificationsEarned' : IDL.Nat,
@@ -1293,8 +1369,10 @@ export const idlFactory = ({ IDL }) => {
   });
   const EmploymentConditionsData = IDL.Record({
     'numberOfWorkplacesImproved' : IDL.Nat,
+    'created' : IDL.Int,
     'totalInvestment' : IDL.Nat,
     'completionDate' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'impactOnProductivity' : IDL.Text,
     'initiativeName' : IDL.Text,
     'dataVerification' : IDL.Bool,
@@ -1328,11 +1406,13 @@ export const idlFactory = ({ IDL }) => {
   const STEMInnovationEducationData = IDL.Record({
     'skillsDeveloped' : IDL.Text,
     'programDescription' : IDL.Text,
+    'created' : IDL.Int,
     'endDate' : IDL.Text,
     'ageRange' : IDL.Text,
     'totalParticipants' : IDL.Nat,
     'feedbackFromParticipants' : IDL.Text,
     'typeOfEducation' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'dataVerification' : IDL.Bool,
     'impactOnCareerOpportunities' : IDL.Text,
     'certificationsEarned' : IDL.Nat,
@@ -1352,10 +1432,12 @@ export const idlFactory = ({ IDL }) => {
   });
   const SustainableInfrastructureData = IDL.Record({
     'feedbackFromCommunity' : IDL.Text,
+    'created' : IDL.Int,
     'totalInvestment' : IDL.Nat,
     'infrastructureType' : IDL.Text,
     'endDate' : IDL.Text,
     'projectDescription' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'projectTitle' : IDL.Text,
     'dataVerification' : IDL.Bool,
     'impactOnCommunity' : IDL.Text,
@@ -1373,9 +1455,11 @@ export const idlFactory = ({ IDL }) => {
     'iotDevice' : IDL.Opt(IOTDevice),
   });
   const PeopleBenefitingFromInfrastructureData = IDL.Record({
+    'created' : IDL.Int,
     'feedbackFromBeneficiaries' : IDL.Text,
     'endDate' : IDL.Text,
     'impactOnQualityOfLife' : IDL.Text,
+    'supportingFiles' : IDL.Vec(IDL.Text),
     'initiativeName' : IDL.Text,
     'dataVerification' : IDL.Bool,
     'initiativeDescription' : IDL.Text,

@@ -3,9 +3,11 @@ import type { ActorMethod } from '@dfinity/agent';
 import type { IDL } from '@dfinity/candid';
 
 export interface AffordableHousingSupportData {
+  'created' : bigint,
   'completionDate' : string,
   'numberofUnitsConstructed' : bigint,
   'feedbackFromBeneficiaries' : string,
+  'supportingFiles' : Array<string>,
   'housingTypes' : string,
   'initiativeName' : string,
   'dataVerification' : boolean,
@@ -21,8 +23,10 @@ export interface AffordableHousingSupportData {
 export interface AntiCorruptionProgramsData {
   'feedbackFromCommunity' : string,
   'programDescription' : string,
+  'created' : bigint,
   'endDate' : string,
   'strategiesImplemented' : string,
+  'supportingFiles' : Array<string>,
   'legalActionsTaken' : bigint,
   'dataVerification' : boolean,
   'totalFunding' : bigint,
@@ -33,19 +37,14 @@ export interface AntiCorruptionProgramsData {
   'location' : string,
   'startDate' : string,
 }
-export interface BasicProgramInfo {
-  'programDescription' : string,
-  'endDate' : [] | [bigint],
-  'programLocation' : string,
-  'programName' : string,
-  'startDate' : bigint,
-}
 export interface CarbonEmissionReductionData {
   'methodsUsed' : string,
   'environmentalImpactAssessment' : string,
+  'created' : bigint,
   'totalInvestment' : bigint,
   'endDate' : string,
   'impactOnOperationalEfficiency' : string,
+  'supportingFiles' : Array<string>,
   'totalEmissionsReduced' : bigint,
   'feedbackFromStakeholders' : string,
   'initiativeName' : string,
@@ -57,12 +56,14 @@ export interface CarbonEmissionReductionData {
   'startDate' : string,
 }
 export interface CollaborativeSDGProjectsData {
+  'created' : bigint,
   'participatingOrganizations' : string,
   'totalInvestment' : bigint,
   'projectName' : string,
   'endDate' : string,
   'projectDescription' : string,
   'feedbackFromParticipants' : string,
+  'supportingFiles' : Array<string>,
   'outcomesAchieved' : string,
   'dataVerification' : boolean,
   'challengesFaced' : string,
@@ -73,8 +74,10 @@ export interface CollaborativeSDGProjectsData {
 export interface CommunityPeaceProgramsData {
   'feedbackFromCommunity' : string,
   'programDescription' : string,
+  'created' : bigint,
   'communityOutreach' : string,
   'endDate' : string,
+  'supportingFiles' : Array<string>,
   'conflictResolutionStrategies' : string,
   'incidentsOfViolenceReduced' : bigint,
   'dataVerification' : boolean,
@@ -87,10 +90,12 @@ export interface CommunityPeaceProgramsData {
 }
 export interface EducationalGrantsData {
   'programDescription' : string,
+  'created' : bigint,
   'endDate' : string,
   'typesOfGrants' : string,
   'totalAmountAwarded' : bigint,
   'feedbackFromRecipients' : string,
+  'supportingFiles' : Array<string>,
   'dataVerification' : boolean,
   'impactOnEducation' : string,
   'totalGrantsAwarded' : bigint,
@@ -103,8 +108,10 @@ export interface EducationalGrantsData {
 }
 export interface EmploymentConditionsData {
   'numberOfWorkplacesImproved' : bigint,
+  'created' : bigint,
   'totalInvestment' : bigint,
   'completionDate' : string,
+  'supportingFiles' : Array<string>,
   'impactOnProductivity' : string,
   'initiativeName' : string,
   'dataVerification' : boolean,
@@ -118,9 +125,11 @@ export interface EmploymentConditionsData {
   'startDate' : string,
 }
 export interface EndangeredSpeciesProtectionData {
+  'created' : bigint,
   'impactOnSpeciesPopulation' : string,
   'endDate' : string,
   'protectionStrategies' : string,
+  'supportingFiles' : Array<string>,
   'feedbackFromStakeholders' : string,
   'initiativeName' : string,
   'dataVerification' : boolean,
@@ -134,7 +143,9 @@ export interface EndangeredSpeciesProtectionData {
 export interface EnergyConsumptionReductionData {
   'methodsUsed' : string,
   'operationalChallenges' : string,
+  'created' : bigint,
   'completionDate' : string,
+  'supportingFiles' : Array<string>,
   'costSavings' : bigint,
   'totalEnergySaved' : bigint,
   'feedbackFromStakeholders' : string,
@@ -148,8 +159,10 @@ export interface EnergyConsumptionReductionData {
 }
 export interface EnergyEfficientSystemsData {
   'ROI' : string,
+  'created' : bigint,
   'estimatedEnergySavings' : bigint,
   'impactOnOperationalEfficiency' : string,
+  'supportingFiles' : Array<string>,
   'totalCost' : bigint,
   'communityFeedback' : string,
   'typeOfSystem' : string,
@@ -161,23 +174,14 @@ export interface EnergyEfficientSystemsData {
   'systemName' : string,
   'installationDate' : string,
 }
-export interface FeedbackAndVerification {
-  'supportingDocuments' : Array<Uint8Array | number[]>,
-  'dataVerification' : boolean,
-  'participantFeedback' : string,
-  'successStories' : string,
-}
-export interface FinancialInfo {
-  'fundingSources' : string,
-  'programBudget' : bigint,
-  'resourcesProvided' : string,
-}
 export interface FoodDonation {
   'programDescription' : string,
+  'created' : bigint,
   'numberOfBeneficiaries' : bigint,
   'totalDonatedFood' : bigint,
   'endDate' : string,
   'feedbackFromRecipients' : string,
+  'supportingFiles' : Array<string>,
   'foodSafetyStandards' : string,
   'dataVerification' : boolean,
   'communityImpact' : string,
@@ -191,9 +195,11 @@ export interface FoodDonation {
   'startDate' : string,
 }
 export interface GenderEqualityWorkshopsData {
+  'created' : bigint,
   'endDate' : string,
   'workshopDescription' : string,
   'feedbackFromParticipants' : string,
+  'supportingFiles' : Array<string>,
   'themesCovered' : string,
   'outcomesMeasured' : string,
   'dataVerification' : boolean,
@@ -206,8 +212,10 @@ export interface GenderEqualityWorkshopsData {
   'startDate' : string,
 }
 export interface GlobalPartnershipFinancialContributionsData {
+  'created' : bigint,
   'feedbackFromBeneficiaries' : string,
   'date' : string,
+  'supportingFiles' : Array<string>,
   'description' : string,
   'dataVerification' : boolean,
   'amountContributed' : bigint,
@@ -221,9 +229,11 @@ export interface HealthCheckupVaccinationData {
   'operationalChallenges' : string,
   'totalServicesProvided' : bigint,
   'programDescription' : string,
+  'created' : bigint,
   'endDate' : string,
   'totalParticipants' : bigint,
   'feedbackFromParticipants' : string,
+  'supportingFiles' : Array<string>,
   'vaccinationCoverage' : bigint,
   'followUpActions' : string,
   'healthOutcomesMeasured' : string,
@@ -237,10 +247,12 @@ export interface HealthCheckupVaccinationData {
 export interface HealthcareAccessData {
   'operationalChallenges' : string,
   'programDescription' : string,
+  'created' : bigint,
   'endDate' : string,
   'totalHealthFacilities' : bigint,
   'improvementsMade' : string,
   'typesOfServicesProvided' : string,
+  'supportingFiles' : Array<string>,
   'dataVerification' : boolean,
   'communityImpact' : string,
   'totalPatientsServed' : bigint,
@@ -254,10 +266,12 @@ export interface HealthcareAccessData {
 export interface HealthcareFunding {
   'healthOutcomes' : string,
   'programDescription' : string,
+  'created' : bigint,
   'fundingSources' : string,
   'feedbackFromBeneficiaries' : string,
   'endDate' : string,
   'numberofHealthProjects' : bigint,
+  'supportingFiles' : Array<string>,
   'totalFundingAmount' : bigint,
   'dataVerification' : boolean,
   'typesOfServicesFunded' : string,
@@ -268,10 +282,12 @@ export interface HealthcareFunding {
   'startDate' : string,
 }
 export interface HumanRightsInitiativesData {
+  'created' : bigint,
   'feedbackFromBeneficiaries' : string,
   'endDate' : string,
   'areasCovered' : string,
   'impactOnLegalOutcomes' : string,
+  'supportingFiles' : Array<string>,
   'initiativeName' : string,
   'dataVerification' : boolean,
   'totalFunding' : bigint,
@@ -286,12 +302,6 @@ export interface IOTDevice {
   'name' : string,
   'platform' : string,
   'ipAddress' : string,
-}
-export interface ImpactAssessment {
-  'skillsDeveloped' : string,
-  'employmentRatePostProgram' : number,
-  'averageIncomeBeforeProgram' : bigint,
-  'averageIncomeAfterProgram' : bigint,
 }
 export interface ImpactTarget1 {
   'id' : bigint,
@@ -401,9 +411,11 @@ export interface InclusionPoliciesData {
   'complianceRate' : bigint,
   'implementationDate' : string,
   'sectorsAffected' : string,
+  'created' : bigint,
   'feedbackFromBeneficiaries' : string,
   'policyName' : string,
   'reviewDate' : string,
+  'supportingFiles' : Array<string>,
   'outcomesAchieved' : string,
   'dataVerification' : boolean,
   'policyDescription' : string,
@@ -412,8 +424,10 @@ export interface InclusionPoliciesData {
   'targetGroups' : string,
 }
 export interface InequalityReductionBeneficiariesData {
+  'created' : bigint,
   'feedbackFromBeneficiaries' : string,
   'endDate' : string,
+  'supportingFiles' : Array<string>,
   'initiativeName' : string,
   'dataVerification' : boolean,
   'initiativeDescription' : string,
@@ -428,10 +442,12 @@ export interface InequalityReductionBeneficiariesData {
   'startDate' : string,
 }
 export interface JobCreationInitiativesData {
+  'created' : bigint,
   'totalInvestment' : bigint,
   'completionDate' : string,
   'feedbackFromBeneficiaries' : string,
   'demographicFocus' : string,
+  'supportingFiles' : Array<string>,
   'initiativeName' : string,
   'dataVerification' : boolean,
   'economicImpact' : string,
@@ -444,16 +460,32 @@ export interface JobCreationInitiativesData {
   'startDate' : string,
 }
 export interface JobTrainingProgram {
+  'skillsDeveloped' : string,
+  'programDescription' : string,
   'created' : bigint,
-  'participantsInfo' : ParticipantsInfo,
-  'impactAssessment' : ImpactAssessment,
-  'feedbackAndVerification' : FeedbackAndVerification,
-  'basicProgramInfo' : BasicProgramInfo,
-  'financialInfo' : FinancialInfo,
+  'fundingSources' : string,
+  'endDate' : [] | [bigint],
+  'completionRate' : string,
+  'supportingFiles' : Array<string>,
+  'programBudget' : bigint,
+  'programLocation' : string,
+  'dataVerification' : boolean,
+  'programName' : string,
+  'employmentRatePostProgram' : string,
+  'averageIncomeBeforeProgram' : bigint,
+  'participantFeedback' : string,
+  'resourcesProvided' : string,
+  'numberOfParticipants' : bigint,
+  'targetDemographic' : string,
+  'startDate' : bigint,
+  'successStories' : string,
+  'averageIncomeAfterProgram' : bigint,
 }
 export interface LandConservationReforestationData {
   'feedbackFromCommunity' : string,
+  'created' : bigint,
   'endDate' : string,
+  'supportingFiles' : Array<string>,
   'conservationMethods' : string,
   'initiativeName' : string,
   'communityInvolvement' : string,
@@ -468,9 +500,11 @@ export interface LandConservationReforestationData {
   'startDate' : string,
 }
 export interface LandRehabilitationData {
+  'created' : bigint,
   'areaRehabilitated' : bigint,
   'endDate' : string,
   'biodiversityImpact' : string,
+  'supportingFiles' : Array<string>,
   'communityFeedback' : string,
   'initiativeName' : string,
   'dataVerification' : boolean,
@@ -483,8 +517,10 @@ export interface LandRehabilitationData {
 }
 export interface MarginalizedCommunitySupportData {
   'feedbackFromCommunity' : string,
+  'created' : bigint,
   'numberOfBeneficiaries' : bigint,
   'completionDate' : string,
+  'supportingFiles' : Array<string>,
   'initiativeName' : string,
   'servicesProvided' : string,
   'outcomesAchieved' : string,
@@ -497,8 +533,10 @@ export interface MarginalizedCommunitySupportData {
   'startDate' : string,
 }
 export interface MarineEcosystemProtectionData {
+  'created' : bigint,
   'endDate' : string,
   'protectionStrategies' : string,
+  'supportingFiles' : Array<string>,
   'feedbackFromStakeholders' : string,
   'initiativeName' : string,
   'dataVerification' : boolean,
@@ -1008,6 +1046,7 @@ export interface MicroloanProgram {
   'created' : bigint,
   'numberOfBeneficiaries' : bigint,
   'endDate' : string,
+  'supportingFiles' : Array<string>,
   'description' : string,
   'fundingSource' : string,
   'dataVerification' : boolean,
@@ -1016,7 +1055,7 @@ export interface MicroloanProgram {
   'beneficiaryFeedback' : string,
   'programChallenges' : string,
   'economicImpact' : string,
-  'repaymentRate' : number,
+  'repaymentRate' : string,
   'programName' : string,
   'averageLoanAmount' : bigint,
   'location' : string,
@@ -1024,12 +1063,14 @@ export interface MicroloanProgram {
 }
 export interface NutritiousFoodProgram {
   'programDescription' : string,
+  'created' : bigint,
   'endDate' : string,
   'nutritionalContent' : string,
   'sourceOfFood' : string,
   'totalParticipants' : bigint,
   'mealsProvided' : bigint,
   'typeOfMeals' : string,
+  'supportingFiles' : Array<string>,
   'dataVerification' : boolean,
   'frequencyOfMeals' : string,
   'challengesFaced' : string,
@@ -1041,10 +1082,12 @@ export interface NutritiousFoodProgram {
 }
 export interface OceanPollutionReductionData {
   'feedbackFromCommunity' : string,
+  'created' : bigint,
   'impactOnMarineLife' : string,
   'reductionMethods' : string,
   'endDate' : string,
   'typesOfPollutantsTargeted' : string,
+  'supportingFiles' : Array<string>,
   'initiativeName' : string,
   'communityInvolvement' : string,
   'dataVerification' : boolean,
@@ -1054,16 +1097,13 @@ export interface OceanPollutionReductionData {
   'location' : string,
   'startDate' : string,
 }
-export interface ParticipantsInfo {
-  'completionRate' : number,
-  'numberOfParticipants' : bigint,
-  'targetDemographic' : string,
-}
 export interface PeopleAssistedOutOfPoverty {
   'programDescription' : string,
+  'created' : bigint,
   'endDate' : string,
   'longTermImpact' : string,
   'totalParticipants' : bigint,
+  'supportingFiles' : Array<string>,
   'dataVerification' : boolean,
   'challengesFaced' : string,
   'programName' : string,
@@ -1076,9 +1116,11 @@ export interface PeopleAssistedOutOfPoverty {
   'successfullyAssisted' : bigint,
 }
 export interface PeopleBenefitingFromInfrastructureData {
+  'created' : bigint,
   'feedbackFromBeneficiaries' : string,
   'endDate' : string,
   'impactOnQualityOfLife' : string,
+  'supportingFiles' : Array<string>,
   'initiativeName' : string,
   'dataVerification' : boolean,
   'initiativeDescription' : string,
@@ -1091,10 +1133,12 @@ export interface PeopleBenefitingFromInfrastructureData {
 }
 export interface ReforestationProjectsData {
   'feedbackFromCommunity' : string,
+  'created' : bigint,
   'projectName' : string,
   'endDate' : string,
   'projectDescription' : string,
   'biodiversityImpact' : string,
+  'supportingFiles' : Array<string>,
   'numberofTreesPlanted' : bigint,
   'communityInvolvement' : string,
   'dataVerification' : boolean,
@@ -1107,11 +1151,13 @@ export interface ReforestationProjectsData {
   'startDate' : string,
 }
 export interface RenewableEnergyInvestmentData {
+  'created' : bigint,
   'totalInvestment' : bigint,
   'endDate' : string,
   'environmentalImpact' : string,
   'capacityInstalled' : bigint,
   'impactOnOperationalCosts' : string,
+  'supportingFiles' : Array<string>,
   'feedbackFromStakeholders' : string,
   'typeOfEnergy' : string,
   'initiativeName' : string,
@@ -1124,12 +1170,14 @@ export interface RenewableEnergyInvestmentData {
 }
 export interface RenewableEnergyProjectsData {
   'operationalChallenges' : string,
+  'created' : bigint,
   'totalInvestment' : bigint,
   'completionDate' : string,
   'projectName' : string,
   'capacityInstalled' : bigint,
   'successesAchieved' : string,
   'projectDescription' : string,
+  'supportingFiles' : Array<string>,
   'impactOnLocalEnvironment' : string,
   'communityInvolvement' : string,
   'dataVerification' : boolean,
@@ -1139,8 +1187,10 @@ export interface RenewableEnergyProjectsData {
   'startDate' : string,
 }
 export interface ResourceFootprintReductionData {
+  'created' : bigint,
   'endDate' : string,
   'impactOnOperationalCosts' : string,
+  'supportingFiles' : Array<string>,
   'feedbackFromStakeholders' : string,
   'initiativeName' : string,
   'dataVerification' : boolean,
@@ -1157,8 +1207,10 @@ export type Result = { 'ok' : UserRecord } |
   { 'err' : string };
 export interface SDGAdvocacyCampaignsData {
   'methodsUsed' : string,
+  'created' : bigint,
   'feedbackFromAudience' : string,
   'endDate' : string,
+  'supportingFiles' : Array<string>,
   'mainMessages' : string,
   'targetAudience' : string,
   'impactOnAwareness' : string,
@@ -1172,11 +1224,13 @@ export interface SDGAdvocacyCampaignsData {
 export interface STEMInnovationEducationData {
   'skillsDeveloped' : string,
   'programDescription' : string,
+  'created' : bigint,
   'endDate' : string,
   'ageRange' : string,
   'totalParticipants' : bigint,
   'feedbackFromParticipants' : string,
   'typeOfEducation' : string,
+  'supportingFiles' : Array<string>,
   'dataVerification' : boolean,
   'impactOnCareerOpportunities' : string,
   'certificationsEarned' : bigint,
@@ -1191,11 +1245,13 @@ export interface SanitationFacilitiesData {
   'operationalChallenges' : string,
   'numberOfFacilitiesBuilt' : bigint,
   'typesOfFacilities' : string,
+  'created' : bigint,
   'totalInvestment' : bigint,
   'completionDate' : string,
   'projectDescription' : string,
   'populationServed' : bigint,
   'facilityName' : string,
+  'supportingFiles' : Array<string>,
   'complianceWithStandards' : string,
   'dataVerification' : boolean,
   'numberOfFacilitiesRenovated' : bigint,
@@ -1205,10 +1261,12 @@ export interface SanitationFacilitiesData {
 }
 export interface SchoolsBuiltSupportedData {
   'feedbackFromCommunity' : string,
+  'created' : bigint,
   'totalInvestment' : bigint,
   'projectName' : string,
   'endDate' : string,
   'projectDescription' : string,
+  'supportingFiles' : Array<string>,
   'sourcesOfFunding' : string,
   'numberOfSchoolsBuilt' : bigint,
   'studentCapacityIncrease' : bigint,
@@ -1222,8 +1280,10 @@ export interface SchoolsBuiltSupportedData {
 export interface StudentsBenefitingData {
   'graduationRates' : bigint,
   'programDescription' : string,
+  'created' : bigint,
   'endDate' : string,
   'totalStudentsBenefited' : bigint,
+  'supportingFiles' : Array<string>,
   'followUpSuccessRate' : bigint,
   'dataVerification' : boolean,
   'challengesFaced' : string,
@@ -1238,6 +1298,7 @@ export interface StudentsBenefitingData {
 }
 export interface SustainableAgricultureInvestment {
   'agriculturalOutput' : bigint,
+  'created' : bigint,
   'totalInvestment' : bigint,
   'projectName' : string,
   'endDate' : string,
@@ -1245,6 +1306,7 @@ export interface SustainableAgricultureInvestment {
   'farmerFeedback' : string,
   'projectDescription' : string,
   'sustainabilityMetrics' : string,
+  'supportingFiles' : Array<string>,
   'typeOfInvestments' : string,
   'dataVerification' : boolean,
   'challengesFaced' : string,
@@ -1255,7 +1317,9 @@ export interface SustainableAgricultureInvestment {
   'startDate' : string,
 }
 export interface SustainableFishingSupportData {
+  'created' : bigint,
   'endDate' : string,
+  'supportingFiles' : Array<string>,
   'fishingPracticesImplemented' : string,
   'policyChanges' : string,
   'initiativeName' : string,
@@ -1271,10 +1335,12 @@ export interface SustainableFishingSupportData {
 }
 export interface SustainableInfrastructureData {
   'feedbackFromCommunity' : string,
+  'created' : bigint,
   'totalInvestment' : bigint,
   'infrastructureType' : string,
   'endDate' : string,
   'projectDescription' : string,
+  'supportingFiles' : Array<string>,
   'projectTitle' : string,
   'dataVerification' : boolean,
   'impactOnCommunity' : string,
@@ -1284,10 +1350,12 @@ export interface SustainableInfrastructureData {
   'startDate' : string,
 }
 export interface SustainableSupplyChainInvestmentData {
+  'created' : bigint,
   'totalInvestment' : bigint,
   'endDate' : string,
   'environmentalImpact' : string,
   'supplierEngagement' : string,
+  'supportingFiles' : Array<string>,
   'feedbackFromStakeholders' : string,
   'initiativeName' : string,
   'dataVerification' : boolean,
@@ -1302,10 +1370,12 @@ export interface SustainableSupplyChainInvestmentData {
 }
 export interface UrbanLivingConditionsData {
   'feedbackFromCommunity' : string,
+  'created' : bigint,
   'totalInvestment' : bigint,
   'completionDate' : string,
   'environmentalImpact' : string,
   'populationImpacted' : bigint,
+  'supportingFiles' : Array<string>,
   'initiativeName' : string,
   'communityInvolvement' : string,
   'outcomesAchieved' : string,
@@ -1318,10 +1388,12 @@ export interface UrbanLivingConditionsData {
   'startDate' : string,
 }
 export interface UrbanSustainabilityProjectsData {
+  'created' : bigint,
   'completionDate' : string,
   'projectName' : string,
   'projectDescription' : string,
   'technologiesUsed' : string,
+  'supportingFiles' : Array<string>,
   'communityEngagement' : string,
   'dataVerification' : boolean,
   'impactOnCommunity' : string,
@@ -1346,9 +1418,11 @@ export interface UserRecord {
 }
 export interface VocationalTrainingProgramsData {
   'programDescription' : string,
+  'created' : bigint,
   'endDate' : string,
   'skillsAcquired' : string,
   'totalParticipants' : bigint,
+  'supportingFiles' : Array<string>,
   'dataVerification' : boolean,
   'impactOnCommunity' : string,
   'certificationsEarned' : bigint,
@@ -1362,7 +1436,9 @@ export interface VocationalTrainingProgramsData {
 }
 export interface WasteReductionRecyclingData {
   'feedbackFromCommunity' : string,
+  'created' : bigint,
   'endDate' : string,
+  'supportingFiles' : Array<string>,
   'initiativeName' : string,
   'wasteReduced' : bigint,
   'dataVerification' : boolean,
@@ -1381,9 +1457,11 @@ export interface WasteReductionRecyclingData {
 export interface WaterConservationInitiativesData {
   'feedbackFromCommunity' : string,
   'methodsUsed' : string,
+  'created' : bigint,
   'totalInvestment' : bigint,
   'endDate' : string,
   'waterSaved' : bigint,
+  'supportingFiles' : Array<string>,
   'initiativeName' : string,
   'impactOnLocalEnvironment' : string,
   'communityInvolvement' : string,
@@ -1396,9 +1474,11 @@ export interface WaterConservationInitiativesData {
 }
 export interface WaterSanitationAccessData {
   'operationalChallenges' : string,
+  'created' : bigint,
   'numberOfBeneficiaries' : bigint,
   'completionDate' : string,
   'projectDescription' : string,
+  'supportingFiles' : Array<string>,
   'communityFeedback' : string,
   'healthImpact' : string,
   'typesOfInfrastructureBuilt' : string,
@@ -1411,11 +1491,13 @@ export interface WaterSanitationAccessData {
 }
 export interface WomensEmpowermentProgramData {
   'programDescription' : string,
+  'created' : bigint,
   'endDate' : string,
   'impactOnParticipants' : string,
   'feedbackFromParticipants' : string,
   'followUpSupport' : string,
   'typeOfActivities' : string,
+  'supportingFiles' : Array<string>,
   'outcomesAchieved' : string,
   'dataVerification' : boolean,
   'challengesFaced' : string,
@@ -1428,8 +1510,10 @@ export interface WomensEmpowermentProgramData {
 export interface WorkplaceGenderEqualityPoliciesData {
   'complianceRate' : bigint,
   'implementationDate' : string,
+  'created' : bigint,
   'policyName' : string,
   'reviewDate' : string,
+  'supportingFiles' : Array<string>,
   'outcomesAchieved' : string,
   'dataVerification' : boolean,
   'policyDescription' : string,

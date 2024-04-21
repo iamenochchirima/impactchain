@@ -143,7 +143,7 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
       const startDateMilliseconds = new Date(data.startDate).getTime();
       const endDateMilliseconds = new Date(data.endDate).getTime();
 
-      const jobTrainingProgram: MicroloanProgram = {
+      const microloanProgram: MicroloanProgram = {
         programName: data.programName,
         description: data.description,
         startDate: BigInt(startDateMilliseconds),
@@ -162,7 +162,7 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
         supportingFiles: urls ? urls : [],
         created: BigInt(Date.now()),
       };
-      setManualData(jobTrainingProgram);
+      setManualData(microloanProgram);
       setUploadManually(false);
     } catch (error) {
         setSaving(false);

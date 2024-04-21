@@ -24,7 +24,6 @@ type FormData = {
   followUpDuration: number;
   longTermImpact: Text;
   participantFeedback: Text;
-  challengesFaced: Text;
   challengesFaced: string;
 };
 
@@ -133,11 +132,11 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
       const startDateMilliseconds = new Date(data.startDate).getTime();
       const endDateMilliseconds = new Date(data.endDate).getTime();
 
-      const jobTrainingProgram: PeopleAssistedOutOfPovertyType = {
+      const request: PeopleAssistedOutOfPovertyType = {
         programName: data.programName,
         programDescription: data.programDescription,
         startDate: BigInt(startDateMilliseconds),
-        endDate: BigInt(endDateMilliseconds),
+        endDate: endDateMilliseconds,
         location: data.location,
         totalParticipants: data.totalParticipants,
         successfullyAssisted: data.successfullyAssisted,
@@ -145,13 +144,10 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
         averageIncomeAfterProgram: data.averageIncomeAfterProgram,
         followUpDuration: data.followUpDuration,
         longTermImpact: data.longTermImpact,
-        participantFeedback: data.participantFeedback,
         challengesFaced: data.challengesFaced,
-        dataVerification: false,
-        supportingFiles: urls ? urls : [],
-        created: BigInt(Date.now()),
+        supportDocuments: urls,
       };
-      setManualData(jobTrainingProgram);
+      setManualData(request);
       setUploadManually(false);
     } catch (error) {
       setSaving(false);

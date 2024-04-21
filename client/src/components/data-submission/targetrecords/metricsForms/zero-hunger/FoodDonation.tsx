@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { z } from "zod";
-import { uploadFile } from "../../../../config/storage/functions";
+import { uploadFile } from "../../../../../config/storage/functions";
 import { useSelector } from "react-redux";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RootState } from "../../../../redux/store";
+import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
-import { styles } from "../../../../styles/styles";
-import FilesInput from "./support/FilesInput";
-import { FoodDonation as FoodDonationType } from "../../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
+import { styles } from "../../../../../styles/styles";
+import FilesInput from "../support/FilesInput";
+import { FoodDonation as FoodDonationType } from "../../../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
 
 type FormData = {
   programName: string;

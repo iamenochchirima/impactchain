@@ -1297,24 +1297,27 @@ export interface StudentsBenefitingData {
   'feedbackFromEducators' : string,
 }
 export interface SustainableAgricultureInvestment {
-  'agriculturalOutput' : bigint,
+  'location' : string,
+  'startDate' : bigint,
+  'endDate' : bigint,
+  'supportingFiles' : Array<string>,
   'created' : bigint,
+
+  'agriculturalOutput' : bigint,
   'totalInvestment' : bigint,
   'projectName' : string,
-  'endDate' : bigint,
   'impactOnLocalEconomy' : string,
   'farmerFeedback' : string,
   'projectDescription' : string,
   'sustainabilityMetrics' : string,
-  'supportingFiles' : Array<string>,
   'typeOfInvestments' : string,
-  'dataVerification' : boolean,
+  
   'challengesFaced' : string,
-  'numberofBeneficiaries' : bigint,
+  'numberOfBeneficiaries' : bigint,
   'investmentSource' : string,
   'technologyUsed' : string,
-  'location' : string,
-  'startDate' : bigint,
+  
+  'dataVerification' : boolean,
 }
 export interface SustainableFishingSupportData {
   'created' : bigint,

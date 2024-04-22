@@ -60,7 +60,7 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
       const startDateMilliseconds = new Date(startDate).getTime();
       const endDateMilliseconds = new Date(endDate).getTime();
 
-      const jobTrainingProgram: FoodDonationType = {
+      const FoodDonation: FoodDonationType = {
         programName: programName,
         programDescription: programDescription,
         startDate: BigInt(startDateMilliseconds),

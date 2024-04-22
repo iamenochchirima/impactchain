@@ -25,12 +25,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(errorHandler)
 
 const PORT = process.env.PORT || 5000;
+const HOST = '0.0.0.0';
 
 const server = http.createServer(app);
 
 setupSocketIO(server);
 
-server.listen(PORT, () => {
+server.listen({ port: PORT, host: HOST }, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 

@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 import { RootState } from "../../../redux/store";
 import { useAuth } from "../../../hooks/AppContext";
 import { ImpactTargetType, Metric } from "../../../utils/types";
-import { UserRecord } from "../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
+import { UserRecord } from "../../../hooks/declarations/data/data.did";
 import { getTargetMetrics } from "../../../utils/targets";
 
 type Props = {

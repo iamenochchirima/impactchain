@@ -1,4 +1,4 @@
-import { IOTDevice } from "../hooks/declarations/impact_chain_data/impact_chain_data.did";
+import { IOTDevice } from "../hooks/declarations/data/data.did";
 
 export type ImpactTargetType = {
   id: number;

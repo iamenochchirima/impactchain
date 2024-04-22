@@ -9,7 +9,7 @@ import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
-import { MicroloanProgram } from "../../../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
+import { MicroloanProgram } from "../../../../../hooks/declarations/data/data.did";
 
 const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);

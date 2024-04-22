@@ -7,8 +7,8 @@ import React, {
 } from "react";
 import { Actor, ActorSubclass, HttpAgent } from "@dfinity/agent";
 
-import { _SERVICE } from "./declarations/impact_chain_data/impact_chain_data.did";
-import { dataCanisterId, dataIDL, network } from "./exporter";
+import { _SERVICE } from "./declarations/data/data.did";
+import { dataCanisterId, dataIDL, environment, network } from "./exporter";
 import { Socket, io } from "socket.io-client";
 
 const localhost = "http://localhost:4943";
@@ -35,10 +35,15 @@ const useAuthClient = () => {
   useEffect(() => {
     updateClient();
 
-    const newSocket = io("https://impactchain-production.up.railway.app/", {
-      path: "/socket.io",
-      transports: ["websocket"],
-    });
+    const newSocket = io(
+      environment === "development"
+        ? "http://localhost:5000"
+        : "https://impactchain-production.up.railway.app/",
+      {
+        path: "/socket.io",
+        transports: ["websocket"],
+      }
+    );
     setSocket(newSocket);
 
     return () => {

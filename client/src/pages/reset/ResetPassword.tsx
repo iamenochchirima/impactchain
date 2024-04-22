@@ -1,6 +1,25 @@
-import React from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const ResetPassword = () => {
+
+    const [email, setEmail] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        try {
+            // Call the API to send the reset password email
+            // await sendResetPasswordEmail(email);
+            setIsLoading(false);
+            // Redirect the user to the login page
+            // navigate("/login");
+        } catch (error) {
+            console.error(error);
+            setIsLoading(false);
+        }
+    };
   return (
     <div className="bg-black min-h-screen font-NeueMachinaRegular text-custom-green pt-44">
       <h1 className="font-NeueMachinaUltrabold text-7xl text-center">

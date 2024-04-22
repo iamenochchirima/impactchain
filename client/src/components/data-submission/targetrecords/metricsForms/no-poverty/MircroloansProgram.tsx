@@ -15,7 +15,7 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
   const [supportFiles, setSupportFiles] = useState<File[] | null>(null);
   const { storageInitiated } = useSelector((state: RootState) => state.app);
-  const [countDown, setCountDown] = useState("");
+  const [countDown, setCountDown] = useState<number>(0);
 
   const [programName, setProgramName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -189,7 +189,7 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
             type="number"
             placeholder="Total Budget"
             value={totalBudget}
-            onChange={(e) => setTotalBudget(parseInt(e.target.value))}
+            onChange={(e) => setTotalBudget(e.target.value)}
             required
           />
         </div>
@@ -213,7 +213,7 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
             type="number"
             placeholder="Number of Beneficiaries"
             value={numberOfBeneficiaries}
-            onChange={(e) => setNumberOfBeneficiaries(parseInt(e.target.value))}
+            onChange={(e) => setNumberOfBeneficiaries(e.target.value)}
             required
           />
         </div>
@@ -225,7 +225,7 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
             type="number"
             placeholder="Average Loan Amount"
             value={averageLoanAmount}
-            onChange={(e) => setAverageLoanAmount(parseInt(e.target.value))}
+            onChange={(e) => setAverageLoanAmount(e.target.value)}
             required
           />
         </div>

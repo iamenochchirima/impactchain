@@ -1,33 +1,13 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { z } from "zod";
 import { uploadFile } from "../../../../../config/storage/functions";
 import { useSelector } from "react-redux";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
 import { FoodDonation as FoodDonationType } from "../../../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
 
-type FormData = {
-  programName: string;
-  programDescription: string;
-  startDate: string;
-  endDate: string;
-  location: string;
-  totalDonatedFood: number;
-  numberOfBeneficiaries: number;
-  typeOfFoodDonated: string;
-  sourcesOfFood: string;
-  storageFacilities: string;
-  distributionMethods: string;
-  foodSafetyStandards: string;
-  communityImpact: string;
-  feedbackFromRecipients: string;
-  challengesFaced: string;
-};
 
 const FoodDonation = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
@@ -35,91 +15,24 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
   const { storageInitiated } = useSelector((state: RootState) => state.app);
   const [countDown, setCountDown] = useState<number>(0);
 
-  const schema = z.object({
-    programName: z
-      .string()
-      .min(1, { message: "Name must be at least 2 characters long" })
-      .max(200, { message: "Name must be at most 200 characters long" }),
-    programDescription: z
-      .string()
-      .min(1, {
-        message: "Description must be at least 2 characters long",
-      })
-      .max(500, { message: "Description must be at most 500 characters long" }),
-    startDate: z.string().min(1, { message: "Start Date is required" }),
-    endDate: z.string(),
-    location: z
-      .string()
-      .min(1, { message: "Location is required" })
-      .max(200, { message: "Location must be at most 200 characters long" }),
-    totalDonatedFood: z
-      .string()
-      .min(1, { message: "Total Donated Food is required" })
-      .max(200, {
-        message: "Total Donated Food must be at most 200 characters long",
-      }),
-    numberOfBeneficiaries: z
-      .number()
-      .min(1, { message: "Number of Beneficiaries is required" })
-      .max(200, {
-        message: "Number of Beneficiaries must be at most 200 characters long",
-      }),
-    typeOfFoodDonated: z
-      .string()
-      .min(1, { message: "Type of Food Donated is required" })
-      .max(200, {
-        message: "Type of Food Donated must be at most 200 characters long",
-      }),
-    sourcesOfFood: z
-      .string()
-      .min(1, { message: "Sources of Food is required" })
-      .max(200, {
-        message: "Sources of Food must be at most 200 characters long",
-      }),
-    storageFacilities: z
-      .string()
-      .min(1, { message: "Storage Facilities is required" })
-      .max(200, {
-        message: "Storage Facilities must be at most 200 characters long",
-      }),
-    distributionMethods: z
-      .string()
-      .min(1, { message: "Distribution Methods is required" })
-      .max(200, {
-        message: "Distribution Methods must be at most 200 characters long",
-      }),
-    foodSafetyStandards: z
-      .string()
-      .min(1, { message: "Food Safety Standards is required" })
-      .max(200, {
-        message: "Food Safety Standards must be at most 200 characters long",
-      }),
-    communityImpact: z
-      .string()
-      .min(1, { message: "Community Impact is required" })
-      .max(200, {
-        message: "Community Impact must be at most 200 characters long",
-      }),
-    feedbackFromRecipients: z
-      .string()
-      .min(1, { message: "Feedback From Recipients is required" })
-      .max(200, {
-        message: "Feedback From Recipients must be at most 200 characters long",
-      }),
-    challengesFaced: z
-      .string()
-      .min(1, { message: "Challenges Faced is required" })
-      .max(200, {
-        message: "Challenges Faced must be at most 200 characters long",
-      }),
-  });
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>({ resolver: zodResolver(schema) });
+  const [programName, setProgramName] = useState<string>("");
+  const [programDescription, setProgramDescription] = useState<string>("");
+  const [startDate, setStartDate] = useState<string>("");
+  const [endDate, setEndDate] = useState<string>("");
+  const [location, setLocation] = useState<string>("");
+  const [totalDonatedFood, setTotalDonatedFood] = useState("");
+  const [numberOfBeneficiaries, setNumberOfBeneficiaries] = useState("");
+  const [typeOfFoodDonated, setTypeOfFoodDonated] = useState<string>("");
+  const [sourcesOfFood, setSourcesOfFood] = useState<string>("");
+  const [storageFacilities, setStorageFacilities] = useState<string>("");
+  const [distributionMethods, setDistributionMethods] = useState<string>("");
+  const [foodSafetyStandards, setFoodSafetyStandards] = useState<string>("");
+  const [communityImpact, setCommunityImpact] = useState<string>("");
+  const [feedbackFromRecipients, setFeedbackFromRecipients] =
+    useState<string>("");
+  const [challengesFaced, setChallengesFaced] = useState<string>("");
 
-  const handleSave = async (data: FormData) => {
+  const handleSave = async () => {
     try {
       setSaving(true);
       const checkedFiles: File[] = [];
@@ -144,25 +57,25 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
 
       const urls = await uploadAsset(checkedFiles);
 
-      const startDateMilliseconds = new Date(data.startDate).getTime();
-      const endDateMilliseconds = new Date(data.endDate).getTime();
+      const startDateMilliseconds = new Date(startDate).getTime();
+      const endDateMilliseconds = new Date(endDate).getTime();
 
       const jobTrainingProgram: FoodDonationType = {
-        programName: data.programName,
-        programDescription: data.programDescription,
+        programName: programName,
+        programDescription: programDescription,
         startDate: BigInt(startDateMilliseconds),
         endDate: BigInt(endDateMilliseconds),
-        location: data.location,
-        totalDonatedFood: BigInt(data.totalDonatedFood),
-        numberOfBeneficiaries: BigInt(data.numberOfBeneficiaries),
-        typeOfFoodDonated: data.typeOfFoodDonated,
-        sourcesOfFood: data.sourcesOfFood,
-        storageFacilities: data.storageFacilities,
-        distributionMethods: data.distributionMethods,
-        foodSafetyStandards: data.foodSafetyStandards,
-        communityImpact: data.communityImpact,
-        feedbackFromRecipients: data.feedbackFromRecipients,
-        challengesFaced: data.challengesFaced,
+        location: location,
+        totalDonatedFood: BigInt(totalDonatedFood),
+        numberOfBeneficiaries: BigInt(numberOfBeneficiaries),
+        typeOfFoodDonated: typeOfFoodDonated,
+        sourcesOfFood: sourcesOfFood,
+        storageFacilities: storageFacilities,
+        distributionMethods: distributionMethods,
+        foodSafetyStandards: foodSafetyStandards,
+        communityImpact: communityImpact,
+        feedbackFromRecipients: feedbackFromRecipients,
+        challengesFaced: challengesFaced,
         dataVerification: false,
         supportingFiles: urls ? urls : [],
         created: BigInt(Date.now()),
@@ -177,7 +90,7 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
-      const file_path = location.pathname;
+      const file_path = location;
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);
@@ -214,23 +127,23 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
             id="programName"
             type="string"
             placeholder="Program Name"
-            {...register("programName")}
+            value={programName}
+            onChange={(e) => setProgramName(e.target.value)}
+            required
           />
-          <p className={`${styles.errorP}`}>{errors.programName?.message}</p>
         </div>
-       
+
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Program Description</label>
           <textarea
             className={`${styles.formInput}`}
             id="programDescription"
             placeholder="Program Description"
-            {...register("programDescription")}
+            value={programDescription}
+            onChange={(e) => setProgramDescription(e.target.value)}
+            required
             style={{ overflow: "hidden" }}
           />
-          <p className={`${styles.errorP}`}>
-            {errors.programDescription?.message}
-          </p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Start Date</label>
@@ -239,10 +152,10 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
             id="startDate"
             type="date"
             placeholder="Start Date"
-            {...register("startDate")}
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            required
           />
-
-          <p className={`${styles.errorP}`}>{errors.startDate?.message}</p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>End Date</label>
@@ -251,20 +164,21 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
             id="endDate"
             type="date"
             placeholder="End Date"
-            {...register("endDate")}
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
           />
-          <p className={`${styles.errorP}`}>{errors.endDate?.message}</p>
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Program Location</label>
+          <label htmlFor={`${styles.inputLabel}`}>Location</label>
           <input
             className={`${styles.formInput}`}
             id="location"
             type="string"
-            placeholder="Program Location"
-            {...register("location")}
+            placeholder="Location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            required
           />
-          <p className={`${styles.errorP}`}>{errors.location?.message}</p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Total Donated Food</label>
@@ -273,20 +187,24 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
             id="totalDonatedFood"
             type="number"
             placeholder="Total Donated Food"
-            {...register("totalDonatedFood")}
+            value={totalDonatedFood}
+            onChange={(e) => setTotalDonatedFood(e.target.value)}
+            required
           />
-          <p className={`${styles.errorP}`}>{errors.totalDonatedFood?.message}</p>
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Number of Beneficiaries</label>
+          <label htmlFor={`${styles.inputLabel}`}>
+            Number of Beneficiaries
+          </label>
           <input
             className={`${styles.formInput}`}
             id="numberOfBeneficiaries"
             type="number"
             placeholder="Number of Beneficiaries"
-            {...register("numberOfBeneficiaries")}
+            value={numberOfBeneficiaries}
+            onChange={(e) => setNumberOfBeneficiaries(e.target.value)}
+            required
           />
-          <p className={`${styles.errorP}`}>{errors.numberOfBeneficiaries?.message}</p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Type of Food Donated</label>
@@ -295,9 +213,10 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
             id="typeOfFoodDonated"
             type="string"
             placeholder="Type of Food Donated"
-            {...register("typeOfFoodDonated")}
+            value={typeOfFoodDonated}
+            onChange={(e) => setTypeOfFoodDonated(e.target.value)}
+            required
           />
-          <p className={`${styles.errorP}`}>{errors.typeOfFoodDonated?.message}</p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Sources of Food</label>
@@ -306,9 +225,9 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
             id="sourcesOfFood"
             type="string"
             placeholder="Sources of Food"
-            {...register("sourcesOfFood")}
+            value={sourcesOfFood}
+            onChange={(e) => setSourcesOfFood(e.target.value)}
           />
-          <p className={`${styles.errorP}`}>{errors.sourcesOfFood?.message}</p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Storage Facilities</label>
@@ -317,9 +236,9 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
             id="storageFacilities"
             type="string"
             placeholder="Storage Facilities"
-            {...register("storageFacilities")}
+            value={storageFacilities}
+            onChange={(e) => setStorageFacilities(e.target.value)}
           />
-          <p className={`${styles.errorP}`}>{errors.storageFacilities?.message}</p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Distribution Methods</label>
@@ -328,9 +247,9 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
             id="distributionMethods"
             type="string"
             placeholder="Distribution Methods"
-            {...register("distributionMethods")}
+            value={distributionMethods}
+            onChange={(e) => setDistributionMethods(e.target.value)}
           />
-          <p className={`${styles.errorP}`}>{errors.distributionMethods?.message}</p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Food Safety Standards</label>
@@ -339,9 +258,9 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
             id="foodSafetyStandards"
             type="string"
             placeholder="Food Safety Standards"
-            {...register("foodSafetyStandards")}
+            value={foodSafetyStandards}
+            onChange={(e) => setFoodSafetyStandards(e.target.value)}
           />
-          <p className={`${styles.errorP}`}>{errors.foodSafetyStandards?.message}</p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Community Impact</label>
@@ -350,20 +269,22 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
             id="communityImpact"
             type="string"
             placeholder="Community Impact"
-            {...register("communityImpact")}
+            value={communityImpact}
+            onChange={(e) => setCommunityImpact(e.target.value)}
           />
-          <p className={`${styles.errorP}`}>{errors.communityImpact?.message}</p>
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Feedback From Recipients</label>
+          <label htmlFor={`${styles.inputLabel}`}>
+            Feedback from Recipients
+          </label>
           <input
             className={`${styles.formInput}`}
             id="feedbackFromRecipients"
             type="string"
-            placeholder="Feedback From Recipients"
-            {...register("feedbackFromRecipients")}
+            placeholder="Feedback from Recipients"
+            value={feedbackFromRecipients}
+            onChange={(e) => setFeedbackFromRecipients(e.target.value)}
           />
-          <p className={`${styles.errorP}`}>{errors.feedbackFromRecipients?.message}</p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Challenges Faced</label>
@@ -372,10 +293,10 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
             id="challengesFaced"
             type="string"
             placeholder="Challenges Faced"
-            {...register("challengesFaced")}
+            value={challengesFaced}
+            onChange={(e) => setChallengesFaced(e.target.value)}
           />
-          <p className={`${styles.errorP}`}>{errors.challengesFaced?.message}</p>
-        </div>  
+        </div>
       </form>
 
       <FilesInput {...{ setSupportFiles, supportFiles }} />
@@ -388,7 +309,7 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
           Cancel
         </button>
         <button
-          onClick={handleSubmit(handleSave)}
+          onClick={handleSave}
           disabled={saving}
           className={`${styles.roundedButton}`}
         >

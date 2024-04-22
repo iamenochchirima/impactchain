@@ -35,7 +35,7 @@ const useAuthClient = () => {
   useEffect(() => {
     updateClient();
 
-    const newSocket = io("http://localhost:5000/", {
+    const newSocket = io("https://impactchain-production.up.railway.app/", {
       path: "/socket.io",
       transports: ["websocket"],
     });

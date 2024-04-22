@@ -13,7 +13,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
   const [supportFiles, setSupportFiles] = useState<File[] | null>(null);
   const { storageInitiated } = useSelector((state: RootState) => state.app);
-  const [countDown, setCountDown] = useState("");
+  const [countDown, setCountDown] = useState<number>(0);
 
   const [programName, setProgramName] = useState<string>("");
   const [programDescription, setProgramDescription] = useState<string>("");
@@ -202,7 +202,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
             type="number"
             placeholder="Number of Participants"
             value={numberOfParticipants}
-            onChange={(e) => setNumberOfParticipants(parseInt(e.target.value))}
+            onChange={(e) => setNumberOfParticipants(e.target.value)}
             required
           />
         </div>
@@ -214,7 +214,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
             type="number"
             placeholder="Completion Rate"
             value={completionRate}
-            onChange={(e) => setCompletionRate(parseInt(e.target.value))}
+            onChange={(e) => setCompletionRate(e.target.value)}
             required
           />
         </div>
@@ -226,7 +226,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
             type="number"
             placeholder="Program Budget"
             value={programBudget}
-            onChange={(e) => setProgramBudget(parseInt(e.target.value))}
+            onChange={(e) => setProgramBudget(e.target.value)}
             required
           />
         </div>
@@ -274,7 +274,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
             type="number"
             placeholder="Employment Rate Post Program"
             value={employmentRatePostProgram}
-            onChange={(e) => setEmploymentRatePostProgram(parseInt(e.target.value))}
+            onChange={(e) => setEmploymentRatePostProgram(e.target.value)}
             required
           />
         </div>
@@ -286,7 +286,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
             type="number"
             placeholder="Average Income Before Program"
             value={averageIncomeBeforeProgram}
-            onChange={(e) => setAverageIncomeBeforeProgram(parseInt(e.target.value))}
+            onChange={(e) => setAverageIncomeBeforeProgram(e.target.value)}
             required
           />
         </div>
@@ -298,7 +298,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
             type="number"
             placeholder="Average Income After Program"
             value={averageIncomeAfterProgram}
-            onChange={(e) => setAverageIncomeAfterProgram(parseInt(e.target.value))}
+            onChange={(e) => setAverageIncomeAfterProgram(e.target.value)}
             required
           />
         </div>

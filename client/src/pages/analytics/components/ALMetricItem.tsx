@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { Metric } from "../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
 import { CategoryType } from "../types";
 import { RoportModalRequest, setReportModal } from "../../../redux/slices/app";
 import { useDispatch } from "react-redux";
+import { Metric } from "../../../utils/types";
 
 type Props = {
   item: Metric;

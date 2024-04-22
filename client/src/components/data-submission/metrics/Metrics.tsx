@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import MetricCard from "./MetricCard";
 import {
-  ImpactTarget,
   UserRecord,
 } from "../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
 import { useAuth } from "../../../hooks/AppContext";
@@ -13,6 +12,7 @@ import {
   setUserRecord,
 } from "../../../redux/slices/app";
 import { toast } from "react-toastify";
+import { ImpactTargetType } from '../../../utils/types';
 
 const Metrics = () => {
   const { dataActor } = useAuth();
@@ -20,9 +20,9 @@ const Metrics = () => {
     (state: RootState) => state.app
   );
   const [record, setRecord] = useState<UserRecord | null>(null);
-  const [targets, setTargets] = useState<ImpactTarget[]>([]);
+  const [targets, setTargets] = useState<ImpactTargetType[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [displayedTargets, setDisplayedTargets] = useState<ImpactTarget[]>([]);
+  const [displayedTargets, setDisplayedTargets] = useState<ImpactTargetType[]>([]);
   const [saving, setSaving] = useState(false);
   const itemsPerPage = 3;
   const [currentPage, setCurrentPage] = useState(1);
@@ -120,7 +120,7 @@ const Metrics = () => {
         What metrics do you need to measure?
       </h3>
       <div className="grid grid-cols-3 gap-4 mt-5">
-        {displayedTargets.map((target: ImpactTarget) => (
+        {displayedTargets.map((target: ImpactTargetType) => (
           <MetricCard
             key={target.id}
             {...{ target, record, setRecord, setTargets, targets }}

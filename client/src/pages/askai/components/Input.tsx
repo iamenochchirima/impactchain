@@ -2,7 +2,6 @@ import React, { FC, useEffect, useRef } from "react";
 import { Message } from "../AskAI";
 import { useAuth } from "../../../hooks/AppContext";
 import { v4 as uuid } from "uuid";
-import { set } from "zod";
 
 type SetMessagesFunction = React.Dispatch<
   React.SetStateAction<Message[] | null>

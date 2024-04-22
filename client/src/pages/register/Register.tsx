@@ -5,14 +5,8 @@ import {
   useSignupMutation,
 } from "../../redux/api/usersApiSlice";
 import { toast } from "react-toastify";
+import { useState } from "react";
 
-type FormData = {
-  firstname: string;
-  lastname: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
 
 const Register = () => {
   const [signup, { isLoading }] = useSignupMutation();

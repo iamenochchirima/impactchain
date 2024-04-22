@@ -185,7 +185,7 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
             type="number"
             placeholder="Total Participants"
             value={totalParticipants}
-            onChange={(e) => setTotalParticipants(parseInt(e.target.value))}
+            onChange={(e) => setTotalParticipants(e.target.value)}
             required
           />
         </div>
@@ -197,7 +197,7 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
             type="number"
             placeholder="Successfully Assisted"
             value={successfullyAssisted}
-            onChange={(e) => setSuccessfullyAssisted(parseInt(e.target.value))}
+            onChange={(e) => setSuccessfullyAssisted(e.target.value)}
             required
           />
         </div>
@@ -212,7 +212,7 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
             placeholder="Average Income Before Program"
             value={averageIncomeBeforeProgram}
             onChange={(e) =>
-              setAverageIncomeBeforeProgram(parseInt(e.target.value))
+              setAverageIncomeBeforeProgram(e.target.value)
             }
           />
         </div>
@@ -227,7 +227,7 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
             placeholder="Average Income After Program"
             value={averageIncomeAfterProgram}
             onChange={(e) =>
-              setAverageIncomeAfterProgram(parseInt(e.target.value))
+              setAverageIncomeAfterProgram(e.target.value)
             }
           />
         </div>
@@ -239,7 +239,7 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
             type="number"
             placeholder="Follow Up Duration"
             value={followUpDuration}
-            onChange={(e) => setFollowUpDuration(parseInt(e.target.value))}
+            onChange={(e) => setFollowUpDuration(e.target.value)}
           />
         </div>
         <div className={`${styles.inputDiv}`}>

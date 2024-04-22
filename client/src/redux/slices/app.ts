@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Metric, UserRecord } from "../../hooks/declarations/impact_chain_data/impact_chain_data.did";
 import { CategoryType } from "../../pages/analytics/types";
-import { ImpactTargetType } from "../../utils/types";
+import { ImpactTargetType, Metric } from "../../utils/types";
+import { UserRecord } from "../../hooks/declarations/impact_chain_data/impact_chain_data.did";
 
 export type TargetRecordStateType = {
   color: string;

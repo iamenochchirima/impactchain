@@ -11,6 +11,6 @@ export default (router: Router) => {
   router.post("/auth/logout", logout)
   router.post("/auth/authenticate", verifyUser, (req, res) => res.end())
   router.post("/auth/generate-otp", verifyUser, localVariables, generateOTP)
-  router.get("/auth/verify-otp", verifyUser, verifyOTP)
+  router.post("/auth/verify-otp", verifyUser, verifyOTP)
   router.put("/auth/reset-password", verifyUser, resetPassword)
 };

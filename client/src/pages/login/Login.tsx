@@ -1,50 +1,39 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setIsAuthenticated, setUserInfo } from "../../redux/slices/app";
 import { Link, useNavigate } from "react-router-dom";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useLoginMutation } from "../../redux/api/usersApiSlice";
 import { RootState } from "../../redux/store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-
-type FormData = {
-  email: string;
-  password: string;
-};
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state: RootState) => state.app);
-  const [login, { isSuccess, isLoading, isError }] = useLoginMutation();
+  const [login, { isSuccess, isLoading}] = useLoginMutation();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     if (isSuccess) {
       dispatch(setIsAuthenticated(true));
     }
   }, [userInfo]);
+   
 
-  const schema = z.object({
-    email: z.string().email({ message: "Invalid email" }),
-    password: z
-      .string()
-      .min(6, { message: "Password must be at least 6 characters long" }),
-  });
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>({ resolver: zodResolver(schema) });
-
-  const handleLogin = async (data: FormData) => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     try {
+      const data = {
+        email,
+        password,
+      };
       const res = await login(data).unwrap();
+      console.log("res", res);
       dispatch(setIsAuthenticated(true));
       dispatch(setUserInfo(res));
-      navigate("/");
+      // navigate("/");
     } catch (error) {
       if ((error as any)?.status === 401) {
         toast.error((error as any)?.data.message),
@@ -78,7 +67,7 @@ const Login = () => {
         <div className="flex items-center justify-center">
           <div className="w-full max-w-xs">
             <form
-            onSubmit={handleSubmit(handleLogin)}
+            onSubmit={handleLogin}
              className="bg-black shadow-md font-TelegraphRegular rounded px-3 pt-3 pb-8 ">
               <div className="mb-4">
                 <input
@@ -86,9 +75,11 @@ const Login = () => {
                   id="email"
                   type="email"
                   placeholder="Email"
-                  {...register("email", { required: "Email is required" })}
+                 value = {email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
-                <p className="pt-2">{errors.email?.message}</p>
+              
               </div>
               <div className="mb-6 ">
                 <input
@@ -96,9 +87,10 @@ const Login = () => {
                   id="password"
                   type="password"
                   placeholder="Password"
-                  {...register("password", { required: "Password is required" })}
+                  value = {password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
-                <p className="pt-2 ">{errors.password?.message}</p>
               </div>
               <div className="flex items-center justify-center">
                 <button

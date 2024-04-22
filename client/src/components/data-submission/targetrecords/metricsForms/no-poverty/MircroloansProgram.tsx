@@ -2,120 +2,39 @@
 
 
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { z } from "zod";
 import { uploadFile } from "../../../../../config/storage/functions";
 import { useSelector } from "react-redux";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
 import { MicroloanProgram } from "../../../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
 
-
-type FormData = {
-  programName : string;
-  description : string;
-  startDate : string;
-  endDate : string;
-  location : string;
-  totalBudget : number
-  fundingSource : string;
-  numberOfBeneficiaries : number
-  averageLoanAmount : number
-  disbursementMethod : string;
-  repaymentRate : string;
-  economicImpact : string;
-  beneficiaryFeedback : string;
-  programChallenges : string;
-};
-
 const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
   const [supportFiles, setSupportFiles] = useState<File[] | null>(null);
   const { storageInitiated } = useSelector((state: RootState) => state.app);
-  const [countDown, setCountDown] = useState<number>(0);
+  const [countDown, setCountDown] = useState("");
 
-  const schema = z.object({
-    programName: z
-      .string()
-      .min(1, { message: "Name must be at least 2 characters long" })
-      .max(200, { message: "Name must be at most 200 characters long" }),
-    description: z
-      .string()
-      .min(1, {
-        message: "Description must be at least 2 characters long",
-      })
-      .max(500, { message: "Description must be at most 500 characters long" }),
-    startDate: z.string().min(1, { message: "Start Date is required" }),
-    endDate: z.string(),
-    location: z.string().min(1, { message: "Location is required" }),
-    totalBudget: z
-      .string()
-      .min(1, { message: "Total budget is required" })
-      .max(100, {
-        message: "Total budget must be at most 100 characters long",
-      }),
-    fundingSource: z 
-      .string()
-      .min(1, { message: "Funding source is required" })
-      .max(100, {
-        message: "Funding source must be at most 100 characters long",
-      }),
-    numberOfBeneficiaries: z
-      .string()
-      .min(1, { message: "Number of beneficiaries is required" })
-      .max(100, {
-        message: "Number of beneficiaries must be at most 100 characters long",
-      }),
-    averageLoanAmount: z
-      .string()
-      .min(1, { message: "Average loan amount is required" })
-      .max(100, {
-        message: "Average loan amount must be at most 100 characters long",
-      }),
-    disbursementMethod: z
-      .string()
-      .min(1, { message: "Disbursement method is required" })
-      .max(100, {
-        message: "Disbursement method must be at most 100 characters long",
-      }),
-    repaymentRate: z
-      .string()
-      .min(1, { message: "Repayment rate is required" })
-      .max(100, {
-        message: "Repayment rate must be at most 100 characters long",
-      }),
-    economicImpact: z
-      .string()
-      .min(1, { message: "Economic impact is required" })
-      .max(500, {
-        message: "Economic impact must be at most 100 characters long",
-      }),
-    beneficiaryFeedback: z
-      .string()
-      .min(1, { message: "Beneficiary feedback is required" })
-      .max(500, {
-        message: "Beneficiary feedback must be at most 100 characters long",
-      }),
-    programChallenges: z
-      .string()
-      .min(1, { message: "Program challenges is required" })
-      .max(500, {
-        message: "Program challenges must be at most 100 characters long",
-      }),
+  const [programName, setProgramName] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [startDate, setStartDate] = useState<string>("");
+  const [endDate, setEndDate] = useState<string>("");
+  const [location, setLocation] = useState<string>("");
+  const [totalBudget, setTotalBudget] = useState("");
+  const [fundingSource, setFundingSource] = useState<string>("");
+  const [numberOfBeneficiaries, setNumberOfBeneficiaries] = useState("");
+  const [averageLoanAmount, setAverageLoanAmount] = useState("");
+  const [disbursementMethod, setDisbursementMethod] = useState<string>("");
+  const [repaymentRate, setRepaymentRate] = useState<string>("");
+  const [economicImpact, setEconomicImpact] = useState<string>("");
+  const [beneficiaryFeedback, setBeneficiaryFeedback] = useState<string>("");
+  const [programChallenges, setProgramChallenges] = useState<string>("");
 
-      
-  });
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>({ resolver: zodResolver(schema) });
 
-  const handleSave = async (data: FormData) => {
+
+  const handleSave = async () => {
     try {
       setSaving(true);
       const checkedFiles: File[] = [];
@@ -140,30 +59,31 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
 
       const urls = await uploadAsset(checkedFiles);
 
-      const startDateMilliseconds = new Date(data.startDate).getTime();
-      const endDateMilliseconds = new Date(data.endDate).getTime();
+      const startDateMilliseconds = new Date(startDate).getTime();
+      const endDateMilliseconds = new Date(endDate).getTime();
 
       const microloanProgram: MicroloanProgram = {
-        programName: data.programName,
-        description: data.description,
+        programName: programName,
+        description: description,
         startDate: BigInt(startDateMilliseconds),
         endDate: BigInt(endDateMilliseconds),
-        location: data.location,
-        totalBudget: BigInt(data.totalBudget),
-        fundingSource: data.fundingSource,
-        numberOfBeneficiaries: BigInt(data.numberOfBeneficiaries),
-        averageLoanAmount: BigInt(data.averageLoanAmount),
-        disbursementMethod: data.disbursementMethod,
-        repaymentRate: data.repaymentRate,
-        economicImpact: data.economicImpact,
-        beneficiaryFeedback: data.beneficiaryFeedback,
-        programChallenges: data.programChallenges,
+        location: location,
+        totalBudget: BigInt(totalBudget),
+        fundingSource: fundingSource,
+        numberOfBeneficiaries: BigInt(numberOfBeneficiaries),
+        averageLoanAmount: BigInt(averageLoanAmount),
+        disbursementMethod: disbursementMethod,
+        repaymentRate: repaymentRate,
+        economicImpact: economicImpact,
+        beneficiaryFeedback: beneficiaryFeedback,
+        programChallenges: programChallenges,
         dataVerification: false,
         supportingFiles: urls ? urls : [],
         created: BigInt(Date.now()),
       };
       setManualData(microloanProgram);
       setUploadManually(false);
+      setSaving(false);
     } catch (error) {
         setSaving(false);
       console.log("Error saving job training program", error);
@@ -172,7 +92,7 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
-      const file_path = location.pathname;
+      const file_path = location
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);
@@ -209,9 +129,10 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
             id="programName"
             type="string"
             placeholder="Program Name"
-            {...register("programName")}
+            value={programName}
+            onChange={(e) => setProgramName(e.target.value)}
+            required
           />
-          <p className={`${styles.errorP}`}>{errors.programName?.message}</p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Program Description</label>
@@ -219,12 +140,11 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
             className={`${styles.formInput}`}
             id="description"
             placeholder="Program Description"
-            {...register("description")}
             style={{ overflow: "hidden" }}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
           />
-          <p className={`${styles.errorP}`}>
-            {errors.description?.message}
-          </p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Start Date</label>
@@ -233,9 +153,10 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
             id="startDate"
             type="date"
             placeholder="Start Date"
-            {...register("startDate")}
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            required
           />
-          <p className={`${styles.errorP}`}>{errors.startDate?.message}</p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>End Date</label>
@@ -244,22 +165,21 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
             id="endDate"
             type="date"
             placeholder="End Date"
-            {...register("endDate")}
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
           />
-          <p className={`${styles.errorP}`}>{errors.endDate?.message}</p>
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Program Location</label>
+          <label htmlFor={`${styles.inputLabel}`}>Location</label>
           <input
             className={`${styles.formInput}`}
             id="location"
             type="string"
-            placeholder="Program Location"
-            {...register("location")}
+            placeholder="Location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            required
           />
-          <p className={`${styles.errorP}`}>
-            {errors.location?.message}
-          </p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Total Budget</label>
@@ -268,11 +188,10 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
             id="totalBudget"
             type="number"
             placeholder="Total Budget"
-            {...register("totalBudget")}
+            value={totalBudget}
+            onChange={(e) => setTotalBudget(parseInt(e.target.value))}
+            required
           />
-          <p className={`${styles.errorP}`}>
-            {errors.totalBudget?.message}
-          </p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Funding Source</label>
@@ -281,11 +200,10 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
             id="fundingSource"
             type="string"
             placeholder="Funding Source"
-            {...register("fundingSource")}
+            value={fundingSource}
+            onChange={(e) => setFundingSource(e.target.value)}
+            required
           />
-          <p className={`${styles.errorP}`}>
-            {errors.fundingSource?.message}
-          </p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Number of Beneficiaries</label>
@@ -294,11 +212,10 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
             id="numberOfBeneficiaries"
             type="number"
             placeholder="Number of Beneficiaries"
-            {...register("numberOfBeneficiaries")}
+            value={numberOfBeneficiaries}
+            onChange={(e) => setNumberOfBeneficiaries(parseInt(e.target.value))}
+            required
           />
-          <p className={`${styles.errorP}`}>
-            {errors.numberOfBeneficiaries?.message}
-          </p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Average Loan Amount</label>
@@ -307,11 +224,10 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
             id="averageLoanAmount"
             type="number"
             placeholder="Average Loan Amount"
-            {...register("averageLoanAmount")}
+            value={averageLoanAmount}
+            onChange={(e) => setAverageLoanAmount(parseInt(e.target.value))}
+            required
           />
-          <p className={`${styles.errorP}`}>
-            {errors.averageLoanAmount?.message}
-          </p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Disbursement Method</label>
@@ -320,11 +236,10 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
             id="disbursementMethod"
             type="string"
             placeholder="Disbursement Method"
-            {...register("disbursementMethod")}
+            value={disbursementMethod}
+            onChange={(e) => setDisbursementMethod(e.target.value)}
+            required
           />
-          <p className={`${styles.errorP}`}>
-            {errors.disbursementMethod?.message}
-          </p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Repayment Rate</label>
@@ -333,50 +248,43 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
             id="repaymentRate"
             type="string"
             placeholder="Repayment Rate"
-            {...register("repaymentRate")}
+            value={repaymentRate}
+            onChange={(e) => setRepaymentRate(e.target.value)}
+            required
           />
-          <p className={`${styles.errorP}`}>
-            {errors.repaymentRate?.message}
-          </p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Economic Impact</label>
-          <textarea
+          <input
             className={`${styles.formInput}`}
             id="economicImpact"
+            type="string"
             placeholder="Economic Impact"
-            {...register("economicImpact")}
-            style={{ overflow: "hidden" }}
+            value={economicImpact}
+            onChange={(e) => setEconomicImpact(e.target.value)}
           />
-          <p className={`${styles.errorP}`}>
-            {errors.economicImpact?.message}
-          </p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Beneficiary Feedback</label>
-          <textarea
+          <input
             className={`${styles.formInput}`}
             id="beneficiaryFeedback"
+            type="string"
             placeholder="Beneficiary Feedback"
-            {...register("beneficiaryFeedback")}
-            style={{ overflow: "hidden" }}
+            value={beneficiaryFeedback}
+            onChange={(e) => setBeneficiaryFeedback(e.target.value)}
           />
-          <p className={`${styles.errorP}`}>
-            {errors.beneficiaryFeedback?.message}
-          </p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Program Challenges</label>
-          <textarea
+          <input
             className={`${styles.formInput}`}
             id="programChallenges"
+            type="string"
             placeholder="Program Challenges"
-            {...register("programChallenges")}
-            style={{ overflow: "hidden" }}
+            value={programChallenges}
+            onChange={(e) => setProgramChallenges(e.target.value)}
           />
-          <p className={`${styles.errorP}`}>
-            {errors.programChallenges?.message}
-          </p>
         </div>
       </form>
 
@@ -390,7 +298,7 @@ const  MircroloansProgram = ({ setManualData, setUploadManually }) => {
           Cancel
         </button>
         <button
-          onClick={handleSubmit(handleSave)}
+          onClick={handleSave}
           disabled={saving}
           className={`${styles.roundedButton}`}
         >

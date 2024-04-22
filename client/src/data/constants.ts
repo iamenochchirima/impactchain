@@ -90,7 +90,7 @@ export const targetOptions: TargetOption[] = [
           },
         ],
       },
-    ],
+    ]
   },
   {
     id: 2,

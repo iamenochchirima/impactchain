@@ -1,39 +1,15 @@
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-type FormData = {
-  name: string;
-  platform: string;
-  ipAddress: string;
-};
+import { useState } from "react";
 
 const LinkDevice = ({ setLinkDevice, setIotDevice }) => {
+const [name, setName] = useState("");
+  const [platform, setPlatform] = useState("");
+  const [ipAddress, setIpAddress] = useState("");
 
-  const schema = z.object({
-    name: z
-      .string()
-      .min(1, { message: "Name must be at least 2 characters long" })
-      .max(50, { message: "Name must be at most 50 characters long" }),
-    platform: z
-      .string()
-      .min(1, { message: "Platform must be at least 2 characters long" })
-      .max(50, { message: "Platform must be at most 50 characters long" }),
-    ipAddress: z
-      .string()
-      .min(1, { message: "IP Address must be at least 2 characters long" })
-      .max(50, { message: "IP Address must be at most 50 characters long" }),
-  });
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>({ resolver: zodResolver(schema) });
-
-  const handleSave = async (data: FormData) => {
+  const handleSave = async () => {
     setIotDevice({
-      name: data.name,
-      platform: data.platform,
-      ipAddress: data.ipAddress,
+      name: name,
+      platform: platform,
+      ipAddress: ipAddress,
     });
     setLinkDevice(false);
   };
@@ -60,11 +36,11 @@ const LinkDevice = ({ setLinkDevice, setIotDevice }) => {
                       id="name"
                       type="text"
                       placeholder="Name"
-                      {...register("name", {
-                        required: "Name is required",
-                      })}
+                     value = {name}
+                      onChange={(e) => setName(e.target.value)}
+                      required
                     />
-                    <p>{errors.name?.message}</p>
+            
                   </div>
                 <div className="mb-4">
                     <input
@@ -72,11 +48,10 @@ const LinkDevice = ({ setLinkDevice, setIotDevice }) => {
                       id="platform"
                       type="text"
                       placeholder="Platform e.g Mac"
-                      {...register("platform", {
-                        required: "Platform is required",
-                      })}
+                      onChange={(e) => setPlatform(e.target.value)}
+                      value = {platform}
+                      required
                     />
-                    <p>{errors.platform?.message}</p>
                   </div>
                 <div className="mb-4">
                   <input
@@ -84,9 +59,10 @@ const LinkDevice = ({ setLinkDevice, setIotDevice }) => {
                     id="ipAddress"
                     type="text"
                     placeholder="IP Address"
-                    {...register("ipAddress", { required: "IP Address is required" })}
+                    onChange={(e) => setIpAddress(e.target.value)}
+                    value = {ipAddress}
+                    required
                   />
-                  <p>{errors.ipAddress?.message}</p>
                 </div>
               </form>
               <div className="flex justify-between items-center py-4">
@@ -97,7 +73,7 @@ const LinkDevice = ({ setLinkDevice, setIotDevice }) => {
                   Cancel
                 </button>
                 <button
-                    onClick={handleSubmit(handleSave)}
+                    onClick={handleSave}
                   className={`bg-custom-green px-10 py-1.5  rounded-full text-black font-bold`}
                 >
                   Save & Continue

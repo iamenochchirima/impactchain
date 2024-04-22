@@ -1,9 +1,6 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { setIsAuthenticated, setUserInfo } from "../../redux/slices/app";
 import { Link } from "react-router-dom";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
   useSignupMutation,
 } from "../../redux/api/usersApiSlice";
@@ -20,31 +17,18 @@ type FormData = {
 const Register = () => {
   const [signup, { isLoading }] = useSignupMutation();
 
-  const schema = z.object({
-    firstname: z
-      .string()
-      .min(2, { message: "First Name must be at least 2 characters long" })
-      .max(50, { message: "First Name must be at most 50 characters long" }),
-    lastname: z
-      .string()
-      .min(2, { message: "Last Name must be at least 2 characters long" })
-      .max(50, { message: "Last Name must be at most 50 characters long" }),
-    email: z.string().email({ message: "Invalid email" }),
-    password: z
-      .string()
-      .min(6, { message: "Password must be at least 6 characters long" }),
-    confirmPassword: z
-      .string()
-      .min(6, { message: "Password must be at least 6 characters long" }),
-  });
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>({ resolver: zodResolver(schema) });
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSave = async (data: FormData) => {
-    if (data.password !== data.confirmPassword) {
+
+ 
+
+  const handleSave = async (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
       toast.error("Passwords do not match"),
         {
           position: "top-right",
@@ -55,11 +39,11 @@ const Register = () => {
     }
     try {
       const body = {
-        firstname: data.firstname,
-        lastname: data.lastname,
-        email: data.email,
-        password: data.password,
-        confirmPassword: data.confirmPassword,
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        password: password,
+        confirmPassword: confirmPassword,
       };
       const res = await signup(body).unwrap();
       dispatch(setIsAuthenticated(true));
@@ -103,7 +87,7 @@ const Register = () => {
           <div className="flex ">
             <div className="w-full max-w-sm">
               <form
-                onSubmit={handleSubmit(handleSave)}
+                onSubmit={handleSave}
                 className="bg-black shadow-md font-TelegraphRegular rounded px-8 pt-6 pb-8"
               >
                 <div className="flex gap-3 items-center">
@@ -113,9 +97,10 @@ const Register = () => {
                     id="firstname"
                     type="text"
                     placeholder="First Name"
-                    {...register("firstname", { required: "First name is required" })}
+                  value = {firstname}
+                  onChange={(e) => setFirstname(e.target.value)}
+                  required
                   />
-                  <p className="pt-2 text-[12px]">{errors.firstname?.message}</p>
                 </div>
                 <div className="mb-4">
                   <input
@@ -123,9 +108,12 @@ const Register = () => {
                     id="lastname"
                     type="text"
                     placeholder="Last Name"
-                    {...register("lastname", { required: "Last name is required" })}
+                  value = {lastname}
+                  onChange={(e) => setLastname(e.target.value)}
+                  required
+
                   />
-                  <p className="pt-2 text-[12px]">{errors.lastname?.message}</p>
+        
                 </div>
                 </div>
                 <div className="mb-4">
@@ -134,9 +122,10 @@ const Register = () => {
                     id="email"
                     type="email"
                     placeholder="Email"
-                    {...register("email", { required: "Email is required" })}
+                    value = {email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
                   />
-                  <p className="pt-2 text-[12px]">{errors.email?.message}</p>
                 </div>
                 <div className="mb-6">
                   <input
@@ -144,11 +133,10 @@ const Register = () => {
                     id="password"
                     type="password"
                     placeholder="Password"
-                    {...register("password", {
-                      required: "Password is required",
-                    })}
+                    value = {password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
                   />
-                  <p className="pt-2 text-[12px]">{errors.password?.message}</p>
                 </div>
                 <div className="mb-6">
                   <input
@@ -156,11 +144,9 @@ const Register = () => {
                     id="confirmPassword"
                     type="password"
                     placeholder="Confirm Password"
-                    {...register("confirmPassword", {
-                      required: "Password is required",
-                    })}
+                    value = {confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                   />
-                  <p className="pt-2 text-[12px]">{errors.confirmPassword?.message}</p>
                 </div>
                 <div className="flex items-center justify-center">
                   <button

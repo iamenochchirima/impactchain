@@ -1,31 +1,12 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { z } from "zod";
 import { uploadFile } from "../../../../../config/storage/functions";
 import { useSelector } from "react-redux";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
 import { PeopleAssistedOutOfPoverty as PeopleAssistedOutOfPovertyType } from "../../../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
-
-type FormData = {
-  programName: string;
-  programDescription: string;
-  startDate: string;
-  endDate: string;
-  location: string;
-  totalParticipants: number;
-  successfullyAssisted: number;
-  averageIncomeBeforeProgram: number;
-  averageIncomeAfterProgram: number;
-  followUpDuration: number;
-  longTermImpact: Text;
-  participantFeedback: Text;
-  challengesFaced: string;
-};
 
 const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
@@ -33,78 +14,23 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
   const { storageInitiated } = useSelector((state: RootState) => state.app);
   const [countDown, setCountDown] = useState<number>(0);
 
-  const schema = z.object({
-    programName: z
-      .string()
-      .min(1, { message: "Name must be at least 2 characters long" })
-      .max(200, { message: "Name must be at most 200 characters long" }),
-    programDescription: z
-      .string()
-      .min(1, {
-        message: "Description must be at least 2 characters long",
-      })
-      .max(500, { message: "Description must be at most 500 characters long" }),
-    startDate: z.string().min(1, { message: "Start Date is required" }),
-    endDate: z.string(),
-    location: z
-      .string()
-      .min(1, { message: "Location is required" })
-      .max(200, { message: "Location must be at most 200 characters long" }),
-    totalParticipants: z
-      .string()
-      .min(1, { message: "Total Participants is required" }),
-    successfullyAssisted: z
-      .string()
-      .min(1, { message: "Successfully Assisted is required" })
-      .max(200, {
-        message: "Successfully Assisted must be at most 200 characters long",
-      }),
-    averageIncomeBeforeProgram: z
-      .string()
-      .min(1, { message: "Average Income Before Program is required" })
-      .max(200, {
-        message:
-          "Average Income Before Program must be at most 200 characters long",
-      }),
-    averageIncomeAfterProgram: z
-      .string()
-      .min(1, { message: "Average Income After Program is required" })
-      .max(200, {
-        message:
-          "Average Income After Program must be at most 200 characters long",
-      }),
-    followUpDuration: z
-      .string()
-      .min(1, { message: "Follow Up Duration is required" })
-      .max(200, {
-        message: "Follow Up Duration must be at most 200 characters long",
-      }),
-    longTermImpact: z
-      .string()
-      .min(1, { message: "Long Term Impact is required" })
-      .max(200, {
-        message: "Long Term Impact must be at most 200 characters long",
-      }),
-    participantFeedback: z
-      .string()
-      .min(1, { message: "Participant Feedback is required" })
-      .max(200, {
-        message: "Participant Feedback must be at most 200 characters long",
-      }),
-    challengesFaced: z
-      .string()
-      .min(1, { message: "Challenges Faced is required" })
-      .max(200, {
-        message: "Challenges Faced must be at most 200 characters long",
-      }),
-  });
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>({ resolver: zodResolver(schema) });
+  const [programName, setProgramName] = useState<string>("");
+  const [programDescription, setProgramDescription] = useState<string>("");
+  const [startDate, setStartDate] = useState<string>("");
+  const [endDate, setEndDate] = useState<string>("");
+  const [location, setLocation] = useState<string>("");
+  const [totalParticipants, setTotalParticipants] = useState("");
+  const [successfullyAssisted, setSuccessfullyAssisted] = useState("");
+  const [averageIncomeBeforeProgram, setAverageIncomeBeforeProgram] =
+    useState("");
+  const [averageIncomeAfterProgram, setAverageIncomeAfterProgram] =
+    useState("");
+  const [followUpDuration, setFollowUpDuration] = useState("");
+  const [longTermImpact, setLongTermImpact] = useState<string>("");
+  const [participantFeedback, setParticipantFeedback] = useState<string>("");
+  const [challengesFaced, setChallengesFaced] = useState<string>("");
 
-  const handleSave = async (data: FormData) => {
+  const handleSubmit = async () => {
     try {
       setSaving(true);
       const checkedFiles: File[] = [];
@@ -129,26 +55,30 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
 
       const urls = await uploadAsset(checkedFiles);
 
-      const startDateMilliseconds = new Date(data.startDate).getTime();
-      const endDateMilliseconds = new Date(data.endDate).getTime();
+      const startDateMilliseconds = new Date(startDate).getTime();
+      const endDateMilliseconds = new Date(endDate).getTime();
 
       const request: PeopleAssistedOutOfPovertyType = {
-        programName: data.programName,
-        programDescription: data.programDescription,
+        programName: programName,
+        programDescription: programDescription,
         startDate: BigInt(startDateMilliseconds),
-        endDate: endDateMilliseconds,
-        location: data.location,
-        totalParticipants: data.totalParticipants,
-        successfullyAssisted: data.successfullyAssisted,
-        averageIncomeBeforeProgram: data.averageIncomeBeforeProgram,
-        averageIncomeAfterProgram: data.averageIncomeAfterProgram,
-        followUpDuration: data.followUpDuration,
-        longTermImpact: data.longTermImpact,
-        challengesFaced: data.challengesFaced,
-        supportDocuments: urls,
+        endDate: BigInt(endDateMilliseconds),
+        location: location,
+        totalParticipants: BigInt(totalParticipants),
+        successfullyAssisted: BigInt(successfullyAssisted),
+        averageIncomeBeforeProgram: BigInt(averageIncomeBeforeProgram),
+        averageIncomeAfterProgram: BigInt(averageIncomeAfterProgram),
+        followUpDuration: BigInt(followUpDuration),
+        longTermImpact: longTermImpact,
+        participantFeedback: participantFeedback,
+        challengesFaced: challengesFaced,
+        supportingFiles: urls ? urls : [],
+        dataVerification: false,
+        created: BigInt(Date.now()),
       };
       setManualData(request);
       setUploadManually(false);
+      setSaving(false);
     } catch (error) {
       setSaving(false);
       console.log("Error saving job training program", error);
@@ -157,7 +87,7 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
-      const file_path = location.pathname;
+      const file_path = location;
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);
@@ -194,9 +124,10 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
             id="programName"
             type="string"
             placeholder="Program Name"
-            {...register("programName")}
+            value={programName}
+            onChange={(e) => setProgramName(e.target.value)}
+            required
           />
-          <p className={`${styles.errorP}`}>{errors.programName?.message}</p>
         </div>
 
         <div className={`${styles.inputDiv}`}>
@@ -205,12 +136,11 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
             className={`${styles.formInput}`}
             id="programDescription"
             placeholder="Program Description"
-            {...register("programDescription")}
+            value={programDescription}
+            onChange={(e) => setProgramDescription(e.target.value)}
+            required
             style={{ overflow: "hidden" }}
           />
-          <p className={`${styles.errorP}`}>
-            {errors.programDescription?.message}
-          </p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Start Date</label>
@@ -219,10 +149,10 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
             id="startDate"
             type="date"
             placeholder="Start Date"
-            {...register("startDate")}
+            value = {startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            required
           />
-
-          <p className={`${styles.errorP}`}>{errors.startDate?.message}</p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>End Date</label>
@@ -231,9 +161,9 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
             id="endDate"
             type="date"
             placeholder="End Date"
-            {...register("endDate")}
+            value = {endDate}
+            onChange={(e) => setEndDate(e.target.value)}
           />
-          <p className={`${styles.errorP}`}>{errors.endDate?.message}</p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Program Location</label>
@@ -242,9 +172,10 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
             id="location"
             type="string"
             placeholder="Program Location"
-            {...register("location")}
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            required
           />
-          <p className={`${styles.errorP}`}>{errors.location?.message}</p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Total Participants</label>
@@ -253,11 +184,10 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
             id="totalParticipants"
             type="number"
             placeholder="Total Participants"
-            {...register("totalParticipants")}
+            value={totalParticipants}
+            onChange={(e) => setTotalParticipants(parseInt(e.target.value))}
+            required
           />
-          <p className={`${styles.errorP}`}>
-            {errors.totalParticipants?.message}
-          </p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Successfully Assisted</label>
@@ -266,37 +196,40 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
             id="successfullyAssisted"
             type="number"
             placeholder="Successfully Assisted"
-            {...register("successfullyAssisted")}
+            value={successfullyAssisted}
+            onChange={(e) => setSuccessfullyAssisted(parseInt(e.target.value))}
+            required
           />
-          <p className={`${styles.errorP}`}>
-            {errors.successfullyAssisted?.message}
-          </p>
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Average Income Before Program</label>
+          <label htmlFor={`${styles.inputLabel}`}>
+            Average Income Before Program
+          </label>
           <input
             className={`${styles.formInput}`}
             id="averageIncomeBeforeProgram"
             type="number"
             placeholder="Average Income Before Program"
-            {...register("averageIncomeBeforeProgram")}
+            value={averageIncomeBeforeProgram}
+            onChange={(e) =>
+              setAverageIncomeBeforeProgram(parseInt(e.target.value))
+            }
           />
-          <p className={`${styles.errorP}`}>
-            {errors.averageIncomeBeforeProgram?.message}
-          </p>
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Average Income After Program</label>
+          <label htmlFor={`${styles.inputLabel}`}>
+            Average Income After Program
+          </label>
           <input
             className={`${styles.formInput}`}
             id="averageIncomeAfterProgram"
             type="number"
             placeholder="Average Income After Program"
-            {...register("averageIncomeAfterProgram")}
+            value={averageIncomeAfterProgram}
+            onChange={(e) =>
+              setAverageIncomeAfterProgram(parseInt(e.target.value))
+            }
           />
-          <p className={`${styles.errorP}`}>
-            {errors.averageIncomeAfterProgram?.message}
-          </p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Follow Up Duration</label>
@@ -305,11 +238,9 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
             id="followUpDuration"
             type="number"
             placeholder="Follow Up Duration"
-            {...register("followUpDuration")}
+            value={followUpDuration}
+            onChange={(e) => setFollowUpDuration(parseInt(e.target.value))}
           />
-          <p className={`${styles.errorP}`}>
-            {errors.followUpDuration?.message}
-          </p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Long Term Impact</label>
@@ -317,10 +248,11 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
             className={`${styles.formInput}`}
             id="longTermImpact"
             placeholder="Long Term Impact"
-            {...register("longTermImpact")}
+            value={longTermImpact}
+            onChange={(e) => setLongTermImpact(e.target.value)}
+            required
             style={{ overflow: "hidden" }}
           />
-          <p className={`${styles.errorP}`}>{errors.longTermImpact?.message}</p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Participant Feedback</label>
@@ -328,12 +260,11 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
             className={`${styles.formInput}`}
             id="participantFeedback"
             placeholder="Participant Feedback"
-            {...register("participantFeedback")}
+            value={participantFeedback}
+            onChange={(e) => setParticipantFeedback(e.target.value)}
+            required
             style={{ overflow: "hidden" }}
           />
-          <p className={`${styles.errorP}`}>
-            {errors.participantFeedback?.message}
-          </p>
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Challenges Faced</label>
@@ -341,12 +272,11 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
             className={`${styles.formInput}`}
             id="challengesFaced"
             placeholder="Challenges Faced"
-            {...register("challengesFaced")}
+            value={challengesFaced}
+            onChange={(e) => setChallengesFaced(e.target.value)}
+            required
             style={{ overflow: "hidden" }}
           />
-          <p className={`${styles.errorP}`}>
-            {errors.challengesFaced?.message}
-          </p>
         </div>
       </form>
 
@@ -360,7 +290,7 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
           Cancel
         </button>
         <button
-          onClick={handleSubmit(handleSave)}
+          onClick={handleSubmit}
           disabled={saving}
           className={`${styles.roundedButton}`}
         >

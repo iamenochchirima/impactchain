@@ -1,17 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const ResetPassword = () => {
+const GetOTP = ({ email, setEmail, handleSave, isLoading }) => {
   return (
-    <div className="bg-black min-h-screen font-NeueMachinaRegular text-custom-green pt-44">
-      <h1 className="font-NeueMachinaUltrabold text-7xl text-center">
-        <span className="text-custom-green ">impact.</span>
-        <span className="text-white">chain</span>{" "}
-      </h1>
-      <div className="flex flex-col gap-3 justify-center items-center py-10 font-TelegraphRegular">
+    <div className="flex flex-col gap-3 justify-center items-center py-10 font-TelegraphRegular">
       <p className="text-3xl">Forgot Password</p>
       <p className=" text-lg">Enter your email address</p>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleSave}
         className="bg-black shadow-md font-TelegraphRegular rounded px-8 pt-6 pb-8 max-w-sm"
       >
         <div className="mb-4">
@@ -41,8 +37,7 @@ const ResetPassword = () => {
         </div>
       </form>
     </div>
-    </div>
   );
 };
 
-export default ResetPassword;
+export default GetOTP;

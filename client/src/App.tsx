@@ -12,7 +12,6 @@ import {
 } from "./redux/slices/app";
 
 // Pages
-const Home = lazy(() => import("./pages/home/Home"));
 const Login = lazy(() => import("./pages/login/Login"));
 const Register = lazy(() => import("./pages/register/Register"));
 const Dashboard = lazy(() => import("./pages/dashboard/Dashboard"));
@@ -24,9 +23,10 @@ const CarbonCredits = lazy(
 );
 const LandingPage = lazy(() => import("./pages/landing/Landing"));
 const Notfound = lazy(() => import("./components/Notfound"));
+const ForgotPassword = lazy(() => import("./pages/reset/ForgotPassword"));
 const ResetPassword = lazy(() => import("./pages/reset/ResetPassword"));
-const Help = lazy(() => import("./components/Help"));
 import { initActors } from "./config/storage/functions"
+
 
 const App = () => {
   const { isAuthenticated } = useSelector(
@@ -81,7 +81,8 @@ const App = () => {
             path="/signup"
             element={isAuthenticated ? <Navigate to="/dashboard" /> : <Register />}
           />
-          <Route path="/forgot-password" element={<ResetPassword />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="*" element={<Notfound />} />
         </Routes>
       </Suspense>

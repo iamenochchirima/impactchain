@@ -9,7 +9,7 @@ import cors from "cors";
 import "dotenv/config";
 import router from "./router";
 import { errorHandler, notFound } from "./middlewares/error";
-const MONGO_URI = process.env.MONGO_URI;
+const MONGO_USER_AND_PASSWORD = process.env.MONGO_USER_AND_PASSWORD;
 import { setupSocketIO } from "./sockets/socketController";
 
 const app = express();
@@ -50,10 +50,9 @@ if (process.env.NODE_ENV === "production") {
 }
 
 mongoose.Promise = Promise;
-mongoose.connect(MONGO_URI);
+mongoose.connect(`mongodb+srv://${MONGO_USER_AND_PASSWORD}@cluster0.g43znfh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`);
 mongoose.connection.on("error", (error) => {
   console.error(error);
-  console.log("Mongo uri is", MONGO_URI)
   console.log("MongoDB connection error:", error);
   process.exit();
 });

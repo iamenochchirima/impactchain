@@ -19,12 +19,6 @@ export default defineConfig({
   },
   server: {
     port: 3000,
-    proxy: {
-      "/api": {
-        target: "https://impactchain-production.up.railway.app/",
-        changeOrigin: true,
-      },
-    },
     watch: {
       usePolling: true,
     },

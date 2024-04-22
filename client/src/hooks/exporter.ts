@@ -1,6 +1,7 @@
 export { idlFactory as dataIDL } from "./declarations/impact_chain_data/impact_chain_data.did.js";
 export { idlFactory as fileStorageIdlFactory } from "./declarations/file_storage/file_storage.did.js";
 export { idlFactory as fileScalingManagerIdlFactory } from "./declarations/file_scaling_manager/file_scaling_manager.did.js";
+export const API_BASE_URL = import.meta.env.API_BASE_URL || "http://localhost:5000";
 export const network = "ic"
 export const dataCanisterId = "hocf4-oyaaa-aaaal-qdmba-cai";
 export const storageCanId = "osmo3-paaaa-aaaal-qdvlq-cai";

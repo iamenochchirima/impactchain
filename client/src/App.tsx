@@ -26,6 +26,7 @@ const Notfound = lazy(() => import("./components/Notfound"));
 const ForgotPassword = lazy(() => import("./pages/reset/ForgotPassword"));
 const ResetPassword = lazy(() => import("./pages/reset/ResetPassword"));
 import { initActors } from "./config/storage/functions"
+import { API_BASE_URL } from "./hooks/exporter";
 
 
 const App = () => {
@@ -53,6 +54,8 @@ const App = () => {
       dispatch(setUserInfo(user));
     }
   };
+
+  console.log("API BASE URL: ", API_BASE_URL);
 
   return (
     <BrowserRouter>

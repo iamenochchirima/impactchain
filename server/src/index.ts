@@ -15,7 +15,11 @@ import { setupSocketIO } from "./sockets/socketController";
 const app = express();
 app.use(
   cors({
-    credentials: true,
+    origin: [
+      "https://impactchain-h55v.vercel.app",
+      "http://localhost:3000", 
+    ],
+    credentials: true, 
   })
 );
 

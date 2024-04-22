@@ -4,7 +4,7 @@ import { RootState } from "../../../redux/store";
 import MetricCard from "./MetricCard";
 import {
   UserRecord,
-} from "../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
+} from "../../../hooks/declarations/data/data.did";
 import { useAuth } from "../../../hooks/AppContext";
 import {
   setDataComponent,

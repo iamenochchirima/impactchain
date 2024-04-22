@@ -6,7 +6,7 @@ import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
-import { PeopleAssistedOutOfPoverty as PeopleAssistedOutOfPovertyType } from "../../../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
+import { PeopleAssistedOutOfPoverty as PeopleAssistedOutOfPovertyType } from "../../../../../hooks/declarations/data/data.did";
 
 const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);

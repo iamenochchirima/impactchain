@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { targetOptions } from "../../../data/constants";
 import MetricItem from "./MetricItem";
-import { UserRecord } from "../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
+import { UserRecord } from "../../../hooks/declarations/data/data.did";
 import { ImpactTargetType, Metric } from "../../../utils/types";
 import { getTargetMetrics } from "../../../utils/targets";
 import { setImpactTargets } from "../../../redux/slices/app";

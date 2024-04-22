@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { IOTDevice } from "../../../hooks/declarations/impact_chain_data/impact_chain_data.did";
+import { IOTDevice } from "../../../hooks/declarations/data/data.did";
 import UploadDocs from "./UploadDocs";
 import LinkDevice from "./LinkDevice";
 import { Metric } from "../../../utils/types";

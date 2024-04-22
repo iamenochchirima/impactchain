@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { GoSingleSelect } from "react-icons/go";
 import { useAuth } from "../../hooks/AppContext";
-import { UserRecord } from "../../hooks/declarations/impact_chain_data/impact_chain_data.did";
+import { UserRecord } from "../../hooks/declarations/data/data.did";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { setDataComponent, setUserRecord } from "../../redux/slices/app";

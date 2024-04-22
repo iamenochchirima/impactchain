@@ -7,7 +7,7 @@ import { RootState } from "../../redux/store";
 import { useAuth } from "../../hooks/AppContext";
 import {
   UserRecord,
-} from "../../hooks/declarations/impact_chain_data/impact_chain_data.did";
+} from "../../hooks/declarations/data/data.did";
 import { ImpactTargetType } from "../../utils/types";
 import { getTargetMetrics } from "../../utils/targets";
 

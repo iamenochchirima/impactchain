@@ -1,4 +1,4 @@
-import { UserRecord } from "../hooks/declarations/impact_chain_data/impact_chain_data.did";
+import { UserRecord } from "../hooks/declarations/data/data.did";
 import { ImpactTargetType } from "../utils/types";
 
 export const isDataIncomplete = (info: UserRecord, impactTargets: ImpactTargetType[]) => {

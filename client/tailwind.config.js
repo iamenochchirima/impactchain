@@ -20,7 +20,16 @@ export default {
         TelegraphRegular: ['Telegraph-regular', 'sans-serif']
 
       },
-    }
+    },
+    screens: {
+      ts: "360px",
+      xs: "375px",
+      ss: "620px",
+      sm: "770px",
+      md: "900px",
+      lg: "1200px",
+      xl: "1700px",
+    },
   },
   plugins: [],
 }

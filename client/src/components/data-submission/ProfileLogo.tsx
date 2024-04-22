@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setDataComponent, setUserRecord } from "../../redux/slices/app";
 import { RootState } from "../../redux/store";
 import { useAuth } from "../../hooks/AppContext";
-import { UserRecord } from "../../hooks/declarations/impact_chain_data/impact_chain_data.did";
+import { UserRecord } from "../../hooks/declarations/data/data.did";
 import { uploadFile } from "../../config/storage/functions";
 
 const ProfileLogo = () => {

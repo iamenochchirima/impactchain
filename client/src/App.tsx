@@ -55,8 +55,6 @@ const App = () => {
     }
   };
 
-  console.log("API BASE URL: ", API_BASE_URL);
-
   return (
     <BrowserRouter>
       <Suspense fallback={<LoadingScreen />}>

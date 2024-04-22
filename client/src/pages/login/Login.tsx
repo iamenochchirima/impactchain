@@ -1,13 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setIsAuthenticated, setUserInfo } from "../../redux/slices/app";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useLoginMutation } from "../../redux/api/usersApiSlice";
 import { RootState } from "../../redux/store";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const Login = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state: RootState) => state.app);
   const [login, { isSuccess, isLoading}] = useLoginMutation();
@@ -30,10 +29,8 @@ const Login = () => {
         password,
       };
       const res = await login(data).unwrap();
-      console.log("res", res);
       dispatch(setIsAuthenticated(true));
       dispatch(setUserInfo(res));
-      // navigate("/");
     } catch (error) {
       if ((error as any)?.status === 401) {
         toast.error((error as any)?.data.message),

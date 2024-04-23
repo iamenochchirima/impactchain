@@ -65,7 +65,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
         programName: programName,
         programDescription: programDescription,
         startDate: BigInt(startDateMilliseconds),
-        endDate: endDate ? [BigInt(endDateMilliseconds)] : [],
+        endDate: BigInt(endDateMilliseconds),
         programLocation: programLocation,
         targetDemographic: targetDemographic,
         numberOfParticipants: BigInt(numberOfParticipants),

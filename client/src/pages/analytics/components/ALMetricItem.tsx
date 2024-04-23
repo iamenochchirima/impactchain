@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { CategoryType } from "../types";
-import { RoportModalRequest, setReportModal } from "../../../redux/slices/app";
+import { CurrentMetricInfo, setCurrentMetricInfo, setReportPromptModal } from "../../../redux/slices/app";
 import { useDispatch } from "react-redux";
 import { Metric } from "../../../utils/types";
 
@@ -10,15 +10,17 @@ type Props = {
 };
 
 const ALMetricItem: FC<Props> = ({ item, category }) => {
+
   const dispatch = useDispatch();
   const handleClicked = () => {
-    const req: RoportModalRequest = {
-      reportModal: true,
-      reportMetric: item,
-      reportCategory: category,
+    const req: CurrentMetricInfo = {
+      metric: item,
+      category: category,
     };
-    dispatch(setReportModal(req));
+    dispatch(setCurrentMetricInfo(req));
+    dispatch(setReportPromptModal(true))
   };
+
   return (
       <div className="flex items-center gap-3 text-white hover:cursor-pointer">
         <span className="leading-tight w-1/2">{item.name}</span>
@@ -26,7 +28,7 @@ const ALMetricItem: FC<Props> = ({ item, category }) => {
           onClick={handleClicked}
           className="hover:bg-gray-700 w-1/2 px-2 py-1 text-nowrap text-custom-green rounded"
         >
-          View Report
+          Generate Report
         </button>
       </div>
   );

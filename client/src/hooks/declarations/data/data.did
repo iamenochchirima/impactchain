@@ -5,15 +5,15 @@ type WorkplaceGenderEqualityPoliciesData =
    complianceRate: nat;
    created: int;
    dataVerification: bool;
+   endDate: int;
    feedbackFromEmployees: text;
-   implementationDate: text;
    location: text;
    measuresTaken: text;
    numberOfEmployeesAffected: nat;
    outcomesAchieved: text;
    policyDescription: text;
    policyName: text;
-   reviewDate: text;
+   startDate: int;
    supportingFiles: vec text;
  };
 type WomensEmpowermentProgramData = 
@@ -38,9 +38,9 @@ type WomensEmpowermentProgramData =
 type WaterSanitationAccessData = 
  record {
    communityFeedback: text;
-   completionDate: text;
    created: int;
    dataVerification: bool;
+   endDate: int;
    healthImpact: text;
    location: text;
    numberOfBeneficiaries: nat;
@@ -48,7 +48,7 @@ type WaterSanitationAccessData =
    projectDescription: text;
    projectTitle: text;
    qualityOfServicesProvided: text;
-   startDate: text;
+   startDate: int;
    supportingFiles: vec text;
    totalFundsAllocated: nat;
    typesOfInfrastructureBuilt: text;
@@ -129,9 +129,9 @@ type UrbanSustainabilityProjectsData =
  record {
    challengesFaced: text;
    communityEngagement: text;
-   completionDate: text;
    created: int;
    dataVerification: bool;
+   endDate: int;
    environmentalBenefits: text;
    impactOnCommunity: text;
    location: text;
@@ -139,7 +139,7 @@ type UrbanSustainabilityProjectsData =
    projectDescription: text;
    projectName: text;
    projectScope: text;
-   startDate: text;
+   startDate: int;
    supportingFiles: vec text;
    technologiesUsed: text;
    totalFunding: nat;
@@ -149,9 +149,9 @@ type UrbanLivingConditionsData =
    areasImproved: text;
    challengesFaced: text;
    communityInvolvement: text;
-   completionDate: text;
    created: int;
    dataVerification: bool;
+   endDate: int;
    environmentalImpact: text;
    feedbackFromCommunity: text;
    initiativeDescription: text;
@@ -159,7 +159,7 @@ type UrbanLivingConditionsData =
    location: text;
    outcomesAchieved: text;
    populationImpacted: nat;
-   startDate: text;
+   startDate: int;
    supportingFiles: vec text;
    technologiesImplemented: text;
    totalInvestment: nat;
@@ -281,10 +281,10 @@ type SchoolsBuiltSupportedData =
  };
 type SanitationFacilitiesData = 
  record {
-   completionDate: text;
    complianceWithStandards: text;
    created: int;
    dataVerification: bool;
+   endDate: int;
    facilityName: text;
    feedbackFromCommunity: text;
    impactOnHealth: text;
@@ -294,7 +294,7 @@ type SanitationFacilitiesData =
    operationalChallenges: text;
    populationServed: nat;
    projectDescription: text;
-   startDate: text;
+   startDate: int;
    supportingFiles: vec text;
    totalInvestment: nat;
    typesOfFacilities: text;
@@ -363,16 +363,16 @@ type RenewableEnergyProjectsData =
  record {
    capacityInstalled: nat;
    communityInvolvement: text;
-   completionDate: text;
    created: int;
    dataVerification: bool;
+   endDate: int;
    energyProduced: nat;
    impactOnLocalEnvironment: text;
    location: text;
    operationalChallenges: text;
    projectDescription: text;
    projectName: text;
-   startDate: text;
+   startDate: int;
    successesAchieved: text;
    supportingFiles: vec text;
    totalInvestment: nat;
@@ -1093,9 +1093,9 @@ type MarineEcosystemProtectionData =
 type MarginalizedCommunitySupportData = 
  record {
    challengesFaced: text;
-   completionDate: text;
    created: int;
    dataVerification: bool;
+   endDate: int;
    feedbackFromCommunity: text;
    initiativeDescription: text;
    initiativeName: text;
@@ -1103,7 +1103,7 @@ type MarginalizedCommunitySupportData =
    numberOfBeneficiaries: nat;
    outcomesAchieved: text;
    servicesProvided: text;
-   startDate: text;
+   startDate: int;
    supportingFiles: vec text;
    targetGroups: text;
    totalFunding: nat;
@@ -1152,7 +1152,7 @@ type JobTrainingProgram =
    created: int;
    dataVerification: bool;
    employmentRatePostProgram: text;
-   endDate: opt int;
+   endDate: int;
    fundingSources: text;
    numberOfParticipants: nat;
    participantFeedback: text;
@@ -1170,18 +1170,18 @@ type JobTrainingProgram =
 type JobCreationInitiativesData = 
  record {
    challengesFaced: text;
-   completionDate: text;
    created: int;
    dataVerification: bool;
    demographicFocus: text;
    economicImpact: text;
+   endDate: int;
    feedbackFromBeneficiaries: text;
    initiativeDescription: text;
    initiativeName: text;
    location: text;
    numberOfJobsCreated: nat;
    sectorsImpacted: text;
-   startDate: text;
+   startDate: int;
    supportingFiles: vec text;
    totalInvestment: nat;
    typeOfJobs: text;
@@ -1211,14 +1211,14 @@ type InclusionPoliciesData =
    complianceRate: nat;
    created: int;
    dataVerification: bool;
+   endDate: int;
    feedbackFromBeneficiaries: text;
-   implementationDate: text;
    measuresImplemented: text;
    outcomesAchieved: text;
    policyDescription: text;
    policyName: text;
-   reviewDate: text;
    sectorsAffected: text;
+   startDate: int;
    supportingFiles: vec text;
    targetGroups: text;
  };
@@ -1434,11 +1434,12 @@ type GlobalPartnershipFinancialContributionsData =
    contributionName: text;
    created: int;
    dataVerification: bool;
-   date: text;
    description: text;
    donor: text;
+   endDate: int;
    feedbackFromBeneficiaries: text;
    impactAssessment: text;
+   startDate: int;
    supportingFiles: vec text;
    targetedSDGs: text;
  };
@@ -1491,8 +1492,8 @@ type EnergyEfficientSystemsData =
    dataVerification: bool;
    estimatedEnergySavings: nat;
    impactOnOperationalEfficiency: text;
-   installationDate: text;
    location: text;
+   startDate: int;
    supportingFiles: vec text;
    systemDescription: text;
    systemName: text;
@@ -1501,10 +1502,10 @@ type EnergyEfficientSystemsData =
  };
 type EnergyConsumptionReductionData = 
  record {
-   completionDate: text;
    costSavings: nat;
    created: int;
    dataVerification: bool;
+   endDate: int;
    feedbackFromStakeholders: text;
    impactOnEnvironmentalSustainability: text;
    initiativeDescription: text;
@@ -1513,7 +1514,7 @@ type EnergyConsumptionReductionData =
    methodsUsed: text;
    operationalChallenges: text;
    percentageReduction: nat;
-   startDate: text;
+   startDate: int;
    supportingFiles: vec text;
    totalEnergySaved: nat;
  };
@@ -1538,9 +1539,9 @@ type EmploymentConditionsData =
  record {
    affectedEmployees: nat;
    challengesFaced: text;
-   completionDate: text;
    created: int;
    dataVerification: bool;
+   endDate: int;
    feedbackFromEmployees: text;
    impactOnEmployeeSatisfaction: text;
    impactOnProductivity: text;
@@ -1548,7 +1549,7 @@ type EmploymentConditionsData =
    initiativeName: text;
    location: text;
    numberOfWorkplacesImproved: nat;
-   startDate: text;
+   startDate: int;
    supportingFiles: vec text;
    totalInvestment: nat;
    typesOfImprovements: text;
@@ -1647,9 +1648,9 @@ type AntiCorruptionProgramsData =
 type AffordableHousingSupportData = 
  record {
    challengesFaced: text;
-   completionDate: text;
    created: int;
    dataVerification: bool;
+   endDate: int;
    feedbackFromBeneficiaries: text;
    housingTypes: text;
    impactOnCommunity: text;
@@ -1658,7 +1659,7 @@ type AffordableHousingSupportData =
    location: text;
    numberofBeneficiaries: nat;
    numberofUnitsConstructed: nat;
-   startDate: text;
+   startDate: int;
    supportingFiles: vec text;
    sustainabilityFeatures: text;
    totalFunding: nat;

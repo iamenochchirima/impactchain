@@ -1,10 +1,12 @@
 import React, { FC, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import ALMetricCard from "./ALMetricCard";
 import { TargetOption, targetOptions } from "../../../data/constants";
 import { AiOutlineClose } from "react-icons/ai";
 import { CategoryType } from "../types";
+import { ImpactTargetType } from "../../../utils/types";
+import { setCategoryImpactTargets } from "../../../redux/slices/app";
 
 type Props = {
   setOpenModal: (value: boolean) => void;
@@ -12,6 +14,7 @@ type Props = {
 };
 
 const Metrics: FC<Props> = ({ setOpenModal, category }) => {
+  const dispatch = useDispatch();
   const { impactTargets } = useSelector((state: RootState) => state.app);
   const [targets, setTargets] = useState<TargetOption[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -32,6 +35,20 @@ const Metrics: FC<Props> = ({ setOpenModal, category }) => {
         (a, b) => Number(a.id) - Number(b.id)
       );
       setTargets(_sorted);
+
+      const matchingTargets = matchingTargetsOptions
+        .map((option) =>
+          impactTargets.find(
+            (target) =>
+              target.name === option.name &&
+              option.category === category.category
+          )
+        )
+        .filter((target): target is ImpactTargetType => target !== undefined);
+        
+      dispatch(
+        setCategoryImpactTargets({ categoryImpactTargets: matchingTargets })
+      );
     }
   }, [impactTargets, category]);
 
@@ -72,36 +89,36 @@ const Metrics: FC<Props> = ({ setOpenModal, category }) => {
                 <>
                   <div className="grid grid-cols-3 gap-4 mt-5">
                     {displayedTargets.map((target: TargetOption) => (
-                      <ALMetricCard key={target.id} {...{target, category}} />
+                      <ALMetricCard key={target.id} {...{ target, category }} />
                     ))}
                   </div>
                   <div className="flex justify-center gap-2 items-center mt-4">
                     <div className="">
-                    {currentPage > 1 && (
-                      <button
-                        onClick={handlePrevious}
-                        className=" px-4 py-2 text-custom-green"
-                      >
-                        Previous
-                      </button>
-                    )}
+                      {currentPage > 1 && (
+                        <button
+                          onClick={handlePrevious}
+                          className=" px-4 py-2 text-custom-green"
+                        >
+                          Previous
+                        </button>
+                      )}
                     </div>
-                  
+
                     <span className="text-white">
                       {currentPage} of {totalPages}
                     </span>
 
-                   <div className="">
-                   {currentPage < totalPages && (
-                      <button
-                        onClick={handleNext}
-                        disabled={currentPage >= totalPages}
-                        className=" px-4 py-2 text-custom-green"
-                      >
-                        Next
-                      </button>
-                    )}
-                   </div>
+                    <div className="">
+                      {currentPage < totalPages && (
+                        <button
+                          onClick={handleNext}
+                          disabled={currentPage >= totalPages}
+                          className=" px-4 py-2 text-custom-green"
+                        >
+                          Next
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </>
               ) : (

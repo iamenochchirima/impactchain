@@ -1,14 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { useEffect, useState } from "react";
-import { gitMetricsForTheGivenTimePeriod } from "./utils/util";
+import { getMetricsWithDataForTheGivenTimePeriod} from "./utils/util";
 import { toast } from "react-toastify";
 import { setReportPromptModal } from "../../../redux/slices/app";
+import { Metric } from "../../../utils/types";
 
 const ShowReport = () => {
     const dispatch = useDispatch();
-  const [allData, setAllData] = useState<any[] | null>(null);
-  const [dataForPeriod, setDataForPeriod] = useState<any[] | null>(null);
+  const [allMetrics, setAllMetrics] = useState<Metric[] | null>(null);
+  const [metricsWithDataForPeriod, setMetricsWithDataForPeriod] = useState<Metric[] | null>(null);
   const { categoryImpactTargets, reportPromptResponse } = useSelector(
     (state: RootState) => state.app
   );
@@ -26,20 +27,18 @@ const ShowReport = () => {
       ?.map((target) => target.metrics)
       .flat();
     if (metrics) {
-      const data = metrics.map((metric) => metric.data);
-      console.log("Data", data);
-      setAllData(data);
+        setAllMetrics(metrics);
     }
   };
 
   useEffect(() => {
-    if (allData && reportPromptResponse) {
-      const res = gitMetricsForTheGivenTimePeriod(
-        allData,
+    if (allMetrics && reportPromptResponse) {
+      const res = getMetricsWithDataForTheGivenTimePeriod(
+        allMetrics,
         reportPromptResponse
       );
       if (res) {
-        setDataForPeriod(res);
+        setMetricsWithDataForPeriod(res);
       }
       if (!res) {
         toast.warning("No data found for the given time period, please select another time period", {
@@ -51,7 +50,13 @@ const ShowReport = () => {
 
       }
     }
-  }, [allData, reportPromptResponse]);
+  }, [allMetrics, reportPromptResponse]);
+
+  useEffect(() => {
+    if (metricsWithDataForPeriod) {
+      console.log("Metrics for period", metricsWithDataForPeriod);
+    }
+  }, [metricsWithDataForPeriod]);
 
   return (
     <div>

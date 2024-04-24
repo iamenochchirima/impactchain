@@ -1,94 +1,107 @@
 import { ReportPromptsResponses } from "../../../../redux/slices/app";
+import { Metric } from "../../../../utils/types";
 
-export const gitMetricsForTheGivenTimePeriod = (
-  data: any[],
+export const getMetricsWithDataForTheGivenTimePeriod = (
+  metrics: Metric[],
   response: ReportPromptsResponses
 ) => {
   if (response.periodOfTime === "AllTime") {
-    return data;
+    return metrics;
   }
   if (response.periodOfTime === "1Month") {
-    const res = data.filter((value) => {
-      const startDate = new Date(Number(value[0].startDate));
-      const lastMonth = new Date();
-      lastMonth.setMonth(lastMonth.getMonth() - 1);
-      return startDate > lastMonth;
-    });
-    console.log("1Month", res);
-    if (res.length === 0) {
-      return null;
-    } else {
-      return res;
-    }
+    const res = metrics
+      .map((metric) => {
+        const data = metric.data.filter((item) => {
+          const startDate = new Date(Number(item.startDate));
+          const oneMonthAgo = new Date();
+          oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+          return startDate >= oneMonthAgo;
+        });
+
+        return { ...metric, data };
+      })
+      .filter((metric) => metric.data.length >= 1);
+    return res.length > 0 ? res : null;
   }
+
   if (response.periodOfTime === "3Months") {
-    const res = data.filter((value) => {
-      const startDate = new Date(Number(value[0].startDate));
-      const lastMonth = new Date();
-      lastMonth.setMonth(lastMonth.getMonth() - 3);
-      return startDate > lastMonth;
-    });
-    console.log("3Months", res);
-    if (res.length === 0) {
-      return null;
-    } else {
-      return res;
-    }
+    const res = metrics
+      .map((metric) => {
+        const data = metric.data.filter((item) => {
+          const startDate = new Date(Number(item.startDate));
+          const threeMonthsAgo = new Date();
+          threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+          return startDate >= threeMonthsAgo;
+        });
+
+        return { ...metric, data };
+      })
+      .filter((metric) => metric.data.length >= 1);
+    return res.length > 0 ? res : null;
   }
+
   if (response.periodOfTime === "6Months") {
-    const res = data.filter((value) => {
-      const startDate = new Date(Number(value[0].startDate));
-      const lastMonth = new Date();
-      lastMonth.setMonth(lastMonth.getMonth() - 6);
-      return startDate > lastMonth;
-    });
-    console.log("6Months", res);
-    if (res.length === 0) {
-      return null;
-    } else {
-      return res;
-    }
+    const res = metrics
+      .map((metric) => {
+        const data = metric.data.filter((item) => {
+          const startDate = new Date(Number(item.startDate));
+          const sixMonthsAgo = new Date();
+          sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+          return startDate >= sixMonthsAgo;
+        });
+
+        return { ...metric, data };
+      })
+      .filter((metric) => metric.data.length >= 1);
+    return res.length > 0 ? res : null;
   }
+
   if (response.periodOfTime === "1Year") {
-    const res = data.filter((value) => {
-      const startDate = new Date(Number(value[0].startDate));
-      const lastMonth = new Date();
-      lastMonth.setFullYear(lastMonth.getFullYear() - 1);
-      return startDate > lastMonth;
-    });
-    console.log("1Year", res);
-    if (res.length === 0) {
-      return null;
-    } else {
-      return res;
-    }
+    const res = metrics
+      .map((metric) => {
+        const data = metric.data.filter((item) => {
+          const startDate = new Date(Number(item.startDate));
+          const oneYearAgo = new Date();
+          oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+          return startDate >= oneYearAgo;
+        });
+
+        return { ...metric, data };
+      })
+      .filter((metric) => metric.data.length >= 1);
+    return res.length > 0 ? res : null;
   }
+
   if (response.periodOfTime === "3Years") {
-    const res = data.filter((value) => {
-      const startDate = new Date(Number(value[0].startDate));
-      const lastMonth = new Date();
-      lastMonth.setFullYear(lastMonth.getFullYear() - 3);
-      return startDate > lastMonth;
-    });
-    console.log("3Years", res);
-    if (res.length === 0) {
-      return null;
-    } else {
-      return res;
-    }
+    const res = metrics
+      .map((metric) => {
+        const data = metric.data.filter((item) => {
+          const startDate = new Date(Number(item.startDate));
+          const threeYearsAgo = new Date();
+          threeYearsAgo.setFullYear(threeYearsAgo.getFullYear() - 3);
+          return startDate >= threeYearsAgo;
+        });
+
+        return { ...metric, data };
+      })
+      .filter((metric) => metric.data.length >= 1);
+    return res.length > 0 ? res : null;
   }
+
   if (response.periodOfTime === "5Years") {
-    const res = data.filter((value) => {
-      const startDate = new Date(Number(value[0].startDate));
-      const lastMonth = new Date();
-      lastMonth.setFullYear(lastMonth.getFullYear() - 5);
-      return startDate > lastMonth;
-    });
-    console.log("5Years", res);
-    if (res.length === 0) {
-      return null;
-    } else {
-      return res;
-    }
+    const res = metrics
+      .map((metric) => {
+        const data = metric.data.filter((item) => {
+          const startDate = new Date(Number(item.startDate));
+          const fiveYearsAgo = new Date();
+          fiveYearsAgo.setFullYear(fiveYearsAgo.getFullYear() - 5);
+          return startDate >= fiveYearsAgo;
+        });
+
+        return { ...metric, data };
+      })
+      .filter((metric) => metric.data.length >= 1);
+    return res.length > 0 ? res : null;
   }
+  return null;
 };

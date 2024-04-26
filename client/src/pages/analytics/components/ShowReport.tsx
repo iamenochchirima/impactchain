@@ -1,10 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { useEffect, useState } from "react";
-import { getMetricsWithDataForTheGivenTimePeriod} from "./utils/util";
+import { getMetricsGraphs, getMetricsWithDataForTheGivenTimePeriod} from "./utils/util";
 import { toast } from "react-toastify";
 import { setReportPromptModal } from "../../../redux/slices/app";
 import { Metric } from "../../../utils/types";
+import ChartOne from "../../dashboard/components/Charts/ChartOne";
+import ChartTwo from "../../dashboard/components/Charts/ChartTwo";
+import BarGraph from "../../dashboard/components/Charts/BarGraph";
 
 const ShowReport = () => {
     const dispatch = useDispatch();
@@ -54,13 +57,20 @@ const ShowReport = () => {
 
   useEffect(() => {
     if (metricsWithDataForPeriod) {
-      console.log("Metrics for period", metricsWithDataForPeriod);
+      getMetricsGraphs(metricsWithDataForPeriod)
     }
   }, [metricsWithDataForPeriod]);
 
+
+
   return (
     <div>
-      <h1>Report for</h1>
+      <div className="">
+        <h1 className="text-3xl font-bold text-center">Report</h1>
+        {/* <ChartOne/>
+        <ChartTwo/>
+        <BarGraph/> */}
+      </div>
     </div>
   );
 };

@@ -11,24 +11,11 @@ type Props = {
 
 const ALMetricItem: FC<Props> = ({ item, category }) => {
 
-  const dispatch = useDispatch();
-  const handleClicked = () => {
-    const req: CurrentMetricInfo = {
-      metric: item,
-      category: category,
-    };
-    dispatch(setCurrentMetricInfo(req));
-    dispatch(setReportPromptModal(true))
-  };
 
   return (
       <div className="flex items-center gap-3 text-white hover:cursor-pointer">
-        <span className="leading-tight w-1/2">{item.name}</span>
-        <button
-          onClick={handleClicked}
-          className="hover:bg-gray-700 w-1/2 px-2 py-1 text-nowrap text-custom-green rounded"
-        >
-          Generate Report
+        <button className="bg-custom-gray px-2 py-2 rounded-lg w-full hover:bg-gray-700">
+        <span className="leading-tight ">{item.name}</span>
         </button>
       </div>
   );

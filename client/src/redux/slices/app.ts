@@ -14,7 +14,6 @@ type TargetRecordRequest = {
 
 export type RoportModalRequest = {
   reportModal: boolean;
-  reportMetric: Metric | null;
   reportCategory: CategoryType | null;
 };
 
@@ -125,7 +124,6 @@ export const appSlice = createSlice({
       action: PayloadAction<RoportModalRequest>
     ) => {
       state.reportModal = action.payload.reportModal;
-      state.reportMetric = action.payload.reportMetric;
       state.reportCategory = action.payload.reportCategory;
     },
     setHelpModal: (state: GlobalState, action: PayloadAction<boolean>) => {

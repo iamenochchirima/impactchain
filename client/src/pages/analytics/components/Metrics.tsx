@@ -6,7 +6,7 @@ import { TargetOption, targetOptions } from "../../../data/constants";
 import { AiOutlineClose } from "react-icons/ai";
 import { CategoryType } from "../types";
 import { ImpactTargetType } from "../../../utils/types";
-import { setCategoryImpactTargets } from "../../../redux/slices/app";
+import { setCategoryImpactTargets, setReportPromptModal } from "../../../redux/slices/app";
 
 type Props = {
   setOpenModal: (value: boolean) => void;
@@ -45,7 +45,7 @@ const Metrics: FC<Props> = ({ setOpenModal, category }) => {
           )
         )
         .filter((target): target is ImpactTargetType => target !== undefined);
-        
+
       dispatch(
         setCategoryImpactTargets({ categoryImpactTargets: matchingTargets })
       );
@@ -64,6 +64,11 @@ const Metrics: FC<Props> = ({ setOpenModal, category }) => {
 
   const handleNext = () => {
     setCurrentPage((current) => Math.min(current + 1, totalPages));
+  };
+
+
+  const handleGenerate = () => {
+    dispatch(setReportPromptModal(true))
   };
 
   if (!impactTargets || !impactTargets) {
@@ -126,6 +131,12 @@ const Metrics: FC<Props> = ({ setOpenModal, category }) => {
                   <h3>No {category.category} metrics found</h3>
                 </div>
               )}
+              <div className="w-full flex  justify-center items center">
+                <button 
+                onClick={handleGenerate}
+                className="bg-custom-green text-black rounded px-2 py-2 w-3/4"
+                >Generate Report</button>
+              </div>
             </div>
           </div>
         </div>

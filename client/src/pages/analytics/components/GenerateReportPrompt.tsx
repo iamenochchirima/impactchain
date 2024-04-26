@@ -43,14 +43,8 @@ const GenerateReportPrompt = () => {
         toast.error("Please fill all the fields");
         return;
     }
-    if (!currentMetricInfo) {
-      console.error("No metric info found");
-      return;
-    }
     const req: RoportModalRequest = {
       reportModal: true,
-      reportMetric: currentMetricInfo.metric,
-      reportCategory: currentMetricInfo.category,
     };
     const promptRes: ReportPromptsResponses = {
         periodOfTime: timePreriod,

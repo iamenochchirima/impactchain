@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  RoportModalRequest,
   setCurrentMetricInfo,
   setReportModal,
   setReportPromptModal,
@@ -28,7 +27,7 @@ const targetAudiance = [
 ];
 
 const GenerateReportPrompt = () => {
-  const { currentMetricInfo, userRecord } = useSelector(
+  const { userRecord } = useSelector(
     (state: RootState) => state.app
   );
   const dispatch = useDispatch();
@@ -43,27 +42,20 @@ const GenerateReportPrompt = () => {
         toast.error("Please fill all the fields");
         return;
     }
-    const req: RoportModalRequest = {
-      reportModal: true,
-    };
     const promptRes: ReportPromptsResponses = {
         periodOfTime: timePreriod,
         primaryAudience: audience,
         futureESGGoals: futureGoals,
         caseStudiesTestimonials: caseStudies,
     }
-    dispatch(setReportModal(req));
+    dispatch(setReportModal(true));
     dispatch(setReportPromptResponse(promptRes));
     dispatch(setReportPromptModal(false));
   };
 
   const handleClose = () => {
     dispatch(
-      setReportModal({
-        reportModal: false,
-        reportMetric: null,
-        reportCategory: null,
-      })
+      setReportModal(true)
     );
     dispatch(setCurrentMetricInfo({ metric: null, category: null }));
     dispatch(setReportPromptModal(false));

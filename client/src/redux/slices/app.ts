@@ -12,11 +12,6 @@ type TargetRecordRequest = {
   targetRecord: TargetRecordStateType | null;
 };
 
-export type RoportModalRequest = {
-  reportModal: boolean;
-  reportCategory: CategoryType | null;
-};
-
 export type ReportPromptsResponses = {
   periodOfTime: string;
   primaryAudience: string;
@@ -47,8 +42,6 @@ export interface GlobalState {
   metricsUpdated: boolean;
 
   reportModal: boolean;
-  reportMetric: Metric | null;
-  reportCategory: CategoryType | null;
   categoryImpactTargets: ImpactTargetType[] | null;
 
   currentMetricInfo: CurrentMetricInfo | null;
@@ -73,8 +66,6 @@ const initialState: GlobalState = {
   metricsUpdated: false,
 
   reportModal: false,
-  reportMetric: null,
-  reportCategory: null,
   categoryImpactTargets: null,
 
   currentMetricInfo: null,
@@ -121,10 +112,9 @@ export const appSlice = createSlice({
     },
     setReportModal: (
       state: GlobalState,
-      action: PayloadAction<RoportModalRequest>
+      action: PayloadAction<boolean>
     ) => {
-      state.reportModal = action.payload.reportModal;
-      state.reportCategory = action.payload.reportCategory;
+      state.reportModal = action.payload;
     },
     setHelpModal: (state: GlobalState, action: PayloadAction<boolean>) => {
       state.openHelp = action.payload;

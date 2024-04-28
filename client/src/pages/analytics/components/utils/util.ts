@@ -2,14 +2,13 @@ import { ReportPromptsResponses } from "../../../../redux/slices/app";
 import { Metric } from "../../../../utils/types";
 
 export const getMetricsWithDataForTheGivenTimePeriod = (
-  metrics: Metric[],
   response: ReportPromptsResponses
 ) => {
   if (response.periodOfTime === "AllTime") {
-    return metrics;
+    return response.selectedMetrics;
   }
   if (response.periodOfTime === "1Month") {
-    const res = metrics
+    const res = response.selectedMetrics
       .map((metric) => {
         const data = metric.data.filter((item) => {
           const startDate = new Date(Number(item.startDate));
@@ -25,7 +24,7 @@ export const getMetricsWithDataForTheGivenTimePeriod = (
   }
 
   if (response.periodOfTime === "3Months") {
-    const res = metrics
+    const res = response.selectedMetrics
       .map((metric) => {
         const data = metric.data.filter((item) => {
           const startDate = new Date(Number(item.startDate));
@@ -41,7 +40,7 @@ export const getMetricsWithDataForTheGivenTimePeriod = (
   }
 
   if (response.periodOfTime === "6Months") {
-    const res = metrics
+    const res = response.selectedMetrics
       .map((metric) => {
         const data = metric.data.filter((item) => {
           const startDate = new Date(Number(item.startDate));
@@ -57,7 +56,7 @@ export const getMetricsWithDataForTheGivenTimePeriod = (
   }
 
   if (response.periodOfTime === "1Year") {
-    const res = metrics
+    const res = response.selectedMetrics
       .map((metric) => {
         const data = metric.data.filter((item) => {
           const startDate = new Date(Number(item.startDate));
@@ -73,7 +72,7 @@ export const getMetricsWithDataForTheGivenTimePeriod = (
   }
 
   if (response.periodOfTime === "3Years") {
-    const res = metrics
+    const res = response.selectedMetrics
       .map((metric) => {
         const data = metric.data.filter((item) => {
           const startDate = new Date(Number(item.startDate));
@@ -89,7 +88,7 @@ export const getMetricsWithDataForTheGivenTimePeriod = (
   }
 
   if (response.periodOfTime === "5Years") {
-    const res = metrics
+    const res = response.selectedMetrics
       .map((metric) => {
         const data = metric.data.filter((item) => {
           const startDate = new Date(Number(item.startDate));

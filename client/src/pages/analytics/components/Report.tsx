@@ -3,7 +3,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { formatDate } from "../../../utils/time";
-import { RoportModalRequest, setReportModal } from "../../../redux/slices/app";
+import { setReportModal } from "../../../redux/slices/app";
 import { pdfjs, Document, Page } from "react-pdf";
 import { PDFDocumentProxy, PDFPageProxy } from "pdfjs-dist";
 import ShowReport from "./ShowReport";
@@ -17,17 +17,12 @@ interface PdfTextExtractorProps {
 const Report = () => {
   const [text, setText] = useState<string>("");
   const dispatch = useDispatch();
-  const { userRecord, reportCategory, reportMetric, userInfo } = useSelector(
+  const { userRecord, userInfo, reportCategory  } = useSelector(
     (state: RootState) => state.app
   );
 
   const handleClose = () => {
-    const req: RoportModalRequest = {
-      reportModal: false,
-      reportMetric: null,
-      reportCategory: null,
-    };
-    dispatch(setReportModal(req));
+    dispatch(setReportModal(false));
   };
 
   return (
@@ -66,7 +61,6 @@ const Report = () => {
             </div>
             <div className="w-full">
               <div className="bg-black rounded-3xl w-full p-4">
-                <h3>{reportMetric?.name}</h3>
                 <ShowReport />
               </div>
             </div>

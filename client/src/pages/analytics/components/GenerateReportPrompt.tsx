@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  setAllCategoryMetrics,
   setCurrentMetricInfo,
   setReportModal,
   setReportPromptModal,
@@ -8,8 +9,10 @@ import {
 } from "../../../redux/slices/app";
 import { RootState } from "../../../redux/store";
 import { AiOutlineClose } from "react-icons/ai";
-import { ReportPromptsResponses } from '../../../redux/slices/app';
+import { ReportPromptsResponses } from "../../../redux/slices/app";
 import { toast } from "react-toastify";
+import { Metric } from "../../../utils/types";
+import SelectMetrics from "./SelectMetrics";
 
 const targetAudiance = [
   "CorporateExecutives",
@@ -27,7 +30,7 @@ const targetAudiance = [
 ];
 
 const GenerateReportPrompt = () => {
-  const { userRecord } = useSelector(
+  const { userRecord, categoryImpactTargets, } = useSelector(
     (state: RootState) => state.app
   );
   const dispatch = useDispatch();
@@ -36,30 +39,53 @@ const GenerateReportPrompt = () => {
   const [audience, setAudience] = useState<string>("");
   const [futureGoals, setGoals] = useState<string>("");
   const [caseStudies, setStudies] = useState<string>("");
+  const [selectedMetrics, setSelectedMetrics] = useState<Metric[]>([]);
+
+  useEffect(() => {
+    if (!categoryImpactTargets) {
+      console.error("No categoryImpactTargets found");
+      return;
+    }
+    getAllMetrics();
+  }, [categoryImpactTargets]);
 
   const handleGenerate = () => {
-    if (timePreriod === "" || audience === "" || futureGoals === "" || caseStudies === "") {
-        toast.error("Please fill all the fields");
-        return;
+    if (
+      timePreriod === "" ||
+      audience === "" ||
+      futureGoals === "" ||
+      caseStudies === ""
+    ) {
+      toast.error("Please fill all the fields");
+      return;
     }
     const promptRes: ReportPromptsResponses = {
-        periodOfTime: timePreriod,
-        primaryAudience: audience,
-        futureESGGoals: futureGoals,
-        caseStudiesTestimonials: caseStudies,
-    }
+      periodOfTime: timePreriod,
+      selectedMetrics,  
+      primaryAudience: audience,
+      futureESGGoals: futureGoals,
+      caseStudiesTestimonials: caseStudies,
+    };
     dispatch(setReportModal(true));
     dispatch(setReportPromptResponse(promptRes));
     dispatch(setReportPromptModal(false));
   };
 
+  const getAllMetrics = () => {
+    const metrics = categoryImpactTargets
+      ?.map((target) => target.metrics)
+      .flat();
+    if (metrics) {
+      dispatch(setAllCategoryMetrics({ allCategoryMetrics: metrics }));
+    }
+  };
+
   const handleClose = () => {
-    dispatch(
-      setReportModal(true)
-    );
+    dispatch(setReportModal(true));
     dispatch(setCurrentMetricInfo({ metric: null, category: null }));
     dispatch(setReportPromptModal(false));
   };
+
   return (
     <div className="fixed z-50  inset-0 text-white overflow-y-auto bg-black bg-opacity-75">
       <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-TelegraphRegular">
@@ -134,6 +160,19 @@ const GenerateReportPrompt = () => {
                     ))}
                   </select>
                 </div>
+
+                <div className="">
+                  <h3 className="block mb-2 text-lg font-medium text-gray-900 dark:text-white">
+                    Select specific metrics you would like highlighted in the
+                    report.
+                  </h3>
+                  <SelectMetrics
+                    {...{
+                      setSelectedMetrics,
+                    }}
+                  />
+                </div>
+
                 <div className="">
                   <label
                     htmlFor="initiatives"
@@ -172,14 +211,14 @@ const GenerateReportPrompt = () => {
                 </div>
               </div>
 
-             <div className="flex justify-end">
-             <button
-                onClick={handleGenerate}
-                className="bg-custom-green px-4 py-1.5 rounded-3xl text-black font-bold mt-2"
-              >
-                Generate Report
-              </button>
-             </div>
+              <div className="flex justify-end">
+                <button
+                  onClick={handleGenerate}
+                  className="bg-custom-green px-4 py-1.5 rounded-3xl text-black font-bold mt-2"
+                >
+                  Generate Report
+                </button>
+              </div>
             </div>
           </div>
           <div className="flex justify-center items-center gap-3 mt-5 mb-2">

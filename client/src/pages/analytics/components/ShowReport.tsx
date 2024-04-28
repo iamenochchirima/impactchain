@@ -11,7 +11,6 @@ import BarGraph from "../../dashboard/components/Charts/BarGraph";
 
 const ShowReport = () => {
     const dispatch = useDispatch();
-  const [allMetrics, setAllMetrics] = useState<Metric[] | null>(null);
   const [metricsWithDataForPeriod, setMetricsWithDataForPeriod] = useState<Metric[] | null>(null);
   const { categoryImpactTargets, reportPromptResponse } = useSelector(
     (state: RootState) => state.app
@@ -22,22 +21,12 @@ const ShowReport = () => {
       console.error("No categoryImpactTargets or reportPromptResponse found");
       return;
     }
-    getAllMetrics();
   }, [categoryImpactTargets, reportPromptResponse]);
 
-  const getAllMetrics = () => {
-    const metrics = categoryImpactTargets
-      ?.map((target) => target.metrics)
-      .flat();
-    if (metrics) {
-        setAllMetrics(metrics);
-    }
-  };
 
   useEffect(() => {
-    if (allMetrics && reportPromptResponse) {
+    if (reportPromptResponse) {
       const res = getMetricsWithDataForTheGivenTimePeriod(
-        allMetrics,
         reportPromptResponse
       );
       if (res) {
@@ -53,7 +42,7 @@ const ShowReport = () => {
 
       }
     }
-  }, [allMetrics, reportPromptResponse]);
+  }, [ reportPromptResponse]);
 
   useEffect(() => {
     if (metricsWithDataForPeriod) {

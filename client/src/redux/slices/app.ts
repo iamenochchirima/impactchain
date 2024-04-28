@@ -16,6 +16,7 @@ export type ReportPromptsResponses = {
   periodOfTime: string;
   primaryAudience: string;
   futureESGGoals: string;
+  selectedMetrics: Metric[];
   caseStudiesTestimonials: string;
 };
 
@@ -26,6 +27,14 @@ export type CurrentMetricInfo = {
 
 export type SetCategoryImpactTargetsType = {
   categoryImpactTargets: ImpactTargetType[] | null;
+};
+
+export type AllCategroryMetricsRequest = {
+  allCategoryMetrics: Metric[] | null;
+};
+
+export type ReportCategoryRequest = {
+  reportCategory: CategoryType | null;
 };
 
 export interface GlobalState {
@@ -50,6 +59,9 @@ export interface GlobalState {
   reportPromptModal: boolean;
 
   openHelp: boolean;
+
+  allCategoryMetrics: Metric[] | null;
+  reportCategory: CategoryType | null;
 }
 
 const initialState: GlobalState = {
@@ -73,6 +85,9 @@ const initialState: GlobalState = {
   reportPromptModal: false,
 
   openHelp: false,
+
+  allCategoryMetrics: null,
+  reportCategory: null,
 };
 
 export const appSlice = createSlice({
@@ -110,10 +125,7 @@ export const appSlice = createSlice({
     setMetricsUpdated: (state: GlobalState, action: PayloadAction<boolean>) => {
       state.metricsUpdated = action.payload;
     },
-    setReportModal: (
-      state: GlobalState,
-      action: PayloadAction<boolean>
-    ) => {
+    setReportModal: (state: GlobalState, action: PayloadAction<boolean>) => {
       state.reportModal = action.payload;
     },
     setHelpModal: (state: GlobalState, action: PayloadAction<boolean>) => {
@@ -152,6 +164,20 @@ export const appSlice = createSlice({
       state.reportPromptModal = action.payload;
     },
 
+    setAllCategoryMetrics: (
+      state: GlobalState,
+      action: PayloadAction<AllCategroryMetricsRequest>
+    ) => {
+      state.allCategoryMetrics = action.payload.allCategoryMetrics;
+    },
+
+    setReportCategory: (
+      state: GlobalState,
+      action: PayloadAction<ReportCategoryRequest>
+    ) => {
+      state.reportCategory = action.payload.reportCategory;
+    },
+
     logout: (state: GlobalState) => {
       state.isAuthenticated = false;
       state.userInfo = null;
@@ -179,6 +205,8 @@ export const {
   setCurrentMetricInfo,
   setReportPromptResponse,
   setReportPromptModal,
+  setAllCategoryMetrics,
+  setReportCategory,
 } = appSlice.actions;
 
 export default appSlice.reducer;

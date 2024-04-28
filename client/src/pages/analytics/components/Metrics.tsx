@@ -6,7 +6,7 @@ import { TargetOption, targetOptions } from "../../../data/constants";
 import { AiOutlineClose } from "react-icons/ai";
 import { CategoryType } from "../types";
 import { ImpactTargetType } from "../../../utils/types";
-import { setCategoryImpactTargets, setReportPromptModal } from "../../../redux/slices/app";
+import { setCategoryImpactTargets, setReportCategory, setReportPromptModal } from "../../../redux/slices/app";
 
 type Props = {
   setOpenModal: (value: boolean) => void;
@@ -68,6 +68,7 @@ const Metrics: FC<Props> = ({ setOpenModal, category }) => {
 
 
   const handleGenerate = () => {
+    dispatch(setReportCategory({reportCategory: category}));
     dispatch(setReportPromptModal(true))
   };
 

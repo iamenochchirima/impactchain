@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import TargetCard from "./TargetCard";
-import { setDataComponent, setImpactTargets, setUserRecord } from "../../redux/slices/app";
+import {
+  setDataComponent,
+  setImpactTargets,
+  setUserRecord,
+} from "../../redux/slices/app";
 import { useDispatch, useSelector } from "react-redux";
 import { TargetOption, targetOptions } from "../../data/constants";
 import { RootState } from "../../redux/store";
 import { useAuth } from "../../hooks/AppContext";
-import {
-  UserRecord,
-} from "../../hooks/declarations/data/data.did";
+import { UserRecord } from "../../hooks/declarations/data/data.did";
 import { ImpactTargetType } from "../../utils/types";
 import { getTargetMetrics } from "../../utils/targets";
 
@@ -72,17 +74,47 @@ const ImpactTarget = () => {
             };
           }
         });
-        const updatedImpactTargets = {...userRecord.impactTargets};
+        const updatedImpactTargets = { ...userRecord.impactTargets };
 
-        targets.forEach(target => {
-         const metrics = getTargetMetrics(target);
-            updatedImpactTargets[`ImpactTarget${target.id}`] = [{
-                id: target.id,
-                name: target.name,
-                metrics: metrics,
-            }];
+        const impactTargetKeys = [
+          "ImpactTarget1",
+          "ImpactTarget2",
+          "ImpactTarget3",
+          "ImpactTarget4",
+          "ImpactTarget5",
+          "ImpactTarget6",
+          "ImpactTarget7",
+          "ImpactTarget8",
+          "ImpactTarget9",
+          "ImpactTarget10",
+          "ImpactTarget11",
+          "ImpactTarget12",
+          "ImpactTarget13",
+          "ImpactTarget14",
+          "ImpactTarget15",
+          "ImpactTarget16",
+          "ImpactTarget17",
+        ];
+
+        targets.forEach((target) => {
+          const metrics = getTargetMetrics(target);
+          updatedImpactTargets[`ImpactTarget${target.id}`] = [
+            {
+              id: target.id,
+              name: target.name,
+              metrics,
+            },
+          ];
         });
-    
+
+        impactTargetKeys.forEach((key) => {
+          const targetId = parseInt(key.replace("ImpactTarget", ""), 10);
+
+          if (!selectedTargets.some((t) => t.id === targetId)) {
+            updatedImpactTargets[key] = [];
+          }
+        });
+
         const data: UserRecord = {
           ...userRecord,
           impactTargets: updatedImpactTargets,

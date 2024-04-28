@@ -38,7 +38,10 @@ const Metrics = () => {
 
   useEffect(() => {
     if (impactTargets) {
-      setTargets(impactTargets);
+      const _sortedTargets = [...impactTargets].sort(
+        (a, b) => Number(a.id) - Number(b.id)
+      );
+      setTargets(_sortedTargets);
     }
   }, [impactTargets]);
 

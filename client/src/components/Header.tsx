@@ -16,10 +16,11 @@ import Report from "../pages/analytics/components/Report";
 import Help from "./Help";
 import { ImpactTargetType } from "../utils/types";
 import { getImpactTargetsArray } from "../utils/targets";
+import GenerateReportPrompt from "../pages/analytics/components/GenerateReportPrompt";
 
 
 const Header = () => {
-  const { showDataForm, userInfo, reportModal, openHelp } = useSelector(
+  const { showDataForm, userInfo, reportModal, openHelp, reportPromptModal, currentMetricInfo, } = useSelector(
     (state: RootState) => state.app
   );
   const userMenuRef = useRef<HTMLDivElement>(null);
@@ -84,11 +85,13 @@ const Header = () => {
     }
   }, [dataActor, userInfo, dispatch]);
 
+
   return (
     <>
       {showDataForm && <SubmitData />}
       {reportModal && <Report />}
       {openHelp && <Help />}
+      {reportPromptModal && <GenerateReportPrompt />}
       <div className="fixed bg-black z-40 left-64 right-0">
         <div className="pt-4">
           <div className="h-5 flex items-center justify-end bg-custom-gray mx-10 py-10 rounded-xl border border-green-700">

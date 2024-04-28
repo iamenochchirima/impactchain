@@ -12,10 +12,20 @@ type TargetRecordRequest = {
   targetRecord: TargetRecordStateType | null;
 };
 
-export type RoportModalRequest = {
-  reportModal: boolean;
-  reportMetric: Metric | null;
-  reportCategory: CategoryType | null;
+export type ReportPromptsResponses = {
+  periodOfTime: string;
+  primaryAudience: string;
+  futureESGGoals: string;
+  caseStudiesTestimonials: string;
+};
+
+export type CurrentMetricInfo = {
+  metric: Metric | null;
+  category: CategoryType | null;
+};
+
+export type SetCategoryImpactTargetsType = {
+  categoryImpactTargets: ImpactTargetType[] | null;
 };
 
 export interface GlobalState {
@@ -28,13 +38,16 @@ export interface GlobalState {
   userRecord: UserRecord | null;
 
   impactTargets: ImpactTargetType[] | null;
-
   nextTarget: boolean;
   metricsUpdated: boolean;
 
   reportModal: boolean;
-  reportMetric: Metric | null;
-  reportCategory: CategoryType | null;
+  categoryImpactTargets: ImpactTargetType[] | null;
+
+  currentMetricInfo: CurrentMetricInfo | null;
+  reportPromptResponse: ReportPromptsResponses | null;
+
+  reportPromptModal: boolean;
 
   openHelp: boolean;
 }
@@ -53,11 +66,13 @@ const initialState: GlobalState = {
   metricsUpdated: false,
 
   reportModal: false,
-  reportMetric: null,
-  reportCategory: null,
+  categoryImpactTargets: null,
+
+  currentMetricInfo: null,
+  reportPromptResponse: null,
+  reportPromptModal: false,
 
   openHelp: false,
-
 };
 
 export const appSlice = createSlice({
@@ -95,17 +110,48 @@ export const appSlice = createSlice({
     setMetricsUpdated: (state: GlobalState, action: PayloadAction<boolean>) => {
       state.metricsUpdated = action.payload;
     },
-    setReportModal: (state: GlobalState, action: PayloadAction<RoportModalRequest>) => {
-      state.reportModal = action.payload.reportModal;
-      state.reportMetric = action.payload.reportMetric;
-      state.reportCategory = action.payload.reportCategory;
+    setReportModal: (
+      state: GlobalState,
+      action: PayloadAction<boolean>
+    ) => {
+      state.reportModal = action.payload;
     },
     setHelpModal: (state: GlobalState, action: PayloadAction<boolean>) => {
       state.openHelp = action.payload;
     },
-    setImpactTargets: (state: GlobalState, action: PayloadAction<ImpactTargetType[]>) => {
+    setImpactTargets: (
+      state: GlobalState,
+      action: PayloadAction<ImpactTargetType[]>
+    ) => {
       state.impactTargets = action.payload;
     },
+
+    setCurrentMetricInfo: (
+      state: GlobalState,
+      action: PayloadAction<CurrentMetricInfo>
+    ) => {
+      state.currentMetricInfo = action.payload;
+    },
+    setReportPromptResponse: (
+      state: GlobalState,
+      action: PayloadAction<ReportPromptsResponses>
+    ) => {
+      state.reportPromptResponse = action.payload;
+    },
+    setCategoryImpactTargets: (
+      state: GlobalState,
+      action: PayloadAction<SetCategoryImpactTargetsType>
+    ) => {
+      state.categoryImpactTargets = action.payload.categoryImpactTargets;
+    },
+
+    setReportPromptModal: (
+      state: GlobalState,
+      action: PayloadAction<boolean>
+    ) => {
+      state.reportPromptModal = action.payload;
+    },
+
     logout: (state: GlobalState) => {
       state.isAuthenticated = false;
       state.userInfo = null;
@@ -128,6 +174,11 @@ export const {
   setReportModal,
   setHelpModal,
   setImpactTargets,
+  setCategoryImpactTargets,
+
+  setCurrentMetricInfo,
+  setReportPromptResponse,
+  setReportPromptModal,
 } = appSlice.actions;
 
 export default appSlice.reducer;

@@ -1,22 +1,21 @@
-import React, { useState, FunctionComponent } from 'react';
+import React, { useState, FunctionComponent } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { formatDate } from "../../../utils/time";
 import { RoportModalRequest, setReportModal } from "../../../redux/slices/app";
-import { pdfjs, Document, Page } from 'react-pdf';
-import { PDFDocumentProxy, PDFPageProxy } from 'pdfjs-dist'
+import { pdfjs, Document, Page } from "react-pdf";
+import { PDFDocumentProxy, PDFPageProxy } from "pdfjs-dist";
+import ShowReport from "./ShowReport";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 interface PdfTextExtractorProps {
-    file: string | File | ArrayBuffer; 
-  }
-  
-
+  file: string | File | ArrayBuffer;
+}
 
 const Report = () => {
-    const [text, setText] = useState<string>('');
+  const [text, setText] = useState<string>("");
   const dispatch = useDispatch();
   const { userRecord, reportCategory, reportMetric, userInfo } = useSelector(
     (state: RootState) => state.app
@@ -68,7 +67,7 @@ const Report = () => {
             <div className="w-full">
               <div className="bg-black rounded-3xl w-full p-4">
                 <h3>{reportMetric?.name}</h3>
-                <div className="mx-3"></div>
+                <ShowReport />
               </div>
             </div>
             <div className="flex justify-center items-center gap-3 mt-5">

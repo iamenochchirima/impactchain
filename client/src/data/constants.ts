@@ -90,7 +90,7 @@ export const targetOptions: TargetOption[] = [
           },
         ],
       },
-    ]
+    ],
   },
   {
     id: 2,
@@ -606,7 +606,7 @@ export const targetOptions: TargetOption[] = [
             x: "Time (Months/quaters)",
             y: "Number of programs",
           },
-          
+
           {
             name: "EducationOvertime",
             type: "line",
@@ -798,7 +798,7 @@ export const targetOptions: TargetOption[] = [
             type: "line",
             x: "Time (Months/quaters)",
             y: "Amount invested",
-          }
+          },
         ],
       },
     ],
@@ -828,8 +828,8 @@ export const targetOptions: TargetOption[] = [
             type: "bar",
             x: "Location",
             y: "Amount of waste reduced",
-          }
-        ]
+          },
+        ],
       },
       {
         id: 2,
@@ -852,9 +852,9 @@ export const targetOptions: TargetOption[] = [
             name: "SupplyChainImpact",
             type: "bar",
             x: "Impact",
-            y: "Number of suppliers impacted"
-          }
-        ]
+            y: "Number of suppliers impacted",
+          },
+        ],
       },
       {
         id: 3,
@@ -872,8 +872,8 @@ export const targetOptions: TargetOption[] = [
             type: "bar",
             x: "Location",
             y: "Amount of resources reduced",
-          }
-        ]
+          },
+        ],
       },
     ],
   },
@@ -902,8 +902,8 @@ export const targetOptions: TargetOption[] = [
             type: "bar",
             x: "Location",
             y: "Amount of emissions reduced",
-          }
-        ]
+          },
+        ],
       },
       {
         id: 2,
@@ -921,8 +921,8 @@ export const targetOptions: TargetOption[] = [
             type: "bar",
             x: "Location",
             y: "Amount invested",
-          }
-        ]
+          },
+        ],
       },
       {
         id: 3,
@@ -940,8 +940,8 @@ export const targetOptions: TargetOption[] = [
             type: "bar",
             x: "Location",
             y: "Number of projects",
-          }
-        ]
+          },
+        ],
       },
     ],
   },
@@ -970,8 +970,8 @@ export const targetOptions: TargetOption[] = [
             type: "bar",
             x: "Location",
             y: "Number of ecosystems protected",
-          }
-        ]
+          },
+        ],
       },
       {
         id: 2,
@@ -989,8 +989,8 @@ export const targetOptions: TargetOption[] = [
             type: "bar",
             x: "Location",
             y: "Amount of pollution reduced",
-          }
-        ]
+          },
+        ],
       },
       {
         id: 3,
@@ -1008,8 +1008,8 @@ export const targetOptions: TargetOption[] = [
             type: "bar",
             x: "Location",
             y: "Number of fishing communities supported",
-          }
-        ]
+          },
+        ],
       },
     ],
   },
@@ -1038,8 +1038,8 @@ export const targetOptions: TargetOption[] = [
             type: "bar",
             x: "Location",
             y: "Number of hectares conserved",
-          }
-        ]
+          },
+        ],
       },
       {
         id: 2,
@@ -1057,8 +1057,8 @@ export const targetOptions: TargetOption[] = [
             type: "bar",
             x: "Location",
             y: "Number of species protected",
-          }
-        ]
+          },
+        ],
       },
       {
         id: 3,
@@ -1076,8 +1076,8 @@ export const targetOptions: TargetOption[] = [
             type: "bar",
             x: "Location",
             y: "Number of hectares rehabilitated",
-          }
-        ]
+          },
+        ],
       },
     ],
   },
@@ -1106,8 +1106,8 @@ export const targetOptions: TargetOption[] = [
             type: "bar",
             x: "Location",
             y: "Number of programs",
-          }
-        ]
+          },
+        ],
       },
       {
         id: 2,
@@ -1125,8 +1125,8 @@ export const targetOptions: TargetOption[] = [
             type: "bar",
             x: "Location",
             y: "Number of initiatives",
-          }
-        ]
+          },
+        ],
       },
       {
         id: 3,
@@ -1144,8 +1144,8 @@ export const targetOptions: TargetOption[] = [
             type: "bar",
             x: "Location",
             y: "Number of programs",
-          }
-        ]
+          },
+        ],
       },
     ],
   },
@@ -1174,8 +1174,8 @@ export const targetOptions: TargetOption[] = [
             type: "bar",
             x: "Location",
             y: "Number of projects",
-          }
-        ]
+          },
+        ],
       },
       {
         id: 2,
@@ -1193,8 +1193,8 @@ export const targetOptions: TargetOption[] = [
             type: "bar",
             x: "Location",
             y: "Amount contributed",
-          }
-        ]
+          },
+        ],
       },
       {
         id: 3,
@@ -1212,9 +1212,63 @@ export const targetOptions: TargetOption[] = [
             type: "bar",
             x: "Location",
             y: "Number of campaigns",
-          }
-        ]
+          },
+        ],
       },
     ],
   },
+];
+
+export const keys = [
+  "jobTraining",
+  "microloans",
+  "peopleAssisted",
+  "foodDonation",
+  "sustainableAgriculture",
+  "peopleFed",
+  "healthcareFunding",
+  "healthCheckups",
+  "peopleAccessingHealthcare",
+  "schoolsBuilt",
+  "educationalGrants",
+  "studentsBenefiting",
+  "womensEmpowerment",
+  "genderEqualityWorkshops",
+  "workplaceGenderEquality",
+  "sanitationFacilities",
+  "waterConservation",
+  "peopleWithAccess",
+  "renewableEnergyProjects",
+  "energyEfficientSystems",
+  "energyConsumptionReduction",
+  "jobCreation",
+  "vocationalTraining",
+  "employmentImprovements",
+  "stemEducation",
+  "sustainableInfrastructure",
+  "peopleBenefiting",
+  "marginalizedCommunitySupport",
+  "inclusionPolicies",
+  "beneficiaries",
+  "urbanSustainability",
+  "affordableHousing",
+  "urbanLivingConditions",
+  "wasteReduction",
+  "sustainableSupplyChain",
+  "resourceFootprintReduction",
+  "carbonEmissionReduction",
+  "renewableEnergyInvestment",
+  "reforestationProjects",
+  "marineEcosystemProtection",
+  "oceanPollutionReduction",
+  "sustainableFishing",
+  "landConservation",
+  "endangeredSpeciesProtection",
+  "landRehabilitation",
+  "antiCorruptionPrograms",
+  "humanRightsInitiatives",
+  "communityPeacePrograms",
+  "collaborativeProjects",
+  "financialContributions",
+  "sdgAdvocacy",
 ];

@@ -49,7 +49,7 @@ const ShowReport = () => {
   }, [reportPromptResponse]);
 
   useEffect(() => {
-    if (metricsWithDataForPeriod) {
+    if (metricsWithDataForPeriod && reportPromptResponse) {
       getMetricsReportData(metricsWithDataForPeriod, reportPromptResponse);
     }
   }, [metricsWithDataForPeriod, reportPromptResponse]);

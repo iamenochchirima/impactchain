@@ -1,6 +1,6 @@
 import { ReportPromptsResponses } from "../../../../redux/slices/app";
 import { Metric } from "../../../../utils/types";
-import { MetricReportData, LineGraphData } from "./types";
+import { MetricReportData } from "./types";
 
 export const getMetricsWithDataForTheGivenTimePeriod = (
   response: ReportPromptsResponses
@@ -106,66 +106,6 @@ export const getMetricsWithDataForTheGivenTimePeriod = (
   return null;
 };
 
-// Getting current year for yearly categories
-const currentYear: number = new Date().getFullYear();
-
-// Monthly categories (using a single month as example)
-const monthlyCategories: string[] = Array.from(
-  { length: 31 },
-  (_, i) => `${i + 1}`
-);
-
-// Quarterly categories (3 months)
-const quarterlyCategories: string[] = [
-  "Week 1",
-  "Week 2",
-  "Week 3",
-  "Week 4",
-  "Week 5",
-  "Week 6",
-  "Week 7",
-  "Week 8",
-  "Week 9",
-  "Week 10",
-  "Week 11",
-  "Week 12",
-];
-
-// Semi-annual categories (6 months)
-const semiAnnualCategories: string[] = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-];
-
-// 3-Year categories
-const threeYearCategories: string[] = [
-  `Q1 ${currentYear}`,
-  `Q2 ${currentYear}`,
-  `Q3 ${currentYear}`,
-  `Q4 ${currentYear}`,
-  `Q1 ${currentYear + 1}`,
-  `Q2 ${currentYear + 1}`,
-  `Q3 ${currentYear + 1}`,
-  `Q4 ${currentYear + 1}`,
-  `Q1 ${currentYear + 2}`,
-  `Q2 ${currentYear + 2}`,
-  `Q3 ${currentYear + 2}`,
-  `Q4 ${currentYear + 2}`,
-];
-
-// 5-Year categories
-const fiveYearCategories: string[] = [
-  `${currentYear}`,
-  `${currentYear + 1}`,
-  `${currentYear + 2}`,
-  `${currentYear + 3}`,
-  `${currentYear + 4}`,
-];
-
 export const getMetricsReportData = (
   metricsWithDataForPeriod: Metric[],
   reportPromptResponse: ReportPromptsResponses
@@ -173,236 +113,345 @@ export const getMetricsReportData = (
   const metricsData: MetricReportData[] = [];
   for (const metric of metricsWithDataForPeriod) {
     if (metric.data.length === 0) {
-      return null;
+      continue;
     }
-
     if (metric.key === "jobTraining") {
-      const uploadedDataDates = metric.data.map((item) => {
-        return new Date(Number(item.startDate));
-      });
-      const dataValues = metric.data.map((item) => {
-        return item.numberOfPrograms;
-      });
-      const data = getLineGraphData(
+      
+      const valueKey = "numberOfBeneficiaries";
+      const lineGraphData = getLineGraphData(
         reportPromptResponse.periodOfTime,
-        metric.data
+        metric.data,
+        metric.name,
+        valueKey
       );
+
+      if (lineGraphData) {
+        console.log(lineGraphData);
+      };
+
+      const barGraphData = getLocationBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        metric.name,
+        valueKey
+      );
+
+      if (barGraphData) {
+        console.log(barGraphData);
+      }
+
+
     } else if (metric.key === "microloans") {
-      // Code to execute if the key is microloans
+      // Handle microloans logic here
     } else if (metric.key === "peopleAssisted") {
-      // Code to execute if the key is peopleAssisted
+      // Handle people assisted logic here
     } else if (metric.key === "foodDonation") {
-      // Code to execute if the key is foodDonation
+      // Handle food donation logic here
     } else if (metric.key === "sustainableAgriculture") {
-      // Code to execute if the key is sustainableAgriculture
+      // Handle sustainable agriculture logic here
     } else if (metric.key === "peopleFed") {
-      // Code to execute if the key is peopleFed
+      // Handle people fed logic here
     } else if (metric.key === "healthcareFunding") {
-      // Code to execute if the key is healthcareFunding
+      // Handle healthcare funding logic here
     } else if (metric.key === "healthCheckups") {
-      // Code to execute if the key is healthCheckups
+      // Handle health checkups logic here
     } else if (metric.key === "peopleAccessingHealthcare") {
-      // Code to execute if the key is peopleAccessingHealthcare
+      // Handle people accessing healthcare logic here
     } else if (metric.key === "schoolsBuilt") {
-      // Code to execute if the key is schoolsBuilt
+      // Handle schools built logic here
     } else if (metric.key === "educationalGrants") {
-      // Code to execute if the key is educationalGrants
+      // Handle educational grants logic here
     } else if (metric.key === "studentsBenefiting") {
-      // Code to execute if the key is studentsBenefiting
+      // Handle students benefiting logic here
     } else if (metric.key === "womensEmpowerment") {
-      // Code to execute if the key is womensEmpowerment
+      // Handle women's empowerment logic here
     } else if (metric.key === "genderEqualityWorkshops") {
-      // Code to execute if the key is genderEqualityWorkshops
+      // Handle gender equality workshops logic here
     } else if (metric.key === "workplaceGenderEquality") {
-      // Code to execute if the key is workplaceGenderEquality
+      // Handle workplace gender equality logic here
     } else if (metric.key === "sanitationFacilities") {
-      // Code to execute if the key is sanitationFacilities
+      // Handle sanitation facilities logic here
     } else if (metric.key === "waterConservation") {
-      // Code to execute if the key is waterConservation
+      // Handle water conservation logic here
     } else if (metric.key === "peopleWithAccess") {
-      // Code to execute if the key is peopleWithAccess
+      // Handle people with access logic here
     } else if (metric.key === "renewableEnergyProjects") {
-      // Code to execute if the key is renewableEnergyProjects
+      // Handle renewable energy projects logic here
     } else if (metric.key === "energyEfficientSystems") {
-      // Code to execute if the key is energyEfficientSystems
+      // Handle energy efficient systems logic here
     } else if (metric.key === "energyConsumptionReduction") {
-      // Code to execute if the key is energyConsumptionReduction
+      // Handle energy consumption reduction logic here
     } else if (metric.key === "jobCreation") {
-      // Code to execute if the key is jobCreation
+      // Handle job creation logic here
     } else if (metric.key === "vocationalTraining") {
-      // Code to execute if the key is vocationalTraining
+      // Handle vocational training logic here
     } else if (metric.key === "employmentImprovements") {
-      // Code to execute if the key is employmentImprovements
+      // Handle employment improvements logic here
     } else if (metric.key === "stemEducation") {
-      // Code to execute if the key is stemEducation
+      // Handle STEM education logic here
     } else if (metric.key === "sustainableInfrastructure") {
-      // Code to execute if the key is sustainableInfrastructure
+      // Handle sustainable infrastructure logic here
     } else if (metric.key === "peopleBenefiting") {
-      // Code to execute if the key is peopleBenefiting
+      // Handle people benefiting logic here
     } else if (metric.key === "marginalizedCommunitySupport") {
-      // Code to execute if the key is marginalizedCommunitySupport
+      // Handle marginalized community support logic here
     } else if (metric.key === "inclusionPolicies") {
-      // Code to execute if the key is inclusionPolicies
+      // Handle inclusion policies logic here
     } else if (metric.key === "beneficiaries") {
-      // Code to execute if the key is beneficiaries
+      // Handle beneficiaries logic here
     } else if (metric.key === "urbanSustainability") {
-      // Code to execute if the key is urbanSustainability
+      // Handle urban sustainability logic here
     } else if (metric.key === "affordableHousing") {
-      // Code to execute if the key is affordableHousing
+      // Handle affordable housing logic here
     } else if (metric.key === "urbanLivingConditions") {
-      // Code to execute if the key is urbanLivingConditions
+      // Handle urban living conditions logic here
     } else if (metric.key === "wasteReduction") {
-      // Code to execute if the key is wasteReduction
+      // Handle waste reduction logic here
     } else if (metric.key === "sustainableSupplyChain") {
-      // Code to execute if the key is sustainableSupplyChain
+      // Handle sustainable supply chain logic here
     } else if (metric.key === "resourceFootprintReduction") {
-      // Code to execute if the key is resourceFootprintReduction
+      // Handle resource footprint reduction logic here
     } else if (metric.key === "carbonEmissionReduction") {
-      // Code to execute if the key is carbonEmissionReduction
+      // Handle carbon emission reduction logic here
     } else if (metric.key === "renewableEnergyInvestment") {
-      // Code to execute if the key is renewableEnergyInvestment
+      // Handle renewable energy investment logic here
     } else if (metric.key === "reforestationProjects") {
-      // Code to execute if the key is reforestationProjects
+      // Handle reforestation projects logic here
     } else if (metric.key === "marineEcosystemProtection") {
-      // Code to execute if the key is marineEcosystemProtection
+      // Handle marine ecosystem protection logic here
     } else if (metric.key === "oceanPollutionReduction") {
-      // Code to execute if the key is oceanPollutionReduction
+      // Handle ocean pollution reduction logic here
     } else if (metric.key === "sustainableFishing") {
-      // Code to execute if the key is sustainableFishing
+      // Handle sustainable fishing logic here
     } else if (metric.key === "landConservation") {
-      // Code to execute if the key is landConservation
+      // Handle land conservation logic here
     } else if (metric.key === "endangeredSpeciesProtection") {
-      // Code to execute if the key is endangeredSpeciesProtection
+      // Handle endangered species protection logic here
     } else if (metric.key === "landRehabilitation") {
-      // Code to execute if the key is landRehabilitation
+      // Handle land rehabilitation logic here
     } else if (metric.key === "antiCorruptionPrograms") {
-      // Code to execute if the key is antiCorruptionPrograms
+      // Handle anti-corruption programs logic here
     } else if (metric.key === "humanRightsInitiatives") {
-      // Code to execute if the key is humanRightsInitiatives
+      // Handle human rights initiatives logic here
     } else if (metric.key === "communityPeacePrograms") {
-      // Code to execute if the key is communityPeacePrograms
+      // Handle community peace programs logic here
     } else if (metric.key === "collaborativeProjects") {
-      // Code to execute if the key is collaborativeProjects
+      // Handle collaborative projects logic here
     } else if (metric.key === "financialContributions") {
-      // Code to execute if the key is financialContributions
+      // Handle financial contributions logic here
     } else if (metric.key === "sdgAdvocacy") {
-      // Code to execute if the key is sdgAdvocacy
+      // Handle SDG advocacy logic here
     } else {
-      return null;
+      console.log("Unknown metric key:", metric.key);
+      continue;
     }
   }
 };
 
 type LineGraphData = {
-  name: string;
   data: number[];
   categories: string[];
 };
 
 const getLineGraphData = (
   periodOfTime: string,
-  data: any[]
+  data: any[],
+  metricName: string,
+  valueKey: string
 ): LineGraphData | null => {
-  if (periodOfTime === "1Month") {
-    const daysInMonth = new Date(
-      new Date().getFullYear(),
-      new Date().getMonth() + 1,
-      0
-    ).getDate();
-    const dataValues = Array.from({ length: daysInMonth }, () => 0);
-    const categories = Array.from(
-      { length: daysInMonth },
-      (_, i) => `${i + 1}`
-    );
-    data.forEach((item) => {
-      const date = new Date(Number(item.startDate)).getDate();
-      dataValues[date - 1] = item.numberOfPrograms;
-    });
+  let periodLength, categories;
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth();
 
-    const res: LineGraphData = {
-      name: "Job Training",
-      data: dataValues,
-      categories,
-    };
-    return res;
+  switch (periodOfTime) {
+    case "1Month":
+      periodLength = new Date(currentYear, currentMonth + 1, 0).getDate();
+      categories = Array.from(
+        { length: periodLength },
+        (_, i) => `${currentYear}-${currentMonth + 1}-${i + 1}`
+      );
+      break;
+    case "3Months":
+    case "6Months":
+    case "1Year":
+    case "3Years":
+    case "5Years": {
+      const totalMonths = periodTimeToMonths(periodOfTime);
+      periodLength = totalMonths;
+      categories = Array.from({ length: periodLength }, (_, i) => {
+        const monthDate = new Date(
+          currentYear,
+          currentMonth - periodLength + i + 1,
+          1
+        );
+        return monthDate.toLocaleString("default", {
+          month: "short",
+          year: "numeric",
+        });
+      });
+      break;
+    }
+    case "AllTime": {
+      const startYear = 2000;
+      periodLength = currentYear - startYear + 1;
+      categories = Array.from(
+        { length: periodLength },
+        (_, i) => `${startYear + i}`
+      );
+      break;
+    }
+    default:
+      return null;
   }
-  if (periodOfTime === "3Months") {
-    const dataValues = Array.from({ length: 12 }, () => 0);
-    const categories = Array.from({ length: 12 }, (_, i) => `Week ${i + 1}`);
-    data.forEach((item) => {
-      const date = new Date(Number(item.startDate)).getMonth();
-      dataValues[date] = item.numberOfPrograms;
-    });
 
-    const res: LineGraphData = {
-      name: "Job Training",
-      data: dataValues,
-      categories,
-    };
-    return res;
+  const dataValues = Array.from({ length: periodLength }, () => 0);
+  const counts = Array.from({ length: periodLength }, () => 0);
+
+  data.forEach((item) => {
+    let index;
+    const itemDate = new Date(Number(item.startDate));
+
+    switch (periodOfTime) {
+      case "1Month":
+        index = itemDate.getDate() - 1;
+        break;
+      case "3Months":
+      case "6Months":
+      case "1Year":
+      case "3Years":
+      case "5Years":
+      case "AllTime":
+        index =
+          (itemDate.getFullYear() - currentYear) * 12 +
+          itemDate.getMonth() -
+          currentMonth +
+          (periodLength - 1);
+        break;
+      default:
+        index = -1;
+    }
+
+    if (index >= 0 && index < periodLength && item[valueKey] != null) {
+      dataValues[index] += Number(item[valueKey]);
+      counts[index] += 1;
+    }
+  });
+
+  const averages = dataValues.map((sum, i) =>
+    counts[i] ? parseFloat((sum / counts[i]).toFixed(2)) : 0
+  );
+
+  return {
+    data: averages,
+    categories,
+  };
+};
+
+function periodTimeToMonths(periodOfTime: string): number {
+  switch (periodOfTime) {
+    case "3Months":
+      return 3;
+    case "6Months":
+      return 6;
+    case "1Year":
+      return 12;
+    case "3Years":
+      return 36;
+    case "5Years":
+      return 60;
+    default:
+      return 0;
   }
-  if (periodOfTime === "6Months") {
-    const dataValues = Array.from({ length: 6 }, () => 0);
-    const categories = Array.from({ length: 6 }, (_, i) => `Week ${i + 1}`);
-    data.forEach((item) => {
-      const date = new Date(Number(item.startDate)).getMonth();
-      dataValues[date] = item.numberOfPrograms;
-    });
+}
 
-    const res: LineGraphData = {
-      name: "Job Training",
-      data: dataValues,
-      categories,
-    };
-    return res;
-    
+type BarGraphData = {
+  data: number[];
+  categories: string[];
+};
+
+const getLocationBarGraphData = (
+  periodOfTime: string,
+  data: any[],
+  metricName: string,
+  valueKey: string
+): BarGraphData | null => {
+  let periodLength, categories;
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth();
+
+  switch (periodOfTime) {
+    case "1Month":
+      periodLength = new Date(currentYear, currentMonth + 1, 0).getDate();
+      categories = Array.from(
+        { length: periodLength },
+        (_, i) => `${currentYear}-${currentMonth + 1}-${i + 1}`
+      );
+      break;
+    case "3Months":
+    case "6Months":
+    case "1Year":
+    case "3Years":
+    case "5Years": {
+      const totalMonths = periodTimeToMonths(periodOfTime);
+      periodLength = totalMonths;
+      categories = Array.from({ length: periodLength }, (_, i) => {
+        const monthDate = new Date(
+          currentYear,
+          currentMonth - periodLength + i + 1,
+          1
+        );
+        return monthDate.toLocaleString("default", {
+          month: "short",
+          year: "numeric",
+        });
+      });
+      break;
+    }
+    case "AllTime": {
+      const startYear = 2000;
+      periodLength = currentYear - startYear + 1;
+      categories = Array.from(
+        { length: periodLength },
+        (_, i) => `${startYear + i}`
+      );
+      break;
+    }
+    default:
+      return null;
   }
-  if (periodOfTime === "1Year") {
-    const dataValues = Array.from({ length: 12 }, () => 0);
-    const categories = Array.from({ length: 12 }, (_, i) => `Week ${i + 1}`);
-    data.forEach((item) => {
-      const date = new Date(Number(item.startDate)).getMonth();
-      dataValues[date] = item.numberOfPrograms;
-    });
 
-    const res: LineGraphData = {
-      name: "Job Training",
-      data: dataValues,
-      categories,
-    };
-    return res;
+  const dataValues = Array.from({ length: periodLength }, () => 0);
+  const counts = Array.from({ length: periodLength }, () => 0);
+
+  data.forEach((item) => {
+    let index;
+    const itemDate = new Date(Number(item.startDate));
+
+    switch (periodOfTime) {
+      case "1Month":
+        index = itemDate.getDate() - 1;
+        break;
+      case "3Months":
+      case "6Months":
+      case "1Year":
+      case "3Years":
+      case "5Years":
+      case "AllTime":
+        index =
+          (itemDate.getFullYear() - currentYear) * 12 +
+          itemDate.getMonth() -
+          currentMonth +
+          (periodLength - 1);
+        break;
+      default:
+        index = -1;
+    }
+
+    if (index >= 0 && index < periodLength && item[valueKey] != null) {
+      dataValues[index] += Number(item[valueKey]);
+      counts[index] += 1;
+    }
   }
-  if (periodOfTime === "3Years") {   
-    const dataValues = Array.from({ length: 12 }, () => 0);
-    const categories = Array.from({ length: 12 }, (_, i) => `Q${i + 1}`);
-    data.forEach((item) => {
-      const date = new Date(Number(item.startDate)).getMonth();
-      dataValues[date] = item.numberOfPrograms;
-    });
-
-    const res: LineGraphData = {
-      name: "Job Training",
-      data: dataValues,
-      categories,
-    };
-    return res;
-
-    
-  }
-  if (periodOfTime === "5Years") {
-    const dataValues = Array.from({ length: 5 }, () => 0);
-    const categories = Array.from({ length: 5 }, (_, i) => `${currentYear + i}`);
-    data.forEach((item) => {
-      const date = new Date(Number(item.startDate)).getFullYear();
-      dataValues[date] = item.numberOfPrograms;
-    });
-
-    const res: LineGraphData = {
-      name: "Job Training",
-      data: dataValues,
-      categories,
-    };
-    return res;
-  }
-  return null;
 };

@@ -5,7 +5,7 @@ type WorkplaceGenderEqualityPoliciesData =
    complianceRate: nat;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromEmployees: text;
    location: text;
    measuresTaken: text;
@@ -21,7 +21,7 @@ type WomensEmpowermentProgramData =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromParticipants: text;
    followUpSupport: text;
    impactOnParticipants: text;
@@ -29,7 +29,6 @@ type WomensEmpowermentProgramData =
    numberOfParticipants: nat;
    outcomesAchieved: text;
    partnershipsFormed: text;
-   programDescription: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -40,7 +39,7 @@ type WaterSanitationAccessData =
    communityFeedback: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    healthImpact: text;
    location: text;
    numberOfBeneficiaries: nat;
@@ -59,7 +58,7 @@ type WaterConservationInitiativesData =
    communityInvolvement: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromCommunity: text;
    impactOnLocalEnvironment: text;
    initiativeDescription: text;
@@ -77,7 +76,7 @@ type WasteReductionRecyclingData =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromCommunity: text;
    impactOnEnvironmentalSustainability: text;
    initiativeDescription: text;
@@ -99,12 +98,11 @@ type VocationalTrainingProgramsData =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
+   duration: text;
    employmentRatePostTraining: nat;
-   endDate: int;
    impactOnCommunity: text;
    location: text;
    participantFeedback: text;
-   programDescription: text;
    programName: text;
    skillsAcquired: text;
    startDate: int;
@@ -131,7 +129,7 @@ type UrbanSustainabilityProjectsData =
    communityEngagement: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    environmentalBenefits: text;
    impactOnCommunity: text;
    location: text;
@@ -151,7 +149,7 @@ type UrbanLivingConditionsData =
    communityInvolvement: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    environmentalImpact: text;
    feedbackFromCommunity: text;
    initiativeDescription: text;
@@ -170,8 +168,8 @@ type SustainableSupplyChainInvestmentData =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
+   duration: text;
    economicImpact: text;
-   endDate: int;
    environmentalImpact: text;
    feedbackFromStakeholders: text;
    impactOnSupplyChainEfficiency: text;
@@ -189,7 +187,7 @@ type SustainableInfrastructureData =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromCommunity: text;
    impactOnCommunity: text;
    infrastructureType: text;
@@ -206,8 +204,8 @@ type SustainableFishingSupportData =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
+   duration: text;
    economicImpact: text;
-   endDate: int;
    feedbackFromFishermen: text;
    fishingPracticesImplemented: text;
    impactOnFishPopulations: text;
@@ -225,7 +223,7 @@ type SustainableAgricultureInvestment =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    farmerFeedback: text;
    impactOnLocalEconomy: text;
    investmentSource: text;
@@ -245,15 +243,14 @@ type StudentsBenefitingData =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
+   duration: text;
    educationalLevel: text;
-   endDate: int;
    feedbackFromEducators: text;
    feedbackFromStudents: text;
    followUpSuccessRate: nat;
    graduationRates: nat;
    improvementsInPerformance: text;
    location: text;
-   programDescription: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -266,7 +263,7 @@ type SchoolsBuiltSupportedData =
    communityImpact: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromCommunity: text;
    location: text;
    numberOfSchoolsBuilt: nat;
@@ -284,7 +281,7 @@ type SanitationFacilitiesData =
    complianceWithStandards: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    facilityName: text;
    feedbackFromCommunity: text;
    impactOnHealth: text;
@@ -306,12 +303,11 @@ type STEMInnovationEducationData =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromParticipants: text;
    impactOnCareerOpportunities: text;
    location: text;
    partnershipsFormed: text;
-   programDescription: text;
    programName: text;
    skillsDeveloped: text;
    startDate: int;
@@ -326,7 +322,7 @@ type SDGAdvocacyCampaignsData =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromAudience: text;
    impactOnAwareness: text;
    mainMessages: text;
@@ -346,7 +342,7 @@ type ResourceFootprintReductionData =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    environmentalBenefits: text;
    feedbackFromStakeholders: text;
    impactOnOperationalCosts: text;
@@ -365,7 +361,7 @@ type RenewableEnergyProjectsData =
    communityInvolvement: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    energyProduced: nat;
    impactOnLocalEnvironment: text;
    location: text;
@@ -384,7 +380,7 @@ type RenewableEnergyInvestmentData =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    energyProduced: nat;
    environmentalImpact: text;
    feedbackFromStakeholders: text;
@@ -404,7 +400,7 @@ type ReforestationProjectsData =
    communityInvolvement: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    estimatedCarbonSequestration: nat;
    feedbackFromCommunity: text;
    location: text;
@@ -422,7 +418,7 @@ type PeopleBenefitingFromInfrastructureData =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromBeneficiaries: text;
    impactOnQualityOfLife: text;
    initiativeDescription: text;
@@ -441,12 +437,11 @@ type PeopleAssistedOutOfPoverty =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
-   followUpDuration: nat;
+   duration: text;
+   followUpDuration: text;
    location: text;
    longTermImpact: text;
    participantFeedback: text;
-   programDescription: text;
    programName: text;
    startDate: int;
    successfullyAssisted: nat;
@@ -459,7 +454,7 @@ type OceanPollutionReductionData =
    communityInvolvement: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromCommunity: text;
    impactOnMarineLife: text;
    initiativeDescription: text;
@@ -476,14 +471,13 @@ type NutritiousFoodProgram =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    frequencyOfMeals: text;
    impactOnHealth: text;
    location: text;
    mealsProvided: nat;
    nutritionalContent: text;
    participantFeedback: text;
-   programDescription: text;
    programName: text;
    sourceOfFood: text;
    startDate: int;
@@ -493,23 +487,16 @@ type NutritiousFoodProgram =
  };
 type MicroloanProgram = 
  record {
-   averageLoanAmount: nat;
-   beneficiaryFeedback: text;
+   amountDisbursed: nat64;
    created: int;
    dataVerification: bool;
-   description: text;
-   disbursementMethod: text;
-   economicImpact: text;
-   endDate: int;
-   fundingSource: text;
+   duration: text;
    location: text;
-   numberOfBeneficiaries: nat;
-   programChallenges: text;
+   numberOfLoans: nat;
    programName: text;
-   repaymentRate: text;
    startDate: int;
    supportingFiles: vec text;
-   totalBudget: nat;
+   typeOfSupport: text;
  };
 type Metrics9 = 
  record {
@@ -1077,7 +1064,7 @@ type MarineEcosystemProtectionData =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromStakeholders: text;
    fundingAllocated: nat;
    impactOnBiodiversity: text;
@@ -1095,7 +1082,7 @@ type MarginalizedCommunitySupportData =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromCommunity: text;
    initiativeDescription: text;
    initiativeName: text;
@@ -1116,8 +1103,8 @@ type LandRehabilitationData =
    communityFeedback: text;
    created: int;
    dataVerification: bool;
+   duration: text;
    economicImpact: text;
-   endDate: int;
    initiativeDescription: text;
    initiativeName: text;
    location: text;
@@ -1132,7 +1119,7 @@ type LandConservationReforestationData =
    conservationMethods: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromCommunity: text;
    fundingAllocated: nat;
    impactOnEcosystem: text;
@@ -1146,26 +1133,14 @@ type LandConservationReforestationData =
  };
 type JobTrainingProgram = 
  record {
-   averageIncomeAfterProgram: nat;
-   averageIncomeBeforeProgram: nat;
-   completionRate: text;
    created: int;
    dataVerification: bool;
-   employmentRatePostProgram: text;
-   endDate: int;
-   fundingSources: text;
-   numberOfParticipants: nat;
-   participantFeedback: text;
-   programBudget: nat;
-   programDescription: text;
-   programLocation: text;
+   duration: text;
+   location: text;
+   numberOfPrograms: nat;
    programName: text;
-   resourcesProvided: text;
-   skillsDeveloped: text;
    startDate: int;
-   successStories: text;
    supportingFiles: vec text;
-   targetDemographic: text;
  };
 type JobCreationInitiativesData = 
  record {
@@ -1173,8 +1148,8 @@ type JobCreationInitiativesData =
    created: int;
    dataVerification: bool;
    demographicFocus: text;
+   duration: text;
    economicImpact: text;
-   endDate: int;
    feedbackFromBeneficiaries: text;
    initiativeDescription: text;
    initiativeName: text;
@@ -1191,7 +1166,7 @@ type InequalityReductionBeneficiariesData =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromBeneficiaries: text;
    impactAssessment: text;
    initiativeDescription: text;
@@ -1211,7 +1186,7 @@ type InclusionPoliciesData =
    complianceRate: nat;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromBeneficiaries: text;
    measuresImplemented: text;
    outcomesAchieved: text;
@@ -1356,7 +1331,7 @@ type HumanRightsInitiativesData =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromBeneficiaries: text;
    impactOnLegalOutcomes: text;
    initiativeDescription: text;
@@ -1373,14 +1348,13 @@ type HealthcareFunding =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromBeneficiaries: text;
    fundingSources: text;
    healthOutcomes: text;
    impactOnHealthServices: text;
    location: text;
    numberofHealthProjects: nat;
-   programDescription: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1393,13 +1367,12 @@ type HealthcareAccessData =
    communityImpact: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromPatients: text;
    improvementsMade: text;
    location: text;
    operationalChallenges: text;
    patientDemographics: text;
-   programDescription: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1412,13 +1385,12 @@ type HealthCheckupVaccinationData =
    communityImpact: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromParticipants: text;
    followUpActions: text;
    healthOutcomesMeasured: text;
    location: text;
    operationalChallenges: text;
-   programDescription: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1434,9 +1406,8 @@ type GlobalPartnershipFinancialContributionsData =
    contributionName: text;
    created: int;
    dataVerification: bool;
-   description: text;
    donor: text;
-   endDate: int;
+   duration: text;
    feedbackFromBeneficiaries: text;
    impactAssessment: text;
    startDate: int;
@@ -1448,7 +1419,7 @@ type GenderEqualityWorkshopsData =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromParticipants: text;
    location: text;
    numberOfParticipants: nat;
@@ -1468,12 +1439,11 @@ type FoodDonation =
    created: int;
    dataVerification: bool;
    distributionMethods: text;
-   endDate: int;
+   duration: text;
    feedbackFromRecipients: text;
    foodSafetyStandards: text;
    location: text;
    numberOfBeneficiaries: nat;
-   programDescription: text;
    programName: text;
    sourcesOfFood: text;
    startDate: int;
@@ -1505,7 +1475,7 @@ type EnergyConsumptionReductionData =
    costSavings: nat;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromStakeholders: text;
    impactOnEnvironmentalSustainability: text;
    initiativeDescription: text;
@@ -1523,7 +1493,7 @@ type EndangeredSpeciesProtectionData =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromStakeholders: text;
    impactOnSpeciesPopulation: text;
    initiativeDescription: text;
@@ -1541,7 +1511,7 @@ type EmploymentConditionsData =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromEmployees: text;
    impactOnEmployeeSatisfaction: text;
    impactOnProductivity: text;
@@ -1560,11 +1530,10 @@ type EducationalGrantsData =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromRecipients: text;
    impactOnEducation: text;
    location: text;
-   programDescription: text;
    programName: text;
    recipientDemographics: text;
    startDate: int;
@@ -1580,12 +1549,11 @@ type CommunityPeaceProgramsData =
    conflictResolutionStrategies: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromCommunity: text;
    impactOnCommunityCohesion: text;
    incidentsOfViolenceReduced: nat;
    location: text;
-   programDescription: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1596,7 +1564,7 @@ type CollaborativeSDGProjectsData =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromParticipants: text;
    impactOnSDGs: text;
    outcomesAchieved: text;
@@ -1613,7 +1581,7 @@ type CarbonEmissionReductionData =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    environmentalImpactAssessment: text;
    feedbackFromStakeholders: text;
    impactOnOperationalEfficiency: text;
@@ -1633,12 +1601,11 @@ type AntiCorruptionProgramsData =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromCommunity: text;
    impactOnCorruptionLevels: text;
    legalActionsTaken: nat;
    location: text;
-   programDescription: text;
    programName: text;
    startDate: int;
    strategiesImplemented: text;
@@ -1650,7 +1617,7 @@ type AffordableHousingSupportData =
    challengesFaced: text;
    created: int;
    dataVerification: bool;
-   endDate: int;
+   duration: text;
    feedbackFromBeneficiaries: text;
    housingTypes: text;
    impactOnCommunity: text;

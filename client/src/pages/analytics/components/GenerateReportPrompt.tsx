@@ -134,7 +134,7 @@ const GenerateReportPrompt = () => {
                     <option value="6Months">6 Months</option>
                     <option value="1Year">Year</option>
                     <option value="3Years">3 yeays</option>
-                    <option value="5years">5 years</option>
+                    <option value="5Years">5 years</option>
                   </select>
                 </div>
                 <div className="">

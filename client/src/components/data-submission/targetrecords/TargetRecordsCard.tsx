@@ -158,7 +158,8 @@ const TargetRecordsCard: FC<Props> = ({
         });
 
         dispatch(setShowDataForm(false));
-        window.location.reload();
+        // window.location.reload();
+        setSaving(false);
         return;
       }
       if (currentIndex + 2 >= impact.metrics.length) {

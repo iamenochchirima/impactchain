@@ -455,8 +455,8 @@ export interface JobCreationInitiativesData {
 export interface JobTrainingProgram {
   'created' : bigint,
   'duration' : string,
+  'numberOfBeneficiaries' : bigint,
   'supportingFiles' : Array<string>,
-  'numberOfPrograms' : bigint,
   'dataVerification' : boolean,
   'programName' : string,
   'location' : string,

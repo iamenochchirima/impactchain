@@ -56,6 +56,7 @@ const Header = () => {
     const getOnChainData = async () => {
       try {
         const res = await dataActor?.getUserRecord(userInfo.email);
+        console.log("res", res)
         if (res) {
           if ("ok" in res) {
 

@@ -116,31 +116,28 @@ export const getMetricsReportData = (
       continue;
     }
     if (metric.key === "jobTraining") {
-      
       const valueKey = "numberOfBeneficiaries";
       const lineGraphData = getLineGraphData(
         reportPromptResponse.periodOfTime,
         metric.data,
-        metric.name,
         valueKey
       );
 
       if (lineGraphData) {
         console.log(lineGraphData);
-      };
+      }
 
-      const barGraphData = getLocationBarGraphData(
+      const barGraphData = getTimeBarGraphData(
         reportPromptResponse.periodOfTime,
         metric.data,
-        metric.name,
         valueKey
       );
 
-      if (barGraphData) {
-        console.log(barGraphData);
-      }
+      console.log("Bar graph data", barGraphData);
 
-
+      // if (barGraphData) {
+      //   console.log(barGraphData);
+      // }
     } else if (metric.key === "microloans") {
       // Handle microloans logic here
     } else if (metric.key === "peopleAssisted") {
@@ -256,7 +253,6 @@ type LineGraphData = {
 const getLineGraphData = (
   periodOfTime: string,
   data: any[],
-  metricName: string,
   valueKey: string
 ): LineGraphData | null => {
   let periodLength, categories;
@@ -366,92 +362,106 @@ function periodTimeToMonths(periodOfTime: string): number {
 }
 
 type BarGraphData = {
-  data: number[];
+  data: xisVals[];
   categories: string[];
 };
 
-const getLocationBarGraphData = (
+type xisVals = {
+  x: string;
+  y: number;
+};
+
+const getTimeBarGraphData = (
   periodOfTime: string,
   data: any[],
-  metricName: string,
   valueKey: string
 ): BarGraphData | null => {
-  let periodLength, categories;
+  let categories: string[] = [];
+  let resultData: xisVals[] = [];
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
   const currentMonth = currentDate.getMonth();
 
+  let months = 0;
+  const startYear = currentYear - 2;
+
   switch (periodOfTime) {
     case "1Month":
-      periodLength = new Date(currentYear, currentMonth + 1, 0).getDate();
-      categories = Array.from(
-        { length: periodLength },
-        (_, i) => `${currentYear}-${currentMonth + 1}-${i + 1}`
-      );
+    case "3Months": {
+      const weeksCount = periodOfTime === "1Month" ? 4 : 12;
+      categories = [];
+      for (let i = 0; i < weeksCount; i++) {
+        const weekStart = new Date(currentYear, currentMonth + Math.floor(i / 4), (i % 4) * 7 + 1);
+        const monthName = weekStart.toLocaleDateString("default", { month: "short" });
+        const weekNumber = i + 1;
+        categories.push(`Week ${weekNumber} - ${monthName}`);
+      }
       break;
-    case "3Months":
+    }
     case "6Months":
-    case "1Year":
-    case "3Years":
-    case "5Years": {
-      const totalMonths = periodTimeToMonths(periodOfTime);
-      periodLength = totalMonths;
-      categories = Array.from({ length: periodLength }, (_, i) => {
-        const monthDate = new Date(
-          currentYear,
-          currentMonth - periodLength + i + 1,
-          1
-        );
-        return monthDate.toLocaleString("default", {
-          month: "short",
-          year: "numeric",
-        });
+    case "1Year": {
+      months = periodOfTime === "6Months" ? 6 : 12;
+      categories = Array.from({ length: months }, (_, i) => {
+        const date = new Date(currentYear, currentMonth - months + i + 1, 1);
+        return date.toLocaleDateString("default", { month: "short" });
       });
       break;
     }
-    case "AllTime": {
-      const startYear = 2000;
-      periodLength = currentYear - startYear + 1;
-      categories = Array.from(
-        { length: periodLength },
-        (_, i) => `${startYear + i}`
-      );
+    case "3Years":
+      categories = Array.from({ length: 3 * 4 }, (_, i) => { 
+        const year = startYear + Math.floor(i / 4);
+        const quarter = (i % 4) + 1;
+        return `Q${quarter} ${year}`;
+      });
       break;
-    }
+    case "5Years":
+      categories = Array.from({ length: 5 }, (_, i) => `${currentYear - 4 + i}`);
+      break;
     default:
       return null;
   }
 
-  const dataValues = Array.from({ length: periodLength }, () => 0);
-  const counts = Array.from({ length: periodLength }, () => 0);
+  resultData = categories.map(x => ({ x, y: 0 }));
+  const counts = Array.from({ length: resultData.length }, () => 0);
 
-  data.forEach((item) => {
-    let index;
+  data.forEach(item => {
     const itemDate = new Date(Number(item.startDate));
+    console.log(itemDate, item)
+    let index = -1;
 
-    switch (periodOfTime) {
-      case "1Month":
-        index = itemDate.getDate() - 1;
-        break;
-      case "3Months":
-      case "6Months":
-      case "1Year":
-      case "3Years":
-      case "5Years":
-      case "AllTime":
-        index =
-          (itemDate.getFullYear() - currentYear) * 12 +
-          itemDate.getMonth() -
-          currentMonth +
-          (periodLength - 1);
-        break;
-      default:
-        index = -1;
+    if (["1Month", "3Months"].includes(periodOfTime)) {
+      const startOfYear = new Date(itemDate.getFullYear(), 0, 1).getTime();
+      const weekOfYear = Math.floor(
+        (itemDate.getTime() - startOfYear) / (7 * 24 * 60 * 60 * 1000)
+      );
+      index = weekOfYear % categories.length; // Corrected indexing for weeks
+    } else if (["6Months", "1Year"].includes(periodOfTime)) {
+      const monthDiff = (itemDate.getFullYear() - currentYear) * 12 + itemDate.getMonth() - currentMonth;
+      index = monthDiff + months - 1;
+    } else if (periodOfTime === "3Years") {
+      const yearDiff = itemDate.getFullYear() - startYear;
+      const quarter = Math.floor(itemDate.getMonth() / 3);
+      index = yearDiff * 4 + quarter;
+    } else if (periodOfTime === "5Years") {
+      index = itemDate.getFullYear() - (currentYear - 4);
     }
 
-    if (index >= 0 && index < periodLength && item[valueKey] != null) {
-      dataValues[index] += Number(item[valueKey]);
-      counts[index] += 1;
+    if (index >= 0 && index < resultData.length && item[valueKey] != null) {
+      resultData[index].y += Number(item[valueKey]);
+      counts[index]++;
     }
-  }
+  });
+
+  resultData.forEach((item, idx) => {
+    if (counts[idx] > 0) {
+      item.y = parseFloat((item.y / counts[idx]).toFixed(2));
+    }
+  });
+
+  return { data: resultData, categories };
 };
+
+
+
+
+

@@ -19,7 +19,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
   const [startDate, setStartDate] = useState<string>("");
   const [duration, setDuration] = useState<string>("");
   const [programLocation, setProgramLocation] = useState<string>("");
-  const [numberOfPrograms, setNumberOfParticipants] = useState("");
+  const [numberOfBeneficiaries, setNumberOfParticipants] = useState("");
 
   const handleSubmit = async () => {
     try {
@@ -53,7 +53,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
         startDate: BigInt(startDateMilliseconds),
         duration: duration,
         location: programLocation,
-        numberOfPrograms: BigInt(numberOfPrograms),
+        numberOfBeneficiaries: BigInt(numberOfBeneficiaries),
         dataVerification: false,
         supportingFiles: urls ? urls : [],
         created: BigInt(Date.now()),
@@ -150,10 +150,10 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
           <label htmlFor={`${styles.inputLabel}`}>Number of Participants</label>
           <input
             className={`${styles.formInput}`}
-            id="numberOfPrograms"
+            id="numberOfBeneficiaries"
             type="number"
-            placeholder="Number of Programs"
-            value={numberOfPrograms}
+            placeholder="Number of Beneficiaries"
+            value={numberOfBeneficiaries}
             onChange={(e) => setNumberOfParticipants(e.target.value)}
             required
           />

@@ -1,102 +1,67 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
-import { ApexOptions } from 'apexcharts'; 
+import dayjs from 'dayjs';
+import quarterOfYear from 'dayjs/plugin/quarterOfYear';
+import { ApexOptions } from 'apexcharts';
 
-interface Series {
-  name: string;
-  data: number[];
-}
+// Extend dayjs with the quarterOfYear plugin
+dayjs.extend(quarterOfYear);
 
-const BarGraph: React.FC = () => {
-  const [chartData, setChartData] = useState<{
-    series: Series[];
-    options: ApexOptions; 
-  }>({
-    series: [
-      {
-        name: 'Inflation',
-        data: [2.3, 3.1, 4.0, 10.1, 4.0, 3.6, 3.2, 2.3, 1.4, 0.8, 0.5, 0.2],
-      },
-    ],
-    options: {
-      chart: {
-        height: 350,
-        type: 'bar', 
-      },
-      plotOptions: {
-        bar: {
-          borderRadius: 10,
-          dataLabels: {
-            position: 'top', 
-          },
-        },
-      },
-      dataLabels: {
-        enabled: true,
-        formatter: (val) => `${val}%`,
-        offsetY: -20,
-        style: {
-          fontSize: '12px',
-          colors: ['#304758'],
-        },
-      },
-      xaxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        position: 'top',
-        axisBorder: {
-          show: false,
-        },
-        axisTicks: {
-          show: false,
-        },
-        crosshairs: {
-          fill: {
-            type: 'gradient',
-            gradient: {
-              colorFrom: '#D8E3F0',
-              colorTo: '#BED1E6',
-              stops: [0, 100],
-              opacityFrom: 0.4,
-              opacityTo: 0.5,
-            },
-          },
-        },
-        tooltip: {
-          enabled: true,
-        },
-      },
-      yaxis: {
-        axisBorder: {
-          show: false,
-        },
-        axisTicks: {
-          show: false,
-        },
-        labels: {
-          formatter: (val) => `${val}%`,
-        },
-      },
-      title: {
-        text: 'Monthly Inflation in Argentina, 2002',
-        floating: true,
-        offsetY: 330,
-        align: 'center',
-        style: {
-          color: '#444',
-        },
-      },
+
+
+const BarGraph = () => {
+  const [series, setSeries] = useState([
+    {
+      name: "sales",
+      data: [
+        { x: '2019/01/01', y: 400 },
+        { x: '2019/04/01', y: 430 },
+        { x: '2019/07/01', y: 448 },
+        { x: '2019/10/01', y: 470 },
+        { x: '2020/01/01', y: 540 },
+        { x: '2020/04/01', y: 580 },
+        { x: '2020/07/01', y: 690 },
+        { x: '2020/10/01', y: 690 }
+      ]
+    }
+  ]);
+
+  const options : ApexOptions = {
+    chart: {
+      type: 'bar',
+      height: 380
     },
-  });
+    xaxis: {
+      type: 'category',
+      labels: {
+        formatter: (val: string) => "Q" + dayjs(val).quarter()
+      },
+      group: {
+        style: {
+          fontSize: '10px',
+          fontWeight: 700
+        },
+        groups: [
+          { title: '2019', cols: 4 },
+          { title: '2020', cols: 4 }
+        ]
+      }
+    },
+    title: {
+      text: 'Grouped Labels on the X-axis',
+    },
+    tooltip: {
+      x: {
+        formatter: (val: string) => "Q" + dayjs(val).quarter() + " " + dayjs(val).format("YYYY")
+      }
+    },
+  };
+
 
   return (
     <div>
       <div id="chart">
-        <ReactApexChart
-          options={chartData.options}
-          series={chartData.series}
-          type="bar"
-          height={350}
-        />
+        <ReactApexChart options={options} series={series} type="bar" height={380} />
       </div>
       <div id="html-dist"></div>
     </div>

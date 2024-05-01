@@ -692,8 +692,8 @@ export const idlFactory = ({ IDL }) => {
   const JobTrainingProgram = IDL.Record({
     'created' : IDL.Int,
     'duration' : IDL.Text,
+    'numberOfBeneficiaries' : IDL.Nat,
     'supportingFiles' : IDL.Vec(IDL.Text),
-    'numberOfPrograms' : IDL.Nat,
     'dataVerification' : IDL.Bool,
     'programName' : IDL.Text,
     'location' : IDL.Text,

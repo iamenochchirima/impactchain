@@ -73,11 +73,11 @@ const About = () => {
   return (
     <div className="text-white">
       {" "}
-      <h3 className="text-3xl font-bold text-white mt-4 text-center font-TelegraphBold mr-12 ">
-        Basic Organisation Information.
+      <h3 className="text-2xl font-bold text-white mt-4 text-center font-TelegraphBold mr-12 ">
+        Basic Organisation Information
       </h3>
-      <div className="min-h-96 pr-24 pl-12 mt-10">
-      <h3>Name of Organisation?</h3>
+      <div className="min-h-96 pr-24 pl-12 mt-10 ">
+      <h3 className="font-TelegrapUltraLight">Name of Organisation?</h3>
         <form action="" className="mt-3">
           <div className="mb-4 ">
             <input
@@ -116,7 +116,7 @@ const About = () => {
             <div className="mt-4 flex items-center gap-3">
               <button
                 className={` ${
-                  selectedButton === "2-10" ? "bg-white" : "bg-custom-green"
+                  selectedButton === "2-10" ? "bg-custom-green" : " bg-gray-500"
                 } py-1 px-4 rounded-xl text-black font-bold`}
                 type="button"
                 onClick={() => {
@@ -128,7 +128,7 @@ const About = () => {
               </button>
               <button
                 className={` ${
-                  selectedButton === "10-25" ? "bg-white" : "bg-custom-green"
+                  selectedButton === "10-25" ? "bg-custom-green" : "bg-gray-500"
                 } py-1 px-4 rounded-xl text-black font-bold`}
                 type="button"
                 onClick={() => {
@@ -140,7 +140,7 @@ const About = () => {
               </button>
               <button
                 className={` ${
-                  selectedButton === "25-50" ? "bg-white" : "bg-custom-green"
+                  selectedButton === "25-50" ? "bg-custom-green" : "bg-gray-500"
                 } py-1 px-4 rounded-xl text-black font-bold`}
                 type="button"
                 onClick={() => {
@@ -152,7 +152,7 @@ const About = () => {
               </button>
               <button
                 className={` ${
-                  selectedButton === "50-100" ? "bg-white" : "bg-custom-green"
+                  selectedButton === "50-100" ? "bg-custom-green" : "bg-gray-500"
                 } py-1 px-4 rounded-xl text-black font-bold`}
                 type="button"
                 onClick={() => {
@@ -169,7 +169,7 @@ const About = () => {
       <div className="flex justify-end items-center  mb-5 ">
         <button
           onClick={handleSubmit}
-          className="mr-24 px-10 py-1.5 bg-custom-green rounded-full text-black font-bold"
+          className="mr-24 px-10 py-1.5 bg-custom-green rounded-xl text-black font-bold"
         >
           {loading ? "Loading..." : "Continue"}
         </button>

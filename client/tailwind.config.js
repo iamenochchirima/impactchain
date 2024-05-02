@@ -17,7 +17,8 @@ export default {
         NeueMachinaUltrabold: ['NeueMachina-ultra-bold', 'sans-serif'],
         PoppinsRegular: ['Poppins-Regular', 'sans-serif'],
         TelegraphBold: ['Telegraph-bold', 'sans-serif'],
-        TelegraphRegular: ['Telegraph-regular', 'sans-serif']
+        TelegraphRegular: ['Telegraph-regular', 'sans-serif'],
+        TelegraphUltraLight: ['Telegraph-ultra-light', 'sans-serif']
 
       },
     },

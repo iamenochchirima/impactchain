@@ -12,6 +12,6 @@ export { idlFactory as fileScalingManagerIdlFactory } from "./declarations/file_
 export const environment = import.meta.env.MODE || "development";
 export const API_BASE_URL = "http://localhost:5000"
 export const network =  import.meta.env.DFX_NETWORK || "local"
-export const dataCanisterId = "b77ix-eeaaa-aaaaa-qaada-cai";
+export const dataCanisterId = "br5f7-7uaaa-aaaaa-qaaca-cai";
 export const storageCanId = "be2us-64aaa-aaaaa-qaabq-cai";
 export const scalingCanId = "bkyz2-fmaaa-aaaaa-qaaaq-cai";

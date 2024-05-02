@@ -62,16 +62,16 @@ const Register = () => {
   return (
     <>
       <div className="bg-black min-h-screen font-NeueMachinaRegular text-custom-green pt-44">
-        <h1 className="font-NeueMachinaUltrabold text-7xl  text-center">
+        <h1 className="font-NeueMachinaUltrabold text-5xl md:text-7xl text-center">
           <span className="text-custom-green ">impact.</span>
           <span className="text-white">chain</span>{" "}
         </h1>
         <div className="flex flex-col justify-center items-center">
           <div className="flex flex-col items-center ">
-            <h3 className=" font-NeueMachinaRegular text-3xl pt-3 text-custom-green">
+            <h3 className=" font-TelegraphRegular text-4xl md:text-3xl pt-3 text-custom-green">
               Create new account
             </h3>
-            <h3 className="text-2xl pt-3 font-TelegraphRegular text-center w-full ">
+            <h3 className="text-2xl pt-3 font-TelegraphUltraLight text-center w-full ">
               Already have an account?{" "}
               <Link className="text-white" to="/login">
                 Login here
@@ -82,12 +82,12 @@ const Register = () => {
             <div className="w-full max-w-sm">
               <form
                 onSubmit={handleSave}
-                className="bg-black shadow-md font-TelegraphRegular rounded px-8 pt-6 pb-8"
+                className="bg-black shadow-md font-TelegraphUltraLight rounded- px-8 pt-6 pb-8"
               >
                 <div className="flex gap-3 items-center">
                 <div className="mb-4">
                   <input
-                    className="shadow placeholder-white min-w-[150px]  placeholder:font-semibold  rounded-3xl appearance-none border-2 border-green-500 w-full py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
+                    className="shadow placeholder-white min-w-[150px]  placeholder:font-semibold  rounded-xl appearance-none border-2 border-green-500 w-full py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
                     id="firstname"
                     type="text"
                     placeholder="First Name"
@@ -98,7 +98,7 @@ const Register = () => {
                 </div>
                 <div className="mb-4">
                   <input
-                    className="shadow placeholder-white min-w-[150px]  placeholder:font-semibold  rounded-3xl appearance-none border-2 border-green-500 w-1/5 py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
+                    className="shadow placeholder-white min-w-[150px]  placeholder:font-semibold  rounded-xl appearance-none border-2 border-green-500 w-1/5 py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
                     id="lastname"
                     type="text"
                     placeholder="Last Name"
@@ -112,7 +112,7 @@ const Register = () => {
                 </div>
                 <div className="mb-4">
                   <input
-                    className="shadow placeholder-white min-w-[300px]  placeholder:font-semibold  rounded-3xl appearance-none border-2 border-green-500 w-full py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
+                    className="shadow placeholder-white min-w-[300px]  placeholder:font-semibold  rounded-xl appearance-none border-2 border-green-500 w-full py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
                     id="email"
                     type="email"
                     placeholder="Email"
@@ -123,7 +123,7 @@ const Register = () => {
                 </div>
                 <div className="mb-6">
                   <input
-                    className="shadow placeholder-white min-w-[300px]  placeholder:font-semibold  rounded-3xl appearance-none border-2 border-green-500 w-full py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
+                    className="shadow placeholder-white min-w-[300px] rounded-xl appearance-none border-2 border-green-500 w-full py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
                     id="password"
                     type="password"
                     placeholder="Password"
@@ -134,7 +134,7 @@ const Register = () => {
                 </div>
                 <div className="mb-6">
                   <input
-                    className="shadow placeholder-white min-w-[300px]  placeholder:font-semibold  rounded-3xl appearance-none border-2 border-green-500 w-full py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
+                    className="shadow placeholder-white min-w-[300px]  rounded-xl appearance-none border-2 border-green-500 w-full py-2 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
                     id="confirmPassword"
                     type="password"
                     placeholder="Confirm Password"
@@ -142,18 +142,18 @@ const Register = () => {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                   />
                 </div>
-                <div className="flex items-center justify-center">
+                <div className="flex items-center justify-center font-TelegraphUltraLight">
                   <button
-                    className="bg-green-500 rounded-3xl px-20 py-1.5 text-black font-semibold  hover:bg-green-600font-bold focus:outline-none focus:shadow-outline"
+                    className="bg-green-500 rounded-xl px-20 py-1.5 text-black font-semibold  hover:bg-green-600 focus:outline-none focus:shadow-outline"
                     type="submit"
                   >
-                    {isLoading ? "Loading..." : "Sign Up"}
+                    {isLoading ? "Loading..." : "Create Account"}
                   </button>
                 </div>
               </form>
             </div>
           </div>
-          <div className="mb-5">
+          <div className="mb-5 font-TelegraphUltraLight">
             <p className="text-white">
               By signing up, you agree to our{" "}
               <a className="text-green-500" href="#">

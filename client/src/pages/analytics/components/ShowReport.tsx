@@ -8,14 +8,16 @@ import {
 import { toast } from "react-toastify";
 import { setReportPromptModal } from "../../../redux/slices/app";
 import { Metric } from "../../../utils/types";
-import ChartOne from "../../dashboard/components/Charts/ChartOne";
-import ChartTwo from "../../dashboard/components/Charts/ChartTwo";
-import BarGraph from "../../dashboard/components/Charts/BarGraph";
+import { MetricReportData } from "./utils/types";
+import SpecificMetric from "./SpecificMetric";
 
 const ShowReport = () => {
   const dispatch = useDispatch();
   const [metricsWithDataForPeriod, setMetricsWithDataForPeriod] = useState<
     Metric[] | null
+  >(null);
+  const [metricsReportData, setMetricsReportData] = useState<
+    MetricReportData[] | null
   >(null);
   const { categoryImpactTargets, reportPromptResponse } = useSelector(
     (state: RootState) => state.app
@@ -50,17 +52,27 @@ const ShowReport = () => {
 
   useEffect(() => {
     if (metricsWithDataForPeriod && reportPromptResponse) {
-      getMetricsReportData(metricsWithDataForPeriod, reportPromptResponse);
+      const _res = getMetricsReportData(
+        metricsWithDataForPeriod,
+        reportPromptResponse
+      );
+      setMetricsReportData(_res);
     }
   }, [metricsWithDataForPeriod, reportPromptResponse]);
 
   return (
     <div>
-      <div className="">
+      <div className="overflow-auto">
         <h1 className="text-3xl font-bold text-center">Report</h1>
-        {/* <ChartOne /> */}
-        <ChartTwo />
-        {/* <BarGraph /> */}
+        {/* SPECIFIC METRICS */}
+        <div className="">
+          <h3>Specific metrics data</h3>
+          <div className="">
+            {metricsReportData?.map((metric, index) => (
+              <SpecificMetric key={index} {...{ metric }} />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

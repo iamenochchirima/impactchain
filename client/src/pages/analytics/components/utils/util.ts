@@ -1,6 +1,6 @@
 import { ReportPromptsResponses } from "../../../../redux/slices/app";
 import { Metric } from "../../../../utils/types";
-import { MetricReportData } from "./types";
+import { BarGraphData, LineGraphData, MetricReportData, xisVals } from "./types";
 
 export const getMetricsWithDataForTheGivenTimePeriod = (
   response: ReportPromptsResponses
@@ -117,27 +117,41 @@ export const getMetricsReportData = (
     }
     if (metric.key === "jobTraining") {
       const valueKey = "numberOfBeneficiaries";
+      const graphName = "Job Training and Educational Programs";
       const lineGraphData = getLineGraphData(
         reportPromptResponse.periodOfTime,
         metric.data,
+        graphName,
         valueKey
       );
-
-      if (lineGraphData) {
-        console.log(lineGraphData);
-      }
-
       const barGraphData = getTimeBarGraphData(
         reportPromptResponse.periodOfTime,
         metric.data,
+       graphName,
         valueKey
       );
 
-      console.log("Bar graph data", barGraphData);
-
-      // if (barGraphData) {
-      //   console.log(barGraphData);
-      // }
+      const _reportData: MetricReportData = {
+        name: "Job Training",
+        key: "jobTraining",
+        graphs: {
+          1: {
+            name: "Job Training",
+            x_label: "Time",
+            y_label: "Number of Beneficiaries",
+            graph: lineGraphData,
+          },
+          2: {
+            name: "Job Training",
+            x_label: "Time",
+            y_label: "Number of Beneficiaries",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+      
+      metricsData.push(_reportData);
     } else if (metric.key === "microloans") {
       // Handle microloans logic here
     } else if (metric.key === "peopleAssisted") {
@@ -243,16 +257,13 @@ export const getMetricsReportData = (
       continue;
     }
   }
-};
-
-type LineGraphData = {
-  data: number[];
-  categories: string[];
+  return metricsData;
 };
 
 const getLineGraphData = (
   periodOfTime: string,
   data: any[],
+  name: string,
   valueKey: string
 ): LineGraphData | null => {
   let periodLength, categories;
@@ -339,6 +350,7 @@ const getLineGraphData = (
   );
 
   return {
+    name,
     data: averages,
     categories,
   };
@@ -361,19 +373,10 @@ function periodTimeToMonths(periodOfTime: string): number {
   }
 }
 
-type BarGraphData = {
-  data: xisVals[];
-  categories: string[];
-};
-
-type xisVals = {
-  x: string;
-  y: number;
-};
-
 const getTimeBarGraphData = (
   periodOfTime: string,
   data: any[],
+  name: string,
   valueKey: string
 ): BarGraphData | null => {
   let categories: string[] = [];
@@ -458,7 +461,7 @@ const getTimeBarGraphData = (
     }
   });
 
-  return { data: resultData, categories };
+  return { name, data: resultData, categories };
 };
 
 

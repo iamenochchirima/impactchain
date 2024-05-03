@@ -17,11 +17,11 @@ const LandingPage = () => {
       </video>
       <div className="z-10 flex flex-col items-center justify-center">
       <img
-        className=""
+        className="w-50"
         src="/i.c.logo2.png"
         alt="impact chain logo"
       />
-      <div className="flex flex-col items-center justify-center md:text-6xl text-7xl">
+      <div className="flex flex-col items-center justify-center md:text-5xl text-6xl">
         <h1>
           <span className="text-green-400  font-extrabold font-NeueMachinaUltrabold">
             impact.
@@ -30,14 +30,14 @@ const LandingPage = () => {
             chain
           </span>
         </h1>
-        <h2 className="text-white text-3xl font-NeueMachinaRegular font-thin">
+        <h2 className="text-white text-2xl font-TelegraphRegular font-thin">
           Measure Impact. Create Change.
         </h2>
       </div>
 
       <Link
         to="login"
-        className=" mt-14 bg-custom-green px-20 py-2 items-center font-TelegraphRegular font-extrabold text-xl text-center rounded-xl"
+        className=" mt-14 bg-custom-green px-20 py-2 items-center font-TelegraphUltraLight font-bold text-lg text-center rounded-xl"
       >
         Login
       </Link>

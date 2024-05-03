@@ -43,6 +43,14 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Telegraph-ultra-light";
+  src: url("../assets/fonts/PPTelegraf-UltraLight.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 
 .slide-fwd-center {
 	-webkit-animation: slide-fwd-center 0.45s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;

@@ -115,15 +115,15 @@ const options: ApexOptions = {
   },
 };
 
-interface ChartOneState {
+interface LineGraphState {
   series: {
     name: string;
     data: number[];
   }[];
 }
 
-const ChartOne: React.FC = () => {
-  const [state, setState] = useState<ChartOneState>({
+const LineGraph: React.FC = () => {
+  const [state, setState] = useState<LineGraphState>({
     series: [
       {
         name: "Product One",
@@ -190,4 +190,4 @@ const ChartOne: React.FC = () => {
   );
 };
 
-export default ChartOne;
+export default LineGraph;

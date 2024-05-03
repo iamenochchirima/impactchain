@@ -60,7 +60,7 @@ const Report = () => {
               </button>
             </div>
             <div className="w-full">
-              <div className="bg-black rounded-3xl w-full p-4">
+              <div className="bg-black rounded-3xl w-full overflow-y-auto max-h-[600px]  p-4">
                 <ShowReport />
               </div>
             </div>

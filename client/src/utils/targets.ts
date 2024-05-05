@@ -353,7 +353,7 @@ export const getTargetMetrics = (target: ImpactTargetType) => {
     }
     if (target.metrics.length > 0) {
       for (const metric of target.metrics) {
-        if (metric.key === "renewableEnergy") {
+        if (metric.key === "womensEmpowerment") {
           const metric51: Metric51 = {
             key: metric.key,
             name: metric.name,
@@ -367,7 +367,7 @@ export const getTargetMetrics = (target: ImpactTargetType) => {
             Metric51: [metric51],
           };
         }
-        if (metric.key === "energyEfficiency") {
+        if (metric.key === "genderEqualityWorkshops") {
           const metric52: Metric52 = {
             key: metric.key,
             name: metric.name,
@@ -381,7 +381,7 @@ export const getTargetMetrics = (target: ImpactTargetType) => {
             Metric52: [metric52],
           };
         }
-        if (metric.key === "carbonOffset") {
+        if (metric.key === "workplaceGenderEquality") {
           const metric53: Metric53 = {
             key: metric.key,
             name: metric.name,

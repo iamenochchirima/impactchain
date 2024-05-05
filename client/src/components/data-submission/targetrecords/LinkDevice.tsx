@@ -13,6 +13,7 @@ const [name, setName] = useState("");
     });
     setLinkDevice(false);
   };
+
   return (
     <div className="fixed z-100 inset-0 text-cyan-700 overflow-y-auto bg-black bg-opacity-75">
       <div className=" flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-TelegraphRegular">

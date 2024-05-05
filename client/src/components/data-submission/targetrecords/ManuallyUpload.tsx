@@ -3,10 +3,11 @@ import { Metric } from "../../../utils/types";
 import JobTrainingProgram from "./metricsForms/no-poverty/JobTrainingProgram";
 import MircroloansProgram from "./metricsForms/no-poverty/MircroloansProgram";
 import PeopleAssistedOutOfPoverty from "./metricsForms/no-poverty/PeopleAssistedOutOfPoverty";
+import { ManualData } from "./MetricRecords";
 
 type Props = {
   setUploadManually: (manually: boolean) => void;
-  setManualData: (manualData: any) => void;
+  setManualData: (manualData: ManualData) => void;
   metric: Metric;
 };
 

@@ -5,7 +5,6 @@ type WorkplaceGenderEqualityPoliciesData =
    dataVerification: bool;
    duration: text;
    location: text;
-   policyDescription: text;
    policyName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -18,7 +17,6 @@ type WomensEmpowermentProgramData =
    duration: text;
    location: text;
    numberOfParticipants: nat;
-   programDescription: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -31,7 +29,6 @@ type WaterSanitationAccessData =
    duration: text;
    location: text;
    numberOfBeneficiaries: nat;
-   programDescription: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -43,7 +40,6 @@ type WaterConservationInitiativesData =
    created: int;
    dataVerification: bool;
    duration: text;
-   initiativeDescription: text;
    location: text;
    programName: text;
    startDate: int;
@@ -57,7 +53,6 @@ type WasteReductionRecyclingData =
    dataVerification: bool;
    duration: text;
    location: text;
-   programDescription: text;
    programName: text;
    recyclingProcessInvolved: text;
    startDate: int;
@@ -69,7 +64,6 @@ type VocationalTrainingProgramsData =
    created: int;
    dataVerification: bool;
    duration: text;
-   initiativeDescription: text;
    location: text;
    programName: text;
    startDate: int;
@@ -96,7 +90,6 @@ type UrbanSustainabilityProjectsData =
    dataVerification: bool;
    duration: text;
    location: text;
-   projectDescription: text;
    projectName: text;
    projectScope: text;
    startDate: int;
@@ -110,7 +103,6 @@ type UrbanLivingConditionsData =
    created: int;
    dataVerification: bool;
    duration: text;
-   initiativeDescription: text;
    location: text;
    numberOfAreasImproved: nat;
    programName: text;
@@ -123,7 +115,6 @@ type SustainableSupplyChainInvestmentData =
    created: int;
    dataVerification: bool;
    duration: text;
-   initiativeDescription: text;
    location: text;
    programName: text;
    startDate: int;
@@ -136,7 +127,6 @@ type SustainableInfrastructureData =
    dataVerification: bool;
    duration: text;
    location: text;
-   projectDescription: text;
    projectName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -146,7 +136,6 @@ type SustainableFishingSupportData =
  record {
    created: int;
    duration: text;
-   initiativeDescription: text;
    location: text;
    programName: text;
    startDate: int;
@@ -160,7 +149,6 @@ type SustainableAgricultureInvestment =
    duration: text;
    location: text;
    numberOfProjects: nat;
-   projectDescription: text;
    projectName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -174,7 +162,6 @@ type StudentsBenefitingData =
    duration: text;
    educationalLevel: text;
    location: text;
-   programDescription: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -188,7 +175,6 @@ type SchoolsSupportedData =
    duration: text;
    location: text;
    numberOfSchoolsSupported: nat;
-   projectDescription: text;
    projectName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -213,7 +199,6 @@ type STEMInnovationEducationData =
    dataVerification: bool;
    duration: text;
    location: text;
-   programDescription: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -222,7 +207,6 @@ type STEMInnovationEducationData =
  };
 type SDGAdvocacyCampaignsData = 
  record {
-   campaignDescription: text;
    campaignName: text;
    created: int;
    dataVerification: bool;
@@ -242,7 +226,6 @@ type RenewableEnergyProjectsData =
    created: int;
    dataVerification: bool;
    duration: text;
-   initiativeDescription: text;
    location: text;
    numberOfProjects: nat;
    projectName: text;
@@ -256,7 +239,6 @@ type RenewableEnergyInvestmentData =
    created: int;
    dataVerification: bool;
    duration: text;
-   initiativeDescription: text;
    location: text;
    numberOfProjects: nat;
    programName: text;
@@ -270,7 +252,6 @@ type ReforestationProjectsData =
    created: int;
    dataVerification: bool;
    duration: text;
-   initiativeDescription: text;
    location: text;
    projectName: text;
    startDate: int;
@@ -283,7 +264,6 @@ type PeopleBenefitingFromInfrastructureData =
    dataVerification: bool;
    duration: text;
    location: text;
-   programDescription: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -297,7 +277,6 @@ type PeopleAssistedOutOfPoverty =
    duration: text;
    location: text;
    numberOfPeopleAssisted: nat;
-   programDescription: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -307,7 +286,6 @@ type OrganizationalResourceFootprintReductionData =
    created: int;
    dataVerification: bool;
    duration: text;
-   initiativeDescription: text;
    location: text;
    programName: text;
    reductionInResourceFootprint: float64;
@@ -320,7 +298,6 @@ type OceanPollutionReductionData =
    created: int;
    dataVerification: bool;
    duration: text;
-   initiativeDescription: text;
    location: text;
    programName: text;
    reductionInPollution: float64;
@@ -335,7 +312,6 @@ type NutritiousFoodProgram =
    duration: text;
    location: text;
    numberOfBeneficiaries: nat;
-   programDescription: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -348,7 +324,6 @@ type MicroloanProgram =
    duration: text;
    location: text;
    numberOfLoans: nat;
-   programDescription: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -921,7 +896,6 @@ type MarineEcosystemProtectionData =
    created: int;
    dataVerification: bool;
    duration: text;
-   initiativeDescription: text;
    location: text;
    programName: text;
    startDate: int;
@@ -934,7 +908,6 @@ type MarginalizedCommunitySupportData =
    dataVerification: bool;
    duration: text;
    location: text;
-   programDescription: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -948,7 +921,6 @@ type LandRehabilitationData =
    created: int;
    dataVerification: bool;
    duration: text;
-   initiativeDescription: text;
    location: text;
    programName: text;
    startDate: int;
@@ -962,7 +934,6 @@ type LandConservationReforestationData =
    created: int;
    dataVerification: bool;
    duration: text;
-   initiativeDescription: text;
    location: text;
    programName: text;
    startDate: int;
@@ -977,7 +948,6 @@ type JobTrainingProgram =
    duration: text;
    location: text;
    numberOfBeneficiaries: nat;
-   programDescription: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -987,7 +957,6 @@ type JobCreationInitiativesData =
    created: int;
    dataVerification: bool;
    duration: text;
-   initiativeDescription: text;
    jobsCreated: nat;
    jobsSectors: text;
    location: text;
@@ -1001,7 +970,6 @@ type InequalityReductionBeneficiariesData =
    dataVerification: bool;
    duration: text;
    location: text;
-   programDescription: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1014,7 +982,6 @@ type InclusionPoliciesData =
    dataVerification: bool;
    duration: text;
    location: text;
-   policyDescription: text;
    policyName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1153,7 +1120,6 @@ type HumanRightsInitiativesData =
    created: int;
    dataVerification: bool;
    duration: text;
-   initiativeDescription: text;
    location: text;
    programName: text;
    scopeOfHumanRightsActivities: text;
@@ -1169,7 +1135,6 @@ type HealthcareFunding =
    duration: text;
    location: text;
    numberOfProjects: nat;
-   programDescription: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1182,7 +1147,6 @@ type HealthcareAccessData =
    duration: text;
    location: text;
    numberOfBeneficiaries: nat;
-   programDescription: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1193,7 +1157,6 @@ type HealthServicesData =
    dataVerification: bool;
    duration: text;
    location: text;
-   programDescription: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1207,7 +1170,6 @@ type GlobalPartnershipFinancialContributionsData =
    dataVerification: bool;
    duration: text;
    location: text;
-   programDescription: text;
    programName: text;
    sourceOfFunds: text;
    startDate: int;
@@ -1234,7 +1196,6 @@ type FoodDonation =
    duration: text;
    location: text;
    numberOfBeneficiaries: nat;
-   programDescription: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1246,7 +1207,6 @@ type EnergyEfficientSystemsData =
    created: int;
    dataVerification: bool;
    efficiencyRate: nat;
-   initiativeDescription: text;
    location: text;
    numberOfSystemsInstalled: nat;
    programName: text;
@@ -1259,7 +1219,6 @@ type EnergyConsumptionReductionData =
    created: int;
    dataVerification: bool;
    duration: text;
-   initiativeDescription: text;
    location: text;
    measurementsUnitsUsed: text;
    programName: text;
@@ -1273,7 +1232,6 @@ type EndangeredSpeciesProtectionData =
    created: int;
    dataVerification: bool;
    duration: text;
-   initiativeDescription: text;
    location: text;
    numberofSpeciesProtected: nat;
    programName: text;
@@ -1286,7 +1244,6 @@ type EmploymentConditionsImprovementData =
    created: int;
    dataVerification: bool;
    duration: text;
-   initiativeDescription: text;
    location: text;
    numberOfBeneficiaries: nat;
    programName: text;
@@ -1300,7 +1257,6 @@ type EducationalGrantsData =
    dataVerification: bool;
    duration: text;
    location: text;
-   programDescription: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1314,7 +1270,6 @@ type CommunityPeaceProgramsData =
    dataVerification: bool;
    duration: text;
    location: text;
-   programDescription: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1326,7 +1281,6 @@ type CollaborativeSDGProjectsData =
    dataVerification: bool;
    duration: text;
    location: text;
-   projectDescription: text;
    projectName: text;
    scopeOfCollaborativeEfforts: text;
    startDate: int;
@@ -1338,7 +1292,6 @@ type CarbonEmissionReductionData =
    created: int;
    dataVerification: bool;
    duration: text;
-   initiativeDescription: text;
    location: text;
    programName: text;
    reductionInEmission: float64;
@@ -1353,7 +1306,6 @@ type AntiCorruptionProgramsData =
    duration: text;
    location: text;
    natureOfAntiCorruptionMeasures: text;
-   programDescription: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1364,7 +1316,6 @@ type AffordableHousingSupportData =
    created: int;
    dataVerification: bool;
    duration: text;
-   initiativeDescription: text;
    location: text;
    numberOfHousingUnitsSupported: nat;
    programName: text;

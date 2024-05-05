@@ -26,8 +26,8 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="bg-black min-h-screen font-NeueMachinaRegular text-custom-green pt-44">
-      <h1 className="font-NeueMachinaUltrabold text-5xl md:text-7xl text-center">
+    <div className="bg-black min-h-screen font-NeueMachinaRegular text-custom-green pt-16">
+      <h1 className="font-NeueMachinaUltrabold text-5xl md:text-5xl text-center">
         <span className="text-custom-green ">impact.</span>
         <span className="text-white">chain</span>{" "}
       </h1>

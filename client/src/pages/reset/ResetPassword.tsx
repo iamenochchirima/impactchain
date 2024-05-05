@@ -21,14 +21,14 @@ const ResetPassword = () => {
         }
     };
   return (
-    <div className="bg-black min-h-screen font-NeueMachinaRegular text-custom-green pt-44">
-      <h1 className="font-NeueMachinaUltrabold text-7xl text-center">
+    <div className="bg-black min-h-screen font-NeueMachinaRegular text-custom-green pt-16">
+      <h1 className="font-NeueMachinaUltrabold text-5xl text-center">
         <span className="text-custom-green ">impact.</span>
         <span className="text-white">chain</span>{" "}
       </h1>
       <div className="flex flex-col gap-3 justify-center items-center py-10 font-TelegraphRegular">
-      <p className="text-3xl">Forgot Password</p>
-      <p className=" text-lg">Enter your email address</p>
+      <p className="text-3xl md:text-xl">Forgot Password</p>
+      <p className=" text-sm">Enter your email address</p>
       <form
         onSubmit={handleSubmit}
         className="bg-black shadow-md font-TelegraphRegular rounded px-8 pt-6 pb-8 max-w-sm"

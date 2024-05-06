@@ -7,7 +7,7 @@ import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
-import {  } from "../../../../../hooks/declarations/data/data.did";
+import { HealthcareAccessData } from "../../../../../hooks/declarations/data/data.did";
 
 
 const PeopleAccessingHealthCare = ({ setManualData, setUploadManually }) => {
@@ -62,7 +62,7 @@ const PeopleAccessingHealthCare = ({ setManualData, setUploadManually }) => {
       const startDateMilliseconds = new Date(startDate).getTime();
       const endDateMilliseconds = new Date(endDate).getTime();
 
-      const healthcareAccessData : HealthcareAccessDataType = {
+      const healthcareAccessData : HealthcareAccessData = {
         startDate: BigInt(startDateMilliseconds),
         endDate: BigInt(endDateMilliseconds),
         location: location,

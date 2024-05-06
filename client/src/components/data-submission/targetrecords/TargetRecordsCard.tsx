@@ -40,7 +40,7 @@ const TargetRecordsCard: FC<Props> = ({
     backgroundImage: `linear-gradient(to top, #354b5b, ${target.color} 50%, ${target.color})`,
   });
   const { dataActor } = useAuth();
-  const { userRecord } = useSelector((state: RootState) => state.app);
+  const { userRecord, nextTarget } = useSelector((state: RootState) => state.app);
   const [impact, setImpact] = useState<ImpactTargetType | undefined>(undefined);
   const dispatch = useDispatch();
   const [metrics, setMetrics] = useState<Metric[]>([]);

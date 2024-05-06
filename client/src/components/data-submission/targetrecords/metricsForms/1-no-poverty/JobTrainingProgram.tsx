@@ -6,12 +6,12 @@ import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
-import {  MicroloanProgram } from "../../../../../hooks/declarations/data/data.did";
+import { JobTrainingProgram as JobTrainingProgramType } from "../../../../../hooks/declarations/data/data.did";
 import { ManualData } from "../../MetricRecords";
 import { IoMdAdd } from "react-icons/io";
 import Program from "./Program";
 
-const  MicroloansProgram = ({ setManualData, setUploadManually }) => {
+const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
   const [supportFiles, setSupportFiles] = useState<File[] | null>(null);
   const { storageInitiated } = useSelector((state: RootState) => state.app);
@@ -20,12 +20,9 @@ const  MicroloansProgram = ({ setManualData, setUploadManually }) => {
   const [startDate, setStartDate] = useState<string>("");
   const [duration, setDuration] = useState<string>("");
   const [programLocation, setProgramLocation] = useState<string>("");
-  const [typeOfProgram, setTypeOfProgram] = useState<string>("");
-  const [numberOfLoans, setNumberOfLoans] = useState<string>("");
-  const [amountDisbursed, setAmountDisbursed] = useState<string>("");
+  const [numberOfBeneficiaries, setNumberOfParticipants] = useState("");
 
-
-  const [programs, setPrograms] = useState<MicroloanProgram[]>([]);
+  const [programs, setPrograms] = useState<JobTrainingProgramType[]>([]);
 
   const [showForm, setShowForm] = useState<boolean>(false);
 
@@ -105,9 +102,7 @@ const  MicroloansProgram = ({ setManualData, setUploadManually }) => {
       startDate === "" ||
       duration === "" ||
       programLocation === "" ||
-      numberOfLoans === "" ||
-      amountDisbursed === "" ||
-      typeOfProgram === ""
+      numberOfBeneficiaries === ""
     ) {
       toast.error("Please fill out all fields", {
         position: "top-center",
@@ -149,14 +144,12 @@ const  MicroloansProgram = ({ setManualData, setUploadManually }) => {
       setSaving(false);
       return;
     }
-    const newProgram: MicroloanProgram = {
+    const newProgram: JobTrainingProgramType = {
       programName,
       startDate: BigInt(new Date(startDate).getTime()),
       duration,
       location: programLocation,
-      typeOfSupport: typeOfProgram,
-      numberOfLoans: BigInt(numberOfLoans),
-      amountDisbursed: BigInt(amountDisbursed),
+      numberOfBeneficiaries: BigInt(numberOfBeneficiaries),
       dataVerification: false,
       supportingFiles: urls,
       created: BigInt(Date.now()),
@@ -166,9 +159,7 @@ const  MicroloansProgram = ({ setManualData, setUploadManually }) => {
     setStartDate("");
     setDuration("");
     setProgramLocation("");
-    setTypeOfProgram("");
-    setNumberOfLoans("");
-    setAmountDisbursed("");
+    setNumberOfParticipants("");
     setSupportFiles(null);
     setShowForm(false);
     setSaving(false);
@@ -210,7 +201,7 @@ const  MicroloansProgram = ({ setManualData, setUploadManually }) => {
         </div>
 
         {programs.length > 0 && (
-          <div className=" border-x border-y border-custom-green flex flex-col gap-2 rounded p-3">
+          <div className={styles.programsDiv}>
             {programs.map((program, index) => (
               <Program key={index} {...{ program, programs, setPrograms }} />
             ))}
@@ -224,7 +215,7 @@ const  MicroloansProgram = ({ setManualData, setUploadManually }) => {
             <h3 className={styles.formTitle}>Job Training Program</h3>
           </div>
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>Program Name</label>
+            <label htmlFor={styles.inputLabel}>What is the name of the job training or educational program?</label>
             <input
               className={styles.formInput}
               id="programName"
@@ -236,7 +227,7 @@ const  MicroloansProgram = ({ setManualData, setUploadManually }) => {
             />
           </div>
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>Start Date</label>
+            <label htmlFor={styles.inputLabel}>When did this program begin?</label>
             <input
               className={styles.formInput}
               id="startDate"
@@ -248,22 +239,22 @@ const  MicroloansProgram = ({ setManualData, setUploadManually }) => {
             />
           </div>
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>End Date</label>
+            <label htmlFor={styles.inputLabel}>How long has the program been running?</label>
             <input
               className={styles.formInput}
               id="duration"
-              type="goal"
+              type="text"
               placeholder="Duration"
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
             />
           </div>
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>Program Location</label>
+            <label htmlFor={styles.inputLabel}>Where is this program located? (City and Country)</label>
             <input
               className={styles.formInput}
               id="programLocation"
-              type="goal"
+              type="text"
               placeholder="Program Location"
               value={programLocation}
               onChange={(e) => setProgramLocation(e.target.value)}
@@ -272,44 +263,20 @@ const  MicroloansProgram = ({ setManualData, setUploadManually }) => {
           </div>
 
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>Type of Program</label>
+            <label htmlFor={styles.inputLabel}>How many participants are there in these programs?</label>
             <input
               className={styles.formInput}
-              id="typeOfProgram"
-              type="text"
-              placeholder="Type of Program"
-              value={typeOfProgram}
-              onChange={(e) => setTypeOfProgram(e.target.value)}
-              required
-            />
-          </div>
-          <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>Number of Loans</label>
-            <input
-              className={styles.formInput}
-              id="numberOfLoans"
+              id="numberOfBeneficiaries"
               type="number"
-              placeholder="Number of Loans"
-              value={numberOfLoans}
-              onChange={(e) => setNumberOfLoans(e.target.value)}
-              required
-            />
-          </div>
-          <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>Amount Disbursed</label>
-            <input
-              className={styles.formInput}
-              id="amountDisbursed"
-              type="number"
-              placeholder="Amount Disbursed"
-              value={amountDisbursed}
-              onChange={(e) => setAmountDisbursed(e.target.value)}
+              placeholder="Number of Beneficiaries"
+              value={numberOfBeneficiaries}
+              onChange={(e) => setNumberOfParticipants(e.target.value)}
               required
             />
           </div>
           <FilesInput {...{ setSupportFiles, supportFiles }} />
 
-          <div className="flex justify-center gap-3 items-center py-4 border-t border-gray-200">
+          <div className={styles.buttonsDiv}>
             <button
               onClick={() => {
                 setShowForm(false);
@@ -343,7 +310,7 @@ const  MicroloansProgram = ({ setManualData, setUploadManually }) => {
             disabled={saving}
             className={`${styles.roundedButton} `}
           >
-           Continue
+            Continue
           </button>
         </div>
       )}
@@ -351,4 +318,4 @@ const  MicroloansProgram = ({ setManualData, setUploadManually }) => {
   );
 };
 
-export default MicroloansProgram;
+export default JobTrainingProgram;

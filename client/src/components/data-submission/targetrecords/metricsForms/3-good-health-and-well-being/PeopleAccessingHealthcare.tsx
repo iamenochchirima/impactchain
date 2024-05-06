@@ -7,33 +7,31 @@ import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
-import {WaterConservationInitiativesData as WaterConservationInitiativesDataType } from "../../../../../hooks/declarations/data/data.did";
+import {  } from "../../../../../hooks/declarations/data/data.did";
 
 
-const WaterConservationInitiativesData = ({ setManualData, setUploadManually }) => {
+const PeopleAccessingHealthCare = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
   const [supportFiles, setSupportFiles] = useState<File[] | null>(null);
-  const {storageInitiated } = useSelector((state: RootState) => state.app);
+  const { storageInitiated } = useSelector((state: RootState) => state.app);
   const [countDown, setCountDown] = useState<number>(0);
 
   const [startDate, setStartDate] = useState<string>("");
   const [endDate, setEndDate] = useState<string>("");
   const [location, setLocation] = useState<string>("");
 
-  const [facilityName, setFacilityName] = useState<string>("");
-  const [projectDescription, setProjectDescription] = useState<string>("");
+  const [programName, setProgramName] = useState<string>("");
+  const [programDescription, setProgramDescription] = useState<string>("");
 
-  
-  const [typeOfFacilities, setTypeOfFacilities] = useState<string>("");
-  const [feedbackFromCommunity, setFeedbackFromCommunity] = useState<string>("");
-  const [impactOnHealth, setImpactOnHealth] = useState<string>("");
   const [operationalChallenges, setOperationalChallenges] = useState<string>("");
-  const [completionDate, setCompletionDate] = useState<string>("");
-  const [complianceWithStandards, setComplianceWithStandards] = useState<string>("");
-  const [numberOfFacilitiesBuilt, setNumberOfFacilitiesBuilt] = useState("");
-  const [numberOfFacilitiesRenovated, setNumberOfFacilitiesRenovated] = useState("");
-  const [totalInvestment, setTotalInvestment] = useState("");
-  const [populationServed, setPopulationServed] = useState("");
+  const [improvementsMade, setImprovementsMade] = useState<string>("");
+  const [typesOfServicesProvided, setTypesOfServicesProvided] = useState<string>("");
+  const [communityImpact, setCommunityImpact] = useState<string>("");
+  const [feedbackFromPatients, setFeedbackFromPatients] = useState<string>("");
+  const [barriersToAccess, setBarriersToAccess] = useState<string>("");
+  const [patientDemographics, setPatientDemographics] = useState<string>("");
+  const [totalPatientsServed, setTotalPatientsServed] = useState("");
+  const [totalHealthFacilities, setTotalHealthFacilities] = useState("");
   
 
   const handleSubmit = async () => {
@@ -64,31 +62,30 @@ const WaterConservationInitiativesData = ({ setManualData, setUploadManually }) 
       const startDateMilliseconds = new Date(startDate).getTime();
       const endDateMilliseconds = new Date(endDate).getTime();
 
-      const SanitationFacilitiesData : SanitationFacilitiesDataType = {
+      const healthcareAccessData : HealthcareAccessDataType = {
         startDate: BigInt(startDateMilliseconds),
         endDate: BigInt(endDateMilliseconds),
         location: location,
-        facilityName: facilityName,
-        projectDescription: projectDescription,
-        typeOfFacilities: typeOfFacilities,
-        feedbackFromCommunity: feedbackFromCommunity,
-        impactOnHealth: impactOnHealth,
+        programName: programName,
+        programDescription: programDescription,
         operationalChallenges: operationalChallenges,
-        completionDate:completionDate,
-        complianceWithStandards:complianceWithStandards,
-        numberOfFacilitiesBuilt: BigInt(numberOfFacilitiesBuilt),
-        numberOfFacilitiesRenovated: BigInt(numberOfFacilitiesRenovated),
-        totalInvestment: BigInt(totalInvestment),
-        populationServed: BigInt(populationServed),
+        improvementsMade: improvementsMade,
+        typesOfServicesProvided:typesOfServicesProvided,
+        communityImpact: communityImpact,
+        feedbackFromPatients: feedbackFromPatients,
+        barriersToAccess: barriersToAccess,
+        patientDemographics: patientDemographics,
+        totalPatientsServed: BigInt(totalPatientsServed),
+        totalHealthFacilities: BigInt(totalHealthFacilities),
         dataVerification: false,
         supportingFiles: urls ? urls : [],
         created: BigInt(Date.now()),
       };
-      setManualData(SanitationFacilitiesData);
+      setManualData(healthcareAccessData);
       setUploadManually(false);
     } catch (error) {
         setSaving(false);
-      console.log("Error saving Sanitation Facilities Data", error);
+      console.log("Error saving Healthcare Access Data", error);
     }
   };
 
@@ -120,29 +117,29 @@ const WaterConservationInitiativesData = ({ setManualData, setUploadManually }) 
     <div>
       <form className={`${styles.munualDataForm}`}>
         <div className={`${styles.formHeader}`}>
-          <h3 className={`${styles.formTitle}`}>Sanitation Facilities Data</h3>
+          <h3 className={`${styles.formTitle}`}>Health Care Access Data</h3>
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Facility Name</label>
+          <label htmlFor={`${styles.inputLabel}`}>Program Name</label>
           <input
             className={`${styles.formInput}`}
-            id="facilityName"
+            id="programName"
             type="text"
-            placeholder="Name of the Facility"
-            value={facilityName}
-            onChange={(e) => setFacilityName(e.target.value)}
+            placeholder="Program Name"
+            value={programName}
+            onChange={(e) => setProgramName(e.target.value)}
             required
           />
 
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Project Description</label>
+          <label htmlFor={`${styles.inputLabel}`}>Program Description</label>
           <textarea
             className={`${styles.formInput}`}
-            id="projectDescription"
-            placeholder="Description of the Project"
-            value={projectDescription}
-            onChange={(e) => setProjectDescription(e.target.value)}
+            id="programDescription"
+            placeholder="Program Description"
+            value={programDescription}
+            onChange={(e) => setProgramDescription(e.target.value)}
             required
             style={{ overflow: "hidden" }}
           />
@@ -184,122 +181,110 @@ const WaterConservationInitiativesData = ({ setManualData, setUploadManually }) 
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Type Of Facilities</label>
-          <input
-            className={`${styles.formInput}`}
-            id="typeOfFacilities"
-            type="text"
-            placeholder="Type of Facilities"
-            value={typeOfFacilities}
-            onChange={(e) => setTypeOfFacilities(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Feedback From Community</label>
-          <input
-            className={`${styles.formInput}`}
-            id="feedbackFromCommunity"
-            type="text"
-            placeholder="Communities Feedback"
-            value={feedbackFromCommunity}
-            onChange={(e) => setFeedbackFromCommunity(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Impact On Health</label>
-          <input
-            className={`${styles.formInput}`}
-            id="impactOnHealth"
-            type="text"
-            placeholder="The Impact on Health"
-            value={impactOnHealth}
-            onChange={(e) => setImpactOnHealth(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Operational Challenges</label>
           <input
             className={`${styles.formInput}`}
             id="operationalChallenges"
             type="text"
-            placeholder="Operational Challenges Faced"
+            placeholder="What're the Operational Challenges"
             value={operationalChallenges}
             onChange={(e) => setOperationalChallenges(e.target.value)}
             required
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Completion Date</label>
+          <label htmlFor={`${styles.inputLabel}`}>Improvements Made</label>
           <input
             className={`${styles.formInput}`}
-            id="completionDate"
+            id="improvementsMade"
             type="text"
-            placeholder="Date of Completion"
-            value={completionDate}
-            onChange={(e) => setCompletionDate(e.target.value)}
+            placeholder="The Improvements Made"
+            value={improvementsMade}
+            onChange={(e) => setImprovementsMade(e.target.value)}
             required
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Compliance With Standards</label>
+          <label htmlFor={`${styles.inputLabel}`}>Types of Services Provided</label>
           <input
             className={`${styles.formInput}`}
-            id="complianceWithStandards"
+            id="typesOfServicesProvided"
             type="text"
-            placeholder="Compliance with Standards"
-            value={complianceWithStandards}
-            onChange={(e) => setComplianceWithStandards(e.target.value)}
+            placeholder="The Types of Services Provided"
+            value={typesOfServicesProvided}
+            onChange={(e) => setTypesOfServicesProvided(e.target.value)}
             required
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Number Of Facilities Built</label>
+          <label htmlFor={`${styles.inputLabel}`}>Community Impact</label>
           <input
             className={`${styles.formInput}`}
-            id="numberOfFacilitiesBuilt"
-            type="number"
-            placeholder="Number of Facilities Built"
-            value={numberOfFacilitiesBuilt}
-            onChange={(e) => setNumberOfFacilitiesBuilt(e.target.value)}
+            id="communityImpact"
+            type="text"
+            placeholder="The Impact on the Community"
+            value={communityImpact}
+            onChange={(e) => setCommunityImpact(e.target.value)}
             required
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Number of Facilities Renovated</label>
+          <label htmlFor={`${styles.inputLabel}`}>Feedback From Patients</label>
           <input
             className={`${styles.formInput}`}
-            id="numberOfFacilitiesRenovated"
-            type="number"
-            placeholder="Number of Facilities Renovated"
-            value={numberOfFacilitiesRenovated}
-            onChange={(e) => setNumberOfFacilitiesRenovated(e.target.value)}
+            id="feedbackFromPatients"
+            type="text"
+            placeholder="Patients Feedback"
+            value={feedbackFromPatients}
+            onChange={(e) => setFeedbackFromPatients(e.target.value)}
             required
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Total Investment</label>
+          <label htmlFor={`${styles.inputLabel}`}>Barriers to Access</label>
           <input
             className={`${styles.formInput}`}
-            id="totalInvesment"
-            type="number"
-            placeholder="Total Investment Amount"
-            value={totalInvestment}
-            onChange={(e) => setTotalInvestment(e.target.value)}
+            id="barriersToAccess"
+            type="text"
+            placeholder="The Barriers to Access"
+            value={barriersToAccess}
+            onChange={(e) => setBarriersToAccess(e.target.value)}
             required
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Population Served</label>
+          <label htmlFor={`${styles.inputLabel}`}>Patient Demographics</label>
           <input
             className={`${styles.formInput}`}
-            id="populationServed"
+            id="patientDemographics"
+            type="text"
+            placeholder="The Patient Demographics"
+            value={patientDemographics}
+            onChange={(e) => setPatientDemographics(e.target.value)}
+            required
+          />
+        </div>
+        <div className={`${styles.inputDiv}`}>
+          <label htmlFor={`${styles.inputLabel}`}>Total Patients Served</label>
+          <input
+            className={`${styles.formInput}`}
+            id="totalPatientsServed"
             type="number"
-            placeholder="Number of People Served"
-            value={populationServed}
-            onChange={(e) => setPopulationServed(e.target.value)}
+            placeholder="The Total Number of Patients Served"
+            value={totalPatientsServed}
+            onChange={(e) => setTotalPatientsServed(e.target.value)}
+            required
+          />
+        </div>
+        <div className={`${styles.inputDiv}`}>
+          <label htmlFor={`${styles.inputLabel}`}>Total Health Facilities</label>
+          <textarea
+            className={`${styles.formInput}`}
+            id="totalHealthFacilities"
+            placeholder="The Total Number of Health Facilities"
+            type="number"
+            value={totalHealthFacilities}
+            onChange={(e) => setTotalHealthFacilities(e.target.value)}
             required
           />
         </div>
@@ -326,4 +311,4 @@ const WaterConservationInitiativesData = ({ setManualData, setUploadManually }) 
   );
 };
 
-export default SanitationFacilitiesData;
+export default PeopleAccessingHealthCare;

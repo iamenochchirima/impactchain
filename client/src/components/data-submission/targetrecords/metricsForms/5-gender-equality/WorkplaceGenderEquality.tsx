@@ -7,10 +7,10 @@ import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
-import { HealthcareAccessData as HealthcareAccessDataType } from "../../../../../hooks/declarations/data/data.did";
+import {WorkplaceGenderEqualityPoliciesData as WorkplaceGenderEqualityPoliciesDataType } from "../../../../../hooks/declarations/data/data.did";
 
 
-const HealthcareAccessData = ({ setManualData, setUploadManually }) => {
+const WorkplaceGenderEqualityPolicies = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
   const [supportFiles, setSupportFiles] = useState<File[] | null>(null);
   const { storageInitiated } = useSelector((state: RootState) => state.app);
@@ -20,18 +20,16 @@ const HealthcareAccessData = ({ setManualData, setUploadManually }) => {
   const [endDate, setEndDate] = useState<string>("");
   const [location, setLocation] = useState<string>("");
 
-  const [programName, setProgramName] = useState<string>("");
-  const [programDescription, setProgramDescription] = useState<string>("");
-
-  const [operationalChallenges, setOperationalChallenges] = useState<string>("");
-  const [improvementsMade, setImprovementsMade] = useState<string>("");
-  const [typesOfServicesProvided, setTypesOfServicesProvided] = useState<string>("");
-  const [communityImpact, setCommunityImpact] = useState<string>("");
-  const [feedbackFromPatients, setFeedbackFromPatients] = useState<string>("");
-  const [barriersToAccess, setBarriersToAccess] = useState<string>("");
-  const [patientDemographics, setPatientDemographics] = useState<string>("");
-  const [totalPatientsServed, setTotalPatientsServed] = useState("");
-  const [totalHealthFacilities, setTotalHealthFacilities] = useState("");
+  const [policyName, setPolicyName] = useState<string>("");
+  const [policyDescription, setPolicyDescription] = useState<string>("");
+  const [challengesFaced, setChallengesFaced] = useState<string>("");
+  const [reviewDate, setReviewDate] = useState<string>("");
+  const [implementationDate, setImplementationDate] = useState<string>("");
+  const [feedbackFromEmployees, setFeedbackFromEmployees] = useState<string>("");
+  const [measuresTaken, setMeasuresTaken] = useState<string>("");
+  const [outcomesAchieved, setOutcomesAchieved] = useState<string>("");
+  const [numberOfEmployeesAffected, setNumberOfEmployeesAffected] = useState("");
+  const [complianceRate, setComplianceRate] = useState("");
   
 
   const handleSubmit = async () => {
@@ -62,30 +60,29 @@ const HealthcareAccessData = ({ setManualData, setUploadManually }) => {
       const startDateMilliseconds = new Date(startDate).getTime();
       const endDateMilliseconds = new Date(endDate).getTime();
 
-      const healthcareAccessData : HealthcareAccessDataType = {
+      const WorkplaceGenderEqualityPoliciesData : WorkplaceGenderEqualityPoliciesDataType = {
         startDate: BigInt(startDateMilliseconds),
         endDate: BigInt(endDateMilliseconds),
         location: location,
-        programName: programName,
-        programDescription: programDescription,
-        operationalChallenges: operationalChallenges,
-        improvementsMade: improvementsMade,
-        typesOfServicesProvided:typesOfServicesProvided,
-        communityImpact: communityImpact,
-        feedbackFromPatients: feedbackFromPatients,
-        barriersToAccess: barriersToAccess,
-        patientDemographics: patientDemographics,
-        totalPatientsServed: BigInt(totalPatientsServed),
-        totalHealthFacilities: BigInt(totalHealthFacilities),
+        policyName: policyName,
+        policyDescription: policyDescription,
+        challengesFaced: challengesFaced,
+        reviewDate:reviewDate,
+        implementationDate: implementationDate,
+        feedbackFromEmployees: feedbackFromEmployees,
+        measuresTaken: measuresTaken,
+        outcomesAchieved:outcomesAchieved,
+        numberOfEmployeesAffected: BigInt(numberOfEmployeesAffected),
+        complianceRate:BigInt(complianceRate),
         dataVerification: false,
         supportingFiles: urls ? urls : [],
         created: BigInt(Date.now()),
       };
-      setManualData(healthcareAccessData);
+      setManualData(WorkplaceGenderEqualityPoliciesData);
       setUploadManually(false);
     } catch (error) {
         setSaving(false);
-      console.log("Error saving Healthcare Access Data", error);
+      console.log("Error saving Work Place Gender Equality Policies Data", error);
     }
   };
 
@@ -117,29 +114,29 @@ const HealthcareAccessData = ({ setManualData, setUploadManually }) => {
     <div>
       <form className={`${styles.munualDataForm}`}>
         <div className={`${styles.formHeader}`}>
-          <h3 className={`${styles.formTitle}`}>Health Care Access Data</h3>
+          <h3 className={`${styles.formTitle}`}>Workplace Gender Equality Policies Data</h3>
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Program Name</label>
+          <label htmlFor={`${styles.inputLabel}`}>Policy Name</label>
           <input
             className={`${styles.formInput}`}
-            id="programName"
+            id="policyName"
             type="text"
-            placeholder="Program Name"
-            value={programName}
-            onChange={(e) => setProgramName(e.target.value)}
+            placeholder="Name of the Policy"
+            value={policyName}
+            onChange={(e) => setPolicyName(e.target.value)}
             required
           />
 
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Program Description</label>
+          <label htmlFor={`${styles.inputLabel}`}>Policy Description</label>
           <textarea
             className={`${styles.formInput}`}
-            id="programDescription"
-            placeholder="Program Description"
-            value={programDescription}
-            onChange={(e) => setProgramDescription(e.target.value)}
+            id="policyDescription"
+            placeholder="Description of the Policy"
+            value={policyDescription}
+            onChange={(e) => setPolicyDescription(e.target.value)}
             required
             style={{ overflow: "hidden" }}
           />
@@ -181,110 +178,98 @@ const HealthcareAccessData = ({ setManualData, setUploadManually }) => {
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Operational Challenges</label>
+          <label htmlFor={`${styles.inputLabel}`}>Challenges Faced</label>
           <input
             className={`${styles.formInput}`}
-            id="operationalChallenges"
+            id="challengesFaced"
             type="text"
-            placeholder="What're the Operational Challenges"
-            value={operationalChallenges}
-            onChange={(e) => setOperationalChallenges(e.target.value)}
+            placeholder="The Challenges Faced"
+            value={challengesFaced}
+            onChange={(e) => setChallengesFaced(e.target.value)}
             required
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Improvements Made</label>
+          <label htmlFor={`${styles.inputLabel}`}>Review Date</label>
           <input
             className={`${styles.formInput}`}
-            id="improvementsMade"
+            id="reviewDate"
             type="text"
-            placeholder="The Improvements Made"
-            value={improvementsMade}
-            onChange={(e) => setImprovementsMade(e.target.value)}
+            placeholder="Date of Review"
+            value={reviewDate}
+            onChange={(e) => setReviewDate(e.target.value)}
             required
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Types of Services Provided</label>
+          <label htmlFor={`${styles.inputLabel}`}>Implementation Date</label>
           <input
             className={`${styles.formInput}`}
-            id="typesOfServicesProvided"
+            id="implementation Date"
             type="text"
-            placeholder="The Types of Services Provided"
-            value={typesOfServicesProvided}
-            onChange={(e) => setTypesOfServicesProvided(e.target.value)}
+            placeholder="Date of Implementation"
+            value={implementationDate}
+            onChange={(e) => setImplementationDate(e.target.value)}
             required
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Community Impact</label>
+          <label htmlFor={`${styles.inputLabel}`}>Feedback From Employees</label>
           <input
             className={`${styles.formInput}`}
-            id="communityImpact"
+            id="feedbackFromEmployees"
             type="text"
-            placeholder="The Impact on the Community"
-            value={communityImpact}
-            onChange={(e) => setCommunityImpact(e.target.value)}
+            placeholder="Employees Feedback"
+            value={feedbackFromEmployees}
+            onChange={(e) => setFeedbackFromEmployees(e.target.value)}
             required
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Feedback From Patients</label>
+          <label htmlFor={`${styles.inputLabel}`}>Measures Taken</label>
           <input
             className={`${styles.formInput}`}
-            id="feedbackFromPatients"
+            id="measuresTaken"
             type="text"
-            placeholder="Patients Feedback"
-            value={feedbackFromPatients}
-            onChange={(e) => setFeedbackFromPatients(e.target.value)}
+            placeholder="What're the measures taken?"
+            value={measuresTaken}
+            onChange={(e) => setMeasuresTaken(e.target.value)}
             required
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Barriers to Access</label>
+          <label htmlFor={`${styles.inputLabel}`}>Outcomes Achieved</label>
           <input
             className={`${styles.formInput}`}
-            id="barriersToAccess"
+            id="outcomesAchieved"
             type="text"
-            placeholder="The Barriers to Access"
-            value={barriersToAccess}
-            onChange={(e) => setBarriersToAccess(e.target.value)}
+            placeholder="What're the Outcomes Achieved"
+            value={outcomesAchieved}
+            onChange={(e) => setOutcomesAchieved(e.target.value)}
             required
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Patient Demographics</label>
+          <label htmlFor={`${styles.inputLabel}`}>Number of Employees Affected</label>
           <input
             className={`${styles.formInput}`}
-            id="patientDemographics"
-            type="text"
-            placeholder="The Patient Demographics"
-            value={patientDemographics}
-            onChange={(e) => setPatientDemographics(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Total Patients Served</label>
-          <input
-            className={`${styles.formInput}`}
-            id="totalPatientsServed"
+            id="numberOfEmployeesAffected"
             type="number"
-            placeholder="The Total Number of Patients Served"
-            value={totalPatientsServed}
-            onChange={(e) => setTotalPatientsServed(e.target.value)}
+            placeholder="The Number of Employees Affected"
+            value={numberOfEmployeesAffected}
+            onChange={(e) => setNumberOfEmployeesAffected(e.target.value)}
             required
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Total Health Facilities</label>
-          <textarea
+          <label htmlFor={`${styles.inputLabel}`}>Compliance Rate</label>
+          <input
             className={`${styles.formInput}`}
-            id="totalHealthFacilities"
-            placeholder="The Total Number of Health Facilities"
+            id="complianceRate"
             type="number"
-            value={totalHealthFacilities}
-            onChange={(e) => setTotalHealthFacilities(e.target.value)}
+            placeholder="Rate of Compliance"
+            value={complianceRate}
+            onChange={(e) => setComplianceRate(e.target.value)}
             required
           />
         </div>
@@ -311,4 +296,4 @@ const HealthcareAccessData = ({ setManualData, setUploadManually }) => {
   );
 };
 
-export default HealthcareAccessData;
+export default WorkplaceGenderEqualityPolicies;

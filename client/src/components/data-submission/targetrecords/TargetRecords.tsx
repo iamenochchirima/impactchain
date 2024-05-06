@@ -3,7 +3,7 @@ import { TargetOption, targetOptions } from "../../../data/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import TargetRecordsCard from "./TargetRecordsCard";
-import { setNextTarget } from "../../../redux/slices/app";
+import { setNextTarget, setPreviousTarget } from "../../../redux/slices/app";
 
 export const TargetRecords = () => {
   const dispatch = useDispatch();
@@ -30,7 +30,6 @@ export const TargetRecords = () => {
       });
       setTargets(matchingTargetOption);
     }
-
   }, [impactTargets]);
 
   useEffect(() => {
@@ -46,10 +45,9 @@ export const TargetRecords = () => {
     }
     if (previousTarget) {
       setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-      dispatch(setNextTarget(false));
+      dispatch(setPreviousTarget(false));
     }
   }, [nextTarget, previousTarget, targets, dispatch]);
-
 
   useEffect(() => {
     if (currentIndex === targets.length - 1) {
@@ -66,7 +64,7 @@ export const TargetRecords = () => {
           {displayedTargets.map((target, index) => {
             return (
               <TargetRecordsCard
-                {...{ target, impactTargets, currentIndex, finished}}
+                {...{ target, impactTargets, currentIndex, finished }}
                 key={index}
               />
             );

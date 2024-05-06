@@ -7,10 +7,10 @@ import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
-import { HealthCheckupVaccinationData as HealthCheckupVaccinationDataType } from "../../../../../hooks/declarations/data/data.did";
+import { SchoolsBuiltSupportedData as SchoolsBuiltSupportedDataType } from "../../../../../hooks/declarations/data/data.did";
 
 
-const HealthCheckupVaccinationData = ({ setManualData, setUploadManually }) => {
+const SchoolsBuiltData = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
   const [supportFiles, setSupportFiles] = useState<File[] | null>(null);
   const { storageInitiated } = useSelector((state: RootState) => state.app);
@@ -20,18 +20,17 @@ const HealthCheckupVaccinationData = ({ setManualData, setUploadManually }) => {
   const [endDate, setEndDate] = useState<string>("");
   const [location, setLocation] = useState<string>("");
 
-  const [programName, setProgramName] = useState<string>("");
-  const [programDescription, setProgramDescription] = useState<string>("");
+  const [projectName, setProjectName] = useState<string>("");
+  const [projectDescription, setProjectDescription] = useState<string>("");
 
-  const [operationalChallenges, setOperationalChallenges] = useState<string>("");
-  const [feedbackFromParticipants, setFeedbackFromParticipants] = useState<string>("");
-  const [followUpActions, setFollowUpActions] = useState<string>("");
-  const [healthOutcomesMeasured, setHealthOutcomesMeasured] = useState<string>("");
+  const [feedbackFromCommunity, setFeedbackFromCommunity] = useState<string>("");
+  const [sourcesOfFunding, setSourcesOfFunding] = useState<string>("");
   const [communityImpact, setCommunityImpact] = useState<string>("");
-  const [typeOfService, setTypeOfService] = useState<string>("");
-  const [totalServicesProvided, setTotalServicesProvided] = useState("");
-  const [totalParticipants, setTotalParticipants] = useState("");
-  const [vaccinationCoverage, setVaccinationCoverage] = useState("");
+  const [challengesFaced, setChallengesFaced] = useState<string>("");
+  const [numberOfSchoolsBuilt, setNumberOfSchoolsBuilt] = useState("");
+  const [studentCapacityIncrease, setStudentCapacityIncrease] = useState("");
+  const [numberOfSchoolsSupported, setNumberOfSchoolsSupported] = useState("");
+  const [totalInvestment, setTotalInvestment] = useState("");
   
 
   const handleSubmit = async () => {
@@ -62,30 +61,29 @@ const HealthCheckupVaccinationData = ({ setManualData, setUploadManually }) => {
       const startDateMilliseconds = new Date(startDate).getTime();
       const endDateMilliseconds = new Date(endDate).getTime();
 
-      const healthCheckupVaccinationData: HealthCheckupVaccinationDataType = {
+      const schoolsBuiltSupportedData : SchoolsBuiltSupportedDataType = {
         startDate: BigInt(startDateMilliseconds),
         endDate: BigInt(endDateMilliseconds),
         location: location,
-        programName: programName,
-        programDescription: programDescription,
-        operationalChallenges: operationalChallenges,
-        feedbackFromParticipants: feedbackFromParticipants,
-        followUpActions: followUpActions,
-        healthOutcomesMeasured:healthOutcomesMeasured,
+        projectName: projectName,
+        projectDescription: projectDescription,
+        feedbackFromCommunity: feedbackFromCommunity,
+        sourcesOfFunding: sourcesOfFunding,
         communityImpact: communityImpact,
-        typeOfService: typeOfService,
-        totalServicesProvided: BigInt(totalServicesProvided),
-        totalParticipants: BigInt(totalParticipants),
-        vaccinationCoverage: BigInt(vaccinationCoverage),
+        challengesFaced: challengesFaced,
+        numberOfSchoolsBuilt:BigInt(numberOfSchoolsBuilt),
+        studentCapacityIncrease: BigInt(studentCapacityIncrease),
+        numberOfSchoolsSupported: BigInt(numberOfSchoolsSupported),
+        totalInvestment: BigInt(totalInvestment),
         dataVerification: false,
         supportingFiles: urls ? urls : [],
         created: BigInt(Date.now()),
       };
-      setManualData(healthCheckupVaccinationData);
+      setManualData(schoolsBuiltSupportedData);
       setUploadManually(false);
     } catch (error) {
         setSaving(false);
-      console.log("Error saving health checkup vaccination data", error);
+      console.log("Error saving Schools Built Supported Data", error);
     }
   };
 
@@ -117,29 +115,29 @@ const HealthCheckupVaccinationData = ({ setManualData, setUploadManually }) => {
     <div>
       <form className={`${styles.munualDataForm}`}>
         <div className={`${styles.formHeader}`}>
-          <h3 className={`${styles.formTitle}`}>Health Checkup Vaccination Data</h3>
+          <h3 className={`${styles.formTitle}`}>Schools Built</h3>
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Program Name</label>
+          <label htmlFor={`${styles.inputLabel}`}>Project Name</label>
           <input
             className={`${styles.formInput}`}
-            id="programName"
+            id="projectName"
             type="text"
-            placeholder="Program Name"
-            value={programName}
-            onChange={(e) => setProgramName(e.target.value)}
+            placeholder="Project Name"
+            value={projectName}
+            onChange={(e) => setProjectName(e.target.value)}
             required
           />
 
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Program Description</label>
+          <label htmlFor={`${styles.inputLabel}`}>Project Description</label>
           <textarea
             className={`${styles.formInput}`}
-            id="programDescription"
-            placeholder="Program Description"
-            value={programDescription}
-            onChange={(e) => setProgramDescription(e.target.value)}
+            id="projectDescription"
+            placeholder="Project Description"
+            value={projectDescription}
+            onChange={(e) => setProjectDescription(e.target.value)}
             required
             style={{ overflow: "hidden" }}
           />
@@ -181,50 +179,26 @@ const HealthCheckupVaccinationData = ({ setManualData, setUploadManually }) => {
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Operational Challenges</label>
+          <label htmlFor={`${styles.inputLabel}`}>Community Feedback</label>
           <input
             className={`${styles.formInput}`}
-            id="operationalChallenges"
+            id="feedbackFromCommunity"
             type="text"
-            placeholder="What're the operational challenges"
-            value={operationalChallenges}
-            onChange={(e) => setOperationalChallenges(e.target.value)}
+            placeholder="Feedback From the Community"
+            value={feedbackFromCommunity}
+            onChange={(e) => setFeedbackFromCommunity(e.target.value)}
             required
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Feedback From Participants</label>
+          <label htmlFor={`${styles.inputLabel}`}>Sources of Funding</label>
           <input
             className={`${styles.formInput}`}
-            id="feedbackFromParticipants"
+            id="sourcesOfFunding"
             type="text"
-            placeholder="Participants Feedback"
-            value={feedbackFromParticipants}
-            onChange={(e) => setFeedbackFromParticipants(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Follow-up Actions</label>
-          <input
-            className={`${styles.formInput}`}
-            id="followUpActions"
-            type="text"
-            placeholder="Follow-up Actions"
-            value={followUpActions}
-            onChange={(e) => setFollowUpActions(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Health Outcomes Measured</label>
-          <input
-            className={`${styles.formInput}`}
-            id="healthOutcomesMeasured"
-            type="text"
-            placeholder="Health Outcomes Measured"
-            value={healthOutcomesMeasured}
-            onChange={(e) => setHealthOutcomesMeasured(e.target.value)}
+            placeholder="The Sources of Funding"
+            value={sourcesOfFunding}
+            onChange={(e) => setSourcesOfFunding(e.target.value)}
             required
           />
         </div>
@@ -241,50 +215,62 @@ const HealthCheckupVaccinationData = ({ setManualData, setUploadManually }) => {
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Type of Service</label>
+          <label htmlFor={`${styles.inputLabel}`}>Challenges Faced</label>
           <input
             className={`${styles.formInput}`}
-            id="typeOfService"
+            id="challengesFaced"
             type="text"
-            placeholder="What's the Type of Service"
-            value={typeOfService}
-            onChange={(e) => setTypeOfService(e.target.value)}
+            placeholder="The Challenges Faced"
+            value={challengesFaced}
+            onChange={(e) => setChallengesFaced(e.target.value)}
             required
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Total Services Provided</label>
+          <label htmlFor={`${styles.inputLabel}`}>Number of Schools Built</label>
           <input
             className={`${styles.formInput}`}
-            id="totalServicesProvided"
+            id="numberOfSchoolsBuilt"
             type="number"
-            placeholder="The Total Services Provided"
-            value={totalServicesProvided}
-            onChange={(e) => setTotalServicesProvided(e.target.value)}
+            placeholder="The Number of Schools Built"
+            value={numberOfSchoolsBuilt}
+            onChange={(e) => setNumberOfSchoolsBuilt(e.target.value)}
             required
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Total Participants</label>
-          <textarea
+          <label htmlFor={`${styles.inputLabel}`}>Student Capacity Increase</label>
+          <input
             className={`${styles.formInput}`}
-            id="totalParticipants"
-            placeholder="The Total number of Participants"
+            id="studentCapacityIncrease"
             type="number"
-            value={totalParticipants}
-            onChange={(e) => setTotalParticipants(e.target.value)}
+            placeholder="The Student Capacity Increase"
+            value={studentCapacityIncrease}
+            onChange={(e) => setStudentCapacityIncrease(e.target.value)}
             required
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Vaccination Coverage</label>
-          <textarea
+          <label htmlFor={`${styles.inputLabel}`}>Number Of Schools Supported</label>
+          <input
             className={`${styles.formInput}`}
-            id="vaccinationCoverage"
-            placeholder="The Vaccination Coverage"
+            id="numberOfSchoolsSupported"
             type="number"
-            value={vaccinationCoverage}
-            onChange={(e) => setVaccinationCoverage(e.target.value)}
+            placeholder="The Number of Schools Supported"
+            value={numberOfSchoolsBuilt}
+            onChange={(e) => setNumberOfSchoolsBuilt(e.target.value)}
+            required
+          />
+        </div>
+        <div className={`${styles.inputDiv}`}>
+          <label htmlFor={`${styles.inputLabel}`}>Total Investment</label>
+          <input
+            className={`${styles.formInput}`}
+            id="totalInvestment"
+            type="number"
+            placeholder="The Total Investment"
+            value={totalInvestment}
+            onChange={(e) => setTotalInvestment(e.target.value)}
             required
           />
         </div>
@@ -311,4 +297,4 @@ const HealthCheckupVaccinationData = ({ setManualData, setUploadManually }) => {
   );
 };
 
-export default HealthCheckupVaccinationData;
+export default SchoolsBuiltData;

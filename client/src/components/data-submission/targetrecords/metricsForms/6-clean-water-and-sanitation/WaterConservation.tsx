@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { uploadFile } from "../../../../../config/storage/functions";
 import { useSelector } from "react-redux";
@@ -6,33 +7,36 @@ import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
-import { SustainableAgricultureInvestment as SustainableAgricultureInvestmentType } from "../../../../../hooks/declarations/data/data.did";
+import {WaterConservationInitiativesData as WaterConservationInitiativesDataType } from "../../../../../hooks/declarations/data/data.did";
 
 
-const SustainableAgricultureInvestment = ({ setManualData, setUploadManually }) => {
+const WaterConservationInitiativesData = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
   const [supportFiles, setSupportFiles] = useState<File[] | null>(null);
-  const { storageInitiated } = useSelector((state: RootState) => state.app);
+  const {storageInitiated } = useSelector((state: RootState) => state.app);
   const [countDown, setCountDown] = useState<number>(0);
 
   const [startDate, setStartDate] = useState<string>("");
   const [endDate, setEndDate] = useState<string>("");
   const [location, setLocation] = useState<string>("");
-  
-  const [projectName, setProjectName] = useState<string>("");
-  const [projectDescription, setProjectDescription] = useState<string>("");
-  const [agriculturalOutput, setAgriculturalOutput] = useState("");
-  const [totalInvestment, setTotalInvestment] = useState("");
-  const [impactOnLocalEconomy, setImpactOnLocalEconomy] = useState<string>("");
-  const [farmerFeedback, setFarmerFeedback] = useState<string>("");
-  const [sustainabilityMetrics, setSustainabilityMetrics] = useState<string>("");
-  const [typeOfInvestments, setTypeOfInvestments] = useState<string>("");
-  const [numberOfBeneficiaries, setNumberOfBeneficiaries] = useState("");
-  const [investmentSource, setInvestmentSource] = useState<string>("");
-  const [technologyUsed, setTechnologyUsed] = useState<string>("");
-  const [challengesFaced, setChallengesFaced] = useState<string>("");
 
-  const handleSave = async () => {
+  const [facilityName, setFacilityName] = useState<string>("");
+  const [projectDescription, setProjectDescription] = useState<string>("");
+
+  
+  const [typeOfFacilities, setTypeOfFacilities] = useState<string>("");
+  const [feedbackFromCommunity, setFeedbackFromCommunity] = useState<string>("");
+  const [impactOnHealth, setImpactOnHealth] = useState<string>("");
+  const [operationalChallenges, setOperationalChallenges] = useState<string>("");
+  const [completionDate, setCompletionDate] = useState<string>("");
+  const [complianceWithStandards, setComplianceWithStandards] = useState<string>("");
+  const [numberOfFacilitiesBuilt, setNumberOfFacilitiesBuilt] = useState("");
+  const [numberOfFacilitiesRenovated, setNumberOfFacilitiesRenovated] = useState("");
+  const [totalInvestment, setTotalInvestment] = useState("");
+  const [populationServed, setPopulationServed] = useState("");
+  
+
+  const handleSubmit = async () => {
     try {
       setSaving(true);
       const checkedFiles: File[] = [];
@@ -60,37 +64,37 @@ const SustainableAgricultureInvestment = ({ setManualData, setUploadManually }) 
       const startDateMilliseconds = new Date(startDate).getTime();
       const endDateMilliseconds = new Date(endDate).getTime();
 
-      const SustainableAgricultureInvestment: SustainableAgricultureInvestmentType = {
-        projectName: projectName,
-        projectDescription: projectDescription,
+      const SanitationFacilitiesData : SanitationFacilitiesDataType = {
         startDate: BigInt(startDateMilliseconds),
         endDate: BigInt(endDateMilliseconds),
         location: location,
-        agriculturalOutput: BigInt(agriculturalOutput),
+        facilityName: facilityName,
+        projectDescription: projectDescription,
+        typeOfFacilities: typeOfFacilities,
+        feedbackFromCommunity: feedbackFromCommunity,
+        impactOnHealth: impactOnHealth,
+        operationalChallenges: operationalChallenges,
+        completionDate:completionDate,
+        complianceWithStandards:complianceWithStandards,
+        numberOfFacilitiesBuilt: BigInt(numberOfFacilitiesBuilt),
+        numberOfFacilitiesRenovated: BigInt(numberOfFacilitiesRenovated),
         totalInvestment: BigInt(totalInvestment),
-        impactOnLocalEconomy: impactOnLocalEconomy,
-        farmerFeedback: farmerFeedback,
-        sustainabilityMetrics: sustainabilityMetrics,
-        typeOfInvestments: typeOfInvestments,
-        numberOfBeneficiaries: BigInt(numberOfBeneficiaries),
-        investmentSource: investmentSource,
-        technologyUsed: technologyUsed,
-        challengesFaced: challengesFaced,
+        populationServed: BigInt(populationServed),
         dataVerification: false,
         supportingFiles: urls ? urls : [],
         created: BigInt(Date.now()),
       };
-      setManualData(SustainableAgricultureInvestment);
+      setManualData(SanitationFacilitiesData);
       setUploadManually(false);
     } catch (error) {
-      setSaving(false);
-      console.log("Error saving sustainable agriculture", error);
+        setSaving(false);
+      console.log("Error saving Sanitation Facilities Data", error);
     }
   };
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
-      const file_path = location;
+      const file_path = location.pathname;
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);
@@ -116,29 +120,27 @@ const SustainableAgricultureInvestment = ({ setManualData, setUploadManually }) 
     <div>
       <form className={`${styles.munualDataForm}`}>
         <div className={`${styles.formHeader}`}>
-          <h3 className={`${styles.formTitle}`}>
-             Sustainable Agriculture
-          </h3>
+          <h3 className={`${styles.formTitle}`}>Sanitation Facilities Data</h3>
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Project Name</label>
+          <label htmlFor={`${styles.inputLabel}`}>Facility Name</label>
           <input
             className={`${styles.formInput}`}
-            id="projectName"
-            type="string"
-            placeholder="Project Name"
-            value={projectName}
-            onChange={(e) => setProjectName(e.target.value)}
+            id="facilityName"
+            type="text"
+            placeholder="Name of the Facility"
+            value={facilityName}
+            onChange={(e) => setFacilityName(e.target.value)}
             required
           />
-        </div>
 
+        </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Project Description</label>
           <textarea
             className={`${styles.formInput}`}
             id="projectDescription"
-            placeholder="Project Description"
+            placeholder="Description of the Project"
             value={projectDescription}
             onChange={(e) => setProjectDescription(e.target.value)}
             required
@@ -153,8 +155,8 @@ const SustainableAgricultureInvestment = ({ setManualData, setUploadManually }) 
             type="date"
             placeholder="Start Date"
             value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
             required
+            onChange={(e) => setStartDate(e.target.value)}
           />
         </div>
         <div className={`${styles.inputDiv}`}>
@@ -166,14 +168,15 @@ const SustainableAgricultureInvestment = ({ setManualData, setUploadManually }) 
             placeholder="End Date"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
+
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Location</label>
+          <label htmlFor={`${styles.inputLabel}`}> Location</label>
           <input
             className={`${styles.formInput}`}
             id="location"
-            type="string"
+            type="text"
             placeholder="Location"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
@@ -181,120 +184,123 @@ const SustainableAgricultureInvestment = ({ setManualData, setUploadManually }) 
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Agriculture Output</label>
+          <label htmlFor={`${styles.inputLabel}`}>Type Of Facilities</label>
           <input
             className={`${styles.formInput}`}
-            id="agriculturalOutput"
-            type="number"
-            placeholder="Agricultural Output"
-            value={agriculturalOutput}
-            onChange={(e) => setAgriculturalOutput(e.target.value)}
+            id="typeOfFacilities"
+            type="text"
+            placeholder="Type of Facilities"
+            value={typeOfFacilities}
+            onChange={(e) => setTypeOfFacilities(e.target.value)}
             required
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>
-            Total Number of Investment
-          </label>
+          <label htmlFor={`${styles.inputLabel}`}>Feedback From Community</label>
           <input
             className={`${styles.formInput}`}
-            id="totalInvestment"
+            id="feedbackFromCommunity"
+            type="text"
+            placeholder="Communities Feedback"
+            value={feedbackFromCommunity}
+            onChange={(e) => setFeedbackFromCommunity(e.target.value)}
+            required
+          />
+        </div>
+        <div className={`${styles.inputDiv}`}>
+          <label htmlFor={`${styles.inputLabel}`}>Impact On Health</label>
+          <input
+            className={`${styles.formInput}`}
+            id="impactOnHealth"
+            type="text"
+            placeholder="The Impact on Health"
+            value={impactOnHealth}
+            onChange={(e) => setImpactOnHealth(e.target.value)}
+            required
+          />
+        </div>
+        <div className={`${styles.inputDiv}`}>
+          <label htmlFor={`${styles.inputLabel}`}>Operational Challenges</label>
+          <input
+            className={`${styles.formInput}`}
+            id="operationalChallenges"
+            type="text"
+            placeholder="Operational Challenges Faced"
+            value={operationalChallenges}
+            onChange={(e) => setOperationalChallenges(e.target.value)}
+            required
+          />
+        </div>
+        <div className={`${styles.inputDiv}`}>
+          <label htmlFor={`${styles.inputLabel}`}>Completion Date</label>
+          <input
+            className={`${styles.formInput}`}
+            id="completionDate"
+            type="text"
+            placeholder="Date of Completion"
+            value={completionDate}
+            onChange={(e) => setCompletionDate(e.target.value)}
+            required
+          />
+        </div>
+        <div className={`${styles.inputDiv}`}>
+          <label htmlFor={`${styles.inputLabel}`}>Compliance With Standards</label>
+          <input
+            className={`${styles.formInput}`}
+            id="complianceWithStandards"
+            type="text"
+            placeholder="Compliance with Standards"
+            value={complianceWithStandards}
+            onChange={(e) => setComplianceWithStandards(e.target.value)}
+            required
+          />
+        </div>
+        <div className={`${styles.inputDiv}`}>
+          <label htmlFor={`${styles.inputLabel}`}>Number Of Facilities Built</label>
+          <input
+            className={`${styles.formInput}`}
+            id="numberOfFacilitiesBuilt"
             type="number"
-            placeholder="Total number of Investment"
+            placeholder="Number of Facilities Built"
+            value={numberOfFacilitiesBuilt}
+            onChange={(e) => setNumberOfFacilitiesBuilt(e.target.value)}
+            required
+          />
+        </div>
+        <div className={`${styles.inputDiv}`}>
+          <label htmlFor={`${styles.inputLabel}`}>Number of Facilities Renovated</label>
+          <input
+            className={`${styles.formInput}`}
+            id="numberOfFacilitiesRenovated"
+            type="number"
+            placeholder="Number of Facilities Renovated"
+            value={numberOfFacilitiesRenovated}
+            onChange={(e) => setNumberOfFacilitiesRenovated(e.target.value)}
+            required
+          />
+        </div>
+        <div className={`${styles.inputDiv}`}>
+          <label htmlFor={`${styles.inputLabel}`}>Total Investment</label>
+          <input
+            className={`${styles.formInput}`}
+            id="totalInvesment"
+            type="number"
+            placeholder="Total Investment Amount"
             value={totalInvestment}
             onChange={(e) => setTotalInvestment(e.target.value)}
             required
           />
         </div>
         <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Immpact on the Local Economy</label>
+          <label htmlFor={`${styles.inputLabel}`}>Population Served</label>
           <input
             className={`${styles.formInput}`}
-            id="impactOnLocalEconomy"
-            type="string"
-            placeholder="Local Economy Impact"
-            value={impactOnLocalEconomy}
-            onChange={(e) => setImpactOnLocalEconomy(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Farmers Feedback</label>
-          <input
-            className={`${styles.formInput}`}
-            id="farmerFeedback"
-            type="string"
-            placeholder="Farmers Feedback"
-            value={farmerFeedback}
-            onChange={(e) => setFarmerFeedback(e.target.value)}
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Sustainability Metrics</label>
-          <input
-            className={`${styles.formInput}`}
-            id="sustainabilityMetrics"
-            type="string"
-            placeholder="Sustainability Metrics"
-            value={sustainabilityMetrics}
-            onChange={(e) => setSustainabilityMetrics(e.target.value)}
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Types of Investment</label>
-          <input
-            className={`${styles.formInput}`}
-            id="typesOfInvestment"
-            type="string"
-            placeholder="Types of Investment"
-            value={typeOfInvestments}
-            onChange={(e) => setTypeOfInvestments(e.target.value)}
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Investment Source</label>
-          <input
-            className={`${styles.formInput}`}
-            id="investmentSource"
-            type="string"
-            placeholder="Source of Investment"
-            value={investmentSource}
-            onChange={(e) => setInvestmentSource(e.target.value)}
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Technology Used</label>
-          <input
-            className={`${styles.formInput}`}
-            id="technologyUsed"
-            type="string"
-            placeholder="Technology Used"
-            value={technologyUsed}
-            onChange={(e) => setTechnologyUsed(e.target.value)}
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>
-            Number of Beneficiaries
-          </label>
-          <input
-            className={`${styles.formInput}`}
-            id="numberofBeneficiaries"
+            id="populationServed"
             type="number"
-            placeholder="Number of Beneficiaries"
-            value={numberOfBeneficiaries}
-            onChange={(e) => setNumberOfBeneficiaries(e.target.value)}
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Challenges Faced</label>
-          <input
-            className={`${styles.formInput}`}
-            id="challengesFaced"
-            type="string"
-            placeholder="Challenges Faced"
-            value={challengesFaced}
-            onChange={(e) => setChallengesFaced(e.target.value)}
+            placeholder="Number of People Served"
+            value={populationServed}
+            onChange={(e) => setPopulationServed(e.target.value)}
+            required
           />
         </div>
       </form>
@@ -309,7 +315,7 @@ const SustainableAgricultureInvestment = ({ setManualData, setUploadManually }) 
           Cancel
         </button>
         <button
-          onClick={handleSave}
+          onClick={handleSubmit}
           disabled={saving}
           className={`${styles.roundedButton}`}
         >
@@ -320,4 +326,4 @@ const SustainableAgricultureInvestment = ({ setManualData, setUploadManually }) 
   );
 };
 
-export default SustainableAgricultureInvestment;
+export default WaterConservationInitiativesData;

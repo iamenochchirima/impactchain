@@ -6,12 +6,12 @@ import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
-import { JobTrainingProgram as JobTrainingProgramType } from "../../../../../hooks/declarations/data/data.did";
+import { PeopleAssistedOutOfPoverty as PeopleAssistedOutOfPovertyType } from "../../../../../hooks/declarations/data/data.did";
 import { ManualData } from "../../MetricRecords";
 import { IoMdAdd } from "react-icons/io";
 import Program from "./Program";
 
-const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
+const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
   const [supportFiles, setSupportFiles] = useState<File[] | null>(null);
   const { storageInitiated } = useSelector((state: RootState) => state.app);
@@ -20,9 +20,9 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
   const [startDate, setStartDate] = useState<string>("");
   const [duration, setDuration] = useState<string>("");
   const [programLocation, setProgramLocation] = useState<string>("");
-  const [numberOfBeneficiaries, setNumberOfParticipants] = useState("");
+  const [numberOfPeopleAssisted, setNumberOfPeopleAssisted] = useState<string>("");
 
-  const [programs, setPrograms] = useState<JobTrainingProgramType[]>([]);
+  const [programs, setPrograms] = useState<PeopleAssistedOutOfPovertyType[]>([]);
 
   const [showForm, setShowForm] = useState<boolean>(false);
 
@@ -102,7 +102,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
       startDate === "" ||
       duration === "" ||
       programLocation === "" ||
-      numberOfBeneficiaries === ""
+     numberOfPeopleAssisted === ""
     ) {
       toast.error("Please fill out all fields", {
         position: "top-center",
@@ -144,12 +144,12 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
       setSaving(false);
       return;
     }
-    const newProgram: JobTrainingProgramType = {
+    const newProgram: PeopleAssistedOutOfPovertyType = {
       programName,
       startDate: BigInt(new Date(startDate).getTime()),
       duration,
       location: programLocation,
-      numberOfBeneficiaries: BigInt(numberOfBeneficiaries),
+      numberOfPeopleAssisted: BigInt(numberOfPeopleAssisted),
       dataVerification: false,
       supportingFiles: urls,
       created: BigInt(Date.now()),
@@ -159,7 +159,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
     setStartDate("");
     setDuration("");
     setProgramLocation("");
-    setNumberOfParticipants("");
+    setNumberOfPeopleAssisted("");
     setSupportFiles(null);
     setShowForm(false);
     setSaving(false);
@@ -188,7 +188,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
 
       <div className=" items-center">
         <h3 className="text-white text-xl text-center">
-          Your Job Training/Educational Programs
+          Peaople Assisted Out of Poverty
         </h3>
         <div className="flex justify-end py-3">
           <button
@@ -201,7 +201,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
         </div>
 
         {programs.length > 0 && (
-          <div className=" border-x border-y border-custom-green flex flex-col gap-2 rounded p-3">
+          <div className={styles.programsDiv}>
             {programs.map((program, index) => (
               <Program key={index} {...{ program, programs, setPrograms }} />
             ))}
@@ -212,14 +212,16 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
       {showForm && (
         <div className={styles.munualDataForm}>
           <div className={styles.formHeader}>
-            <h3 className={styles.formTitle}>Job Training Program</h3>
+            <h3 className={styles.formTitle}>
+              Add a program that assisted people out of poverty
+            </h3>
           </div>
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>Program Name</label>
+            <label htmlFor={styles.inputLabel}> What is the name of the poverty reduction program?</label>
             <input
               className={styles.formInput}
               id="programName"
-              type="goal"
+              type="text"
               placeholder="Program Name"
               value={programName}
               onChange={(e) => setProgramName(e.target.value)}
@@ -227,7 +229,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
             />
           </div>
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>Start Date</label>
+            <label htmlFor={styles.inputLabel}>When did this program begin?</label>
             <input
               className={styles.formInput}
               id="startDate"
@@ -239,22 +241,22 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
             />
           </div>
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>End Date</label>
+            <label htmlFor={styles.inputLabel}>How long has the program been running?</label>
             <input
               className={styles.formInput}
               id="duration"
-              type="goal"
-              placeholder="Duration"
+              type="text"
+              placeholder="Duration e.g 6 months"
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
             />
           </div>
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>Program Location</label>
+            <label htmlFor={styles.inputLabel}>Where is this program located? (City and Country)</label>
             <input
               className={styles.formInput}
               id="programLocation"
-              type="goal"
+              type="text"
               placeholder="Program Location"
               value={programLocation}
               onChange={(e) => setProgramLocation(e.target.value)}
@@ -263,20 +265,20 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
           </div>
 
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>Number of Participants</label>
+            <label htmlFor={styles.inputLabel}>How many individuals have been assisted out of poverty?</label>
             <input
               className={styles.formInput}
-              id="numberOfBeneficiaries"
+              id="numberOfPeopleAssisted"
               type="number"
-              placeholder="Number of Beneficiaries"
-              value={numberOfBeneficiaries}
-              onChange={(e) => setNumberOfParticipants(e.target.value)}
+              placeholder="Number of people assisted"
+              value={numberOfPeopleAssisted}
+              onChange={(e) => setNumberOfPeopleAssisted(e.target.value)}
               required
             />
           </div>
           <FilesInput {...{ setSupportFiles, supportFiles }} />
 
-          <div className="flex justify-center gap-3 items-center py-4 border-t border-gray-200">
+          <div className={styles.buttonsDiv}>
             <button
               onClick={() => {
                 setShowForm(false);
@@ -310,7 +312,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
             disabled={saving}
             className={`${styles.roundedButton} `}
           >
-           Continue
+            Continue
           </button>
         </div>
       )}
@@ -318,4 +320,4 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
   );
 };
 
-export default JobTrainingProgram;
+export default PeopleAssistedOutOfPoverty;

@@ -33,7 +33,8 @@ const MetricRecords: FC<Props> = ({
     if (manualData) {
       const updatedMetric: Metric = {
         ...metric,
-        data: [manualData],
+        data: manualData.data,
+        goal: [manualData.goal],
       };
       setMetrics(
         metrics.map((m) =>

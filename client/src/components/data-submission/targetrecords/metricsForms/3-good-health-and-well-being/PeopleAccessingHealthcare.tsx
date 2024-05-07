@@ -62,26 +62,26 @@ const PeopleAccessingHealthCare = ({ setManualData, setUploadManually }) => {
       const startDateMilliseconds = new Date(startDate).getTime();
       const endDateMilliseconds = new Date(endDate).getTime();
 
-      const healthcareAccessData : HealthcareAccessData = {
-        startDate: BigInt(startDateMilliseconds),
-        endDate: BigInt(endDateMilliseconds),
-        location: location,
-        programName: programName,
-        programDescription: programDescription,
-        operationalChallenges: operationalChallenges,
-        improvementsMade: improvementsMade,
-        typesOfServicesProvided:typesOfServicesProvided,
-        communityImpact: communityImpact,
-        feedbackFromPatients: feedbackFromPatients,
-        barriersToAccess: barriersToAccess,
-        patientDemographics: patientDemographics,
-        totalPatientsServed: BigInt(totalPatientsServed),
-        totalHealthFacilities: BigInt(totalHealthFacilities),
-        dataVerification: false,
-        supportingFiles: urls ? urls : [],
-        created: BigInt(Date.now()),
-      };
-      setManualData(healthcareAccessData);
+      // const healthcareAccessData : HealthcareAccessData = {
+      //   startDate: BigInt(startDateMilliseconds),
+      //   endDate: BigInt(endDateMilliseconds),
+      //   location: location,
+      //   programName: programName,
+      //   programDescription: programDescription,
+      //   operationalChallenges: operationalChallenges,
+      //   improvementsMade: improvementsMade,
+      //   typesOfServicesProvided:typesOfServicesProvided,
+      //   communityImpact: communityImpact,
+      //   feedbackFromPatients: feedbackFromPatients,
+      //   barriersToAccess: barriersToAccess,
+      //   patientDemographics: patientDemographics,
+      //   totalPatientsServed: BigInt(totalPatientsServed),
+      //   totalHealthFacilities: BigInt(totalHealthFacilities),
+      //   dataVerification: false,
+      //   supportingFiles: urls ? urls : [],
+      //   created: BigInt(Date.now()),
+      // };
+      // setManualData(healthcareAccessData);
       setUploadManually(false);
     } catch (error) {
         setSaving(false);
@@ -91,7 +91,7 @@ const PeopleAccessingHealthCare = ({ setManualData, setUploadManually }) => {
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
-      const file_path = location.pathname;
+      const file_path = location
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);
@@ -278,7 +278,7 @@ const PeopleAccessingHealthCare = ({ setManualData, setUploadManually }) => {
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Total Health Facilities</label>
-          <textarea
+          <input
             className={`${styles.formInput}`}
             id="totalHealthFacilities"
             placeholder="The Total Number of Health Facilities"

@@ -61,26 +61,26 @@ const WomensEmpowermentProgramData = ({ setManualData, setUploadManually }) => {
       const startDateMilliseconds = new Date(startDate).getTime();
       const endDateMilliseconds = new Date(endDate).getTime();
 
-      const WomensEmpowermentProgramData : WomensEmpowermentProgramDataType = {
-        startDate: BigInt(startDateMilliseconds),
-        endDate: BigInt(endDateMilliseconds),
-        location: location,
-        programName: programName,
-        programDescription: programDescription,
-        challengesFaced: challengesFaced,
-        typeOfActivities: typeOfActivities,
-        feedbackFromParticipants: feedbackFromParticipants,
-        impactOnParticipants: impactOnParticipants,
-        followUpSupport:followUpSupport,
-        outcomesAchieved:outcomesAchieved,
-        partnershipsFormed:partnershipsFormed,
-        numberOfParticipants: BigInt(numberOfParticipants),
-        dataVerification: false,
-        supportingFiles: urls ? urls : [],
-        created: BigInt(Date.now()),
-      };
-      setManualData(WomensEmpowermentProgramData);
-      setUploadManually(false);
+      // const WomensEmpowermentProgramData : WomensEmpowermentProgramDataType = {
+      //   startDate: BigInt(startDateMilliseconds),
+      //   endDate: BigInt(endDateMilliseconds),
+      //   location: location,
+      //   programName: programName,
+      //   programDescription: programDescription,
+      //   challengesFaced: challengesFaced,
+      //   typeOfActivities: typeOfActivities,
+      //   feedbackFromParticipants: feedbackFromParticipants,
+      //   impactOnParticipants: impactOnParticipants,
+      //   followUpSupport:followUpSupport,
+      //   outcomesAchieved:outcomesAchieved,
+      //   partnershipsFormed:partnershipsFormed,
+      //   numberOfParticipants: BigInt(numberOfParticipants),
+      //   dataVerification: false,
+      //   supportingFiles: urls ? urls : [],
+      //   created: BigInt(Date.now()),
+      // };
+      // setManualData(WomensEmpowermentProgramData);
+      // setUploadManually(false);
     } catch (error) {
         setSaving(false);
       console.log("Error saving Womens Empowerment Program Data", error);
@@ -89,7 +89,7 @@ const WomensEmpowermentProgramData = ({ setManualData, setUploadManually }) => {
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
-      const file_path = location.pathname;
+      const file_path = location
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);

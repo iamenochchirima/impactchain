@@ -60,26 +60,25 @@ const WorkplaceGenderEqualityPolicies = ({ setManualData, setUploadManually }) =
       const startDateMilliseconds = new Date(startDate).getTime();
       const endDateMilliseconds = new Date(endDate).getTime();
 
-      const WorkplaceGenderEqualityPoliciesData : WorkplaceGenderEqualityPoliciesDataType = {
-        startDate: BigInt(startDateMilliseconds),
-        endDate: BigInt(endDateMilliseconds),
-        location: location,
-        policyName: policyName,
-        policyDescription: policyDescription,
-        challengesFaced: challengesFaced,
-        reviewDate:reviewDate,
-        implementationDate: implementationDate,
-        feedbackFromEmployees: feedbackFromEmployees,
-        measuresTaken: measuresTaken,
-        outcomesAchieved:outcomesAchieved,
-        numberOfEmployeesAffected: BigInt(numberOfEmployeesAffected),
-        complianceRate:BigInt(complianceRate),
-        dataVerification: false,
-        supportingFiles: urls ? urls : [],
-        created: BigInt(Date.now()),
-      };
-      setManualData(WorkplaceGenderEqualityPoliciesData);
-      setUploadManually(false);
+      // const WorkplaceGenderEqualityPoliciesData : WorkplaceGenderEqualityPoliciesDataType = {
+      //   startDate: BigInt(startDateMilliseconds),
+      //   location: location,
+      //   policyName: policyName,
+      //   policyDescription: policyDescription,
+      //   challengesFaced: challengesFaced,
+      //   reviewDate:reviewDate,
+      //   implementationDate: implementationDate,
+      //   feedbackFromEmployees: feedbackFromEmployees,
+      //   measuresTaken: measuresTaken,
+      //   outcomesAchieved:outcomesAchieved,
+      //   numberOfEmployeesAffected: BigInt(numberOfEmployeesAffected),
+      //   complianceRate:BigInt(complianceRate),
+      //   dataVerification: false,
+      //   supportingFiles: urls ? urls : [],
+      //   created: BigInt(Date.now()),
+      // };
+      // setManualData(WorkplaceGenderEqualityPoliciesData);
+      // setUploadManually(false);
     } catch (error) {
         setSaving(false);
       console.log("Error saving Work Place Gender Equality Policies Data", error);
@@ -88,7 +87,7 @@ const WorkplaceGenderEqualityPolicies = ({ setManualData, setUploadManually }) =
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
-      const file_path = location.pathname;
+      const file_path = location
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);

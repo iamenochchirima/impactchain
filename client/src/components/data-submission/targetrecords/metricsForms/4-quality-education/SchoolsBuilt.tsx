@@ -7,7 +7,7 @@ import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
-import { SchoolsBuiltSupportedData as SchoolsBuiltSupportedDataType } from "../../../../../hooks/declarations/data/data.did";
+// import { SchoolsBuiltSupportedData as SchoolsBuiltSupportedDataType } from "../../../../../hooks/declarations/data/data.did";
 
 
 const SchoolsBuiltData = ({ setManualData, setUploadManually }) => {
@@ -61,26 +61,26 @@ const SchoolsBuiltData = ({ setManualData, setUploadManually }) => {
       const startDateMilliseconds = new Date(startDate).getTime();
       const endDateMilliseconds = new Date(endDate).getTime();
 
-      const schoolsBuiltSupportedData : SchoolsBuiltSupportedDataType = {
-        startDate: BigInt(startDateMilliseconds),
-        endDate: BigInt(endDateMilliseconds),
-        location: location,
-        projectName: projectName,
-        projectDescription: projectDescription,
-        feedbackFromCommunity: feedbackFromCommunity,
-        sourcesOfFunding: sourcesOfFunding,
-        communityImpact: communityImpact,
-        challengesFaced: challengesFaced,
-        numberOfSchoolsBuilt:BigInt(numberOfSchoolsBuilt),
-        studentCapacityIncrease: BigInt(studentCapacityIncrease),
-        numberOfSchoolsSupported: BigInt(numberOfSchoolsSupported),
-        totalInvestment: BigInt(totalInvestment),
-        dataVerification: false,
-        supportingFiles: urls ? urls : [],
-        created: BigInt(Date.now()),
-      };
-      setManualData(schoolsBuiltSupportedData);
-      setUploadManually(false);
+      // const schoolsBuiltSupportedData : SchoolsBuiltSupportedDataType = {
+      //   startDate: BigInt(startDateMilliseconds),
+      //   endDate: BigInt(endDateMilliseconds),
+      //   location: location,
+      //   projectName: projectName,
+      //   projectDescription: projectDescription,
+      //   feedbackFromCommunity: feedbackFromCommunity,
+      //   sourcesOfFunding: sourcesOfFunding,
+      //   communityImpact: communityImpact,
+      //   challengesFaced: challengesFaced,
+      //   numberOfSchoolsBuilt:BigInt(numberOfSchoolsBuilt),
+      //   studentCapacityIncrease: BigInt(studentCapacityIncrease),
+      //   numberOfSchoolsSupported: BigInt(numberOfSchoolsSupported),
+      //   totalInvestment: BigInt(totalInvestment),
+      //   dataVerification: false,
+      //   supportingFiles: urls ? urls : [],
+      //   created: BigInt(Date.now()),
+      // };
+      // setManualData(schoolsBuiltSupportedData);
+      // setUploadManually(false);
     } catch (error) {
         setSaving(false);
       console.log("Error saving Schools Built Supported Data", error);
@@ -89,7 +89,7 @@ const SchoolsBuiltData = ({ setManualData, setUploadManually }) => {
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
-      const file_path = location.pathname;
+      const file_path = location
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);

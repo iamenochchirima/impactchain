@@ -60,25 +60,25 @@ const GenderEqualityWorkshopsData = ({ setManualData, setUploadManually }) => {
       const startDateMilliseconds = new Date(startDate).getTime();
       const endDateMilliseconds = new Date(endDate).getTime();
 
-      const GenderEqualityWorkshopsData : GenderEqualityWorkshopsDataType = {
-        startDate: BigInt(startDateMilliseconds),
-        endDate: BigInt(endDateMilliseconds),
-        location: location,
-        workshopName: workshopName,
-        workshopDescription: workshopDescription,
-        challengesFaced: challengesFaced,
-        themesCovered: themesCovered,
-        feedbackFromParticipants: feedbackFromParticipants,
-        participantDemographics: participantDemographics,
-        outcomesMeasured:outcomesMeasured,
-        organizationalPartners:organizationalPartners,
-        numberOfParticipants: BigInt(numberOfParticipants),
-        dataVerification: false,
-        supportingFiles: urls ? urls : [],
-        created: BigInt(Date.now()),
-      };
-      setManualData(GenderEqualityWorkshopsData);
-      setUploadManually(false);
+      // const GenderEqualityWorkshopsData : GenderEqualityWorkshopsDataType = {
+      //   startDate: BigInt(startDateMilliseconds),
+      //   endDate: BigInt(endDateMilliseconds),
+      //   location: location,
+      //   workshopName: workshopName,
+      //   workshopDescription: workshopDescription,
+      //   challengesFaced: challengesFaced,
+      //   themesCovered: themesCovered,
+      //   feedbackFromParticipants: feedbackFromParticipants,
+      //   participantDemographics: participantDemographics,
+      //   outcomesMeasured:outcomesMeasured,
+      //   organizationalPartners:organizationalPartners,
+      //   numberOfParticipants: BigInt(numberOfParticipants),
+      //   dataVerification: false,
+      //   supportingFiles: urls ? urls : [],
+      //   created: BigInt(Date.now()),
+      // };
+      // setManualData(GenderEqualityWorkshopsData);
+      // setUploadManually(false);
     } catch (error) {
         setSaving(false);
       console.log("Error saving Gender Equality Workshop Data", error);
@@ -87,7 +87,7 @@ const GenderEqualityWorkshopsData = ({ setManualData, setUploadManually }) => {
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
-      const file_path = location.pathname;
+      const file_path = location
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);

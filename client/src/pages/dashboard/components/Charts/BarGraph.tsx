@@ -51,9 +51,9 @@ const BarGraph = () => {
       text: 'Grouped Labels on the X-axis',
     },
     tooltip: {
-      x: {
-        formatter: (val: string) => "Q" + dayjs(val).quarter() + " " + dayjs(val).format("YYYY")
-      }
+      // x: { //TODO: Fix this
+      //   formatter: (val: string) => "Q" + dayjs(val).quarter() + " " + dayjs(val).format("YYYY")
+      // }
     },
   };
 

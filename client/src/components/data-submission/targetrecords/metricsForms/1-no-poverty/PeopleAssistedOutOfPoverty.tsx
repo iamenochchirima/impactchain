@@ -9,7 +9,7 @@ import FilesInput from "../support/FilesInput";
 import { PeopleAssistedOutOfPoverty as PeopleAssistedOutOfPovertyType } from "../../../../../hooks/declarations/data/data.did";
 import { ManualData } from "../../MetricRecords";
 import { IoMdAdd } from "react-icons/io";
-import Program from "./Program";
+import Program from "../support/Program";
 
 const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);

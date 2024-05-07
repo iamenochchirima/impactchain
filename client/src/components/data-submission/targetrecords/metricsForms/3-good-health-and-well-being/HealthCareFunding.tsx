@@ -61,25 +61,25 @@ const HealthcareFunding = ({ setManualData, setUploadManually }) => {
       const startDateMilliseconds = new Date(startDate).getTime();
       const endDateMilliseconds = new Date(endDate).getTime();
 
-      const healthcareFunding: HealthcareFundingType = {
-        startDate: BigInt(startDateMilliseconds),
-        endDate: BigInt(endDateMilliseconds),
-        location: location,
-        programName: programName,
-        programDescription: programDescription,
-        healthOutcomes: healthOutcomes,
-        fundingSources: fundingSources,
-        feedbackFromBeneficiaries: feedbackFromBeneficiaries,
-        typesOfServicesFunded:typesOfServicesFunded,
-        challengesFaced: challengesFaced,
-        impactOnHealthServices: impactOnHealthServices,
-        numberOfHealthProjects: BigInt(numberOfHealthProjects),
-        totalFundingAmount: BigInt(totalFundingAmount),
-        dataVerification: false,
-        supportingFiles: urls ? urls : [],
-        created: BigInt(Date.now()),
-      };
-      setManualData(healthcareFunding);
+      // const healthcareFunding: HealthcareFundingType = {
+      //   startDate: BigInt(startDateMilliseconds),
+      //   endDate: BigInt(endDateMilliseconds),
+      //   location: location,
+      //   programName: programName,
+      //   programDescription: programDescription,
+      //   healthOutcomes: healthOutcomes,
+      //   fundingSources: fundingSources,
+      //   feedbackFromBeneficiaries: feedbackFromBeneficiaries,
+      //   typesOfServicesFunded:typesOfServicesFunded,
+      //   challengesFaced: challengesFaced,
+      //   impactOnHealthServices: impactOnHealthServices,
+      //   numberOfHealthProjects: BigInt(numberOfHealthProjects),
+      //   totalFundingAmount: BigInt(totalFundingAmount),
+      //   dataVerification: false,
+      //   supportingFiles: urls ? urls : [],
+      //   created: BigInt(Date.now()),
+      // };
+      // setManualData(healthcareFunding);
       setUploadManually(false);
     } catch (error) {
         setSaving(false);
@@ -89,7 +89,7 @@ const HealthcareFunding = ({ setManualData, setUploadManually }) => {
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
-      const file_path = location.pathname;
+      const file_path = location
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);
@@ -264,7 +264,7 @@ const HealthcareFunding = ({ setManualData, setUploadManually }) => {
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>The Total Funding Amount</label>
-          <textarea
+          <input
             className={`${styles.formInput}`}
             id="totalFundingAmount"
             placeholder="The Total Funding Amount"

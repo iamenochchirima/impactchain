@@ -64,28 +64,28 @@ const SanitationFacilitiesData = ({ setManualData, setUploadManually }) => {
       const startDateMilliseconds = new Date(startDate).getTime();
       const endDateMilliseconds = new Date(endDate).getTime();
 
-      const SanitationFacilitiesData : SanitationFacilitiesDataType = {
-        startDate: BigInt(startDateMilliseconds),
-        endDate: BigInt(endDateMilliseconds),
-        location: location,
-        facilityName: facilityName,
-        projectDescription: projectDescription,
-        typeOfFacilities: typeOfFacilities,
-        feedbackFromCommunity: feedbackFromCommunity,
-        impactOnHealth: impactOnHealth,
-        operationalChallenges: operationalChallenges,
-        completionDate:completionDate,
-        complianceWithStandards:complianceWithStandards,
-        numberOfFacilitiesBuilt: BigInt(numberOfFacilitiesBuilt),
-        numberOfFacilitiesRenovated: BigInt(numberOfFacilitiesRenovated),
-        totalInvestment: BigInt(totalInvestment),
-        populationServed: BigInt(populationServed),
-        dataVerification: false,
-        supportingFiles: urls ? urls : [],
-        created: BigInt(Date.now()),
-      };
-      setManualData(SanitationFacilitiesData);
-      setUploadManually(false);
+      // const SanitationFacilitiesData : SanitationFacilitiesDataType = {
+      //   startDate: BigInt(startDateMilliseconds),
+      //   endDate: BigInt(endDateMilliseconds),
+      //   location: location,
+      //   facilityName: facilityName,
+      //   projectDescription: projectDescription,
+      //   typeOfFacilities: typeOfFacilities,
+      //   feedbackFromCommunity: feedbackFromCommunity,
+      //   impactOnHealth: impactOnHealth,
+      //   operationalChallenges: operationalChallenges,
+      //   completionDate:completionDate,
+      //   complianceWithStandards:complianceWithStandards,
+      //   numberOfFacilitiesBuilt: BigInt(numberOfFacilitiesBuilt),
+      //   numberOfFacilitiesRenovated: BigInt(numberOfFacilitiesRenovated),
+      //   totalInvestment: BigInt(totalInvestment),
+      //   populationServed: BigInt(populationServed),
+      //   dataVerification: false,
+      //   supportingFiles: urls ? urls : [],
+      //   created: BigInt(Date.now()),
+      // };
+      // setManualData(SanitationFacilitiesData);
+      // setUploadManually(false);
     } catch (error) {
         setSaving(false);
       console.log("Error saving Sanitation Facilities Data", error);
@@ -94,7 +94,7 @@ const SanitationFacilitiesData = ({ setManualData, setUploadManually }) => {
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
-      const file_path = location.pathname;
+      const file_path = location
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);

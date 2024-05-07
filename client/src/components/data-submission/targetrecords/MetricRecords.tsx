@@ -55,7 +55,7 @@ const MetricRecords: FC<Props> = ({
           className=" flex items-center gap-2 bg-white px-4 py-2 text-black rounded-3xl"
         >
           {metric.data.length > 0 ? <IoCheckmark size={20} /> : <IoMdAdd size={20} />}
-         <span> {metric.data.length > 0 ? "Data recorded" : "Record data manually"}</span>
+         <span> {metric.data.length > 0 ? "Data recorded" : "Record your data"}</span>
         </button>
       </div>
 

@@ -62,27 +62,27 @@ const HealthCheckups = ({ setManualData, setUploadManually }) => {
       const startDateMilliseconds = new Date(startDate).getTime();
       const endDateMilliseconds = new Date(endDate).getTime();
 
-      const healthCheckupVaccinationData: HealthCheckupVaccinationDataType = {
-        startDate: BigInt(startDateMilliseconds),
-        endDate: BigInt(endDateMilliseconds),
-        location: location,
-        programName: programName,
-        programDescription: programDescription,
-        operationalChallenges: operationalChallenges,
-        feedbackFromParticipants: feedbackFromParticipants,
-        followUpActions: followUpActions,
-        healthOutcomesMeasured:healthOutcomesMeasured,
-        communityImpact: communityImpact,
-        typeOfService: typeOfService,
-        totalServicesProvided: BigInt(totalServicesProvided),
-        totalParticipants: BigInt(totalParticipants),
-        vaccinationCoverage: BigInt(vaccinationCoverage),
-        dataVerification: false,
-        supportingFiles: urls ? urls : [],
-        created: BigInt(Date.now()),
-      };
-      setManualData(healthCheckupVaccinationData);
-      setUploadManually(false);
+      // const healthCheckupVaccinationData: HealthCheckupVaccinationDataType = {
+      //   startDate: BigInt(startDateMilliseconds),
+      //   endDate: BigInt(endDateMilliseconds),
+      //   location: location,
+      //   programName: programName,
+      //   programDescription: programDescription,
+      //   operationalChallenges: operationalChallenges,
+      //   feedbackFromParticipants: feedbackFromParticipants,
+      //   followUpActions: followUpActions,
+      //   healthOutcomesMeasured:healthOutcomesMeasured,
+      //   communityImpact: communityImpact,
+      //   typeOfService: typeOfService,
+      //   totalServicesProvided: BigInt(totalServicesProvided),
+      //   totalParticipants: BigInt(totalParticipants),
+      //   vaccinationCoverage: BigInt(vaccinationCoverage),
+      //   dataVerification: false,
+      //   supportingFiles: urls ? urls : [],
+      //   created: BigInt(Date.now()),
+      // };
+      // setManualData(healthCheckupVaccinationData);
+      // setUploadManually(false);
     } catch (error) {
         setSaving(false);
       console.log("Error saving health checkup vaccination data", error);
@@ -91,7 +91,7 @@ const HealthCheckups = ({ setManualData, setUploadManually }) => {
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
-      const file_path = location.pathname;
+      const file_path = location
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);
@@ -266,7 +266,7 @@ const HealthCheckups = ({ setManualData, setUploadManually }) => {
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Total Participants</label>
-          <textarea
+          <input
             className={`${styles.formInput}`}
             id="totalParticipants"
             placeholder="The Total number of Participants"
@@ -278,7 +278,7 @@ const HealthCheckups = ({ setManualData, setUploadManually }) => {
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Vaccination Coverage</label>
-          <textarea
+          <input
             className={`${styles.formInput}`}
             id="vaccinationCoverage"
             placeholder="The Vaccination Coverage"

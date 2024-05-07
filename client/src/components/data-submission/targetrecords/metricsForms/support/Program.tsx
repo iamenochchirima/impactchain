@@ -7,7 +7,9 @@ const Program = ({ program, programs, setPrograms }) => {
   return (
     <div className="flex justify-between items-center">
       <div className="flex gap-3 items-center ">
-        <h3 className="text-white">{program.programName}</h3>
+        <h3 className="text-white">{program.programName || 
+        program.projectName
+        }</h3>
         <p className="text-white">
           {new Date(Number(program.startDate)).toDateString()} -{" "}
           {program.duration}

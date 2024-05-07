@@ -62,27 +62,27 @@ const StudentsBenefitingData = ({ setManualData, setUploadManually }) => {
       const startDateMilliseconds = new Date(startDate).getTime();
       const endDateMilliseconds = new Date(endDate).getTime();
 
-      const StudentsBenefitingData : StudentsBenefitingDataType = {
-        startDate: BigInt(startDateMilliseconds),
-        endDate: BigInt(endDateMilliseconds),
-        location: location,
-        programName: programName,
-        programDescription: programDescription,
-        challengesFaced: challengesFaced,
-        typeOfBenefits: typeOfBenefits,
-        feedbackFromStudents: feedbackFromStudents,
-        educationalLevel: educationalLevel,
-        improvementsInPerformance:improvementsInPerformance,
-        feedbackFromEducators:feedbackFromEducators,
-        graduationRates: BigInt(graduationRates),
-        totalStudentsBenefited: BigInt(totalStudentsBenefited),
-        followUpSuccessRate: BigInt(followUpSuccessRate),
-        dataVerification: false,
-        supportingFiles: urls ? urls : [],
-        created: BigInt(Date.now()),
-      };
-      setManualData(StudentsBenefitingData);
-      setUploadManually(false);
+      // const StudentsBenefitingData : StudentsBenefitingDataType = {
+      //   startDate: BigInt(startDateMilliseconds),
+      //   endDate: BigInt(endDateMilliseconds),
+      //   location: location,
+      //   programName: programName,
+      //   programDescription: programDescription,
+      //   challengesFaced: challengesFaced,
+      //   typeOfBenefits: typeOfBenefits,
+      //   feedbackFromStudents: feedbackFromStudents,
+      //   educationalLevel: educationalLevel,
+      //   improvementsInPerformance:improvementsInPerformance,
+      //   feedbackFromEducators:feedbackFromEducators,
+      //   graduationRates: BigInt(graduationRates),
+      //   totalStudentsBenefited: BigInt(totalStudentsBenefited),
+      //   followUpSuccessRate: BigInt(followUpSuccessRate),
+      //   dataVerification: false,
+      //   supportingFiles: urls ? urls : [],
+      //   created: BigInt(Date.now()),
+      // };
+      // setManualData(StudentsBenefitingData);
+      // setUploadManually(false);
     } catch (error) {
         setSaving(false);
       console.log("Error saving Students Benefiting Data", error);
@@ -91,7 +91,7 @@ const StudentsBenefitingData = ({ setManualData, setUploadManually }) => {
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
-      const file_path = location.pathname;
+      const file_path = location
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);

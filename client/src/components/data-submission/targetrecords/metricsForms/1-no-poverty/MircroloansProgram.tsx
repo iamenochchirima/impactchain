@@ -9,7 +9,7 @@ import FilesInput from "../support/FilesInput";
 import { MicroloanProgram } from "../../../../../hooks/declarations/data/data.did";
 import { ManualData } from "../../MetricRecords";
 import { IoMdAdd } from "react-icons/io";
-import Program from "./Program";
+import Program from "../support/Program";
 
 const MicroloansProgram = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
@@ -229,7 +229,7 @@ const MicroloansProgram = ({ setManualData, setUploadManually }) => {
             <input
               className={styles.formInput}
               id="programName"
-              type="goal"
+              type="text"
               placeholder="Program Name"
               value={programName}
               onChange={(e) => setProgramName(e.target.value)}

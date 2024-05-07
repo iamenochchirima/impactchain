@@ -9,7 +9,7 @@ import FilesInput from "../support/FilesInput";
 import { JobTrainingProgram as JobTrainingProgramType } from "../../../../../hooks/declarations/data/data.did";
 import { ManualData } from "../../MetricRecords";
 import { IoMdAdd } from "react-icons/io";
-import Program from "./Program";
+import Program from "../support/Program";
 
 const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
@@ -177,7 +177,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
           <textarea
             ref={goalareaRef}
             className={styles.goalInput}
-            id="goal"
+            id="text"
             placeholder="Enter your goal here"
             value={goal}
             onChange={(e) => setGoal(e.target.value)}
@@ -219,7 +219,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
             <input
               className={styles.formInput}
               id="programName"
-              type="goal"
+              type="text"
               placeholder="Program Name"
               value={programName}
               onChange={(e) => setProgramName(e.target.value)}

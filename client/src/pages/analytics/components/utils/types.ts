@@ -22,19 +22,21 @@ export type MetricReportData = {
     key: string;
     graphs : {
         1: {
+          typeOfGraph: "line" | "bar" | "pie";
             name: string;
             x_label: string;
             y_label: string;
             graph: LineGraphData | BarGraphData | PieChartData | null;
           };
-          2?: {
-
+          2?: { 
+            typeOfGraph: "line" | "bar" | "pie";
             name: string;
             x_label: string;
             y_label: string;
             graph: LineGraphData | BarGraphData | PieChartData | null;
           };
           3?: {
+            typeOfGraph: "line" | "bar" | "pie";
             name: string;
             x_label: string;
             y_label: string;

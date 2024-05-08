@@ -1,0 +1,44 @@
+type email = text;
+type UserRecord = 
+ record {
+   aboutCompany:
+    record {
+      companySize: text;
+      industry: text;
+      logo: text;
+      name: text;
+    };
+   created: int;
+   email: text;
+   impactTargets: vec ImpactTarget;
+ };
+type Result = 
+ variant {
+   err: text;
+   ok: UserRecord;
+ };
+type Metric = 
+ record {
+   documents: vec text;
+   goal: opt text;
+   iotDevice: opt IOTDevice;
+   name: text;
+ };
+type ImpactTarget = 
+ record {
+   id: nat;
+   metrics: vec Metric;
+   name: text;
+ };
+type IOTDevice = 
+ record {
+   ipAddress: text;
+   name: text;
+   platform: text;
+ };
+service : {
+  addUserRecord: (UserRecord) -> ();
+  getUserRecord: (email) -> (Result) query;
+  removeUserRecord: (email) -> ();
+  updateUserRecord: (UserRecord) -> ();
+}

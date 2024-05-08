@@ -3,18 +3,17 @@ import { TargetOption, targetOptions } from "../../../data/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import TargetRecordsCard from "./TargetRecordsCard";
-import { setNextTarget } from "../../../redux/slices/app";
+import { setNextTarget, setPreviousTarget } from "../../../redux/slices/app";
 
 export const TargetRecords = () => {
   const dispatch = useDispatch();
-  const { impactTargets, nextTarget } = useSelector(
+  const { impactTargets, nextTarget, previousTarget } = useSelector(
     (state: RootState) => state.app
   );
   const [targets, setTargets] = useState<TargetOption[]>([]);
   const [displayedTargets, setDisplayedTargets] = useState<TargetOption[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [finished, setFinished] = useState(false);
-  const [lastOfLast, setLastOfLast] = useState(false);
 
   useEffect(() => {
     if (impactTargets) {
@@ -31,7 +30,6 @@ export const TargetRecords = () => {
       });
       setTargets(matchingTargetOption);
     }
-
   }, [impactTargets]);
 
   useEffect(() => {
@@ -45,15 +43,19 @@ export const TargetRecords = () => {
       );
       dispatch(setNextTarget(false));
     }
-  }, [nextTarget, targets, dispatch]);
+    if (previousTarget) {
+      setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+      dispatch(setPreviousTarget(false));
+    }
+  }, [nextTarget, previousTarget, targets, dispatch]);
 
   useEffect(() => {
-    if ((currentIndex === targets.length - 1) && lastOfLast) {
+    if (currentIndex === targets.length - 1) {
       setFinished(true);
     } else {
       setFinished(false);
     }
-  }, [currentIndex, targets, lastOfLast]);
+  }, [currentIndex, targets]);
 
   return (
     <div>
@@ -62,7 +64,7 @@ export const TargetRecords = () => {
           {displayedTargets.map((target, index) => {
             return (
               <TargetRecordsCard
-                {...{ target, impactTargets, finished, setLastOfLast }}
+                {...{ target, impactTargets, currentIndex, finished }}
                 key={index}
               />
             );

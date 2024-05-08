@@ -136,12 +136,14 @@ export const getMetricsReportData = (
         key: "jobTraining",
         graphs: {
           1: {
+            typeOfGraph: "line",
             name: "Job Training",
             x_label: "Time",
             y_label: "Number of Beneficiaries",
             graph: lineGraphData,
           },
           2: {
+            typeOfGraph: "bar",
             name: "Job Training",
             x_label: "Time",
             y_label: "Number of Beneficiaries",
@@ -429,7 +431,6 @@ const getTimeBarGraphData = (
 
   data.forEach(item => {
     const itemDate = new Date(Number(item.startDate));
-    console.log(itemDate, item)
     let index = -1;
 
     if (["1Month", "3Months"].includes(periodOfTime)) {

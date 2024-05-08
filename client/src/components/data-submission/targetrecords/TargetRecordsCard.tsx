@@ -6,6 +6,7 @@ import {
   setDataComponent,
   setImpactTargets,
   setNextTarget,
+  setPreviousTarget,
   setShowDataForm,
   setTargetRecord,
   setUserRecord,
@@ -22,7 +23,7 @@ type Props = {
   target: TargetOption;
   impactTargets: ImpactTargetType[];
   finished: boolean;
-  setLastOfLast: (lastOfLast: boolean) => void;
+  currentIndex: number;
 };
 
 type GradientStyle = {
@@ -33,54 +34,30 @@ const TargetRecordsCard: FC<Props> = ({
   target,
   impactTargets,
   finished,
-  setLastOfLast,
+  currentIndex,
 }) => {
   const [gradientStyle, setGradientStyle] = useState<GradientStyle>({
     backgroundImage: `linear-gradient(to top, #354b5b, ${target.color} 50%, ${target.color})`,
   });
-  const [clearGoal, setClearGoal] = useState<boolean>(false);
   const { dataActor } = useAuth();
-  const { userRecord } = useSelector((state: RootState) => state.app);
+  const { userRecord, nextTarget } = useSelector((state: RootState) => state.app);
   const [impact, setImpact] = useState<ImpactTargetType | undefined>(undefined);
   const dispatch = useDispatch();
-  const metricsPerPage = 2;
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [totalPages, setTotalPages] = useState<number | null>(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [displayedMetrics, setDisplayedMetrics] = useState<Metric[]>([]);
+  const [metrics, setMetrics] = useState<Metric[]>([]);
   const [saving, setSaving] = useState<boolean>(false);
 
   useEffect(() => {
     if (impact) {
-      setTotalPages(Math.ceil(impact.metrics.length / metricsPerPage));
-      const end = currentIndex + metricsPerPage;
-      setDisplayedMetrics(impact.metrics.slice(currentIndex, end));
+      setMetrics(impact.metrics);
     }
-  }, [currentIndex, impact, metricsPerPage]);
-
-  useEffect(() => {
-    if (totalPages && currentPage === totalPages) {
-      setLastOfLast(true);
-    } else {
-      setLastOfLast(false);
-    }
-  }, [totalPages, currentPage]);
+  }, [impact]);
 
   useEffect(() => {
     if (impactTargets) {
       const _impact = impactTargets.find((t) => Number(t.id) === target.id);
       setImpact(_impact);
-      setCurrentPage(Math.floor(currentIndex / metricsPerPage) + 1);
     }
-  }, [impactTargets, target, currentIndex, metricsPerPage]);
-
-  useEffect(() => {
-    setCurrentPage(Math.floor(currentIndex / metricsPerPage) + 1);
-  }, [currentIndex, metricsPerPage]);
-
-  const handlePrevious = () => {
-    setCurrentIndex((prev) => Math.max(prev - metricsPerPage, 0));
-  };
+  }, [impactTargets, target]);
 
   useEffect(() => {
     if (!impactTargets) return;
@@ -104,12 +81,6 @@ const TargetRecordsCard: FC<Props> = ({
   const handleNext = async () => {
     if (!impact) return;
 
-    for (const metric of displayedMetrics) {
-      if (metric.goal.length === 0) {
-        toast.error("Please set a goal for all metrics before proceeding");
-        return;
-      }
-    }
     try {
       setSaving(true);
       if (!userRecord) {
@@ -117,11 +88,16 @@ const TargetRecordsCard: FC<Props> = ({
         return;
       }
       const updatedImpactMetrics: Metric[] = impact.metrics.map((metric) => {
-        const updatedMetric = displayedMetrics.find(
-          (m) => m.name === metric.name
-        );
+        const updatedMetric = metrics.find((m) => m.name === metric.name);
         return updatedMetric ? updatedMetric : metric;
       });
+      for (const metric of updatedImpactMetrics) {
+        if (metric.data.length === 0) {
+          toast.error("Please record data for all metrics");
+          setSaving(false);
+          return;
+        }
+      }
       const updatedImpact: ImpactTargetType = {
         ...impact,
         metrics: updatedImpactMetrics,
@@ -150,7 +126,6 @@ const TargetRecordsCard: FC<Props> = ({
       };
       await dataActor?.updateUserRecord(updatedUserRecord);
       dispatch(setUserRecord(updatedUserRecord));
-      setClearGoal(true);
       if (finished) {
         toast.success("All data saved successfully", {
           autoClose: 5000,
@@ -158,21 +133,16 @@ const TargetRecordsCard: FC<Props> = ({
         });
 
         dispatch(setShowDataForm(false));
-        // window.location.reload();
+        window.location.reload();
         setSaving(false);
         return;
       }
-      if (currentIndex + 2 >= impact.metrics.length) {
-        toast.success(`Data for ${impact.name} saved successfully`, {
-          autoClose: 5000,
-        });
-        setSaving(false);
-        setCurrentIndex(0);
-        dispatch(setNextTarget(true));
-        return;
-      }
+
+      toast.success(`Data for ${impact.name} saved successfully`, {
+        autoClose: 5000,
+      });
       setSaving(false);
-      setCurrentIndex((prev) => prev + metricsPerPage);
+      dispatch(setNextTarget(true));
     } catch (error) {
       setSaving(false);
       console.log("Error updating impact metrics", error);
@@ -183,9 +153,13 @@ const TargetRecordsCard: FC<Props> = ({
     (t) => Number(t.id) === target.id
   );
 
+  const handlePrevious = () => {
+    dispatch(setPreviousTarget(true));
+  };
+
   return (
     <>
-      <div className="flex flex-col items-center bg-gray mx-[100px] mt">
+      <div className="flex flex-col items-center  w-[90%] sm:w-3/4 md:w-[60%] px-6 py-2 min-w-min max-w-full mx-[100px] mt">
         <div className="text-3xl font-bold text-white mt-4 bg-gra text-center font-TelegraphBold flex gap-3 items-center">
           <span>How do you record your data for {target.name}</span>{" "}
           <img
@@ -206,26 +180,19 @@ const TargetRecordsCard: FC<Props> = ({
           className={` rounded-3xl min-h-[300px] w-full mt-5`}
         >
           {impact && (
-            <>
-              {displayedMetrics.map((metric, index) => (
+            <div className="grid grid-col gap-3 justify-center items-center py-3">
+              {metrics.map((metric, index) => (
                 <MetricRecords
                   key={index}
                   {...{
                     metric,
-                    displayedMetrics,
-                    setDisplayedMetrics,
-                    clearGoal,
-                    setClearGoal,
+                    metrics,
+                    setMetrics,
                   }}
                 />
               ))}
-            </>
+            </div>
           )}
-          <div className="text-center my-4">
-            <span className="text-white">
-              {currentPage} of {totalPages}
-            </span>
-          </div>
         </div>
         <div className="w-full flex justify-between my-4">
           <button
@@ -234,8 +201,9 @@ const TargetRecordsCard: FC<Props> = ({
           >
             <span className="">Back</span>
           </button>
+
           <div className="">
-            {currentPage > 1 && (
+            {currentIndex > 0 && (
               <button
                 onClick={handlePrevious}
                 className="px-10 py-1 text-custom-green font-bold"
@@ -243,6 +211,7 @@ const TargetRecordsCard: FC<Props> = ({
                 <span>Previous</span>
               </button>
             )}
+
             <button
               className={` bg-custom-green px-10 py-1 rounded-full text-black font-bold`}
               disabled={saving}

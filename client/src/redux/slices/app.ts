@@ -48,6 +48,7 @@ export interface GlobalState {
 
   impactTargets: ImpactTargetType[] | null;
   nextTarget: boolean;
+  previousTarget: boolean;
   metricsUpdated: boolean;
 
   reportModal: boolean;
@@ -75,6 +76,7 @@ const initialState: GlobalState = {
   impactTargets: null,
 
   nextTarget: false,
+  previousTarget: false,
   metricsUpdated: false,
 
   reportModal: false,
@@ -121,6 +123,9 @@ export const appSlice = createSlice({
     },
     setNextTarget: (state: GlobalState, action: PayloadAction<boolean>) => {
       state.nextTarget = action.payload;
+    },
+    setPreviousTarget: (state: GlobalState, action: PayloadAction<boolean>) => {
+      state.previousTarget = action.payload;
     },
     setMetricsUpdated: (state: GlobalState, action: PayloadAction<boolean>) => {
       state.metricsUpdated = action.payload;
@@ -196,6 +201,7 @@ export const {
   setStorageInit,
   setTargetRecord,
   setNextTarget,
+  setPreviousTarget,
   setMetricsUpdated,
   setReportModal,
   setHelpModal,

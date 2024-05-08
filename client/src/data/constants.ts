@@ -425,7 +425,7 @@ export const targetOptions: TargetOption[] = [
       },
       {
         id: 3,
-        key: "peopleWithAccess",
+        key: "peopleWithAccessToWater",
         description: "People with water and sanitation access",
         graphs: [
           {
@@ -642,7 +642,7 @@ export const targetOptions: TargetOption[] = [
       },
       {
         id: 3,
-        key: "peopleBenefiting",
+        key: "peopleBenefitingFromInfrastructure",
         description: "People benefiting from infrastructure",
         graphs: [
           {
@@ -704,7 +704,7 @@ export const targetOptions: TargetOption[] = [
       },
       {
         id: 3,
-        key: "beneficiaries",
+        key: "beneficiariesOfInequalityReduction",
         description: "Beneficiaries of inequality reduction",
         graphs: [
           {
@@ -1160,7 +1160,7 @@ export const targetOptions: TargetOption[] = [
     metrics: [
       {
         id: 1,
-        key: "collaborativeProjects",
+        key: "collaborativeSDGProjects",
         description: "Collaborative SDG projects",
         graphs: [
           {
@@ -1179,7 +1179,7 @@ export const targetOptions: TargetOption[] = [
       },
       {
         id: 2,
-        key: "financialContributions",
+        key: "globalPartnershipFinancialContributions",
         description: "Global partnership financial contributions",
         graphs: [
           {
@@ -1237,7 +1237,7 @@ export const keys = [
   "workplaceGenderEquality",
   "sanitationFacilities",
   "waterConservation",
-  "peopleWithAccess",
+  "peopleWithAccessToWater",
   "renewableEnergyProjects",
   "energyEfficientSystems",
   "energyConsumptionReduction",
@@ -1246,10 +1246,10 @@ export const keys = [
   "employmentImprovements",
   "stemEducation",
   "sustainableInfrastructure",
-  "peopleBenefiting",
+  "peopleBenefitingFromInfrastructure",
   "marginalizedCommunitySupport",
   "inclusionPolicies",
-  "beneficiaries",
+  "beneficiariesOfInequalityReduction",
   "urbanSustainability",
   "affordableHousing",
   "urbanLivingConditions",
@@ -1268,7 +1268,7 @@ export const keys = [
   "antiCorruptionPrograms",
   "humanRightsInitiatives",
   "communityPeacePrograms",
-  "collaborativeProjects",
-  "financialContributions",
+  "collaborativeSDGProjects",
+  "globalPartnershipFinancialContributions",
   "sdgAdvocacy",
 ];

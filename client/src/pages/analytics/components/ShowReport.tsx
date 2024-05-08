@@ -68,7 +68,7 @@ const ShowReport = () => {
         <h1 className="text-3xl font-bold text-center">Report</h1>
         {/* SPECIFIC METRICS */}
         <div className="">
-          <h3>Specific metrics data</h3>
+          <h3 className="text-2xl font-bold my-4">Specific metrics data</h3>
           <div className="">
             {metricsReportData?.map((metricData, index) => (
               <SpecificMetric key={index} {...{ metricData }} />

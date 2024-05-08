@@ -149,7 +149,7 @@ const ManuallyUpload: FC<Props> = ({
                   {...{ setManualData, setUploadManually }}
                 />
               )}
-              {metric.key === "peopleWithAccess" && (
+              {metric.key === "peopleWithAccessToWater" && (
                 <PeopleWithWaterAndSanitationAccess
                   {...{ setManualData, setUploadManually }}
                 />
@@ -194,7 +194,7 @@ const ManuallyUpload: FC<Props> = ({
                   {...{ setManualData, setUploadManually }}
                 />
               )}
-              {metric.key === "peopleBenefiting" && (
+              {metric.key === "peopleBenefitingFromInfrastructure" && (
                 <PeopleBenefitingFromInfrastructure
                   {...{ setManualData, setUploadManually }}
                 />
@@ -207,7 +207,7 @@ const ManuallyUpload: FC<Props> = ({
               {metric.key === "inclusionPolicies" && (
                 <InclusionPolicies {...{ setManualData, setUploadManually }} />
               )}
-              {metric.key === "beneficiaries" && (
+              {metric.key === "beneficiariesOfInequalityReduction" && (
                 <InequalityReductionBeneficiaries
                   {...{ setManualData, setUploadManually }}
                 />
@@ -294,12 +294,12 @@ const ManuallyUpload: FC<Props> = ({
                   {...{ setManualData, setUploadManually }}
                 />
               )}
-              {metric.key === "collaborativeProjects" && (
+              {metric.key === "collaborativeSDGProjects" && (
                 <CollaborativeSDGProjects
                   {...{ setManualData, setUploadManually }}
                 />
               )}
-              {metric.key === "financialContributions" && (
+              {metric.key === "globalPartnershipFinancialContributions" && (
                 <GlobalPartnershipFinancialContributions
                   {...{ setManualData, setUploadManually }}
                 />

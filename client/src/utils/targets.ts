@@ -440,7 +440,7 @@ if (target.id === 6) {
           Metric62: [metric62],
         };
       }
-      if (metric.key === "peopleWithAccess") {
+      if (metric.key === "peopleWithAccessToWater") {
         const metric63: Metric63 = {
           key: metric.key,
           name: metric.name,
@@ -616,7 +616,7 @@ if (target.id === 9) {
           Metric92: [metric92],
         };
       }
-      if (metric.key === "peopleBenefiting") {
+      if (metric.key === "peopleBenefitingFromInfrastructure") {
         const metric93: Metric93 = {
           key: metric.key,
           name: metric.name,
@@ -674,7 +674,7 @@ if (target.id === 10) {
           Metric102: [metric102],
         };
       }
-      if (metric.key === "beneficiaries") {
+      if (metric.key === "beneficiariesOfInequalityReduction") {
         const metric103: Metric103 = {
           key: metric.key,
           name: metric.name,
@@ -1052,7 +1052,7 @@ if (target.id === 17) {
   }
   if (target.metrics.length > 0) {
     for (const metric of target.metrics) {
-      if (metric.key === "collaborativeProjects") {
+      if (metric.key === "collaborativeSDGProjects") {
         const metric171: Metric171 = {
           key: metric.key,
           name: metric.name,
@@ -1066,7 +1066,7 @@ if (target.id === 17) {
           Metric171: [metric171],
         };
       }
-      if (metric.key === "financialContributions") {
+      if (metric.key === "globalPartnershipFinancialContributions") {
         const metric172: Metric172 = {
           key: metric.key,
           name: metric.name,

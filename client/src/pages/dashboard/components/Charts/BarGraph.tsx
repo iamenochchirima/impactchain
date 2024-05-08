@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import dayjs from 'dayjs';
 import quarterOfYear from 'dayjs/plugin/quarterOfYear';
@@ -9,7 +9,7 @@ dayjs.extend(quarterOfYear);
 
 
 
-const BarGraph = () => {
+const BarGraph = ({data}) => {
   const [series, setSeries] = useState([
     {
       name: "sales",

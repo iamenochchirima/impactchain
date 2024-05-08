@@ -18,30 +18,30 @@ export type xisVals = {
 export type PieChartData = {};
 
 export type MetricReportData = {
-    name: string;
-    key: string;
-    graphs : {
-        1: {
-          typeOfGraph: "line" | "bar" | "pie";
-            name: string;
-            x_label: string;
-            y_label: string;
-            graph: LineGraphData | BarGraphData | PieChartData | null;
-          };
-          2?: { 
-            typeOfGraph: "line" | "bar" | "pie";
-            name: string;
-            x_label: string;
-            y_label: string;
-            graph: LineGraphData | BarGraphData | PieChartData | null;
-          };
-          3?: {
-            typeOfGraph: "line" | "bar" | "pie";
-            name: string;
-            x_label: string;
-            y_label: string;
-            graph: LineGraphData | BarGraphData | PieChartData | null;
-          };
+  name: string;
+  key: string;
+  graphs: {
+    1?: {
+      typeOfGraph: "line" | "bar" | "pie";
+      name: string;
+      x_label: string;
+      y_label: string;
+      graph: LineGraphData | BarGraphData | PieChartData | null;
     };
-    aiOverview: string;
+    2?: {
+      typeOfGraph: "line" | "bar" | "pie";
+      name: string;
+      x_label: string;
+      y_label: string;
+      graph: LineGraphData | BarGraphData | PieChartData | null;
+    };
+    3?: {
+      typeOfGraph: "line" | "bar" | "pie";
+      name: string;
+      x_label: string;
+      y_label: string;
+      graph: LineGraphData | BarGraphData | PieChartData | null;
+    };
+  };
+  aiOverview: string;
 };

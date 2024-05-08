@@ -1,6 +1,6 @@
 import { ReportPromptsResponses } from "../../../../redux/slices/app";
 import { Metric } from "../../../../utils/types";
-import { BarGraphData, LineGraphData, MetricReportData, xisVals } from "./types";
+import { BarGraphData, LineGraphData, MetricReportData, PieChartData, xisVals } from "./types";
 
 export const getMetricsWithDataForTheGivenTimePeriod = (
   response: ReportPromptsResponses
@@ -155,105 +155,1946 @@ export const getMetricsReportData = (
       
       metricsData.push(_reportData);
     } else if (metric.key === "microloans") {
-      // Handle microloans logic here
+      const valueKey = "amountDisbursed";
+      const graphName = "Microloans or grants provided program";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+
+      const _reportData: MetricReportData = {
+        name: "Microloans or Grants Provided Program",
+        key: "microloans",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Microloans",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Microloans",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+
+      metricsData.push(_reportData);
     } else if (metric.key === "peopleAssisted") {
-      // Handle people assisted logic here
+      const valueKey = "numberOfPeopleAssisted";
+      const graphName = "People assisted out of poverty";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+
+      const _reportData: MetricReportData = {
+        name: "People Assisted Out of Poverty",
+        key: "peopleAssisted",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "People Assisted",
+            x_label: "Time",
+            y_label: "Number of People",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "People Assisted",
+            x_label: "Time",
+            y_label: "Number of People",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+
+      metricsData.push(_reportData);
     } else if (metric.key === "foodDonation") {
-      // Handle food donation logic here
+
+      const valueKey = "numberOfBeneficiaries";
+      const graphName = "Food Donation";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+
+      const _reportData: MetricReportData = {
+        name: "Food Donation",
+        key: "foodDonation",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Food Donation",
+            x_label: "Time",
+            y_label: "Number of People",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Food Donation",
+            x_label: "Time",
+            y_label: "Number of People",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+
+      metricsData.push(_reportData);
     } else if (metric.key === "sustainableAgriculture") {
-      // Handle sustainable agriculture logic here
+      const valueKey = "totalInvestment";
+      const graphName = "Sustainable Agriculture";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+
+      const _reportData: MetricReportData = {
+        name: "Sustainable Agriculture",
+        key: "sustainableAgriculture",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Sustainable Agriculture",
+            x_label: "Time",
+            y_label: "Number of People",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Sustainable Agriculture",
+            x_label: "Time",
+            y_label: "Number of People",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+
+      metricsData.push(_reportData);
     } else if (metric.key === "peopleFed") {
-      // Handle people fed logic here
+      const valueKey = "numberOfBeneficiaries";
+      const graphName = "People with regular nutritious food";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+
+      const _reportData: MetricReportData = {
+        name: "People Fed",
+        key: "peopleFed",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "People Fed",
+            x_label: "Time",
+            y_label: "Number of People",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "People Fed",
+            x_label: "Time",
+            y_label: "Number of People",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+
+      metricsData.push(_reportData);
     } else if (metric.key === "healthcareFunding") {
-      // Handle healthcare funding logic here
+      const valueKey = "amountFunded";
+      const graphName = "Healthcare Funding";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+
+      const _reportData: MetricReportData = {
+        name: "Healthcare Funding",
+        key: "healthcareFunding",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Healthcare Funding",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Healthcare Funding",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+
+      metricsData.push(_reportData);
     } else if (metric.key === "healthCheckups") {
-      // Handle health checkups logic here
+     
+      const valueKey = "totalParticipantss";
+      const graphName = "Health check-ups or vaccination drives";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+
+      const _reportData: MetricReportData = {
+        name: "Health Checkups Provided",
+        key: "healthCheckups",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Health Checkups",
+            x_label: "Time",
+            y_label: "Number of People",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Health Checkups",
+            x_label: "Time",
+            y_label: "Number of People",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+
+      metricsData.push(_reportData);
     } else if (metric.key === "peopleAccessingHealthcare") {
-      // Handle people accessing healthcare logic here
+      const valueKey = "numberOfBeneficiaries";
+      const graphName = "People accessing healthcare services";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+
+      const _reportData: MetricReportData = {
+        name: "People Accessing Healthcare",
+        key: "peopleAccessingHealthcare",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "People Accessing Healthcare",
+            x_label: "Time",
+            y_label: "Number of People",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "People Accessing Healthcare",
+            x_label: "Time",
+            y_label: "Number of People",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+
+      metricsData.push(_reportData);
     } else if (metric.key === "schoolsBuilt") {
-      // Handle schools built logic here
+      const valueKey = "numberOfSchoolsSupported";
+      const graphName = "Schools built or supported";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+
+      const _reportData: MetricReportData = {
+        name: "Schools Built or Supported",
+        key: "schoolsBuilt",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Schools Built",
+            x_label: "Time",
+            y_label: "Number of Schools",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Schools Built",
+            x_label: "Time",
+            y_label: "Number of Schools",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+
+      metricsData.push(_reportData);
     } else if (metric.key === "educationalGrants") {
-      // Handle educational grants logic here
+      const valueKey = "totalAmountAwarded";
+      const graphName = "Educational grants";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+
+      const _reportData: MetricReportData = {
+        name: "Educational Grants Programs",
+        key: "educationalGrants",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Educational Grants",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Educational Grants",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+
+      metricsData.push(_reportData);
     } else if (metric.key === "studentsBenefiting") {
-      // Handle students benefiting logic here
+      const valueKey = "totalStudentsBenefited";
+      const graphName = "Students benefiting from educational programs";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+
+      const _reportData: MetricReportData = {
+        name: "Students Benefiting from Educational Programs",
+        key: "studentsBenefiting",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Students Benefiting",
+            x_label: "Time",
+            y_label: "Number of Students",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Students Benefiting",
+            x_label: "Time",
+            y_label: "Number of Students",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+
+      metricsData.push(_reportData);
     } else if (metric.key === "womensEmpowerment") {
-      // Handle women's empowerment logic here
+      const valueKey = "numberOfParticipants";
+      const graphName = "Women's Empowerment Programs";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Women's Empowerment Initiatives",
+        key: "womensEmpowerment",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Women's Empowerment",
+            x_label: "Time",
+            y_label: "Participants",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Women's Empowerment",
+            x_label: "Time",
+            y_label: "Participants",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "genderEqualityWorkshops") {
-      // Handle gender equality workshops logic here
+      const valueKey = "numberOfParticipants";
+      const graphName = "Gender Equality Workshops";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Gender Equality Workshops",
+        key: "genderEqualityWorkshops",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Gender Equality Workshops",
+            x_label: "Time",
+            y_label: "Workshops",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Gender Equality Workshops",
+            x_label: "Time",
+            y_label: "Workshops",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
+
     } else if (metric.key === "workplaceGenderEquality") {
-      // Handle workplace gender equality logic here
+      const valueKey = "numberOfPolicies";
+      const graphName = "Workplace Gender Equality Policies";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Workplace Gender Equality Policies",
+        key: "workplaceGenderEquality",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Workplace Gender Equality Index",
+            x_label: "Time",
+            y_label: "Index",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Workplace Gender Equality Index",
+            x_label: "Time",
+            y_label: "Index",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
+      
     } else if (metric.key === "sanitationFacilities") {
-      // Handle sanitation facilities logic here
+      const valueKey = "numberOfFacilities";
+      const graphName = "Sanitation Facilities Provided";
+      // TODO: Add pie chart data
+      const pieChartData = getPieChartData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Sanitation Facilities Provided",
+        key: "sanitationFacilities",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Sanitation Facilities",
+            x_label: "Time",
+            y_label: "Facilities",
+            graph: pieChartData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "waterConservation") {
-      // Handle water conservation logic here
-    } else if (metric.key === "peopleWithAccess") {
-      // Handle people with access logic here
+      const valueKey = "waterSaved";
+      const graphName = "Water Conservation Programs";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Water Conservation Programs",
+        key: "waterConservation",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Water Conservation",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Water Conservation",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
+    } else if (metric.key === "peopleWithAccessToWater") {
+      const valueKey = "numberOfBeneficiaries";
+      const graphName = "People with Access to Clean Water Programs";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "People with Access to Clean Water Programs",
+        key: "peopleWithWaterAccess",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "People with Access",
+            x_label: "Time",
+            y_label: "Number of People",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "People with Access",
+            x_label: "Time",
+            y_label: "Number of People",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+      metricsData.push(_reportData);
     } else if (metric.key === "renewableEnergyProjects") {
-      // Handle renewable energy projects logic here
+      const valueKey = "numberOfProjects";
+      const graphName = "Renewable Energy Projects";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Renewable Energy Projects",
+        key: "renewableEnergyProjects",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Renewable Energy Projects",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Renewable Energy Projects",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "energyEfficientSystems") {
-      // Handle energy efficient systems logic here
+      const valueKey = "numberOfSystemsInstalled";
+      const graphName = "Energy Efficient Systems Installed";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Energy Efficient Systems Installed",
+        key: "energyEfficientSystems",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Energy Efficient Systems",
+            x_label: "Time",
+            y_label: "Number of Systems",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Energy Efficient Systems",
+            x_label: "Time",
+            y_label: "Number of Systems",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "energyConsumptionReduction") {
-      // Handle energy consumption reduction logic here
+      const valueKey = "reductionInEnergyConsumption";
+      const graphName = "Energy Consumption Reduction Programs";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Energy Consumption Reduction Programs",
+        key: "energyConsumptionReduction",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Energy Consumption Reduction",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Energy Consumption Reduction",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "jobCreation") {
-      // Handle job creation logic here
+      const valueKey = "jobsCreated";
+      const graphName = "Job Creation Programs";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Job Creation Programs",
+        key: "jobCreation",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Job Creation",
+            x_label: "Time",
+            y_label: "Number of Jobs",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Job Creation",
+            x_label: "Time",
+            y_label: "Number of Jobs",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "vocationalTraining") {
-      // Handle vocational training logic here
+      const valueKey = "totalParticipants";
+      const graphName = "Vocational Training Programs";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Vocational Training Programs",
+        key: "vocationalTraining",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Vocational Training",
+            x_label: "Time",
+            y_label: "Number of Participants",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Vocational Training",
+            x_label: "Time",
+            y_label: "Number of Participants",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "employmentImprovements") {
-      // Handle employment improvements logic here
+      const valueKey = "numberOfBeneficiaries";
+      const graphName = "Employment Improvements Programs";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Employment Improvements Programs",
+        key: "employmentImprovements",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Employment Improvements",
+            x_label: "Time",
+            y_label: "Number of Beneficiaries",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Employment Improvements",
+            x_label: "Time",
+            y_label: "Number of Beneficiaries",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "stemEducation") {
-      // Handle STEM education logic here
+      const valueKey = "totalParticipants";
+      const graphName = "STEM Education Programs";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "STEM Education Programs",
+        key: "stemEducation",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "STEM Education",
+            x_label: "Time",
+            y_label: "Number of Students",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "STEM Education",
+            x_label: "Time",
+            y_label: "Number of Students",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "sustainableInfrastructure") {
-      // Handle sustainable infrastructure logic here
-    } else if (metric.key === "peopleBenefiting") {
-      // Handle people benefiting logic here
+      const valueKey = "numberOfProjects";
+      const graphName = "Sustainable Infrastructure Projects";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Sustainable Infrastructure Projects",
+        key: "sustainableInfrastructure",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Sustainable Infrastructure",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Sustainable Infrastructure",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
+    } else if (metric.key === "peopleBenefitingFromInfrastructure") {
+      const valueKey = "totalBeneficiaries";
+      const graphName = "People Benefiting from Infrastructure Projects";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "People Benefiting from Infrastructure Projects",
+        key: "peopleBenefitingFromInfrastructure",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "People Benefiting",
+            x_label: "Time",
+            y_label: "Number of People",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "People Benefiting",
+            x_label: "Time",
+            y_label: "Number of People",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "marginalizedCommunitySupport") {
-      // Handle marginalized community support logic here
+      const valueKey = "numberOfBeneficiaries";
+      const graphName = "Marginalized Community Support Programs";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Marginalized Community Support Programs",
+        key: "marginalizedCommunitySupport",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Marginalized Community Support",
+            x_label: "Time",
+            y_label: "Number of Participants",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Marginalized Community Support",
+            x_label: "Time",
+            y_label: "Number of Participants",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "inclusionPolicies") {
-      // Handle inclusion policies logic here
-    } else if (metric.key === "beneficiaries") {
-      // Handle beneficiaries logic here
+      const valueKey = "numberOfPolicies";
+      const graphName = "Inclusion Policies Implemented";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Inclusion Policies Implemented",
+        key: "inclusionPolicies",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Inclusion Policies",
+            x_label: "Time",
+            y_label: "Number of Policies",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Inclusion Policies",
+            x_label: "Time",
+            y_label: "Number of Policies",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
+    } else if (metric.key === "beneficiariesOfInequalityReduction") {
+      const valueKey = "totalBeneficiaries";
+      const graphName = "Beneficiaries of Inequality Reduction Programs";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Beneficiaries of Inequality Reduction Programs",
+        key: "beneficiariesOfInequalityReduction",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Beneficiaries of Inequality Reduction",
+            x_label: "Time",
+            y_label: "Number of Beneficiaries",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Beneficiaries of Inequality Reduction",
+            x_label: "Time",
+            y_label: "Number of Beneficiaries",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "urbanSustainability") {
-      // Handle urban sustainability logic here
+      const valueKey = "numberOfProjects";
+      const graphName = "Urban Sustainability Programs";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Urban Sustainability Programs",
+        key: "urbanSustainability",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Urban Sustainability",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Urban Sustainability",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "affordableHousing") {
-      // Handle affordable housing logic here
+      const valueKey = "numberOfHousingUnitsSupported";
+      const graphName = "Affordable Housing Projects";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Affordable Housing Projects",
+        key: "affordableHousing",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Affordable Housing",
+            x_label: "Time",
+            y_label: "Number of Houses",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Affordable Housing",
+            x_label: "Time",
+            y_label: "Number of Houses",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "urbanLivingConditions") {
-      // Handle urban living conditions logic here
+      const valueKey = "numberOfAreasImproved";
+      const graphName = "Urban Living Conditions Improvement Programs";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Urban Living Conditions Improvement Programs",
+        key: "urbanLivingConditions",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Urban Living Conditions",
+            x_label: "Time",
+            y_label: "Number of Beneficiaries",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Urban Living Conditions",
+            x_label: "Time",
+            y_label: "Number of Beneficiaries",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "wasteReduction") {
-      // Handle waste reduction logic here
+      const valueKey = "totalWasteReduced";
+      const graphName = "Waste Reduction Programs";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Waste Reduction Programs",
+        key: "wasteReduction",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Waste Reduction",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Waste Reduction",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "sustainableSupplyChain") {
-      // Handle sustainable supply chain logic here
+      const valueKey = "supplyChainImproved";
+      const graphName = "Sustainable Supply Chain Programs";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Sustainable Supply Chain Programs",
+        key: "sustainableSupplyChain",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Sustainable Supply Chain",
+            x_label: "Time",
+            y_label: "Number of Companies",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Sustainable Supply Chain",
+            x_label: "Time",
+            y_label: "Number of Companies",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "resourceFootprintReduction") {
-      // Handle resource footprint reduction logic here
+      const valueKey = "reductionInResourceFootprint";
+      const graphName = "Resource Footprint Reduction Programs";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Resource Footprint Reduction Programs",
+        key: "resourceFootprintReduction",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Resource Footprint Reduction",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Resource Footprint Reduction",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "carbonEmissionReduction") {
-      // Handle carbon emission reduction logic here
+      const valueKey = "reductionInEmission";
+      const graphName = "Carbon Emission Reduction Programs";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Carbon Emission Reduction Programs",
+        key: "carbonEmissionReduction",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Carbon Emission Reduction",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Carbon Emission Reduction",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "renewableEnergyInvestment") {
-      // Handle renewable energy investment logic here
+      const valueKey = "amountInvested";
+      const graphName = "Renewable Energy Investment Programs";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Renewable Energy Investment Programs",
+        key: "renewableEnergyInvestment",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Renewable Energy Investment",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Renewable Energy Investment",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "reforestationProjects") {
-      // Handle reforestation projects logic here
+      const valueKey = "areaOfLandReforested";
+      const graphName = "Reforestation Program";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Reforestation Programs",
+        key: "reforestationProjects",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Reforestation Projects",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Reforestation Projects",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "marineEcosystemProtection") {
-      // Handle marine ecosystem protection logic here
+      const valueKey = "areaOfEcosystemProtected";
+      const graphName = "Marine Ecosystem Protection Programs";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Marine Ecosystem Protection Programs",
+        key: "marineEcosystemProtection",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Marine Ecosystem Protection",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Marine Ecosystem Protection",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "oceanPollutionReduction") {
-      // Handle ocean pollution reduction logic here
+      const valueKey = "reductionInPollution";
+      const graphName = "Ocean Pollution Reduction Programs";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Ocean Pollution Reduction Programs",
+        key: "oceanPollutionReduction",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Ocean Pollution Reduction",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Ocean Pollution Reduction",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "sustainableFishing") {
-      // Handle sustainable fishing logic here
+      const valueKey = "numberOfSustainableFishingProjects";
+      const graphName = "Sustainable Fishing Programs";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Sustainable Fishing Programs",
+        key: "sustainableFishing",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Sustainable Fishing",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Sustainable Fishing",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "landConservation") {
-      // Handle land conservation logic here
+      const valueKey = "areaOfLandConserved";
+      const graphName = "Land Conservation Programs";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Land Conservation Programs",
+        key: "landConservation",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Land Conservation",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Land Conservation",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "endangeredSpeciesProtection") {
-      // Handle endangered species protection logic here
+      const valueKey = "numberOfSpeciesProtected";
+      const graphName = "Endangered Species Protection Programs";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Endangered Species Protection Programs",
+        key: "endangeredSpeciesProtection",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Endangered Species Protection",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Endangered Species Protection",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "landRehabilitation") {
-      // Handle land rehabilitation logic here
+      const valueKey = "areaOfLandRehabilitated";
+      const graphName = "Land Rehabilitation Programs";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Land Rehabilitation Programs",
+        key: "landRehabilitation",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Land Rehabilitation",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Land Rehabilitation",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "antiCorruptionPrograms") {
-      // Handle anti-corruption programs logic here
+      const valueKey = "numberOfPrograms";
+      const graphName = "Anti-Corruption Programs Implemented";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Anti-Corruption Programs Implemented",
+        key: "antiCorruptionPrograms",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Anti-Corruption Programs",
+            x_label: "Time",
+            y_label: "Number of Programs",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Anti-Corruption Programs",
+            x_label: "Time",
+            y_label: "Number of Programs",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "humanRightsInitiatives") {
-      // Handle human rights initiatives logic here
+      const valueKey = "numberOfInitiatives";
+      const graphName = "Human Rights Initiatives Implemented";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Human Rights Initiatives Implemented",
+        key: "humanRightsInitiatives",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Human Rights Initiatives",
+            x_label: "Time",
+            y_label: "Number of Initiatives",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Human Rights Initiatives",
+            x_label: "Time",
+            y_label: "Number of Initiatives",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
     } else if (metric.key === "communityPeacePrograms") {
-      // Handle community peace programs logic here
-    } else if (metric.key === "collaborativeProjects") {
-      // Handle collaborative projects logic here
-    } else if (metric.key === "financialContributions") {
-      // Handle financial contributions logic here
+      const valueKey = "numberOfPrograms";
+      const graphName = "Community Peace Programs Implemented";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Community Peace Programs Implemented",
+        key: "communityPeacePrograms",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Community Peace Programs",
+            x_label: "Time",
+            y_label: "Number of Programs",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Community Peace Programs",
+            x_label: "Time",
+            y_label: "Number of Programs",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+    
+      metricsData.push(_reportData);
+    } else if (metric.key === "collaborativeSDGProjects") {
+      const valueKey = "numberOfProjects";
+      const graphName = "Collaborative SDG Projects Implemented";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+      const _reportData: MetricReportData = {
+        name: "Collaborative SDG Projects Implemented",
+        key: "collaborativeSDGProjects",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Collaborative SDG Projects",
+            x_label: "Time",
+            y_label: "Number of Projects",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Collaborative SDG Projects",
+            x_label: "Time",
+            y_label: "Number of Projects",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+
+      metricsData.push(_reportData);
+    } else if (metric.key === "globalPartnershipFinancialContributions") {
+      const valueKey = "amountContributed";
+      const graphName = "Global Partnership Financial Contributions";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+
+      const _reportData: MetricReportData = {
+        name: "Global Partnership Financial Contributions",
+        key: "globalPartnershipFinancialContributions",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Financial Contributions",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Financial Contributions",
+            x_label: "Time",
+            y_label: "Amount",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+
+      metricsData.push(_reportData);
     } else if (metric.key === "sdgAdvocacy") {
-      // Handle SDG advocacy logic here
+      const valueKey = "numberOfCampaigns";
+      const graphName = "SDG Advocacy Campaigns Implemented";
+      const lineGraphData = getLineGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      const barGraphData = getTimeBarGraphData(
+        reportPromptResponse.periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+
+      const _reportData: MetricReportData = {
+        name: "SDG Advocacy Campaigns Implemented",
+        key: "sdgAdvocacy",
+        graphs: {
+          1: {
+            typeOfGraph: "line",
+            name: "Advocacy Campaigns",
+            x_label: "Time",
+            y_label: "Number of Campaigns",
+            graph: lineGraphData,
+          },
+          2: {
+            typeOfGraph: "bar",
+            name: "Advocacy Campaigns",
+            x_label: "Time",
+            y_label: "Number of Campaigns",
+            graph: barGraphData,
+          },
+        },
+        aiOverview: "AI Overview",
+      };
+
+      metricsData.push(_reportData);
     } else {
       console.log("Unknown metric key:", metric.key);
       continue;
@@ -464,6 +2305,26 @@ const getTimeBarGraphData = (
 
   return { name, data: resultData, categories };
 };
+
+
+const getPieChartData = (  periodOfTime: string, data: any[], name: string, valueKey: string): PieChartData | null => {
+  const resultData: xisVals[] = [];
+  const counts = Array.from({ length: data.length }, () => 0);
+
+  data.forEach(item => {
+    const value = item[valueKey];
+    if (value != null) {
+      const index = resultData.findIndex(x => x.x === value);
+      if (index === -1) {
+        resultData.push({ x: value, y: 1 });
+      } else {
+        resultData[index].y += 1;
+      }
+    }
+  });
+
+  return { name, data: resultData };
+}
 
 
 

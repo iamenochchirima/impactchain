@@ -122,7 +122,7 @@ interface LineGraphState {
   }[];
 }
 
-const LineGraph: React.FC = () => {
+const LineGraph = ({data}) => {
   const [state, setState] = useState<LineGraphState>({
     series: [
       {

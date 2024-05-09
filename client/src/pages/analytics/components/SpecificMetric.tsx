@@ -1,7 +1,7 @@
 import BarGraph from "../../dashboard/components/Charts/BarGraph";
 import PieChart from "../../dashboard/components/Charts/PieChart";
 import LineGraph from "../../dashboard/components/Charts/LineGraph";
-import { MetricReportData } from "./utils/types";
+import { BarGraphData, GraphsData, LineGraphData, MetricReportData, PieChartData } from "./utils/types";
 import { FC } from "react";
 
 type Props = {
@@ -11,50 +11,55 @@ type Props = {
 const SpecificMetric: FC<Props> = ({ metricData }) => {
   const { graphs } = metricData;
 
+  function isLineGraphData(data: GraphsData): data is LineGraphData {
+    return data !== null && Array.isArray(data.data) && typeof data.data[0] === 'number';
+  }
+ 
+  function isBarGraphData(data: GraphsData): data is BarGraphData {
+    return data !== null && Array.isArray(data.data) && typeof data.data[0] !== 'number';
+  }
+  
+  function isPieChartData(data: GraphsData): data is PieChartData {
+    return data !== null && Array.isArray(data.data) && typeof data.data[0] === 'object' && 'y' in data.data[0];
+  }
+
   return (
     <div>
-      <PieChart />
-      <h3 className="text-xl mb-3">{metricData.name}</h3>
-      <p className="mb-3">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </p>
+    <h3 className="text-xl mb-3">{metricData.name}</h3>
+    <p className="mb-3">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </p>
 
-      {graphs[1]?.graph && graphs[1].typeOfGraph === 'line' && (
-        <LineGraph data={graphs[1].graph} />
-      )}
-      {graphs[1]?.graph && graphs[1].typeOfGraph === 'pie' && (
-        <PieChart data={graphs[1].graph} />
-      )}
-      {graphs[1]?.graph && graphs[1].typeOfGraph === 'bar' && (
-        <BarGraph data={graphs[1].graph} />
-      )}
+    {graphs[1]?.graph && isLineGraphData(graphs[1].graph) && (
+      <LineGraph data={graphs[1].graph} />
+    )}
+    {graphs[1]?.graph && isPieChartData(graphs[1].graph) && (
+      <PieChart data={graphs[1].graph} />
+    )}
+    {graphs[1]?.graph && isBarGraphData(graphs[1].graph) && (
+      <BarGraph data={graphs[1].graph} />
+    )}
 
-      {graphs[2]?.graph && graphs[2].typeOfGraph === 'line' && (
-        <LineGraph data={graphs[2].graph} />
-      )}
-      {graphs[2]?.graph && graphs[2].typeOfGraph === 'pie' && (
-        <PieChart data={graphs[2].graph} />
-      )}
-      {graphs[2]?.graph && graphs[2].typeOfGraph === 'bar' && (
-        <BarGraph data={graphs[2].graph} />
-      )}
+    {graphs[2]?.graph && isLineGraphData(graphs[2].graph) && (
+      <LineGraph data={graphs[2].graph} />
+    )}
+    {graphs[2]?.graph && isPieChartData(graphs[2].graph) && (
+      <PieChart data={graphs[2].graph} />
+    )}
+    {graphs[2]?.graph && isBarGraphData(graphs[2].graph) && (
+      <BarGraph data={graphs[2].graph} />
+    )}
 
-      {graphs[3]?.graph && graphs[3].typeOfGraph === 'line' && (
-        <LineGraph data={graphs[3].graph} />
-      )}
-      {graphs[3]?.graph && graphs[3].typeOfGraph === 'pie' && (
-        <PieChart data={graphs[3].graph} />
-      )}
-      {graphs[3]?.graph && graphs[3].typeOfGraph === 'bar' && (
-        <BarGraph data={graphs[3].graph} />
-      )}
-    </div>
+    {graphs[3]?.graph && isLineGraphData(graphs[3].graph) && (
+      <LineGraph data={graphs[3].graph} />
+    )}
+    {graphs[3]?.graph && isPieChartData(graphs[3].graph) && (
+      <PieChart data={graphs[3].graph} />
+    )}
+    {graphs[3]?.graph && isBarGraphData(graphs[3].graph) && (
+      <BarGraph data={graphs[3].graph} />
+    )}
+  </div>
   );
 };
 

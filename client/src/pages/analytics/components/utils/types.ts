@@ -10,12 +10,18 @@ export type BarGraphData = {
   categories: string[];
 };
 
+export type PieChartData = {
+  name: string;
+  data: {
+    name: string;
+    y: number;
+  }[];
+};
+
 export type xisVals = {
   x: string;
   y: number;
 };
-
-export type PieChartData = {};
 
 export type MetricReportData = {
   name: string;
@@ -26,22 +32,24 @@ export type MetricReportData = {
       name: string;
       x_label: string;
       y_label: string;
-      graph: LineGraphData | BarGraphData | PieChartData | null;
+      graph: GraphsData
     };
     2?: {
       typeOfGraph: "line" | "bar" | "pie";
       name: string;
       x_label: string;
       y_label: string;
-      graph: LineGraphData | BarGraphData | PieChartData | null;
+      graph: GraphsData
     };
     3?: {
       typeOfGraph: "line" | "bar" | "pie";
       name: string;
       x_label: string;
       y_label: string;
-      graph: LineGraphData | BarGraphData | PieChartData | null;
+      graph: GraphsData
     };
   };
   aiOverview: string;
 };
+
+export type GraphsData =  LineGraphData | BarGraphData | PieChartData | null;

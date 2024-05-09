@@ -60,8 +60,6 @@ const ShowReport = () => {
     }
   }, [metricsWithDataForPeriod, reportPromptResponse]);
 
-  console.log("metricsReportData", metricsReportData)
-
   return (
     <div>
       <div className="overflow-auto">

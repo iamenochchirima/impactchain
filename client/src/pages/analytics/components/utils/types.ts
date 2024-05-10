@@ -12,10 +12,13 @@ export type BarGraphData = {
 
 export type PieChartData = {
   name: string;
-  data: {
-    name: string;
-    y: number;
-  }[];
+  pieChat: boolean;
+  data:  pieData[];
+};
+
+export type pieData = {
+  name: string;
+  y: number;
 };
 
 export type xisVals = {
@@ -49,7 +52,7 @@ export type MetricReportData = {
       graph: GraphsData
     };
   };
-  aiOverview: string;
+  aiOverview: any;
 };
 
 export type GraphsData =  LineGraphData | BarGraphData | PieChartData | null;

@@ -3,7 +3,7 @@ import ReactApexChart from 'react-apexcharts';
 import dayjs from 'dayjs';
 import quarterOfYear from 'dayjs/plugin/quarterOfYear';
 import { ApexOptions } from 'apexcharts';
-import { BarGraphData } from '../../../analytics/components/utils/types';
+import { BarGraphData, xisVals } from '../../../analytics/components/utils/types';
 
 // Extend dayjs with the quarterOfYear plugin
 dayjs.extend(quarterOfYear);
@@ -14,7 +14,7 @@ type Props  ={
 
 const BarGraph: FC<Props> = ({data}) => {
 
-  console.log("Bar graph data", data)
+
   const [series, setSeries] = useState([
     {
       name: "sales",
@@ -29,11 +29,24 @@ const BarGraph: FC<Props> = ({data}) => {
     },
     xaxis: {
       type: 'category',
-
+      labels: {
+        style: {
+          colors: '#fff',
+          fontSize: '12px'
+        },
+      },
     },
     title: {
       text: 'Grouped Labels on the X-axis',
     },
+    yaxis : {
+      labels: {
+        style: {
+          colors: '#fff',
+          fontSize: '12px'
+        },
+      }
+    }
     // tooltip: {
     //   x: { 
     //     formatter: (val: string) => "Q" + dayjs(val).quarter() + " " + dayjs(val).format("YYYY")

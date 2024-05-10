@@ -73,7 +73,7 @@ export const targetOptions: TargetOption[] = [
       },
       {
         id: 3,
-        key: "peopleAssisted",
+        key: "peopleAssistedOutOfPoverty",
         description: "People assisted out of poverty",
         graphs: [
           {
@@ -1222,7 +1222,7 @@ export const targetOptions: TargetOption[] = [
 export const keys = [
   "jobTraining",
   "microloans",
-  "peopleAssisted",
+  "peopleAssistedOutOfPoverty",
   "foodDonation",
   "sustainableAgriculture",
   "peopleFed",

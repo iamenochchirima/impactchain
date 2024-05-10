@@ -81,7 +81,7 @@ const ManuallyUpload: FC<Props> = ({
               {metric.key === "microloans" && (
                 <MircroloansProgram {...{ setManualData, setUploadManually }} />
               )}
-              {metric.key === "peopleAssisted" && (
+              {metric.key === "peopleAssistedOutOfPoverty" && (
                 <PeopleAssistedOutOfPoverty
                   {...{ setManualData, setUploadManually }}
                 />

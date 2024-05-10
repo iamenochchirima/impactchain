@@ -151,7 +151,7 @@ export const getTargetMetrics = (target: ImpactTargetType) => {
             Metric12: [metric12],
           };
         }
-        if (metric.key === "peopleAssisted") {
+        if (metric.key === "peopleAssistedOutOfPoverty") {
           const metric13: Metric13 = {
             key: metric.key,
             name: metric.name,

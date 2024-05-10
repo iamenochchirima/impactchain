@@ -52,13 +52,22 @@ const ShowReport = () => {
 
   useEffect(() => {
     if (metricsWithDataForPeriod && reportPromptResponse) {
-      const _res = getMetricsReportData(
-        metricsWithDataForPeriod,
-        reportPromptResponse
-      );
-      setMetricsReportData(_res);
+      getData(metricsWithDataForPeriod, reportPromptResponse);
     }
   }, [metricsWithDataForPeriod, reportPromptResponse]);
+
+  const getData = async (arg1: Metric[], arg2) => {
+    const _res = await getMetricsReportData(arg1, arg2);
+    if (!_res) {
+      toast.error("Error Generating report", {
+        position: "top-right",
+        autoClose: 10000,
+        hideProgressBar: false,
+      });
+      return;
+    }
+    setMetricsReportData(_res);
+  };
 
   return (
     <div>

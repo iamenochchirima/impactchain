@@ -123,3 +123,16 @@ export const resetPassword = async (email: string, password: string) => {
     return Promise.reject(error);
   }
 };
+
+export const getAiOverview = async (prompt: string) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/api/completions`, {
+      message: prompt
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Failed to get AI overview:", error);
+    return Promise.reject(error);
+  }
+}
+

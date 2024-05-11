@@ -14,3 +14,4 @@ export type Metric = {
   goal: [] | [string];
   iotDevice: [] | [IOTDevice];
 };
+

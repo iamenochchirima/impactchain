@@ -208,7 +208,7 @@ export const getTargetMetrics = (target: ImpactTargetType) => {
             Metric22: [metric22],
           };
         }
-        if (metric.key === "peopleFed") {
+        if (metric.key === "peopleFedWithNutritiousFood") {
           const metric23: Metric23 = {
             key: metric.key,
             name: metric.name,

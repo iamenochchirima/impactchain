@@ -147,7 +147,7 @@ export const targetOptions: TargetOption[] = [
       },
       {
         id: 3,
-        key: "peopleFed",
+        key: "peopleFedWithNutritiousFood",
         description: "People with regular nutritious food",
         graphs: [
           {
@@ -1225,7 +1225,7 @@ export const keys = [
   "peopleAssistedOutOfPoverty",
   "foodDonation",
   "sustainableAgriculture",
-  "peopleFed",
+  "peopleFedWithNutritiousFood",
   "healthcareFunding",
   "healthCheckups",
   "peopleAccessingHealthcare",

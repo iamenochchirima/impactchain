@@ -17,7 +17,7 @@ export const chatGPT = async (req: Request, res: Response) => {
         Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
       },
       body: JSON.stringify({
-        model: "gpt-3.5-turbo",
+        model: "gpt-4",
         messages: [{ role: "user", content: req.body.message }],
         max_tokens: 200,
       }),

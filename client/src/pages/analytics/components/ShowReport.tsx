@@ -1,27 +1,37 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { useEffect, useState } from "react";
-import {
-  getMetricsReportData,
-  getMetricsWithDataForTheGivenTimePeriod,
-} from "./utils/util";
+import { getMetricsReportData } from "./utils/getGraphsData";
 import { toast } from "react-toastify";
-import { setLoadingReport, setReportPromptModal } from "../../../redux/slices/app";
+import {
+  setLoadingReport,
+  setReport,
+  setReportPromptModal,
+} from "../../../redux/slices/app";
 import { Metric } from "../../../utils/types";
-import { MetricReportData } from "./utils/types";
+import { FullReportData} from "./utils/types";
 import SpecificMetric from "./SpecificMetric";
+import ReportPeriod from "./ReportPeriod";
+import {
+  generateOverralOverview,
+  getMetricsWithDataForTheGivenTimePeriod,
+  mergeBarGraphData,
+} from "./utils/processGraphsData";
+import Loading from "./Loading";
 
 const ShowReport = () => {
   const dispatch = useDispatch();
   const [metricsWithDataForPeriod, setMetricsWithDataForPeriod] = useState<
     Metric[] | null
   >(null);
-  const [metricsReportData, setMetricsReportData] = useState<
-    MetricReportData[] | null
-  >(null);
-  const { categoryImpactTargets, reportPromptResponse } = useSelector(
-    (state: RootState) => state.app
-  );
+  const {
+    categoryImpactTargets,
+    reportPromptResponse,
+    userRecord,
+    loadingReport,
+    reportCategory,
+    report
+  } = useSelector((state: RootState) => state.app);
 
   useEffect(() => {
     if (!categoryImpactTargets || !reportPromptResponse) {
@@ -57,6 +67,10 @@ const ShowReport = () => {
   }, [metricsWithDataForPeriod, reportPromptResponse]);
 
   const getData = async (arg1: Metric[], arg2) => {
+    if (!reportPromptResponse || !reportCategory) {
+      console.error("No reportPromptResponse or reportCategory found");
+      return;
+    }
     dispatch(setLoadingReport(true));
     const _res = await getMetricsReportData(arg1, arg2);
     if (!_res) {
@@ -67,24 +81,80 @@ const ShowReport = () => {
       });
       return;
     }
-    setMetricsReportData(_res);
+    const overview = await generateOverralOverview(
+      _res.metricsData,
+      mergeBarGraphData(_res.allBarGraphData),
+      reportPromptResponse.periodOfTime,
+      reportCategory.category
+    );
+
+    if (!overview) {
+      toast.error("Error Generating report", {
+        position: "top-right",
+        autoClose: 10000,
+        hideProgressBar: false,
+      });
+      return;
+    }
+    const report: FullReportData = {
+      overview: overview.choices[0].message,
+      overalGraph: mergeBarGraphData(_res.allBarGraphData),
+      specificMetrics: _res.metricsData,
+    }
+    dispatch(setReport({report}));
     dispatch(setLoadingReport(false));
   };
 
+  console.log("Report overview", report?.overview)
+
   return (
     <div>
-      <div className="overflow-auto">
-        <h1 className="text-3xl font-bold text-center">Report</h1>
-        {/* SPECIFIC METRICS */}
-        <div className="">
-          <h3 className="text-2xl font-bold my-4">Specific metrics data</h3>
+      {loadingReport ? (
+        <Loading />
+      ) : (
+        <div className="overflow-auto">
+          <div className="mt-3">
+            <ReportPeriod periodOfTime={reportPromptResponse?.periodOfTime} />
+          </div>
+          <div className="flex flex-col text-[100px] leading-[0.9] mt-4">
+            <span>ESG</span>
+            <span>Performance</span>
+            <span>Report</span>
+          </div>
+          <div className="flex justify-center items-center my-4">
+            <img
+              src={
+                userRecord?.aboutCompany.logo
+                  ? userRecord?.aboutCompany.logo
+                  : "/i.clogo.png"
+              }
+              alt="Company logo"
+              className="h-75 w-75 mx-auto"
+            />
+          </div>
           <div className="">
-            {metricsReportData?.map((metricData, index) => (
-              <SpecificMetric key={index} {...{ metricData }} />
-            ))}
+            <div className="flex flex-col text-[80px] leading-[0.9] mt-20">
+              <span>Executive</span>
+              <span>Summary</span>
+            </div>
+            
+            <div className="">
+              <p className=" whitespace-pre-wrap my-4">
+                {report?.overview.content}
+              </p>
+            </div>
+          </div>
+          {/* SPECIFIC METRICS */}
+          <div className="">
+            <h3 className="text-2xl font-bold my-4">Specific metrics data</h3>
+            <div className="">
+              {report?.specificMetrics.map((metricData, index) => (
+                <SpecificMetric key={index} {...{ metricData }} />
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

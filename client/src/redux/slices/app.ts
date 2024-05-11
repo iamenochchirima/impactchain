@@ -2,6 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { CategoryType } from "../../pages/analytics/types";
 import { ImpactTargetType, Metric } from "../../utils/types";
 import { UserRecord } from "../../hooks/declarations/data/data.did";
+import { FullReportData } from "../../pages/analytics/components/utils/types";
 
 export type TargetRecordStateType = {
   color: string;
@@ -19,12 +20,6 @@ export type ReportPromptsResponses = {
   selectedMetrics: Metric[];
   caseStudiesTestimonials: string;
 };
-
-export type CurrentMetricInfo = {
-  metric: Metric | null;
-  category: CategoryType | null;
-};
-
 export type SetCategoryImpactTargetsType = {
   categoryImpactTargets: ImpactTargetType[] | null;
 };
@@ -35,6 +30,10 @@ export type AllCategroryMetricsRequest = {
 
 export type ReportCategoryRequest = {
   reportCategory: CategoryType | null;
+};
+
+export type SetReportType = {
+  report: FullReportData | null;
 };
 
 export interface GlobalState {
@@ -54,7 +53,6 @@ export interface GlobalState {
   reportModal: boolean;
   categoryImpactTargets: ImpactTargetType[] | null;
 
-  currentMetricInfo: CurrentMetricInfo | null;
   reportPromptResponse: ReportPromptsResponses | null;
 
   reportPromptModal: boolean;
@@ -65,6 +63,7 @@ export interface GlobalState {
   reportCategory: CategoryType | null;
 
   loadingReport: boolean;
+  report: FullReportData | null;
 }
 
 const initialState: GlobalState = {
@@ -84,7 +83,6 @@ const initialState: GlobalState = {
   reportModal: false,
   categoryImpactTargets: null,
 
-  currentMetricInfo: null,
   reportPromptResponse: null,
   reportPromptModal: false,
 
@@ -94,6 +92,7 @@ const initialState: GlobalState = {
   reportCategory: null,
 
  loadingReport: false,
+  report: null,
 };
 
 export const appSlice = createSlice({
@@ -146,13 +145,6 @@ export const appSlice = createSlice({
     ) => {
       state.impactTargets = action.payload;
     },
-
-    setCurrentMetricInfo: (
-      state: GlobalState,
-      action: PayloadAction<CurrentMetricInfo>
-    ) => {
-      state.currentMetricInfo = action.payload;
-    },
     setReportPromptResponse: (
       state: GlobalState,
       action: PayloadAction<ReportPromptsResponses>
@@ -195,6 +187,10 @@ export const appSlice = createSlice({
 
     setLoadingReport: (state: GlobalState, action: PayloadAction<boolean>) => {
       state.loadingReport = action.payload;
+    },
+
+    setReport : (state: GlobalState, action: PayloadAction<SetReportType>) => {
+      state.report = action.payload.report;
     }
   },
 });
@@ -215,13 +211,12 @@ export const {
   setHelpModal,
   setImpactTargets,
   setCategoryImpactTargets,
-
-  setCurrentMetricInfo,
   setReportPromptResponse,
   setReportPromptModal,
   setAllCategoryMetrics,
   setReportCategory,
-  setLoadingReport
+  setLoadingReport,
+  setReport
 } = appSlice.actions;
 
 export default appSlice.reducer;

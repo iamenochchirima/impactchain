@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setAllCategoryMetrics,
-  setCurrentMetricInfo,
   setReportModal,
   setReportPromptModal,
   setReportPromptResponse,
@@ -82,7 +81,6 @@ const GenerateReportPrompt = () => {
 
   const handleClose = () => {
     dispatch(setReportModal(true));
-    dispatch(setCurrentMetricInfo({ metric: null, category: null }));
     dispatch(setReportPromptModal(false));
   };
 

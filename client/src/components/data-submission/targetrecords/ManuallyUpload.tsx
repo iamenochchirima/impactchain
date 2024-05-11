@@ -94,7 +94,7 @@ const ManuallyUpload: FC<Props> = ({
                   {...{ setManualData, setUploadManually }}
                 />
               )}
-              {metric.key === "peopleFed" && (
+              {metric.key === "peopleFedWithNutritiousFood" && (
                 <NutritiousFoodProgram
                   {...{ setManualData, setUploadManually }}
                 />

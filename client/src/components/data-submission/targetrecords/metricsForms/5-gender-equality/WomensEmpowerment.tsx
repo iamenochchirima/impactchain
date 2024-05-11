@@ -80,7 +80,7 @@ const WomensEmpowermentProgramData = ({ setManualData, setUploadManually }) => {
       //   created: BigInt(Date.now()),
       // };
       // setManualData(WomensEmpowermentProgramData);
-      // setUploadManually(false);
+      setUploadManually(false);
     } catch (error) {
         setSaving(false);
       console.log("Error saving Womens Empowerment Program Data", error);
@@ -89,7 +89,7 @@ const WomensEmpowermentProgramData = ({ setManualData, setUploadManually }) => {
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
-      const file_path = location
+      const file_path = location;
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);

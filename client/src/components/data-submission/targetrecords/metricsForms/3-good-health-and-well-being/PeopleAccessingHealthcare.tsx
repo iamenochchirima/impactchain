@@ -7,10 +7,10 @@ import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
-import { HealthcareAccessData } from "../../../../../hooks/declarations/data/data.did";
+import { HealthcareAccessData as HealthcareAccessDataType } from "../../../../../hooks/declarations/data/data.did";
 
 
-const PeopleAccessingHealthCare = ({ setManualData, setUploadManually }) => {
+const HealthcareAccessData = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
   const [supportFiles, setSupportFiles] = useState<File[] | null>(null);
   const { storageInitiated } = useSelector((state: RootState) => state.app);
@@ -62,7 +62,7 @@ const PeopleAccessingHealthCare = ({ setManualData, setUploadManually }) => {
       const startDateMilliseconds = new Date(startDate).getTime();
       const endDateMilliseconds = new Date(endDate).getTime();
 
-      // const healthcareAccessData : HealthcareAccessData = {
+      // const healthcareAccessData : HealthcareAccessDataType = {
       //   startDate: BigInt(startDateMilliseconds),
       //   endDate: BigInt(endDateMilliseconds),
       //   location: location,
@@ -91,7 +91,7 @@ const PeopleAccessingHealthCare = ({ setManualData, setUploadManually }) => {
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
-      const file_path = location
+      const file_path = location;
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);
@@ -278,7 +278,7 @@ const PeopleAccessingHealthCare = ({ setManualData, setUploadManually }) => {
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Total Health Facilities</label>
-          <input
+          <textarea
             className={`${styles.formInput}`}
             id="totalHealthFacilities"
             placeholder="The Total Number of Health Facilities"
@@ -311,4 +311,4 @@ const PeopleAccessingHealthCare = ({ setManualData, setUploadManually }) => {
   );
 };
 
-export default PeopleAccessingHealthCare;
+export default HealthcareAccessData;

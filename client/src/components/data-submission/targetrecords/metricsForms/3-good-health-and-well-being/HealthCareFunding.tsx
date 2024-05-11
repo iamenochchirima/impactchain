@@ -89,7 +89,7 @@ const HealthcareFunding = ({ setManualData, setUploadManually }) => {
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
-      const file_path = location
+      const file_path = location;
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);
@@ -264,7 +264,7 @@ const HealthcareFunding = ({ setManualData, setUploadManually }) => {
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>The Total Funding Amount</label>
-          <input
+          <textarea
             className={`${styles.formInput}`}
             id="totalFundingAmount"
             placeholder="The Total Funding Amount"

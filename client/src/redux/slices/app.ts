@@ -63,6 +63,8 @@ export interface GlobalState {
 
   allCategoryMetrics: Metric[] | null;
   reportCategory: CategoryType | null;
+
+  loadingReport: boolean;
 }
 
 const initialState: GlobalState = {
@@ -90,6 +92,8 @@ const initialState: GlobalState = {
 
   allCategoryMetrics: null,
   reportCategory: null,
+
+ loadingReport: false,
 };
 
 export const appSlice = createSlice({
@@ -188,6 +192,10 @@ export const appSlice = createSlice({
       state.userInfo = null;
       localStorage.removeItem("userInfo");
     },
+
+    setLoadingReport: (state: GlobalState, action: PayloadAction<boolean>) => {
+      state.loadingReport = action.payload;
+    }
   },
 });
 
@@ -213,6 +221,7 @@ export const {
   setReportPromptModal,
   setAllCategoryMetrics,
   setReportCategory,
+  setLoadingReport
 } = appSlice.actions;
 
 export default appSlice.reducer;

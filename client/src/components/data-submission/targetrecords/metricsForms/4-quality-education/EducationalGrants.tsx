@@ -80,7 +80,7 @@ const EducationalGrantsData = ({ setManualData, setUploadManually }) => {
       //   created: BigInt(Date.now()),
       // };
       // setManualData(EducationalGrantsData);
-      // setUploadManually(false);
+      setUploadManually(false);
     } catch (error) {
         setSaving(false);
       console.log("Error saving Educational Grants Data", error);
@@ -89,7 +89,7 @@ const EducationalGrantsData = ({ setManualData, setUploadManually }) => {
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
-      const file_path = location
+      const file_path = location;
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);

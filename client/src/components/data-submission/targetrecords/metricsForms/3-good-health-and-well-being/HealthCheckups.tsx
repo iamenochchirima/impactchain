@@ -7,10 +7,10 @@ import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
-import {HealthServicesData} from "../../../../../hooks/declarations/data/data.did";
+import { HealthCheckupVaccinationData as HealthCheckupVaccinationDataType } from "../../../../../hooks/declarations/data/data.did";
 
 
-const HealthCheckups = ({ setManualData, setUploadManually }) => {
+const HealthCheckupVaccinationData = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
   const [supportFiles, setSupportFiles] = useState<File[] | null>(null);
   const { storageInitiated } = useSelector((state: RootState) => state.app);
@@ -82,7 +82,7 @@ const HealthCheckups = ({ setManualData, setUploadManually }) => {
       //   created: BigInt(Date.now()),
       // };
       // setManualData(healthCheckupVaccinationData);
-      // setUploadManually(false);
+      setUploadManually(false);
     } catch (error) {
         setSaving(false);
       console.log("Error saving health checkup vaccination data", error);
@@ -91,7 +91,7 @@ const HealthCheckups = ({ setManualData, setUploadManually }) => {
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
-      const file_path = location
+      const file_path = location;
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);
@@ -266,7 +266,7 @@ const HealthCheckups = ({ setManualData, setUploadManually }) => {
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Total Participants</label>
-          <input
+          <textarea
             className={`${styles.formInput}`}
             id="totalParticipants"
             placeholder="The Total number of Participants"
@@ -278,7 +278,7 @@ const HealthCheckups = ({ setManualData, setUploadManually }) => {
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Vaccination Coverage</label>
-          <input
+          <textarea
             className={`${styles.formInput}`}
             id="vaccinationCoverage"
             placeholder="The Vaccination Coverage"
@@ -311,4 +311,4 @@ const HealthCheckups = ({ setManualData, setUploadManually }) => {
   );
 };
 
-export default HealthCheckups;
+export default HealthCheckupVaccinationData;

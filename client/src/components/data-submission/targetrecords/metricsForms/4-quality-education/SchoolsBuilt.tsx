@@ -7,10 +7,10 @@ import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
-// import { SchoolsBuiltSupportedData as SchoolsBuiltSupportedDataType } from "../../../../../hooks/declarations/data/data.did";
+import { SchoolsBuiltSupportedData as SchoolsBuiltSupportedDataType } from "../../../../../hooks/declarations/data/data.did";
 
 
-const SchoolsBuiltData = ({ setManualData, setUploadManually }) => {
+const SchoolsBuiltSupportedData = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
   const [supportFiles, setSupportFiles] = useState<File[] | null>(null);
   const { storageInitiated } = useSelector((state: RootState) => state.app);
@@ -80,7 +80,7 @@ const SchoolsBuiltData = ({ setManualData, setUploadManually }) => {
       //   created: BigInt(Date.now()),
       // };
       // setManualData(schoolsBuiltSupportedData);
-      // setUploadManually(false);
+      setUploadManually(false);
     } catch (error) {
         setSaving(false);
       console.log("Error saving Schools Built Supported Data", error);
@@ -89,7 +89,7 @@ const SchoolsBuiltData = ({ setManualData, setUploadManually }) => {
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
-      const file_path = location
+      const file_path = location;
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);
@@ -297,4 +297,4 @@ const SchoolsBuiltData = ({ setManualData, setUploadManually }) => {
   );
 };
 
-export default SchoolsBuiltData;
+export default SchoolsBuiltSupportedData;

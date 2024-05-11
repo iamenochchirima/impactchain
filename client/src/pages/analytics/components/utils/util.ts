@@ -14,9 +14,11 @@ import {
 export const getMetricsWithDataForTheGivenTimePeriod = (
   response: ReportPromptsResponses
 ) => {
+
   if (response.periodOfTime === "AllTime") {
     return response.selectedMetrics;
   }
+
   if (response.periodOfTime === "1Month") {
     const res = response.selectedMetrics
       .map((metric) => {
@@ -89,7 +91,6 @@ export const getMetricsWithDataForTheGivenTimePeriod = (
           threeYearsAgo.setFullYear(threeYearsAgo.getFullYear() - 3);
           return startDate >= threeYearsAgo;
         });
-
         return { ...metric, data };
       })
       .filter((metric) => metric.data.length >= 1);
@@ -151,10 +152,11 @@ export const getMetricsReportData = async (
       )}, please analyze the trends in the number of beneficiaries over time, highlighting any seasonal trends or year-on-year growth. Provide a detailed overview of these trends, write a brief overview which we can put the users report pdf so they can understand the data and the trends and areas of improvement needed to be made. Here is an example of what the overview should look like: "Overview: The job training programs, including the Web Development Bootcamp in Cape Town and the Data Science Training in Johannesburg, aim to equip participants with essential technical skills in high-demand fields. These programs, each spanning 3 to 4 months, are strategically located to maximize accessibility and impact.
       Performance: The programs have trained 270 beneficiaries this year, marking a 25% increase from the previous period. While the Web Development Bootcamp achieved high data verification, the Data Science Training faced challenges with verifying data, slightly impacting the overall data integrity.
       Future Goals: Enhance data verification across all programs to ensure robust and reliable reporting of impacts. Plans to expand these initiatives to additional cities are set, aiming to increase the beneficiary count by at least 30% in the next cycle. Additionally, integrating soft skills training into the curriculum is targeted to provide a more holistic educational experience."`;
+
       const res = await getAiOverview(prompt);
 
       if (!res.choices) {
-        console.error("No choices found");
+        console.error("No choices found", res);
         return;
       }
 

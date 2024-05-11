@@ -7,6 +7,7 @@ import { setReportModal } from "../../../redux/slices/app";
 import { pdfjs, Document, Page } from "react-pdf";
 import { PDFDocumentProxy, PDFPageProxy } from "pdfjs-dist";
 import ShowReport from "./ShowReport";
+import Loading from "./Loading";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -17,7 +18,7 @@ interface PdfTextExtractorProps {
 const Report = () => {
   const [text, setText] = useState<string>("");
   const dispatch = useDispatch();
-  const { userRecord, userInfo, reportCategory  } = useSelector(
+  const { userRecord, userInfo, reportCategory, loadingReport  } = useSelector(
     (state: RootState) => state.app
   );
 
@@ -29,7 +30,7 @@ const Report = () => {
     <div className="fixed z-50  inset-0 text-white overflow-y-auto bg-black bg-opacity-75">
       <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-TelegraphRegular">
         <div className="bg-custom-gray fixed rounded-xl mx-10 w-[90%] sm:w-3/4 md:w-[60%] px-6 py-2 min-w-min max-w-full ">
-          <div className="mb-10">
+         {loadingReport ? <Loading /> :  <div className="mb-10">
             <div className="flex justify-between items-center">
               <img
                 src={userRecord ? "i.c.logo2.png" : "i.c.logo2.png"}
@@ -77,7 +78,7 @@ const Report = () => {
                 </span>
               </div>
             </div>
-          </div>
+          </div>}
         </div>
       </div>
     </div>

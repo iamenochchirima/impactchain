@@ -10,7 +10,7 @@ import FilesInput from "../support/FilesInput";
 import {WorkplaceGenderEqualityPoliciesData as WorkplaceGenderEqualityPoliciesDataType } from "../../../../../hooks/declarations/data/data.did";
 
 
-const WorkplaceGenderEqualityPolicies = ({ setManualData, setUploadManually }) => {
+const WorkplaceGenderEqualityPoliciesData = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
   const [supportFiles, setSupportFiles] = useState<File[] | null>(null);
   const { storageInitiated } = useSelector((state: RootState) => state.app);
@@ -62,6 +62,7 @@ const WorkplaceGenderEqualityPolicies = ({ setManualData, setUploadManually }) =
 
       // const WorkplaceGenderEqualityPoliciesData : WorkplaceGenderEqualityPoliciesDataType = {
       //   startDate: BigInt(startDateMilliseconds),
+      //   endDate: BigInt(endDateMilliseconds),
       //   location: location,
       //   policyName: policyName,
       //   policyDescription: policyDescription,
@@ -78,7 +79,7 @@ const WorkplaceGenderEqualityPolicies = ({ setManualData, setUploadManually }) =
       //   created: BigInt(Date.now()),
       // };
       // setManualData(WorkplaceGenderEqualityPoliciesData);
-      // setUploadManually(false);
+      setUploadManually(false);
     } catch (error) {
         setSaving(false);
       console.log("Error saving Work Place Gender Equality Policies Data", error);
@@ -87,7 +88,7 @@ const WorkplaceGenderEqualityPolicies = ({ setManualData, setUploadManually }) =
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
-      const file_path = location
+      const file_path = location;
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);
@@ -295,4 +296,4 @@ const WorkplaceGenderEqualityPolicies = ({ setManualData, setUploadManually }) =
   );
 };
 
-export default WorkplaceGenderEqualityPolicies;
+export default WorkplaceGenderEqualityPoliciesData;

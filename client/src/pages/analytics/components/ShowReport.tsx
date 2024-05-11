@@ -6,7 +6,7 @@ import {
   getMetricsWithDataForTheGivenTimePeriod,
 } from "./utils/util";
 import { toast } from "react-toastify";
-import { setReportPromptModal } from "../../../redux/slices/app";
+import { setLoadingReport, setReportPromptModal } from "../../../redux/slices/app";
 import { Metric } from "../../../utils/types";
 import { MetricReportData } from "./utils/types";
 import SpecificMetric from "./SpecificMetric";
@@ -57,6 +57,7 @@ const ShowReport = () => {
   }, [metricsWithDataForPeriod, reportPromptResponse]);
 
   const getData = async (arg1: Metric[], arg2) => {
+    dispatch(setLoadingReport(true));
     const _res = await getMetricsReportData(arg1, arg2);
     if (!_res) {
       toast.error("Error Generating report", {
@@ -67,6 +68,7 @@ const ShowReport = () => {
       return;
     }
     setMetricsReportData(_res);
+    dispatch(setLoadingReport(false));
   };
 
   return (

@@ -1,12 +1,12 @@
-import React from 'react';
+import RiseLoader from "react-spinners/RiseLoader";
 
 const Loading = () => {
   return (
-    <div className="flex justify-center items-center h-screen">
-      <span>
-        Loading
-      </span>
-    </div>
+    <div className="flex bg-black text-white justify-center items-center h-screen">
+    <span>
+    <RiseLoader color="#4FEF64" />
+    </span>
+  </div>
   );
 };
 

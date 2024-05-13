@@ -34,8 +34,6 @@ export const mergeBarGraphData = (graphs: BarGraphData[]): BarGraphData => {
     })
   );
 
-  averageData.sort((a, b) => a.x.localeCompare(b.x));
-
   const uniqueCategories = new Set<string>();
   graphs.forEach((graph) => {
     graph.categories.forEach((category) => {

@@ -44,40 +44,42 @@ const SpecificMetric: FC<Props> = ({ metricData }) => {
 
   return (
     <div>
-      <h3 className="text-xl mb-3">{metricData.name}</h3>
+      <h3 className="text-2xl font-bold  my-4 underline">{metricData.name}</h3>
       <p className="whitespace-pre-wrap mb-3">
         {metricData.aiOverview.content}
       </p>
 
-      {graphs[1]?.graph && isLineGraphData(graphs[1].graph) && (
-        <LineGraph data={graphs[1].graph} />
-      )}
-      {graphs[1]?.graph && isPieChartData(graphs[1].graph) && (
-        <PieChart data={graphs[1].graph} />
-      )}
-      {graphs[1]?.graph && isBarGraphData(graphs[1].graph) && (
-        <BarGraph data={graphs[1].graph} />
-      )}
+      <div className="border-x border-y border-custom-green rounded-lg p-3 ">
+        {graphs[1]?.graph && isLineGraphData(graphs[1].graph) && (
+          <LineGraph data={graphs[1].graph} graphKey={metricData.key} />
+        )}
+        {graphs[1]?.graph && isPieChartData(graphs[1].graph) && (
+          <PieChart data={graphs[1].graph} graphKey={metricData.key}/>
+        )}
+        {graphs[1]?.graph && isBarGraphData(graphs[1].graph) && (
+          <BarGraph data={graphs[1].graph} graphKey={metricData.key} />
+        )}
 
-      {graphs[2]?.graph && isLineGraphData(graphs[2].graph) && (
-        <LineGraph data={graphs[2].graph} />
-      )}
-      {graphs[2]?.graph && isPieChartData(graphs[2].graph) && (
-        <PieChart data={graphs[2].graph} />
-      )}
-      {graphs[2]?.graph && isBarGraphData(graphs[2].graph) && (
-        <BarGraph data={graphs[2].graph} />
-      )}
+        {graphs[2]?.graph && isLineGraphData(graphs[2].graph) && (
+          <LineGraph data={graphs[2].graph} graphKey={metricData.key} />
+        )}
+        {graphs[2]?.graph && isPieChartData(graphs[2].graph) && (
+          <PieChart data={graphs[2].graph} graphKey={metricData.key} />
+        )}
+        {graphs[2]?.graph && isBarGraphData(graphs[2].graph) && (
+          <BarGraph data={graphs[2].graph} graphKey={metricData.key} />
+        )}
 
-      {graphs[3]?.graph && isLineGraphData(graphs[3].graph) && (
-        <LineGraph data={graphs[3].graph} />
-      )}
-      {graphs[3]?.graph && isPieChartData(graphs[3].graph) && (
-        <PieChart data={graphs[3].graph} />
-      )}
-      {graphs[3]?.graph && isBarGraphData(graphs[3].graph) && (
-        <BarGraph data={graphs[3].graph} />
-      )}
+        {graphs[3]?.graph && isLineGraphData(graphs[3].graph) && (
+          <LineGraph data={graphs[3].graph} graphKey={metricData.key} />
+        )}
+        {graphs[3]?.graph && isPieChartData(graphs[3].graph) && (
+          <PieChart data={graphs[3].graph} graphKey={metricData.key} />
+        )}
+        {graphs[3]?.graph && isBarGraphData(graphs[3].graph) && (
+          <BarGraph data={graphs[3].graph} graphKey={metricData.key} />
+        )}
+      </div>
     </div>
   );
 };

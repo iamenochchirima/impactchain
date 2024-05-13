@@ -290,7 +290,7 @@ export const getMetricsReportData = async (
           2: undefined,
           3: undefined,
         },
-        aiOverview: "AI Overview",
+        aiOverview: res.choices[0].message,
       };
 
       metricsData.push(_reportData);

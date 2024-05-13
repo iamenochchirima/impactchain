@@ -1,31 +1,99 @@
-import React, { useState, FunctionComponent } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { formatDate } from "../../../utils/time";
 import { setReportModal } from "../../../redux/slices/app";
-import { pdfjs, Document, Page } from "react-pdf";
-import { PDFDocumentProxy, PDFPageProxy } from "pdfjs-dist";
 import ShowReport from "./ShowReport";
 import { RiFileEditFill } from "react-icons/ri";
-import Loading from "./Loading";
+import axios from "axios";
+import { saveAs } from 'file-saver';
+import { API_BASE_URL } from "../../../hooks/exporter";
+import { MetricReportData } from "./utils/types";
+import { getReportTimeTitle } from "./utils/utils";
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
-
-interface PdfTextExtractorProps {
-  file: string | File | ArrayBuffer;
-}
 
 const Report = () => {
-  const [text, setText] = useState<string>("");
   const dispatch = useDispatch();
-  const { userRecord, userInfo, reportCategory, loadingReport } = useSelector(
+  const { userRecord, userInfo, reportCategory, reportPromptResponse, report, metricsCharts} = useSelector(
     (state: RootState) => state.app
   );
 
   const handleClose = () => {
     dispatch(setReportModal(false));
   };
+
+  const getDataUri = async (chartId) => {
+    return await ApexCharts.exec(chartId, "dataURI").then(({ imgURI }) => {
+      return imgURI;
+    });
+  };
+
+const handleDownloadChart = async () => {
+  const uri1 = await getDataUri("bar-graph");
+  const uri2 = await getDataUri("linegraph");
+
+  const a = document.createElement("a");
+  a.href = uri1;
+  a.download = "bar-graph.png";
+  a.click();
+
+  const b = document.createElement("a");
+  b.href = uri2;
+  b.download = "line-graph.png";
+  b.click();
+  
+}
+
+ type TemplateMetricReportData = {
+  name: string;
+  key: string;
+  graph: File;
+  aiOverview: any;
+};
+const createAndDownloadPdf = () => {
+if (!reportPromptResponse || !reportCategory || !report || !userRecord || !metricsCharts) {
+    console.error("No report data found");
+    return;
+  }
+
+  const templateMetrics: TemplateMetricReportData[] = report.specificMetrics.map((metric) => {
+    const chart = metricsCharts.find((chart) => chart.key === metric.key);
+    if (!chart) {
+      console.error("No chart found for metric");
+      return undefined; 
+    }
+    return {
+      name: metric.name,
+      key: metric.key,
+      graph: chart.chart,
+      aiOverview: metric.aiOverview,
+    };
+  }).filter((metric): metric is TemplateMetricReportData => metric !== undefined); 
+
+  const overalGarph = metricsCharts.find((chart) => chart.key === "overalGraph");
+
+  if (!overalGarph) {
+    console.error("No overall graph found");
+    return;
+  }
+
+  const body = {
+    period: getReportTimeTitle(reportPromptResponse.periodOfTime),
+    logo: userRecord.aboutCompany.logo,
+    companyName: userRecord.aboutCompany.name,
+    overview: report.overview,
+    overalGraph: overalGarph.chart,
+    metrics: templateMetrics,
+  }
+  axios.post(`${API_BASE_URL}/api/create-pdf`, body)
+    .then(() => axios.get(`${API_BASE_URL}/api/fetch-pdf`, { responseType: 'blob' }))
+    .then((res) => {
+      const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
+      saveAs(pdfBlob, 'newPdf.pdf');
+    })
+}
+
+ 
 
   return (
     <div className="fixed z-50  inset-0 text-white overflow-y-auto bg-black bg-opacity-75">
@@ -52,12 +120,12 @@ const Report = () => {
                   {userRecord ? formatDate(Number(userRecord.created)) : 0}
                 </span>
               </div>
-              <button
+             {report &&  <button
                 className="bg-custom-green px-4 py-1.5 rounded-3xl text-black font-bold"
-                onClick={() => console.log("Download report")}
+                onClick={createAndDownloadPdf}
               >
                 Download Report
-              </button>
+              </button>}
             </div>
             <hr className="border-2 border-white" />
             <div className="my-4 flex justify-between items-center">
@@ -72,7 +140,7 @@ const Report = () => {
               </button>
             </div>
             <div className="w-full">
-              <div className="bg-black rounded-3xl w-full overflow-y-auto max-h-[600px]  p-4">
+              <div className="bg-black rounded-3xl w-full overflow-y-auto max-h-[600px]  p-4 ">
                 <ShowReport />
               </div>
             </div>

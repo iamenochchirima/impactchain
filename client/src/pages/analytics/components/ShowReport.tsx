@@ -9,7 +9,7 @@ import {
   setReportPromptModal,
 } from "../../../redux/slices/app";
 import { Metric } from "../../../utils/types";
-import { FullReportData} from "./utils/types";
+import { FullReportData } from "./utils/types";
 import SpecificMetric from "./SpecificMetric";
 import ReportPeriod from "./ReportPeriod";
 import {
@@ -18,6 +18,7 @@ import {
   mergeBarGraphData,
 } from "./utils/processGraphsData";
 import Loading from "./Loading";
+import BarGraph from "../../dashboard/components/Charts/BarGraph";
 
 const ShowReport = () => {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const ShowReport = () => {
     userRecord,
     loadingReport,
     reportCategory,
-    report
+    report,
   } = useSelector((state: RootState) => state.app);
 
   useEffect(() => {
@@ -87,7 +88,6 @@ const ShowReport = () => {
       reportPromptResponse.periodOfTime,
       reportCategory.category
     );
-
     if (!overview) {
       toast.error("Error Generating report", {
         position: "top-right",
@@ -100,19 +100,17 @@ const ShowReport = () => {
       overview: overview.choices[0].message,
       overalGraph: mergeBarGraphData(_res.allBarGraphData),
       specificMetrics: _res.metricsData,
-    }
-    dispatch(setReport({report}));
+    };
+    dispatch(setReport({ report }));
     dispatch(setLoadingReport(false));
   };
-
-  console.log("Report overview", report?.overview)
-
+  
   return (
     <div>
       {loadingReport ? (
         <Loading />
       ) : (
-        <div className="overflow-auto">
+        <div id="chartContainer" className="overflow-auto ">
           <div className="mt-3">
             <ReportPeriod periodOfTime={reportPromptResponse?.periodOfTime} />
           </div>
@@ -137,21 +135,22 @@ const ShowReport = () => {
               <span>Executive</span>
               <span>Summary</span>
             </div>
-            
             <div className="">
               <p className=" whitespace-pre-wrap my-4">
                 {report?.overview.content}
               </p>
             </div>
+            {report && <BarGraph data={report.overalGraph} graphKey="overalGraph" />}
+          </div>
+          <div className="flex flex-col text-[100px] leading-[0.9] mt-4">
+            <span>Specific</span>
+            <span>Metrics</span>
           </div>
           {/* SPECIFIC METRICS */}
           <div className="">
-            <h3 className="text-2xl font-bold my-4">Specific metrics data</h3>
-            <div className="">
-              {report?.specificMetrics.map((metricData, index) => (
-                <SpecificMetric key={index} {...{ metricData }} />
-              ))}
-            </div>
+            {report?.specificMetrics.map((metricData, index) => (
+              <SpecificMetric key={index} {...{ metricData }} />
+            ))}
           </div>
         </div>
       )}

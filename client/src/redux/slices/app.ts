@@ -36,6 +36,15 @@ export type SetReportType = {
   report: FullReportData | null;
 };
 
+export type MetricCharts = {
+  key: string;
+  chart: File;
+}
+
+export type MetricsChartsRequest = {
+  metricsCharts: MetricCharts[] | null;
+}
+
 export interface GlobalState {
   isAuthenticated: boolean;
   userInfo: any | null;
@@ -64,6 +73,8 @@ export interface GlobalState {
 
   loadingReport: boolean;
   report: FullReportData | null;
+
+  metricsCharts: MetricCharts[] | null;
 }
 
 const initialState: GlobalState = {
@@ -93,6 +104,7 @@ const initialState: GlobalState = {
 
  loadingReport: false,
   report: null,
+  metricsCharts: null,
 };
 
 export const appSlice = createSlice({
@@ -191,6 +203,9 @@ export const appSlice = createSlice({
 
     setReport : (state: GlobalState, action: PayloadAction<SetReportType>) => {
       state.report = action.payload.report;
+    },
+    setMetricsCharts: (state: GlobalState, action: PayloadAction<MetricsChartsRequest>) => {
+      state.metricsCharts = action.payload.metricsCharts;
     }
   },
 });
@@ -216,7 +231,8 @@ export const {
   setAllCategoryMetrics,
   setReportCategory,
   setLoadingReport,
-  setReport
+  setReport,
+  setMetricsCharts
 } = appSlice.actions;
 
 export default appSlice.reducer;

@@ -21,10 +21,6 @@ type Props = {
 };
 
 const BarGraph: FC<Props> = ({ data, graphKey }) => {
-  const [chartMounted, setChartMounted] = useState(false);
-  const [chartUpdated, setChartUpdated] = useState(false);
-  const { metricsCharts } = useSelector((state: RootState) => state.app);
-  const dispatch = useDispatch();
   const [series, setSeries] = useState([
     {
       name: "sales",
@@ -39,15 +35,7 @@ const BarGraph: FC<Props> = ({ data, graphKey }) => {
       toolbar: {
         show: true,
       },
-      id: "bar-graph",
-      events: {
-        mounted: (chartContext, config) => {
-          setChartMounted(true);
-        },
-        updated: (chartContext, config) => {
-          setChartUpdated(true);
-        },
-      },
+      id: graphKey,
     },
 
     xaxis: {
@@ -94,42 +82,6 @@ const BarGraph: FC<Props> = ({ data, graphKey }) => {
     },
   });
 
-  const getDataUri = async (chartId) => {
-    return await ApexCharts.exec(chartId, "dataURI")
-      .then(({ imgURI }) => {
-        return imgURI;
-      })
-      .catch((e) => {
-        console.error("Error fetching Data URI", e);
-      });
-  };
-
-  useEffect(() => {
-    if (chartMounted) {
-      setTimeout(() => {
-        getDataUri("bar-graph").then((uri) => {
-          const chartFile = new File([uri], "bar-graph.png", {
-            type: "image/png",
-          });
-          const metricChart: MetricCharts = {
-            key: graphKey,
-            chart: chartFile,
-          };
-          if (metricsCharts) {
-            const existingMetricChart = metricsCharts.find(
-              (metric) => metric.key === graphKey
-            );
-            if (!existingMetricChart) {
-              const newMetricsCharts = [...metricsCharts, metricChart];
-              dispatch(setMetricsCharts({ metricsCharts: newMetricsCharts }));
-            }
-          } else {
-            dispatch(setMetricsCharts({ metricsCharts: [metricChart] }));
-          }
-        });
-      }, 1000);
-    }
-  }, [dispatch, metricsCharts, graphKey, chartMounted, chartUpdated]);
 
 
   return (

@@ -1,7 +1,7 @@
 type TemplateMetricReportData = {
   name: string;
   key: string;
-  graph: File;
+  graph: string;
   aiOverview: any;
 };
 
@@ -17,11 +17,10 @@ export const pdfTemplate = ({
   logo: string;
   companyName: string;
   overview: any;
-  overalGraph: File;
+  overalGraph: string;
   metrics: TemplateMetricReportData[];
 }): string => {
 
-  console.log("period", period, "logo", logo, "companyName", companyName, "overview", overview, "overalGraph", overalGraph, "metrics", metrics);
   return `
 <!DOCTYPE html>
 <html lang="en">
@@ -105,7 +104,7 @@ export const pdfTemplate = ({
   </head>
   <body>
     <div class="container">
-      <span class="header">MONTHLY REPORT — MARCH 2023</span>
+      <span class="header">${period}</span>
       <div class="report-title-div">
         <span>ESG</span>
         <span>Performance</span>
@@ -114,6 +113,9 @@ export const pdfTemplate = ({
       <div class="logo-div">
         <img class="logo" src=${logo} alt="logo" />
       </div>
+      <div class="logo-div">
+      <img class="logo" src=${overalGraph} alt="logo" />
+    </div>
       <div class="footer">POWERED BY impact.chain</div>
     </div>
   </body>

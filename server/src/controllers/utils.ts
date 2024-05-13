@@ -26,7 +26,6 @@ export const createPdf = async (req: Request, res: Response) => {
     });
 
     await browser.close();
-    console.log("PDF created successfully at", pdfPath)
     res.send("PDF created successfully!");
   } catch (error) {
     console.error("Error creating PDF:", error);

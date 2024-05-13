@@ -8,13 +8,12 @@ import { RiFileEditFill } from "react-icons/ri";
 import axios from "axios";
 import { saveAs } from 'file-saver';
 import { API_BASE_URL } from "../../../hooks/exporter";
-import { MetricReportData } from "./utils/types";
 import { getReportTimeTitle } from "./utils/utils";
 
 
 const Report = () => {
   const dispatch = useDispatch();
-  const { userRecord, userInfo, reportCategory, reportPromptResponse, report, metricsCharts} = useSelector(
+  const { userRecord, userInfo, reportCategory, reportPromptResponse, report} = useSelector(
     (state: RootState) => state.app
   );
 
@@ -23,14 +22,15 @@ const Report = () => {
   };
 
   const getDataUri = async (chartId) => {
+    console.log(chartId)
     return await ApexCharts.exec(chartId, "dataURI").then(({ imgURI }) => {
       return imgURI;
     });
   };
 
 const handleDownloadChart = async () => {
-  const uri1 = await getDataUri("bar-graph");
-  const uri2 = await getDataUri("linegraph");
+  const uri1 = await getDataUri("overalGraph");
+  const uri2 = await getDataUri("jobTraining");
 
   const a = document.createElement("a");
   a.href = uri1;
@@ -47,44 +47,38 @@ const handleDownloadChart = async () => {
  type TemplateMetricReportData = {
   name: string;
   key: string;
-  graph: File;
+  graph: string;
   aiOverview: any;
 };
-const createAndDownloadPdf = () => {
-if (!reportPromptResponse || !reportCategory || !report || !userRecord || !metricsCharts) {
+const createAndDownloadPdf = async () => {
+if (!reportPromptResponse || !reportCategory || !report || !userRecord ) {
     console.error("No report data found");
     return;
   }
 
-  const templateMetrics: TemplateMetricReportData[] = report.specificMetrics.map((metric) => {
-    const chart = metricsCharts.find((chart) => chart.key === metric.key);
-    if (!chart) {
-      console.error("No chart found for metric");
-      return undefined; 
-    }
-    return {
+  const templateMetrics: TemplateMetricReportData[] =  []
+  const overalGraphChartUri = await getDataUri("overalGraph");
+
+  for (const metric of report.specificMetrics) {
+    const chartUri = await getDataUri(metric.key);
+
+    templateMetrics.push({
       name: metric.name,
       key: metric.key,
-      graph: chart.chart,
+      graph: chartUri,
       aiOverview: metric.aiOverview,
-    };
-  }).filter((metric): metric is TemplateMetricReportData => metric !== undefined); 
-
-  const overalGarph = metricsCharts.find((chart) => chart.key === "overalGraph");
-
-  if (!overalGarph) {
-    console.error("No overall graph found");
-    return;
+    });
   }
-
+   
   const body = {
     period: getReportTimeTitle(reportPromptResponse.periodOfTime),
     logo: userRecord.aboutCompany.logo,
     companyName: userRecord.aboutCompany.name,
     overview: report.overview,
-    overalGraph: overalGarph.chart,
+    overalGraph: overalGraphChartUri,
     metrics: templateMetrics,
   }
+
   axios.post(`${API_BASE_URL}/api/create-pdf`, body)
     .then(() => axios.get(`${API_BASE_URL}/api/fetch-pdf`, { responseType: 'blob' }))
     .then((res) => {

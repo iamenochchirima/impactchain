@@ -19,10 +19,6 @@ type Props = {
 };
 
 const LineGraph: FC<Props> = ({ data, graphKey }) => {
-  const { metricsCharts } = useSelector((state: RootState) => state.app);
-  const [chartMounted, setChartMounted] = useState(false);
-  const [chartUpdated, setChartUpdated] = useState(false);
-  const dispatch = useDispatch();
   const [state, setState] = useState<LineGraphState>({
     series: [
       {
@@ -39,15 +35,7 @@ const LineGraph: FC<Props> = ({ data, graphKey }) => {
       zoom: {
         enabled: false,
       },
-      id: "linegraph",
-      events: {
-        mounted: (chartContext, config) => {
-          setChartMounted(true);
-        },
-        updated: (chartContext, config) => {
-          setChartUpdated(true);
-        },
-      },
+      id: graphKey,
     },
     dataLabels: {
       enabled: false,
@@ -75,43 +63,6 @@ const LineGraph: FC<Props> = ({ data, graphKey }) => {
       theme: "light",
     },
   };
-
-  const getDataUri = async (chartId) => {
-    return await ApexCharts.exec(chartId, "dataURI")
-      .then(({ imgURI }) => {
-        return imgURI;
-      })
-      .catch((e) => {
-        console.error("Error fetching Data URI", e);
-      });
-  };
-
-  useEffect(() => {
-    if (chartMounted) {
-      setTimeout(() => {
-        getDataUri("line-graph").then((uri) => {
-          const chartFile = new File([uri], "line-graph.png", {
-            type: "image/png",
-          });
-          const metricChart: MetricCharts = {
-            key: graphKey,
-            chart: chartFile,
-          };
-          if (metricsCharts) {
-            const existingMetricChart = metricsCharts.find(
-              (metric) => metric.key === graphKey
-            );
-            if (!existingMetricChart) {
-              const newMetricsCharts = [...metricsCharts, metricChart];
-              dispatch(setMetricsCharts({ metricsCharts: newMetricsCharts }));
-            }
-          } else {
-            dispatch(setMetricsCharts({ metricsCharts: [metricChart] }));
-          }
-        });
-      }, 1000);
-    }
-  }, [dispatch, metricsCharts, graphKey, chartMounted, chartUpdated]);
 
   return (
     <div>

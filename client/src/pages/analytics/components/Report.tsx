@@ -6,88 +6,75 @@ import { setReportModal } from "../../../redux/slices/app";
 import ShowReport from "./ShowReport";
 import { RiFileEditFill } from "react-icons/ri";
 import axios from "axios";
-import { saveAs } from 'file-saver';
+import { saveAs } from "file-saver";
 import { API_BASE_URL } from "../../../hooks/exporter";
 import { getReportTimeTitle } from "./utils/utils";
 
-
 const Report = () => {
   const dispatch = useDispatch();
-  const { userRecord, userInfo, reportCategory, reportPromptResponse, report} = useSelector(
-    (state: RootState) => state.app
-  );
+  const { userRecord, userInfo, reportCategory, reportPromptResponse, report } =
+    useSelector((state: RootState) => state.app);
 
   const handleClose = () => {
     dispatch(setReportModal(false));
   };
 
   const getDataUri = async (chartId) => {
-    console.log(chartId)
+    console.log(chartId);
     return await ApexCharts.exec(chartId, "dataURI").then(({ imgURI }) => {
       return imgURI;
     });
   };
 
-const handleDownloadChart = async () => {
-  const uri1 = await getDataUri("overalGraph");
-  const uri2 = await getDataUri("jobTraining");
+  type TemplateMetricReportData = {
+    name: string;
+    key: string;
+    graph: string;
+    aiOverview: any;
+  };
+  const createAndDownloadPdf = async () => {
+    if (!reportPromptResponse || !reportCategory || !report || !userRecord) {
+      console.error("No report data found");
+      return;
+    }
 
-  const a = document.createElement("a");
-  a.href = uri1;
-  a.download = "bar-graph.png";
-  a.click();
+    try {
+      const templateMetrics: TemplateMetricReportData[] = [];
+    const overalGraphChartUri = await getDataUri("overalGraph");
 
-  const b = document.createElement("a");
-  b.href = uri2;
-  b.download = "line-graph.png";
-  b.click();
-  
-}
+    for (const metric of report.specificMetrics) {
+      const chartUri = await getDataUri(metric.key);
 
- type TemplateMetricReportData = {
-  name: string;
-  key: string;
-  graph: string;
-  aiOverview: any;
-};
-const createAndDownloadPdf = async () => {
-if (!reportPromptResponse || !reportCategory || !report || !userRecord ) {
-    console.error("No report data found");
-    return;
-  }
+      templateMetrics.push({
+        name: metric.name,
+        key: metric.key,
+        graph: chartUri,
+        aiOverview: metric.aiOverview,
+      });
+    }
 
-  const templateMetrics: TemplateMetricReportData[] =  []
-  const overalGraphChartUri = await getDataUri("overalGraph");
+    const body = {
+      period: getReportTimeTitle(reportPromptResponse.periodOfTime),
+      logo: userRecord.aboutCompany.logo,
+      companyName: userRecord.aboutCompany.name,
+      overview: report.overview,
+      overalGraph: overalGraphChartUri,
+      metrics: templateMetrics,
+    };
 
-  for (const metric of report.specificMetrics) {
-    const chartUri = await getDataUri(metric.key);
-
-    templateMetrics.push({
-      name: metric.name,
-      key: metric.key,
-      graph: chartUri,
-      aiOverview: metric.aiOverview,
-    });
-  }
-   
-  const body = {
-    period: getReportTimeTitle(reportPromptResponse.periodOfTime),
-    logo: userRecord.aboutCompany.logo,
-    companyName: userRecord.aboutCompany.name,
-    overview: report.overview,
-    overalGraph: overalGraphChartUri,
-    metrics: templateMetrics,
-  }
-
-  axios.post(`${API_BASE_URL}/api/create-pdf`, body)
-    .then(() => axios.get(`${API_BASE_URL}/api/fetch-pdf`, { responseType: 'blob' }))
-    .then((res) => {
-      const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
-      saveAs(pdfBlob, 'newPdf.pdf');
-    })
-}
-
- 
+    axios
+      .post(`${API_BASE_URL}/api/create-pdf`, body)
+      .then(() =>
+        axios.get(`${API_BASE_URL}/api/fetch-pdf`, { responseType: "blob" })
+      )
+      .then((res) => {
+        const pdfBlob = new Blob([res.data], { type: "application/pdf" });
+        saveAs(pdfBlob, "newPdf.pdf");
+      });
+    } catch (error) {
+      console.log("Error generating pdf", error)
+    }
+  };
 
   return (
     <div className="fixed z-50  inset-0 text-white overflow-y-auto bg-black bg-opacity-75">
@@ -114,19 +101,19 @@ if (!reportPromptResponse || !reportCategory || !report || !userRecord ) {
                   {userRecord ? formatDate(Number(userRecord.created)) : 0}
                 </span>
               </div>
-             {report &&  <button
-                className="bg-custom-green px-4 py-1.5 rounded-3xl text-black font-bold"
-                onClick={createAndDownloadPdf}
-              >
-                Download Report
-              </button>}
+              {report && (
+                <button
+                  className="bg-custom-green px-4 py-1.5 rounded-3xl text-black font-bold"
+                  onClick={createAndDownloadPdf}
+                >
+                  Download Report
+                </button>
+              )}
             </div>
             <hr className="border-2 border-white" />
             <div className="my-4 flex justify-between items-center">
               <h3 className="text-xl">{reportCategory?.title}</h3>
-              <button
-                className="text-custom-green px-4 py-1.5 font-bold flex items-center gap-2 hover:bg-gray-400 hover:text-black rounded-full"          
-              >
+              <button className="text-custom-green px-4 py-1.5 font-bold flex items-center gap-2 hover:bg-gray-400 hover:text-black rounded-full">
                 <span>
                   <RiFileEditFill />
                 </span>

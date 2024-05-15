@@ -1,5 +1,5 @@
 import React from "react";
-import { getReportTimeTitle } from "./utils/utils";
+import { getReportTimeTitle } from "../utils/utils";
 
 interface ReportPeriodProps {
   periodOfTime?: string;

@@ -1,24 +1,24 @@
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../redux/store";
+import { RootState } from "../../../../redux/store";
 import { useEffect, useState } from "react";
-import { getMetricsReportData } from "./utils/getGraphsData";
+import { getMetricsReportData } from "../utils/getGraphsData";
 import { toast } from "react-toastify";
 import {
   setLoadingReport,
   setReport,
   setReportPromptModal,
-} from "../../../redux/slices/app";
-import { Metric } from "../../../utils/types";
-import { FullReportData } from "./utils/types";
+} from "../../../../redux/slices/app";
+import { Metric } from "../../../../utils/types";
+import { FullReportData } from "../utils/types";
 import SpecificMetric from "./SpecificMetric";
 import ReportPeriod from "./ReportPeriod";
 import {
   generateOverralOverview,
   getMetricsWithDataForTheGivenTimePeriod,
   mergeBarGraphData,
-} from "./utils/processGraphsData";
-import Loading from "./Loading";
-import BarGraph from "../../dashboard/components/Charts/BarGraph";
+} from "../utils/processGraphsData";
+import Loading from "../Loading";
+import BarGraph from "../../../dashboard/components/Charts/BarGraph";
 
 const ShowReport = () => {
   const dispatch = useDispatch();
@@ -63,7 +63,7 @@ const ShowReport = () => {
 
   useEffect(() => {
     if (metricsWithDataForPeriod && reportPromptResponse) {
-      getData(metricsWithDataForPeriod, reportPromptResponse);
+      getData(metricsWithDataForPeriod, reportPromptResponse.periodOfTime);
     }
   }, [metricsWithDataForPeriod, reportPromptResponse]);
 

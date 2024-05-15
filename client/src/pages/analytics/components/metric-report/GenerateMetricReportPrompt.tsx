@@ -5,13 +5,13 @@ import {
   setReportModal,
   setReportPromptModal,
   setReportPromptResponse,
-} from "../../../redux/slices/app";
-import { RootState } from "../../../redux/store";
+} from "../../../../redux/slices/app";
+import { RootState } from "../../../../redux/store";
 import { AiOutlineClose } from "react-icons/ai";
-import { ReportPromptsResponses } from "../../../redux/slices/app";
+import { ReportPromptsResponses } from "../../../../redux/slices/app";
 import { toast } from "react-toastify";
-import { Metric } from "../../../utils/types";
-import SelectMetrics from "./SelectMetrics";
+import { Metric } from "../../../../utils/types";
+import SelectMetrics from "../SelectMetrics";
 
 const targetAudiance = [
   "CorporateExecutives",
@@ -28,7 +28,7 @@ const targetAudiance = [
   "Stakeholders",
 ];
 
-const GenerateReportPrompt = () => {
+const GenerateMetricReportPrompt = () => {
   const { userRecord, categoryImpactTargets, } = useSelector(
     (state: RootState) => state.app
   );
@@ -158,19 +158,6 @@ const GenerateReportPrompt = () => {
                     ))}
                   </select>
                 </div>
-
-                <div className="">
-                  <h3 className="block mb-2 text-lg font-medium text-gray-900 dark:text-white">
-                    Select specific metrics you would like highlighted in the
-                    report.
-                  </h3>
-                  <SelectMetrics
-                    {...{
-                      setSelectedMetrics,
-                    }}
-                  />
-                </div>
-
                 <div className="">
                   <label
                     htmlFor="initiatives"
@@ -238,4 +225,4 @@ const GenerateReportPrompt = () => {
   );
 };
 
-export default GenerateReportPrompt;
+export default GenerateMetricReportPrompt;

@@ -17,9 +17,9 @@ export const chatGPT = async (req: Request, res: Response) => {
         Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
       },
       body: JSON.stringify({
-        model: "gpt-4",
+        model: "gpt-4o",
         messages: [{ role: "user", content: req.body.message }],
-        max_tokens: 200,
+        max_tokens: 300,
       }),
     };
     const response = await fetch(
@@ -45,7 +45,7 @@ export const streamChatGPT = async (req: Request, res: Response) => {
 
   try {
     const stream = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "gpt-4o",
       messages: [{ role: "user", content: req.body.message}],
       stream: true,
     });

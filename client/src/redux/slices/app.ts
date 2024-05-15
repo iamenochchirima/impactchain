@@ -36,6 +36,14 @@ export type SetReportType = {
   report: FullReportData | null;
 };
 
+export type CurrentMetricInfoRequest = {
+  currentMetricInfo: CurrentMetricInfo | null;
+};
+
+export type CurrentMetricInfo = {
+  metric: Metric;
+  category: CategoryType;
+};
 
 export interface GlobalState {
   isAuthenticated: boolean;
@@ -57,6 +65,8 @@ export interface GlobalState {
   reportPromptResponse: ReportPromptsResponses | null;
 
   reportPromptModal: boolean;
+  metricReportPromptModal: boolean;
+  metricAnanlyticsModal: boolean;
 
   openHelp: boolean;
 
@@ -66,6 +76,7 @@ export interface GlobalState {
   loadingReport: boolean;
   report: FullReportData | null;
 
+  currentMetricInfo: CurrentMetricInfo | null;
 }
 
 const initialState: GlobalState = {
@@ -87,14 +98,18 @@ const initialState: GlobalState = {
 
   reportPromptResponse: null,
   reportPromptModal: false,
+  metricReportPromptModal: false,
+  metricAnanlyticsModal: false,
 
   openHelp: false,
 
   allCategoryMetrics: null,
   reportCategory: null,
 
- loadingReport: false,
+  loadingReport: false,
   report: null,
+
+  currentMetricInfo: null,
 };
 
 export const appSlice = createSlice({
@@ -137,6 +152,18 @@ export const appSlice = createSlice({
     },
     setReportModal: (state: GlobalState, action: PayloadAction<boolean>) => {
       state.reportModal = action.payload;
+    },
+    setMetricReportPromptModal: (
+      state: GlobalState,
+      action: PayloadAction<boolean>
+    ) => {
+      state.metricReportPromptModal = action.payload;
+    },
+    setMetricAnanlyticsModal: (
+      state: GlobalState,
+      action: PayloadAction<boolean>
+    ) => {
+      state.metricAnanlyticsModal = action.payload;
     },
     setHelpModal: (state: GlobalState, action: PayloadAction<boolean>) => {
       state.openHelp = action.payload;
@@ -191,9 +218,16 @@ export const appSlice = createSlice({
       state.loadingReport = action.payload;
     },
 
-    setReport : (state: GlobalState, action: PayloadAction<SetReportType>) => {
+    setReport: (state: GlobalState, action: PayloadAction<SetReportType>) => {
       state.report = action.payload.report;
-    }
+    },
+
+    setCurrentMetricInfo: (
+      state: GlobalState,
+      action: PayloadAction<CurrentMetricInfoRequest>
+    ) => {
+      state.currentMetricInfo = action.payload.currentMetricInfo;
+    },
   },
 });
 
@@ -218,7 +252,10 @@ export const {
   setAllCategoryMetrics,
   setReportCategory,
   setLoadingReport,
-  setReport
+  setReport,
+  setCurrentMetricInfo,
+  setMetricReportPromptModal,
+  setMetricAnanlyticsModal,
 } = appSlice.actions;
 
 export default appSlice.reducer;

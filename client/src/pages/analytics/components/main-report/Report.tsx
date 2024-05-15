@@ -1,14 +1,14 @@
 import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../redux/store";
-import { formatDate } from "../../../utils/time";
-import { setReportModal } from "../../../redux/slices/app";
+import { RootState } from "../../../../redux/store";
+import { formatDate } from "../../../../utils/time";
+import { setReportModal } from "../../../../redux/slices/app";
 import ShowReport from "./ShowReport";
 import { RiFileEditFill } from "react-icons/ri";
 import axios from "axios";
 import { saveAs } from "file-saver";
-import { API_BASE_URL } from "../../../hooks/exporter";
-import { getReportTimeTitle } from "./utils/utils";
+import { API_BASE_URL } from "../../../../hooks/exporter";
+import { getReportTimeTitle } from "../utils/utils";
 
 const Report = () => {
   const dispatch = useDispatch();
@@ -20,7 +20,6 @@ const Report = () => {
   };
 
   const getDataUri = async (chartId) => {
-    console.log(chartId);
     return await ApexCharts.exec(chartId, "dataURI").then(({ imgURI }) => {
       return imgURI;
     });
@@ -83,7 +82,9 @@ const Report = () => {
           <div className="mb-10">
             <div className="flex justify-between items-center">
               <img
-                src={userRecord ? "i.c.logo2.png" : "i.c.logo2.png"}
+              src={
+                userRecord ? userRecord.aboutCompany.logo : "i.c.logo2.png"
+              }
                 alt="logo-image"
                 className="h-20 w-20"
               />

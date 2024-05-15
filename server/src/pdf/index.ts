@@ -1,9 +1,14 @@
+import path from 'path';
+import fs from 'fs';
 type TemplateMetricReportData = {
   name: string;
   key: string;
   graph: string;
   aiOverview: any;
 };
+
+const logoPath = path.join(__dirname, 'i.clogo.png');
+const icon = fs.readFileSync(logoPath, 'base64');
 
 export const pdfTemplate = ({
   period,
@@ -154,7 +159,7 @@ export const pdfTemplate = ({
             <span>POWERED BY</span
             ><img
               class="footer-icon"
-              src="/i.clogo.png"
+              src="data:image/png;base64,${icon}"
               alt="impact-chain-logo"
             />
             <span
@@ -213,7 +218,7 @@ export const pdfTemplate = ({
             style="display: flex; flex-direction: column; align-items: center"
             class=""
           >
-            <h1>Company Name</h1>
+            <h1>${companyName}</h1>
             <img
               style="height: 200px; width: 200px; border-radius: 100%"
               src="/tree.jpg"

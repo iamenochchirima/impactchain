@@ -286,6 +286,9 @@ export const getPieChartData = (
   return { name, pieChat: true, data: resultData };
 };
 
+
+/// getMetricsWithDataForTheGivenTimePeriod function checks the periodOfTime and filters metrics with data for the given time period, then returns the metrics with data for the given time period.
+
 export const getMetricsWithDataForTheGivenTimePeriod = (
   response: ReportPromptsResponses
 ) => {

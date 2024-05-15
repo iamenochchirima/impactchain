@@ -9,7 +9,6 @@ const basePath = path.join(__dirname, '../pdfs');
 const pdfPath = path.join(basePath, 'result.pdf');
 
 export const createPdf = async (req: Request, res: Response) => {
-  console.log("Received request to create PDF with data:", req.body);
   try {
     const browser = await puppeteer.launch(); 
     const page = await browser.newPage(); 
@@ -35,7 +34,6 @@ export const createPdf = async (req: Request, res: Response) => {
 };
 
 export const fetchPDF = async (req: Request, res: Response) => {
-  console.log(`Received request to fetch PDF from: ${pdfPath}`);
     const fs = require('fs');
   if (fs.existsSync(pdfPath)) {
     res.sendFile(pdfPath); 

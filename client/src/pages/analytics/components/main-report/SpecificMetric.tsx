@@ -1,13 +1,13 @@
-import BarGraph from "../../dashboard/components/Charts/BarGraph";
-import PieChart from "../../dashboard/components/Charts/PieChart";
-import LineGraph from "../../dashboard/components/Charts/LineGraph";
+import BarGraph from "../../../dashboard/components/Charts/BarGraph";
+import PieChart from "../../../dashboard/components/Charts/PieChart";
+import LineGraph from "../../../dashboard/components/Charts/LineGraph";
 import {
   BarGraphData,
   GraphsData,
   LineGraphData,
   MetricReportData,
   PieChartData,
-} from "./utils/types";
+} from "../utils/types";
 import { FC } from "react";
 
 type Props = {

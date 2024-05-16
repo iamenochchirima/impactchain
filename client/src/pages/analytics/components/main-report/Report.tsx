@@ -68,7 +68,7 @@ const Report = () => {
       )
       .then((res) => {
         const pdfBlob = new Blob([res.data], { type: "application/pdf" });
-        saveAs(pdfBlob, "newPdf.pdf");
+        saveAs(pdfBlob, "Report.pdf");
       });
     } catch (error) {
       console.log("Error generating pdf", error)

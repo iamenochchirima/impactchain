@@ -1,6 +1,7 @@
 import BarGraph from "../../../dashboard/components/Charts/BarGraph";
 import PieChart from "../../../dashboard/components/Charts/PieChart";
 import LineGraph from "../../../dashboard/components/Charts/LineGraph";
+import ReactMarkdown from 'react-markdown';
 import {
   BarGraphData,
   GraphsData,
@@ -46,7 +47,8 @@ const ShowMetricReport: FC<Props> = ({ metricReport }) => {
     <div>
       <h3 className="text-2xl font-bold  my-4 underline">{metricReport.name}</h3>
       <p className="whitespace-pre-wrap mb-3">
-        {metricReport.aiOverview.content}
+      <ReactMarkdown>{metricReport.aiOverview.content}
+      </ReactMarkdown>
       </p>
 
       <div className="border-x border-y border-custom-green rounded-lg p-3 ">

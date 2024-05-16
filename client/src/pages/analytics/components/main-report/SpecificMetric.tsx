@@ -9,6 +9,7 @@ import {
   PieChartData,
 } from "../utils/types";
 import { FC } from "react";
+import ReactMarkdown from 'react-markdown';
 
 type Props = {
   metricData: MetricReportData;
@@ -46,7 +47,7 @@ const SpecificMetric: FC<Props> = ({ metricData }) => {
     <div>
       <h3 className="text-2xl font-bold  my-4 underline">{metricData.name}</h3>
       <p className="whitespace-pre-wrap mb-3">
-        {metricData.aiOverview.content}
+          <ReactMarkdown>{metricData.aiOverview.content}</ReactMarkdown>
       </p>
 
       <div className="border-x border-y border-custom-green rounded-lg p-3 ">

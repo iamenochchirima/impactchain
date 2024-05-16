@@ -11,17 +11,21 @@ const ConfirmOTP = ({ email }) => {
 
   const handleConfirmOTP = async (e) => {
     e.preventDefault();
-    const { status } = await verifyOPT(email, code);
-    if (status === 200) {
-      console.log("OTP verified successfully");
-      return navigate("/reset-password");
+    try {
+      const { status } = await verifyOPT(email, code);
+      if (status === 201) {
+        return navigate("/reset-password");
+      }
+      return toast.error("Invalid OTP code");
+    } catch (error) {
+      toast.error("Invalid OTP code");
     }
-    return toast.error("Invalid OTP code");
   };
 
   const handleResendOTP = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setOtp("");
     generateOTP(email).then((OTP) => {
       if (OTP) {
         setIsLoading(false);

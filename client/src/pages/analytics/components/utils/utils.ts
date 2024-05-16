@@ -12,6 +12,7 @@ export const getReportTimeTitle = (period: string): string => {
       "5Years": `5-Year Report - ${
         currentDate.getFullYear() - 5
       } to ${currentDate.getFullYear()}`,
+      AllTime: "All Time Report",
     };
   
     return reportTitles[period ?? ""] || "Custom Time Report";

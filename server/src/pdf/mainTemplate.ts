@@ -1,5 +1,7 @@
 import path from 'path';
 import fs from 'fs';
+import {marked} from 'marked';
+
 type TemplateMetricReportData = {
   name: string;
   key: string;
@@ -10,7 +12,7 @@ type TemplateMetricReportData = {
 const logoPath = path.join(__dirname, 'i.clogo.png');
 const icon = fs.readFileSync(logoPath, 'base64');
 
-export const pdfTemplate = ({
+export const mainPdfTemplate = ({
   period,
   logo,
   overview,
@@ -25,6 +27,20 @@ export const pdfTemplate = ({
   overalGraph: string;
   metrics: TemplateMetricReportData[];
 }): string => {
+  const overviewHtml = marked(overview.content);
+  const metricsHtml = metrics.map(metric => `
+    <div class="overview-text">
+      <h3>${metric.name}</h3>
+      ${marked(metric.aiOverview.content)}
+      <div class="chart-div">
+        <img
+          class="specific-chart-img"
+          src=${metric.graph}
+          alt="metric chart"
+        />
+      </div>
+    </div>
+  `).join('');
 
   return `
   <!DOCTYPE html>
@@ -173,10 +189,7 @@ export const pdfTemplate = ({
           <span>Overview</span>
         </div>
         <div class="">
-          <p class="overview-text">
-            ${overview.content}
-          </p>
-  
+          ${overviewHtml}
           <div class="chart-div">
             <img class="chart-img" src=${overalGraph} alt="overview graph" />
           </div>
@@ -185,26 +198,9 @@ export const pdfTemplate = ({
           <span>Specific</span>
           <span>Metrics</span>
         </div>
-        ${metrics.map(metric => `
-        <div class="overview-text">
-        <h3>
-          ${metric.name}
-        </h3>
-        <p class="overview-text">>
-         ${metric.aiOverview.content}
-        </p>
-        <div class="chart-div">
-          <img
-            class="specific-chart-img"
-            src=${metric.graph}
-            alt="metric chart"
-          />
-        </div>
-      </div>
-      `).join('')}
+        ${metricsHtml}
       <div
         <div
-          class=""
           style="
             display: flex;
             flex-direction: column;
@@ -216,7 +212,6 @@ export const pdfTemplate = ({
         >
           <div
             style="display: flex; flex-direction: column; align-items: center"
-            class=""
           >
             <h1>${companyName}</h1>
             <img
@@ -228,6 +223,6 @@ export const pdfTemplate = ({
         </div>
       </div>
     </body>
-  </html>  
-`;
+  </html>
+  `;
 };

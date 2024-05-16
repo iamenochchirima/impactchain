@@ -40,7 +40,7 @@ export const getMetricsReportData = async (
         metric.data,
         graphName,
         valueKey
-      );
+      )
 
       if (barGraphData) {
         allBarGraphData.push(barGraphData);

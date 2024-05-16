@@ -67,6 +67,19 @@ export const verifyPassword = async (email: string, password: string) => {
   }
 };
 
+export const resetPassword = async (email: string, password: string, confirm: string) => {
+  try {
+    const { data } = await axios.put(`${API_BASE_URL}/api/auth/reset-password`, {
+      email,
+      password,
+      confirm,
+    });
+    return Promise.resolve(data);
+  } catch (error) {
+    return { error: "Error resetting password", };
+  }
+};
+
 export const updateUser = async (credentials: any) => {
   try {
     const { data } = await axios.put("/users/update", { ...credentials });
@@ -105,18 +118,6 @@ export const verifyOPT = async (email: string, code: string) => {
     const { data, status } = await axios.post(`${API_BASE_URL}/api/auth/verify-otp`, {
       email,
       code,
-    });
-    return Promise.resolve({ data, status });
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
-
-export const resetPassword = async (email: string, password: string) => {
-  try {
-    const { data, status } = await axios.put(`${API_BASE_URL}/api/auth/reset-password`, {
-      email,
-      password,
     });
     return Promise.resolve({ data, status });
   } catch (error) {

@@ -1,16 +1,11 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import dayjs from "dayjs";
 import quarterOfYear from "dayjs/plugin/quarterOfYear";
 import { ApexOptions } from "apexcharts";
 import {
   BarGraphData,
-  MetricReportData,
-  xisVals,
 } from "../../../analytics/components/utils/types";
-import { useDispatch, useSelector } from "react-redux";
-import { MetricCharts, setMetricsCharts } from "../../../../redux/slices/app";
-import { RootState } from "../../../../redux/store";
 
 // Extend dayjs with the quarterOfYear plugin
 dayjs.extend(quarterOfYear);

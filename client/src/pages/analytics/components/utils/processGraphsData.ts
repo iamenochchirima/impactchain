@@ -217,6 +217,15 @@ export const getTimeBarGraphData = (
         (_, i) => `${currentYear - 4 + i}`
       );
       break;
+    case "AllTime": {
+      const startYear = 2000;
+      const periodLength = currentYear - startYear + 1;
+      categories = Array.from(
+        { length: periodLength },
+        (_, i) => `${startYear + i}`
+      );
+      break;
+    }
     default:
       return null;
   }
@@ -246,6 +255,8 @@ export const getTimeBarGraphData = (
       index = yearDiff * 4 + quarter;
     } else if (periodOfTime === "5Years") {
       index = itemDate.getFullYear() - (currentYear - 4);
+    } else if (periodOfTime === "AllTime") {
+      index = itemDate.getFullYear() - 2000;
     }
 
     if (index >= 0 && index < resultData.length && item[valueKey] != null) {
@@ -262,6 +273,7 @@ export const getTimeBarGraphData = (
 
   return { name, data: resultData, categories };
 };
+
 
 export const getPieChartData = (
   periodOfTime: string,
@@ -287,7 +299,8 @@ export const getPieChartData = (
 };
 
 
-/// getMetricsWithDataForTheGivenTimePeriod function checks the periodOfTime and filters metrics with data for the given time period, then returns the metrics with data for the given time period.
+/// getMetricsWithDataForTheGivenTimePeriod function checks the periodOfTime
+/// and filters metrics with data for the given time period, then returns the metrics with data for the given time period.
 
 export const getMetricsWithDataForTheGivenTimePeriod = (
   response: ReportPromptsResponses

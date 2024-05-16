@@ -19,6 +19,7 @@ import {
 } from "../utils/processGraphsData";
 import Loading from "../Loading";
 import BarGraph from "../../../dashboard/components/Charts/BarGraph";
+import ReactMarkdown from "react-markdown";
 
 const ShowReport = () => {
   const dispatch = useDispatch();
@@ -104,7 +105,7 @@ const ShowReport = () => {
     dispatch(setReport({ report }));
     dispatch(setLoadingReport(false));
   };
-  
+
   return (
     <div>
       {loadingReport ? (
@@ -137,10 +138,12 @@ const ShowReport = () => {
             </div>
             <div className="">
               <p className=" whitespace-pre-wrap my-4">
-                {report?.overview.content}
+              <ReactMarkdown>{report?.overview.content || ""}</ReactMarkdown>
               </p>
             </div>
-            {report && <BarGraph data={report.overalGraph} graphKey="overalGraph" />}
+            {report && (
+              <BarGraph data={report.overalGraph} graphKey="overalGraph" />
+            )}
           </div>
           <div className="flex flex-col text-[100px] leading-[0.9] mt-4">
             <span>Specific</span>

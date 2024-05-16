@@ -46,7 +46,7 @@ const LineGraph: FC<Props> = ({ data, graphKey }) => {
       colors: ["#008FFB"],
     },
     title: {
-      text: "Product Trends by Month",
+      text: data.name,
       align: "left",
     },
     grid: {

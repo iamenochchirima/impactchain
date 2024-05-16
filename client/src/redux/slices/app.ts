@@ -46,6 +46,7 @@ export type CurrentMetricInfo = {
 };
 
 export interface GlobalState {
+  userEmail: string;
   isAuthenticated: boolean;
   userInfo: any | null;
   targetRecord: TargetRecordStateType | null;
@@ -80,6 +81,7 @@ export interface GlobalState {
 }
 
 const initialState: GlobalState = {
+  userEmail: "",
   isAuthenticated: false,
   storageInitiated: false,
   userInfo: null,
@@ -116,6 +118,9 @@ export const appSlice = createSlice({
   name: "app",
   initialState,
   reducers: {
+    setUserEmail: (state: GlobalState, action: PayloadAction<string>) => {
+      state.userEmail = action.payload;
+    },
     setIsAuthenticated: (state: GlobalState, action: PayloadAction<any>) => {
       state.isAuthenticated = action.payload;
     },
@@ -232,6 +237,7 @@ export const appSlice = createSlice({
 });
 
 export const {
+  setUserEmail,
   setIsAuthenticated,
   setUserInfo,
   logout,

@@ -7,7 +7,6 @@ import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
-import { SchoolsBuiltSupportedData as SchoolsBuiltSupportedDataType } from "../../../../../hooks/declarations/data/data.did";
 
 
 const SchoolsBuiltSupportedData = ({ setManualData, setUploadManually }) => {
@@ -29,7 +28,7 @@ const SchoolsBuiltSupportedData = ({ setManualData, setUploadManually }) => {
   const [challengesFaced, setChallengesFaced] = useState<string>("");
   const [numberOfSchoolsBuilt, setNumberOfSchoolsBuilt] = useState("");
   const [studentCapacityIncrease, setStudentCapacityIncrease] = useState("");
-  const [numberOfSchoolsSupported, setNumberOfSchoolsSupported] = useState("");
+
   const [totalInvestment, setTotalInvestment] = useState("");
   
 

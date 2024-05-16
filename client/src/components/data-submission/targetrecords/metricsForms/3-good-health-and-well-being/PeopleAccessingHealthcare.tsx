@@ -278,7 +278,7 @@ const HealthcareAccessData = ({ setManualData, setUploadManually }) => {
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Total Health Facilities</label>
-          <textarea
+          <input
             className={`${styles.formInput}`}
             id="totalHealthFacilities"
             placeholder="The Total Number of Health Facilities"

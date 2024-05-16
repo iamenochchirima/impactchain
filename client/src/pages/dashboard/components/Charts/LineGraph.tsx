@@ -1,10 +1,7 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 import { LineGraphData } from "../../../analytics/components/utils/types";
-import { MetricCharts, setMetricsCharts } from "../../../../redux/slices/app";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../../redux/store";
 
 interface LineGraphState {
   series: {

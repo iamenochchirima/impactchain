@@ -7,10 +7,9 @@ import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
-import { HealthCheckupVaccinationData as HealthCheckupVaccinationDataType } from "../../../../../hooks/declarations/data/data.did";
 
 
-const HealthCheckupVaccinationData = ({ setManualData, setUploadManually }) => {
+const HealthCheckupVaccinationData = ({ setUploadManually }) => {
   const [saving, setSaving] = useState(false);
   const [supportFiles, setSupportFiles] = useState<File[] | null>(null);
   const { storageInitiated } = useSelector((state: RootState) => state.app);
@@ -266,7 +265,7 @@ const HealthCheckupVaccinationData = ({ setManualData, setUploadManually }) => {
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Total Participants</label>
-          <textarea
+          <input
             className={`${styles.formInput}`}
             id="totalParticipants"
             placeholder="The Total number of Participants"
@@ -278,7 +277,7 @@ const HealthCheckupVaccinationData = ({ setManualData, setUploadManually }) => {
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>Vaccination Coverage</label>
-          <textarea
+          <input
             className={`${styles.formInput}`}
             id="vaccinationCoverage"
             placeholder="The Vaccination Coverage"

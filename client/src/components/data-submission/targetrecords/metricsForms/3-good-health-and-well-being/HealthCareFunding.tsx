@@ -264,7 +264,7 @@ const HealthcareFunding = ({ setManualData, setUploadManually }) => {
         </div>
         <div className={`${styles.inputDiv}`}>
           <label htmlFor={`${styles.inputLabel}`}>The Total Funding Amount</label>
-          <textarea
+          <input
             className={`${styles.formInput}`}
             id="totalFundingAmount"
             placeholder="The Total Funding Amount"

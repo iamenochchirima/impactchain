@@ -233,7 +233,7 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="programName"
               type="goal"
-              placeholder="Program Name"
+              placeholder="Enter the specific name of the food donation program."
               value={programName}
               onChange={(e) => setProgramName(e.target.value)}
               required
@@ -247,7 +247,7 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="startDate"
               type="date"
-              placeholder="Start Date"
+              placeholder="Indicate when the program was initiated."
               value={startDate}
               required
               onChange={(e) => setStartDate(e.target.value)}
@@ -261,7 +261,7 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="duration"
               type="text"
-              placeholder="Duration e.g 6 months"
+              placeholder="Provide the duration that the program has been running."
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
             />
@@ -274,7 +274,7 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="programLocation"
               type="text"
-              placeholder="Program Location"
+              placeholder="Specify the city and country where the program is implemented."
               value={programLocation}
               onChange={(e) => setProgramLocation(e.target.value)}
               required
@@ -292,7 +292,7 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
               onChange={(e) => setTypeOfFoodDonated(e.target.value)}
               required
             >
-              <option value="">Select Type of Food Donated</option>
+              <option value="">Select the type of food donated from the dropdown.</option>
               <option value="perishable">Perishable</option>
               <option value="non-perishable">Non-Perishable</option>
               <option value="fresh">Fresh</option>
@@ -308,7 +308,7 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="numberOfBeneficiaries"
               type="number"
-              placeholder="Number of Beneficiaries"
+              placeholder="Indicate the number of beneficiaries receiving this food."
               value={numberOfBeneficiaries}
               onChange={(e) => setNumberOfBeneficiaries(e.target.value)}
               required
@@ -322,7 +322,7 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="volumeDonatedFood"
               type="number"
-              placeholder="Volume of Donated Food (kg) e.g 1000"
+              placeholder="Enter the volume of food donated during the program (kg) e.g 1000"
               value={volumeDonatedFood}
               onChange={(e) => setVolumeDonatedFood(e.target.value)}
               required

@@ -6,7 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { setDataComponent, setUserRecord } from "../../redux/slices/app";
 import { toast } from "react-toastify";
+import Bubbles from "../Bubbles";
 
+const bubbleText = "Before we begin enhancing your ESG reporting and analytics capabilities, we need some details about your company. This information will enable us to tailor our analysis and reports to better suit your organization's specific needs and goals."
 const About = () => {
   const dispatch = useDispatch();
   const { userInfo, userRecord } = useSelector((state: RootState) => state.app);
@@ -167,7 +169,8 @@ const About = () => {
           </div>
         </form>
       </div>
-      <div className="flex justify-end items-center  mb-5 ">
+      <div className="flex justify-between items-center  mb-5 ">
+        <Bubbles {...{bubbleText}}/>
         <button
           onClick={handleSubmit}
           className="mr-24 px-10 py-1.5 bg-custom-green rounded-xl text-black font-TelegraphUltraLight md:text-sm text-lg font-bold"

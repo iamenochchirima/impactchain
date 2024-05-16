@@ -220,7 +220,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="programName"
               type="text"
-              placeholder="Program Name"
+              placeholder="Enter the specific name of the poverty reduction program."
               value={programName}
               onChange={(e) => setProgramName(e.target.value)}
               required
@@ -232,7 +232,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="startDate"
               type="date"
-              placeholder="Start Date"
+              placeholder="Indicate when the program began"
               value={startDate}
               required
               onChange={(e) => setStartDate(e.target.value)}
@@ -244,7 +244,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="duration"
               type="text"
-              placeholder="Duration"
+              placeholder="Provide the duration that the program has been running."
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
             />
@@ -255,7 +255,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="programLocation"
               type="text"
-              placeholder="Program Location"
+              placeholder="Specify the city and country where the program is implemented"
               value={programLocation}
               onChange={(e) => setProgramLocation(e.target.value)}
               required
@@ -268,7 +268,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="numberOfBeneficiaries"
               type="number"
-              placeholder="Number of Beneficiaries"
+              placeholder="Indicate the number of participants involved in these programs."
               value={numberOfBeneficiaries}
               onChange={(e) => setNumberOfParticipants(e.target.value)}
               required

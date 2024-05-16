@@ -20,8 +20,7 @@ const NutritiousFoodProgram = ({ setManualData, setUploadManually }) => {
   const [startDate, setStartDate] = useState<string>("");
   const [duration, setDuration] = useState<string>("");
   const [programLocation, setProgramLocation] = useState<string>("");
-  const [numberOfBeneficiaries, setNumberOfBeneficiaries] =
-    useState<string>("");
+  const [numberOfBeneficiaries, setNumberOfBeneficiaries] =useState<string>("");
 
   const [programs, setPrograms] = useState<NutritiousFoodProgramType[]>([]);
 
@@ -225,7 +224,7 @@ const NutritiousFoodProgram = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="programName"
               type="text"
-              placeholder="Program Name"
+              placeholder="Enter the name of the program ensuring regular nutritious food access."
               value={programName}
               onChange={(e) => setProgramName(e.target.value)}
               required
@@ -239,7 +238,7 @@ const NutritiousFoodProgram = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="startDate"
               type="date"
-              placeholder="Start Date"
+              placeholder="Indicate when the program was launched."
               value={startDate}
               required
               onChange={(e) => setStartDate(e.target.value)}
@@ -253,7 +252,7 @@ const NutritiousFoodProgram = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="duration"
               type="text"
-              placeholder="Duration e.g 6 months"
+              placeholder="Provide the duration that the program has been operational eg. 6 Months"
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
             />
@@ -266,7 +265,7 @@ const NutritiousFoodProgram = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="programLocation"
               type="text"
-              placeholder="Program Location"
+              placeholder="Specify the city and country where the program is run."
               value={programLocation}
               onChange={(e) => setProgramLocation(e.target.value)}
               required
@@ -274,13 +273,13 @@ const NutritiousFoodProgram = ({ setManualData, setUploadManually }) => {
           </div>
           <div className={styles.inputDiv}>
             <label htmlFor={styles.inputLabel}>
-              How many people are regularly fed nutritious food?
+              How many individuals are regularly fed nutritious food?
             </label>
             <input
               className={styles.formInput}
               id="numberOfBeneficiaries"
               type="number"
-              placeholder="Number of Beneficiaries"
+              placeholder="Enter the number of individuals who are regularly provided with nutritious food through this program."
               value={numberOfBeneficiaries}
               onChange={(e) => setNumberOfBeneficiaries(e.target.value)}
               required

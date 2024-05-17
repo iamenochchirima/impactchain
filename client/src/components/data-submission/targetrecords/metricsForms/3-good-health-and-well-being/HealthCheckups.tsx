@@ -11,6 +11,8 @@ import { ManualData } from "../../MetricRecords";
 import { IoMdAdd } from "react-icons/io";
 import Program from "../support/Program";
 
+
+const HealthCheckupVaccinationData = ({ setUploadManually }) => {
 const HealthServicesData = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
   const [supportFiles, setSupportFiles] = useState<File[] | null>(null);
@@ -32,6 +34,54 @@ const HealthServicesData = ({ setManualData, setUploadManually }) => {
   
 
   const handleSubmit = async () => {
+    try {
+      setSaving(true);
+      const checkedFiles: File[] = [];
+      if (supportFiles) {
+        for (const file of supportFiles) {
+          if (file.size <= 4 * 1024 * 1024) {
+            checkedFiles.push(file);
+          }
+        }
+      }
+
+      if (checkedFiles.length === 0) {
+        toast.error("Please upload support documents", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+        });
+        setSaving(false);
+        return;
+      }
+
+      const urls = await uploadAsset(checkedFiles);
+
+      const startDateMilliseconds = new Date(startDate).getTime();
+      const endDateMilliseconds = new Date(endDate).getTime();
+
+      // const healthCheckupVaccinationData: HealthCheckupVaccinationDataType = {
+      //   startDate: BigInt(startDateMilliseconds),
+      //   endDate: BigInt(endDateMilliseconds),
+      //   location: location,
+      //   programName: programName,
+      //   programDescription: programDescription,
+      //   operationalChallenges: operationalChallenges,
+      //   feedbackFromParticipants: feedbackFromParticipants,
+      //   followUpActions: followUpActions,
+      //   healthOutcomesMeasured:healthOutcomesMeasured,
+      //   communityImpact: communityImpact,
+      //   typeOfService: typeOfService,
+      //   totalServicesProvided: BigInt(totalServicesProvided),
+      //   totalParticipants: BigInt(totalParticipants),
+      //   vaccinationCoverage: BigInt(vaccinationCoverage),
+      //   dataVerification: false,
+      //   supportingFiles: urls ? urls : [],
+      //   created: BigInt(Date.now()),
+      // };
+      // setManualData(healthCheckupVaccinationData);
+      setUploadManually(false);
     if (goal === "") {
       toast.error("Please enter a goal", {
         position: "top-center",
@@ -64,6 +114,7 @@ const HealthServicesData = ({ setManualData, setUploadManually }) => {
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
+      const file_path = location;
       const file_path = location.pathname;
       try {
         const urls: string[] = [];
@@ -342,4 +393,5 @@ const HealthServicesData = ({ setManualData, setUploadManually }) => {
   );
 };
 
+export default HealthCheckupVaccinationData;
 export default HealthServicesData;

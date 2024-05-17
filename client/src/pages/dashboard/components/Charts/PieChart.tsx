@@ -2,7 +2,7 @@ import { ApexOptions } from "apexcharts";
 import React, { useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
-const PieChart: React.FC = () => {
+const PieChart = ({data, graphKey}) => {
   const [chartData, setChartData] = useState({
     series: [44, 55, 41, 17, 15],
   });

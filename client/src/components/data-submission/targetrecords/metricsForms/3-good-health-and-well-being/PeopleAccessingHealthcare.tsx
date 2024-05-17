@@ -30,30 +30,53 @@ const HealthcareAccessData = ({ setManualData, setUploadManually }) => {
   const goalareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleSubmit = async () => {
-    if (goal === "") {
-      toast.error("Please enter a goal", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-      });
-      return;
-    }
-    if (programs.length === 0) {
-      toast.error("Please add at least one healthcare access program you did", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-      });
-      return;
-    }
     try {
-      const data: ManualData = {
-        goal: goal,
-        data: programs,
-      };
-      setManualData(data);
+      setSaving(true);
+      const checkedFiles: File[] = [];
+      if (supportFiles) {
+        for (const file of supportFiles) {
+          if (file.size <= 4 * 1024 * 1024) {
+            checkedFiles.push(file);
+          }
+        }
+      }
+
+      if (checkedFiles.length === 0) {
+        toast.error("Please upload support documents", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+        });
+        setSaving(false);
+        return;
+      }
+
+      const urls = await uploadAsset(checkedFiles);
+
+      const startDateMilliseconds = new Date(startDate).getTime();
+      const endDateMilliseconds = new Date(endDate).getTime();
+
+      // const healthcareAccessData : HealthcareAccessDataType = {
+      //   startDate: BigInt(startDateMilliseconds),
+      //   endDate: BigInt(endDateMilliseconds),
+      //   location: location,
+      //   programName: programName,
+      //   programDescription: programDescription,
+      //   operationalChallenges: operationalChallenges,
+      //   improvementsMade: improvementsMade,
+      //   typesOfServicesProvided:typesOfServicesProvided,
+      //   communityImpact: communityImpact,
+      //   feedbackFromPatients: feedbackFromPatients,
+      //   barriersToAccess: barriersToAccess,
+      //   patientDemographics: patientDemographics,
+      //   totalPatientsServed: BigInt(totalPatientsServed),
+      //   totalHealthFacilities: BigInt(totalHealthFacilities),
+      //   dataVerification: false,
+      //   supportingFiles: urls ? urls : [],
+      //   created: BigInt(Date.now()),
+      // };
+      // setManualData(healthcareAccessData);
       setUploadManually(false);
     } catch (error) {
       console.log("Error saving healthcare access program", error);
@@ -62,7 +85,7 @@ const HealthcareAccessData = ({ setManualData, setUploadManually }) => {
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
-      const file_path = location.pathname;
+      const file_path = location;
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);

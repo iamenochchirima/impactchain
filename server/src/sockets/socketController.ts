@@ -22,7 +22,7 @@ export const setupSocketIO = (server: HttpServer): void => {
     socket.on('streamChatGPT', async (msg: string) => {
       try {
         const stream = await openai.chat.completions.create({
-          model: "gpt-3.5-turbo",
+          model: "gpt-4o",
           messages: [{ role: "user", content: msg }],
           stream: true,
         });
@@ -39,7 +39,6 @@ export const setupSocketIO = (server: HttpServer): void => {
         socket.emit('chatGPTError', "An error occurred while streaming with OpenAI.");
       }
     });
-
     socket.on('disconnect', () => {
       console.log('A user disconnected');
     });

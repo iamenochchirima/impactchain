@@ -62,7 +62,7 @@ const WorkplaceGenderEqualityPoliciesData = ({ setManualData, setUploadManually 
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
-      const file_path = location.pathname;
+      const file_path = location;
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);

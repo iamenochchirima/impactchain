@@ -2,17 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setAllCategoryMetrics,
-  setCurrentMetricInfo,
   setReportModal,
   setReportPromptModal,
   setReportPromptResponse,
-} from "../../../redux/slices/app";
-import { RootState } from "../../../redux/store";
+} from "../../../../redux/slices/app";
+import { RootState } from "../../../../redux/store";
 import { AiOutlineClose } from "react-icons/ai";
-import { ReportPromptsResponses } from "../../../redux/slices/app";
+import { ReportPromptsResponses } from "../../../../redux/slices/app";
 import { toast } from "react-toastify";
-import { Metric } from "../../../utils/types";
-import SelectMetrics from "./SelectMetrics";
+import { Metric } from "../../../../utils/types";
+import SelectMetrics from "../SelectMetrics";
 
 const targetAudiance = [
   "CorporateExecutives",
@@ -29,7 +28,7 @@ const targetAudiance = [
   "Stakeholders",
 ];
 
-const GenerateReportPrompt = () => {
+const GenerateMetricReportPrompt = () => {
   const { userRecord, categoryImpactTargets, } = useSelector(
     (state: RootState) => state.app
   );
@@ -82,7 +81,6 @@ const GenerateReportPrompt = () => {
 
   const handleClose = () => {
     dispatch(setReportModal(true));
-    dispatch(setCurrentMetricInfo({ metric: null, category: null }));
     dispatch(setReportPromptModal(false));
   };
 
@@ -133,8 +131,8 @@ const GenerateReportPrompt = () => {
                     <option value="3Months">3 Months</option>
                     <option value="6Months">6 Months</option>
                     <option value="1Year">Year</option>
-                    <option value="3Years">3 yeays</option>
-                    <option value="5Years">5 years</option>
+                    <option value="3Years">3 Years</option>
+                    <option value="5Years">5 Years</option>
                   </select>
                 </div>
                 <div className="">
@@ -160,19 +158,6 @@ const GenerateReportPrompt = () => {
                     ))}
                   </select>
                 </div>
-
-                <div className="">
-                  <h3 className="block mb-2 text-lg font-medium text-gray-900 dark:text-white">
-                    Select specific metrics you would like highlighted in the
-                    report.
-                  </h3>
-                  <SelectMetrics
-                    {...{
-                      setSelectedMetrics,
-                    }}
-                  />
-                </div>
-
                 <div className="">
                   <label
                     htmlFor="initiatives"
@@ -240,4 +225,4 @@ const GenerateReportPrompt = () => {
   );
 };
 
-export default GenerateReportPrompt;
+export default GenerateMetricReportPrompt;

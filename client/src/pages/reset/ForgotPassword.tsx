@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { generateOTP } from "../../helpers/helpers";
 import GetOTP from "./GetOTP";
 import ConfirmOTP from "./ConfirmOTP";
+import { setUserEmail } from "../../redux/slices/app";
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const ForgotPassword = () => {
 
   const handleSave = async (e) => {
     e.preventDefault();
+    dispatch(setUserEmail(email));
     setIsLoading(true);
     generateOTP(email).then((OTP) => {
       if (OTP) {

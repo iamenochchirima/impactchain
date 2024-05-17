@@ -2,6 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { CategoryType } from "../../pages/analytics/types";
 import { ImpactTargetType, Metric } from "../../utils/types";
 import { UserRecord } from "../../hooks/declarations/data/data.did";
+import { FullReportData } from "../../pages/analytics/components/utils/types";
 
 export type TargetRecordStateType = {
   color: string;
@@ -19,12 +20,6 @@ export type ReportPromptsResponses = {
   selectedMetrics: Metric[];
   caseStudiesTestimonials: string;
 };
-
-export type CurrentMetricInfo = {
-  metric: Metric | null;
-  category: CategoryType | null;
-};
-
 export type SetCategoryImpactTargetsType = {
   categoryImpactTargets: ImpactTargetType[] | null;
 };
@@ -37,7 +32,21 @@ export type ReportCategoryRequest = {
   reportCategory: CategoryType | null;
 };
 
+export type SetReportType = {
+  report: FullReportData | null;
+};
+
+export type CurrentMetricInfoRequest = {
+  currentMetricInfo: CurrentMetricInfo | null;
+};
+
+export type CurrentMetricInfo = {
+  metric: Metric;
+  category: CategoryType;
+};
+
 export interface GlobalState {
+  userEmail: string;
   isAuthenticated: boolean;
   userInfo: any | null;
   targetRecord: TargetRecordStateType | null;
@@ -54,18 +63,25 @@ export interface GlobalState {
   reportModal: boolean;
   categoryImpactTargets: ImpactTargetType[] | null;
 
-  currentMetricInfo: CurrentMetricInfo | null;
   reportPromptResponse: ReportPromptsResponses | null;
 
   reportPromptModal: boolean;
+  metricReportPromptModal: boolean;
+  metricAnanlyticsModal: boolean;
 
   openHelp: boolean;
 
   allCategoryMetrics: Metric[] | null;
   reportCategory: CategoryType | null;
+
+  loadingReport: boolean;
+  report: FullReportData | null;
+
+  currentMetricInfo: CurrentMetricInfo | null;
 }
 
 const initialState: GlobalState = {
+  userEmail: "",
   isAuthenticated: false,
   storageInitiated: false,
   userInfo: null,
@@ -82,20 +98,29 @@ const initialState: GlobalState = {
   reportModal: false,
   categoryImpactTargets: null,
 
-  currentMetricInfo: null,
   reportPromptResponse: null,
   reportPromptModal: false,
+  metricReportPromptModal: false,
+  metricAnanlyticsModal: false,
 
   openHelp: false,
 
   allCategoryMetrics: null,
   reportCategory: null,
+
+  loadingReport: false,
+  report: null,
+
+  currentMetricInfo: null,
 };
 
 export const appSlice = createSlice({
   name: "app",
   initialState,
   reducers: {
+    setUserEmail: (state: GlobalState, action: PayloadAction<string>) => {
+      state.userEmail = action.payload;
+    },
     setIsAuthenticated: (state: GlobalState, action: PayloadAction<any>) => {
       state.isAuthenticated = action.payload;
     },
@@ -133,6 +158,18 @@ export const appSlice = createSlice({
     setReportModal: (state: GlobalState, action: PayloadAction<boolean>) => {
       state.reportModal = action.payload;
     },
+    setMetricReportPromptModal: (
+      state: GlobalState,
+      action: PayloadAction<boolean>
+    ) => {
+      state.metricReportPromptModal = action.payload;
+    },
+    setMetricAnanlyticsModal: (
+      state: GlobalState,
+      action: PayloadAction<boolean>
+    ) => {
+      state.metricAnanlyticsModal = action.payload;
+    },
     setHelpModal: (state: GlobalState, action: PayloadAction<boolean>) => {
       state.openHelp = action.payload;
     },
@@ -141,13 +178,6 @@ export const appSlice = createSlice({
       action: PayloadAction<ImpactTargetType[]>
     ) => {
       state.impactTargets = action.payload;
-    },
-
-    setCurrentMetricInfo: (
-      state: GlobalState,
-      action: PayloadAction<CurrentMetricInfo>
-    ) => {
-      state.currentMetricInfo = action.payload;
     },
     setReportPromptResponse: (
       state: GlobalState,
@@ -188,10 +218,26 @@ export const appSlice = createSlice({
       state.userInfo = null;
       localStorage.removeItem("userInfo");
     },
+
+    setLoadingReport: (state: GlobalState, action: PayloadAction<boolean>) => {
+      state.loadingReport = action.payload;
+    },
+
+    setReport: (state: GlobalState, action: PayloadAction<SetReportType>) => {
+      state.report = action.payload.report;
+    },
+
+    setCurrentMetricInfo: (
+      state: GlobalState,
+      action: PayloadAction<CurrentMetricInfoRequest>
+    ) => {
+      state.currentMetricInfo = action.payload.currentMetricInfo;
+    },
   },
 });
 
 export const {
+  setUserEmail,
   setIsAuthenticated,
   setUserInfo,
   logout,
@@ -207,12 +253,15 @@ export const {
   setHelpModal,
   setImpactTargets,
   setCategoryImpactTargets,
-
-  setCurrentMetricInfo,
   setReportPromptResponse,
   setReportPromptModal,
   setAllCategoryMetrics,
   setReportCategory,
+  setLoadingReport,
+  setReport,
+  setCurrentMetricInfo,
+  setMetricReportPromptModal,
+  setMetricAnanlyticsModal,
 } = appSlice.actions;
 
 export default appSlice.reducer;

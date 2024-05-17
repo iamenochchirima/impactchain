@@ -128,9 +128,12 @@ export const resetPassword = async (req: Request, res: Response) => {
     return res.status(400).json({ message: "Session expired" });
   }
 
-  const { email, password } = req.body;
-  if (!email || !password) {
+  const { email, password, confirm } = req.body;
+  if (!email || !password || !confirm) {
     return res.status(400).json({ message: "Invalid data" });
+  }
+  if (password !== confirm) {
+    return res.status(400).json({ message: "Passwords do not match" });
   }
   const user = await getUserByEmail(email);
   if (!user) {

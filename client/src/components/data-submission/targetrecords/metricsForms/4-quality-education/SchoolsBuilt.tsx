@@ -11,7 +11,7 @@ import { ManualData } from "../../MetricRecords";
 import { IoMdAdd } from "react-icons/io";
 import Program from "../support/Program";
 
-const SchoolsBuiltData = ({ setManualData, setUploadManually }) => {
+const SchoolsBuiltSupportedData = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
   const [supportFiles, setSupportFiles] = useState<File[] | null>(null);
   const { storageInitiated } = useSelector((state: RootState) => state.app);
@@ -64,7 +64,7 @@ const SchoolsBuiltData = ({ setManualData, setUploadManually }) => {
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
-      const file_path = location.pathname;
+      const file_path = location;
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);
@@ -342,4 +342,4 @@ const SchoolsBuiltData = ({ setManualData, setUploadManually }) => {
   );
 };
 
-export default SchoolsBuiltData;
+export default SchoolsBuiltSupportedData;

@@ -10,7 +10,7 @@ import FilesInput from "../support/FilesInput";
 import {WaterConservationInitiativesData as WaterConservationInitiativesDataType } from "../../../../../hooks/declarations/data/data.did";
 
 
-const WaterConservationInitiativesData = ({ setManualData, setUploadManually }) => {
+const WaterConservation = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
   const [supportFiles, setSupportFiles] = useState<File[] | null>(null);
   const {storageInitiated } = useSelector((state: RootState) => state.app);
@@ -85,7 +85,7 @@ const WaterConservationInitiativesData = ({ setManualData, setUploadManually }) 
       //   created: BigInt(Date.now()),
       // };
       // setManualData(SanitationFacilitiesData);
-      // setUploadManually(false);
+      setUploadManually(false);
     } catch (error) {
         setSaving(false);
       console.log("Error saving Sanitation Facilities Data", error);
@@ -94,7 +94,7 @@ const WaterConservationInitiativesData = ({ setManualData, setUploadManually }) 
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
-      const file_path = location
+      const file_path = location;
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);
@@ -326,4 +326,4 @@ const WaterConservationInitiativesData = ({ setManualData, setUploadManually }) 
   );
 };
 
-export default WaterConservationInitiativesData;
+export default WaterConservation;

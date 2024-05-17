@@ -11,7 +11,7 @@ const AIResponse: FC<Props> = ({ message }) => {
       <div className="flex flex-col gap-1 w-full">
         <h1 className="font-bold mb-2 mt-2">AI</h1>
         <div className="flex flex-col w-full  leading-1.5 pb-4 rounded-e-xl rounded-es-xl ">
-          <p className=" font-normal text-white dark:text-white">
+          <p className=" font-normal text-white dark:text-white whitespace-pre-wrap ">
             {message.message}
           </p>
         </div>

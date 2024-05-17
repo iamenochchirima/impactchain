@@ -1,67 +1,93 @@
-import React, { useState, useEffect } from 'react';
-import ReactApexChart from 'react-apexcharts';
-import dayjs from 'dayjs';
-import quarterOfYear from 'dayjs/plugin/quarterOfYear';
-import { ApexOptions } from 'apexcharts';
+import React, { FC, useState } from "react";
+import ReactApexChart from "react-apexcharts";
+import dayjs from "dayjs";
+import quarterOfYear from "dayjs/plugin/quarterOfYear";
+import { ApexOptions } from "apexcharts";
+import {
+  BarGraphData,
+} from "../../../analytics/components/utils/types";
 
 // Extend dayjs with the quarterOfYear plugin
 dayjs.extend(quarterOfYear);
 
+type Props = {
+  data: BarGraphData;
+  graphKey: string;
+};
 
-
-const BarGraph = () => {
+const BarGraph: FC<Props> = ({ data, graphKey }) => {
   const [series, setSeries] = useState([
     {
       name: "sales",
-      data: [
-        { x: '2019/01/01', y: 400 },
-        { x: '2019/04/01', y: 430 },
-        { x: '2019/07/01', y: 448 },
-        { x: '2019/10/01', y: 470 },
-        { x: '2020/01/01', y: 540 },
-        { x: '2020/04/01', y: 580 },
-        { x: '2020/07/01', y: 690 },
-        { x: '2020/10/01', y: 690 }
-      ]
-    }
+      data: data.data,
+    },
   ]);
 
-  const options : ApexOptions = {
+  const [options, setOptions] = useState<ApexOptions>({
     chart: {
-      type: 'bar',
-      height: 380
-    },
-    xaxis: {
-      type: 'category',
-      labels: {
-        formatter: (val: string) => "Q" + dayjs(val).quarter()
+      type: "bar",
+      height: 380,
+      toolbar: {
+        show: true,
       },
-      group: {
+      id: graphKey,
+    },
+
+    xaxis: {
+      type: "category",
+      labels: {
         style: {
-          fontSize: '10px',
-          fontWeight: 700
+          colors: "#333",
+          fontSize: "12px",
         },
-        groups: [
-          { title: '2019', cols: 4 },
-          { title: '2020', cols: 4 }
-        ]
-      }
+      },
     },
     title: {
-      text: 'Grouped Labels on the X-axis',
+      text: data.name,
+      style: {
+        color: "#333",
+        fontSize: "15px",
+      },
     },
-    // tooltip: {
-    //   x: { 
-    //     formatter: (val: string) => "Q" + dayjs(val).quarter() + " " + dayjs(val).format("YYYY")
-    //   }
-    // },
-  };
+    yaxis: {
+      labels: {
+        style: {
+          colors: "#333",
+          fontSize: "12px",
+        },
+      },
+    },
+    plotOptions: {
+      bar: {
+        distributed: true,
+        horizontal: false,
+        columnWidth: "55%",
+      },
+    },
+    fill: {
+      opacity: 1,
+      colors: ["#008FFB"],
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    tooltip: {
+      enabled: true,
+      theme: "light",
+    },
+  });
+
 
 
   return (
-    <div>
+    <div className="bg-white text-black shadow-lg p-3 rounded-lg">
       <div id="chart">
-        <ReactApexChart options={options} series={series} type="bar" height={380} />
+        <ReactApexChart
+          options={options}
+          series={series}
+          type="bar"
+          height={380}
+        />
       </div>
       <div id="html-dist"></div>
     </div>

@@ -15,33 +15,53 @@ export type xisVals = {
   y: number;
 };
 
-export type PieChartData = {};
+export type PieChartData = {
+  name: string;
+  pieChat: boolean;
+  data:  pieData[];
+};
+
+export type pieData = {
+  name: string;
+  y: number;
+};
+
+
 
 export type MetricReportData = {
-    name: string;
-    key: string;
-    graphs : {
-        1: {
-          typeOfGraph: "line" | "bar" | "pie";
-            name: string;
-            x_label: string;
-            y_label: string;
-            graph: LineGraphData | BarGraphData | PieChartData | null;
-          };
-          2?: { 
-            typeOfGraph: "line" | "bar" | "pie";
-            name: string;
-            x_label: string;
-            y_label: string;
-            graph: LineGraphData | BarGraphData | PieChartData | null;
-          };
-          3?: {
-            typeOfGraph: "line" | "bar" | "pie";
-            name: string;
-            x_label: string;
-            y_label: string;
-            graph: LineGraphData | BarGraphData | PieChartData | null;
-          };
+  name: string;
+  key: string;
+  graphs: {
+    1?: {
+      typeOfGraph: "line" | "bar" | "pie";
+      name: string;
+      x_label: string;
+      y_label: string;
+      graph: GraphsData
     };
-    aiOverview: string;
+    2?: {
+      typeOfGraph: "line" | "bar" | "pie";
+      name: string;
+      x_label: string;
+      y_label: string;
+      graph: GraphsData
+    };
+    3?: {
+      typeOfGraph: "line" | "bar" | "pie";
+      name: string;
+      x_label: string;
+      y_label: string;
+      graph: GraphsData
+    };
+  };
+  aiOverview: any;
+};
+
+export type GraphsData =  LineGraphData | BarGraphData | PieChartData | null;
+
+
+export type FullReportData = {
+  overview : any;
+  overalGraph: BarGraphData;
+  specificMetrics: MetricReportData[];
 };

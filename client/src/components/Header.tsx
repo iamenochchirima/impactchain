@@ -12,15 +12,17 @@ import {
 } from "../redux/slices/app";
 import { useAuth } from "../hooks/AppContext";
 import { isDataIncomplete } from "./utils";
-import Report from "../pages/analytics/components/Report";
+import Report from "../pages/analytics/components/main-report/Report";
 import Help from "./Help";
 import { ImpactTargetType } from "../utils/types";
 import { getImpactTargetsArray } from "../utils/targets";
-import GenerateReportPrompt from "../pages/analytics/components/GenerateReportPrompt";
+import GenerateReportPrompt from "../pages/analytics/components/main-report/GenerateReportPrompt";
+import GenerateMetricReportPrompt from "../pages/analytics/components/metric-report/GenerateMetricReportPrompt";
+import MetricAnalysis from "../pages/analytics/components/metric-report/MetricAnalysis";
 
 
 const Header = () => {
-  const { showDataForm, userInfo, reportModal, openHelp, reportPromptModal, currentMetricInfo, } = useSelector(
+  const { showDataForm, userInfo, reportModal, openHelp, reportPromptModal, metricReportPromptModal, metricAnanlyticsModal } = useSelector(
     (state: RootState) => state.app
   );
   const userMenuRef = useRef<HTMLDivElement>(null);
@@ -56,7 +58,6 @@ const Header = () => {
     const getOnChainData = async () => {
       try {
         const res = await dataActor?.getUserRecord(userInfo.email);
-        console.log("res", res)
         if (res) {
           if ("ok" in res) {
 
@@ -93,6 +94,8 @@ const Header = () => {
       {reportModal && <Report />}
       {openHelp && <Help />}
       {reportPromptModal && <GenerateReportPrompt />}
+      {metricReportPromptModal && <GenerateMetricReportPrompt />}
+      {metricAnanlyticsModal && <MetricAnalysis />}
       <div className="fixed bg-black z-40 left-64 right-0">
         <div className="pt-4">
           <div className="h-5 flex items-center justify-end bg-custom-gray mx-10 py-10 rounded-xl border border-green-700">

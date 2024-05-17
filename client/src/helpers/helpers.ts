@@ -67,6 +67,19 @@ export const verifyPassword = async (email: string, password: string) => {
   }
 };
 
+export const resetPassword = async (email: string, password: string, confirm: string) => {
+  try {
+    const { data } = await axios.put(`${API_BASE_URL}/api/auth/reset-password`, {
+      email,
+      password,
+      confirm,
+    });
+    return Promise.resolve(data);
+  } catch (error) {
+    return { error: "Error resetting password", };
+  }
+};
+
 export const updateUser = async (credentials: any) => {
   try {
     const { data } = await axios.put("/users/update", { ...credentials });
@@ -112,14 +125,15 @@ export const verifyOPT = async (email: string, code: string) => {
   }
 };
 
-export const resetPassword = async (email: string, password: string) => {
+export const getAiOverview = async (prompt: string) => {
   try {
-    const { data, status } = await axios.put(`${API_BASE_URL}/api/auth/reset-password`, {
-      email,
-      password,
+    const response = await axios.post(`${API_BASE_URL}/api/completions`, {
+      message: prompt
     });
-    return Promise.resolve({ data, status });
+    return response.data;
   } catch (error) {
+    console.error("Failed to get AI overview:", error);
     return Promise.reject(error);
   }
-};
+}
+

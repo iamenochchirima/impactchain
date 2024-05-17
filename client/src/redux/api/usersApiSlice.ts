@@ -1,6 +1,5 @@
+import { API_BASE_URL } from '../../hooks/exporter';
 import { apiSlice } from "./apiSlice";
-
-const USERS_URL = "/users";
 
 export const usersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -29,28 +28,28 @@ export const usersApiSlice = apiSlice.injectEndpoints({
 
     }),
     getUsers: builder.query({
-      query: () => `${USERS_URL}`,
+      query: () => `${API_BASE_URL}`,
     }),
     getUser: builder.query({
       query: () => "/api/users/profile",
     }),
     createUser: builder.mutation({
       query: (user) => ({
-        url: USERS_URL,
+        url: API_BASE_URL,
         method: "POST",
         body: user,
       }),
     }),
     updateUser: builder.mutation({
       query: (user) => ({
-        url: `${USERS_URL}/${user.id}`,
+        url: `${API_BASE_URL}/api/users/update/`,
         method: "PUT",
         body: user,
       }),
     }),
     deleteUser: builder.mutation({
       query: (id: string) => ({
-        url: `${USERS_URL}/${id}`,
+        url: `${API_BASE_URL}/${id}`,
         method: "DELETE",
       }),
     }),

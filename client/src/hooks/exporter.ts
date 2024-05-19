@@ -2,7 +2,11 @@ export { idlFactory as dataIDL } from "./declarations/data/data.did.js";
 export { idlFactory as fileStorageIdlFactory } from "./declarations/file_storage/file_storage.did.js";
 export { idlFactory as fileScalingManagerIdlFactory } from "./declarations/file_scaling_manager/file_scaling_manager.did.js";
 
-export const environment = "production";
+// Env is a variant type that can be either "development" or "production"
+
+type Env = "development" | "production";
+
+export const environment: Env = "production";
 export const API_BASE_URL = "https://impactchain-production.up.railway.app"
 export const network = "ic"
 export const dataCanisterId = "hocf4-oyaaa-aaaal-qdmba-cai";

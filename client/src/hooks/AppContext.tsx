@@ -7,9 +7,10 @@ import React, {
 } from "react";
 import { Actor, ActorSubclass, HttpAgent } from "@dfinity/agent";
 
-import { _SERVICE } from "./declarations/data/data.did";
+
 import { dataCanisterId, dataIDL, environment, network } from "./exporter";
 import { Socket, io } from "socket.io-client";
+import { _SERVICE } from "./declarations/data/data.did";
 
 const localhost = "http://localhost:4943";
 const host = "https://icp0.io";

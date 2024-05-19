@@ -35,7 +35,7 @@ const Help = () => {
           <div className="flex gap-3 bg-custom-gray p-3 border-x border-y border-custom-green rounded-3xl">
             <img src="/Books.svg" alt="icon" className="w-8 h-8" />
             <div className="flex flex-col gap-3">
-              <h1 className="font-bold">Knowledge Base</h1>
+              <h1 className="font-bold">Tutorial</h1>
               <p>
                 Get the most of impact chain by asking our AI all your questions
               </p>

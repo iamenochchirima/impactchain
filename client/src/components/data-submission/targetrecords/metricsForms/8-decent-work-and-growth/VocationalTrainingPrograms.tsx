@@ -63,7 +63,7 @@ const VocationalTrainingProgramsData = ({ setManualData, setUploadManually }) =>
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
-      const file_path = location.pathname;
+      const file_path = location;
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);
@@ -262,32 +262,21 @@ const VocationalTrainingProgramsData = ({ setManualData, setUploadManually }) =>
               required
             >
               <option value="">Select the type of vocational training provided from the dropdown.</option>
-              <option value="financial">Direct Funding</option>
-              <option value="resource-based">Grants</option>
-              <option value="consultation">Public-Private Partnerships</option>
+              <option value="technical">Technical</option>
+              <option value="business">Business</option>
+              <option value="artisanal">Artisanal</option>
+              <option value="other">Other</option>
             </select>
           </div>
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>How many health care projects are funded?</label>
+            <label htmlFor={styles.inputLabel}>How many participants are involved?</label>
             <input
               className={styles.formInput}
-              id="numberOfProjects"
+              id="totalParticipants"
               type="number"
-              placeholder="Indicate the number of healthcare projects supported by this funding."
-              value={numberOfProjects}
-              onChange={(e) => setNumberOfProjects(e.target.value)}
-              required
-            />
-          </div>
-          <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>What is the total amount funded? (In ZAR)</label>
-            <input
-              className={styles.formInput}
-              id="amountFunded"
-              type="number"
-              placeholder="Enter the total amount of funding allocated."
-              value={amountFunded}
-              onChange={(e) => setAmountFunded(e.target.value)}
+              placeholder="Indicate the number of participants in this vocational training program"
+              value={totalParticipants}
+              onChange={(e) => setTotalParticipants(e.target.value)}
               required
             />
           </div>
@@ -353,4 +342,4 @@ const VocationalTrainingProgramsData = ({ setManualData, setUploadManually }) =>
   );
 };
 
-export default HealthcareFunding;
+export default VocationalTrainingProgramsData;

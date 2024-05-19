@@ -24,59 +24,37 @@ const EducationalGrantsData = ({ setManualData, setUploadManually }) => {
   const [programName, setProgramName] = useState<string>("");
   const [typeOfGrant, setTypeOfGrant] = useState<string>("");
   const [totalAmountAwarded, setTotalAmountAwarded] = useState<string>("");
-  
+
   const [programs, setPrograms] = useState<EducationalGrantsDataType[]>([]);
   const [showForm, setShowForm] = useState<boolean>(false);
   const [goal, setGoal] = useState<string>("");
   const goalareaRef = useRef<HTMLTextAreaElement>(null);
-
+  
   const handleSubmit = async () => {
+    if (goal === "") {
+      toast.error("Please enter a goal", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+      });
+      return;
+    }
+    if (programs.length === 0) {
+      toast.error("Please add at least one educational grant program you did", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+      });
+      return;
+    }
     try {
-      setSaving(true);
-      const checkedFiles: File[] = [];
-      if (supportFiles) {
-        for (const file of supportFiles) {
-          if (file.size <= 4 * 1024 * 1024) {
-            checkedFiles.push(file);
-          }
-        }
-      }
-
-      if (checkedFiles.length === 0) {
-        toast.error("Please upload support documents", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-        });
-        setSaving(false);
-        return;
-      }
-
-      const urls = await uploadAsset(checkedFiles);
-
-      const startDateMilliseconds = new Date(startDate).getTime();
-      const endDateMilliseconds = new Date(endDate).getTime();
-
-      // const EducationalGrantsData : EducationalGrantsDataType = {
-      //   startDate: BigInt(startDateMilliseconds),
-      //   endDate: BigInt(endDateMilliseconds),
-      //   location: location,
-      //   programName: programName,
-      //   programDescription: programDescription,
-      //   feedbackFromRecipients: feedbackFromRecipients,
-      //   typesOfGrants: typesOfGrants,
-      //   impactOnEducation: impactOnEducation,
-      //   challengesFaced: challengesFaced,
-      //   recipientDemographics:recipientDemographics,
-      //   averageGrantAmount: BigInt(averageGrantAmount),
-      //   totalGrantsAwarded: BigInt(totalGrantsAwarded),
-      //   totalAmountAwarded: BigInt(totalAmountAwarded),
-      //   dataVerification: false,
-      //   supportingFiles: urls ? urls : [],
-      //   created: BigInt(Date.now()),
-      // };
-      // setManualData(EducationalGrantsData);
+      const data: ManualData = {
+        goal: goal,
+        data: programs,
+      };
+      setManualData(data);
       setUploadManually(false);
     } catch (error) {
       console.log("Error saving educational grant program", error);
@@ -170,7 +148,7 @@ const EducationalGrantsData = ({ setManualData, setUploadManually }) => {
       return;
     }
 
-    const newProgram:EducationalGrantsDataType = {
+    const newProgram: EducationalGrantsDataType = {
       programName,
       startDate:BigInt(new Date(startDate).getTime()),
       duration,
@@ -198,7 +176,7 @@ const EducationalGrantsData = ({ setManualData, setUploadManually }) => {
     <div>
       <div className=" items-center">
         <h3 className="text-white text-xl text-center">
-          Educational Grants Data
+          Educational Grant
         </h3>
         <div className="flex justify-end py-3">
           <button
@@ -284,9 +262,9 @@ const EducationalGrantsData = ({ setManualData, setUploadManually }) => {
               required
             >
               <option value="">Select the type of educational grant provided from the dropdown.</option>
-              <option value="financial">Scholarships</option>
-              <option value="resource-based">Research Funding</option>
-              <option value="consultation">Teaching Grants</option>
+              <option value="scholarships">Scholarships</option>
+              <option value="research-funding">Research Funding</option>
+              <option value="teaching-grants">Teaching Grants</option>
             </select>
           </div>
           <div className={styles.inputDiv}>
@@ -295,7 +273,7 @@ const EducationalGrantsData = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="totalAmountAwarded"
               type="number"
-              placeholder="Specify the total amount of money awarded in grants."
+              placeholder="Specify the total amount of money disbursed in grants."
               value={totalAmountAwarded}
               onChange={(e) => setTotalAmountAwarded(e.target.value)}
               required

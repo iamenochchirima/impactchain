@@ -9,7 +9,7 @@ type TemplateMetricReportData = {
   aiOverview: any;
 };
 
-const logoPath = path.join(__dirname, "i.clogo.png");
+const logoPath = path.join(__dirname, './assets/images/i.clogo.png');
 const icon = fs.readFileSync(logoPath, "base64");
 
 export const metricPdfTemplate = ({
@@ -39,22 +39,22 @@ export const metricPdfTemplate = ({
       <style>
         @font-face {
           font-family: "TelegraphUltraBold";
-          src: url("fonts/PPTelegraf-UltraBold.otf") format("opentype"),
-            url("fonts/PPTelegraf-UltraBold.otf") format("opentype");
+          src: url("assets/fonts/PPTelegraf-UltraBold.otf") format("opentype"),
+            url("assets/fonts/PPTelegraf-UltraBold.otf") format("opentype");
           font-weight: bolder;
           font-style: normal;
         }
         @font-face {
           font-family: "TelegraphRegular";
-          src: url("fonts/PPTelegraf-Regular.otf") format("opentype"),
-            url("fonts/PPTelegraf-Regular.otf") format("opentype");
+          src: url("assets/fonts/PPTelegraf-Regular.otf") format("opentype"),
+            url("assets/fonts/PPTelegraf-Regular.otf") format("opentype");
           font-weight: normal;
           font-style: normal;
         }
         @font-face {
           font-family: "TelegraphUltraLight";
-          src: url("fonts/PPTelegraf-UltraLight.otf") format("opentype"),
-            url("fonts/PPTelegraf-UltraLight.otf") format("opentype");
+          src: url("assets/fonts/PPTelegraf-UltraLight.otf") format("opentype"),
+            url("assets/fonts/PPTelegraf-UltraLight.otf") format("opentype");
           font-weight: lighter;
           font-style: normal;
         }

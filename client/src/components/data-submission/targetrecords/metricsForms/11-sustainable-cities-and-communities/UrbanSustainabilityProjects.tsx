@@ -22,8 +22,7 @@ const UrbanSustainabilityProjectsData = ({ setManualData, setUploadManually }) =
   const [location, setLocation] = useState<string>("");
 
   const [programName, setProgramName] = useState<string>("");
-  const [typeOfFunding, setTypeOfFunding] = useState<string>("");
-  const [amountFunded, setAmountFunded] = useState<string>("");
+  const [typeOfProject, setTypeOfProject] = useState<string>("");
   const [numberOfProjects, setNumberOfProjects] = useState<string>("");
 
   const [programs, setPrograms] = useState<UrbanSustainabilityProjectsDataType[]>([]);
@@ -42,7 +41,7 @@ const UrbanSustainabilityProjectsData = ({ setManualData, setUploadManually }) =
       return;
     }
     if (programs.length === 0) {
-      toast.error("Please add at least one healthcare funding program you did", {
+      toast.error("Please add at least one urban sustainability program you did", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -58,7 +57,7 @@ const UrbanSustainabilityProjectsData = ({ setManualData, setUploadManually }) =
       setManualData(data);
       setUploadManually(false);
     } catch (error) {
-      console.log("Error saving healthcare funding program", error);
+      console.log("Error saving urban sustainability program", error);
     }
   };
 
@@ -104,8 +103,7 @@ const UrbanSustainabilityProjectsData = ({ setManualData, setUploadManually }) =
       startDate === "" ||
       duration === "" ||
       location === "" ||
-      typeOfFunding === "" ||
-      amountFunded === "" ||
+      typeOfProject === "" ||
       numberOfProjects === ""
 
     ){
@@ -150,13 +148,12 @@ const UrbanSustainabilityProjectsData = ({ setManualData, setUploadManually }) =
       return;
     }
 
-    const newProgram: HealthcareFundingType = {
+    const newProgram: UrbanSustainabilityProjectsDataType = {
       programName,
       startDate:BigInt(new Date(startDate).getTime()),
       duration,
       location,
-      typeOfFunding,
-      amountFunded: BigInt(amountFunded),
+      typeOfProject,
       numberOfProjects: BigInt(numberOfProjects),
       dataVerification:false,
       supportingFiles:urls,
@@ -167,8 +164,7 @@ const UrbanSustainabilityProjectsData = ({ setManualData, setUploadManually }) =
     setStartDate("");
     setDuration("");
     setLocation("");
-    setTypeOfFunding("");
-    setAmountFunded("");
+    setTypeOfProject("");
     setNumberOfProjects("");
     setSupportFiles(null);
     setShowForm(false);
@@ -180,7 +176,7 @@ const UrbanSustainabilityProjectsData = ({ setManualData, setUploadManually }) =
     <div>
       <div className=" items-center">
         <h3 className="text-white text-xl text-center">
-          Health Care Funding
+          Urban Sustainability Project
         </h3>
         <div className="flex justify-end py-3">
           <button
@@ -205,16 +201,16 @@ const UrbanSustainabilityProjectsData = ({ setManualData, setUploadManually }) =
         <div className={styles.munualDataForm}>
           <div className={styles.formHeader}>
             <h3 className={styles.formTitle}>
-              Add a Healthcare Funding Program
+              Add a Urban Sustainability Project or Program
             </h3>
           </div>
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>What is the name of the Healthcare Funding program?</label>
+            <label htmlFor={styles.inputLabel}>What is the name of the Urban Sustainability program?</label>
             <input
               className={styles.formInput}
               id="programName"
               type="text"
-              placeholder="Enter the specific name of the healthcare funding program."
+              placeholder="Enter the specific name of the urban sustainability project."
               value={programName}
               onChange={(e) => setProgramName(e.target.value)}
               required
@@ -226,7 +222,7 @@ const UrbanSustainabilityProjectsData = ({ setManualData, setUploadManually }) =
               className={styles.formInput}
               id="startDate"
               type="date"
-              placeholder="Indicate when the funding program was initiated."
+              placeholder="Indicate when the project was initiated ."
               value={startDate}
               required
               onChange={(e) => setStartDate(e.target.value)}
@@ -238,7 +234,7 @@ const UrbanSustainabilityProjectsData = ({ setManualData, setUploadManually }) =
               className={styles.formInput}
               id="duration"
               type="text"
-              placeholder="Provide the duration that the funding program has been running."
+              placeholder="Provide the duration that the project has been running."
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
             />
@@ -249,7 +245,7 @@ const UrbanSustainabilityProjectsData = ({ setManualData, setUploadManually }) =
               className={styles.formInput}
               id="location"
               type="text"
-              placeholder="Specify the city and country where the funding is directed."
+              placeholder="Specify the city and country where the project is implemented."
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               required
@@ -257,41 +253,30 @@ const UrbanSustainabilityProjectsData = ({ setManualData, setUploadManually }) =
           </div>
 
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>What type of funding is provided?</label>
+            <label htmlFor={styles.inputLabel}>What is the main reason for the project or program?</label>
             <select
               className={styles.formSelectInput}
-              id="typeOfFunding"
-              value={typeOfFunding}
-              onChange={(e) => setTypeOfFunding(e.target.value)}
+              id="typeOfProject"
+              value={typeOfProject}
+              onChange={(e) => setTypeOfProject(e.target.value)}
               required
             >
-              <option value="">Select the primary type of funding from the dropdown.</option>
-              <option value="financial">Direct Funding</option>
-              <option value="resource-based">Grants</option>
-              <option value="consultation">Public-Private Partnerships</option>
+              <option value="">Select the main focus of the sustainability project from the dropdown.</option>
+              <option value="green-spaces">Green Spaces</option>
+              <option value="energy-efficiency">Energy Efficiency</option>
+              <option value="waste-management">Waste Management</option>
+              <option value="water-conservation">Water Conservation</option>
             </select>
           </div>
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>How many health care projects are funded?</label>
+            <label htmlFor={styles.inputLabel}>How many projects are involved in this initiative?</label>
             <input
               className={styles.formInput}
               id="numberOfProjects"
               type="number"
-              placeholder="Indicate the number of healthcare projects supported by this funding."
+              placeholder="Enter the total number of sustainability projects initiated under this program."
               value={numberOfProjects}
               onChange={(e) => setNumberOfProjects(e.target.value)}
-              required
-            />
-          </div>
-          <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>What is the total amount funded? (In ZAR)</label>
-            <input
-              className={styles.formInput}
-              id="amountFunded"
-              type="number"
-              placeholder="Enter the total amount of funding allocated."
-              value={amountFunded}
-              onChange={(e) => setAmountFunded(e.target.value)}
               required
             />
           </div>
@@ -357,4 +342,4 @@ const UrbanSustainabilityProjectsData = ({ setManualData, setUploadManually }) =
   );
 };
 
-export default HealthcareFunding;
+export default UrbanSustainabilityProjectsData;

@@ -6,7 +6,7 @@ import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
-import { OrganizationalResourceFootprintReductionData as OrganizationalResourceFootprintReductionData } from "../../../../../hooks/declarations/data/data.did";
+import {OrganizationalResourceFootprintReductionData as OrganizationalResourceFootprintReductionDataType } from "../../../../../hooks/declarations/data/data.did";
 import { ManualData } from "../../MetricRecords";
 import { IoMdAdd } from "react-icons/io";
 import Program from "../support/Program";
@@ -148,7 +148,7 @@ const OrganizationalResourceFootprintReductionData = ({ setManualData, setUpload
       return;
     }
 
-    const newProgram: OrganizationalResourceFootprintReductionData = {
+    const newProgram: OrganizationalResourceFootprintReductionDataType = {
       programName,
       startDate:BigInt(new Date(startDate).getTime()),
       duration,
@@ -253,7 +253,7 @@ const OrganizationalResourceFootprintReductionData = ({ setManualData, setUpload
           </div>
 
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>What type of resources is provided?</label>
+            <label htmlFor={styles.inputLabel}>What type of resources are managed?</label>
             <select
               className={styles.formSelectInput}
               id="typeOfResources"
@@ -269,7 +269,7 @@ const OrganizationalResourceFootprintReductionData = ({ setManualData, setUpload
             </select>
           </div>
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>How many health care projects are funded?</label>
+            <label htmlFor={styles.inputLabel}>What is the value of reduction in your resource footprint?</label>
             <input
               className={styles.formInput}
               id="reductionInResourceFootprint"

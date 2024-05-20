@@ -22,9 +22,9 @@ const EnergyEfficientSystemsData = ({ setManualData, setUploadManually }) => {
   const [location, setLocation] = useState<string>("");
 
   const [programName, setProgramName] = useState<string>("");
-  const [typeOfFunding, setTypeOfFunding] = useState<string>("");
-  const [amountFunded, setAmountFunded] = useState<string>("");
-  const [numberOfProjects, setNumberOfProjects] = useState<string>("");
+  const [typeOfSystem, setTypeOfSystem] = useState<string>("");
+  const [numberOfSystemsInstalled, setNumberOfSystemsInstalled] = useState<string>("");
+  const [efficiencyRate, setEfficiencyRate] = useState<string>("");
 
   const [programs, setPrograms] = useState<EnergyEfficientSystemsDataType[]>([]);
   const [showForm, setShowForm] = useState<boolean>(false);
@@ -42,7 +42,7 @@ const EnergyEfficientSystemsData = ({ setManualData, setUploadManually }) => {
       return;
     }
     if (programs.length === 0) {
-      toast.error("Please add at least one healthcare funding program you did", {
+      toast.error("Please add at least one energy efficient systems program you did", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -58,13 +58,13 @@ const EnergyEfficientSystemsData = ({ setManualData, setUploadManually }) => {
       setManualData(data);
       setUploadManually(false);
     } catch (error) {
-      console.log("Error saving healthcare funding program", error);
+      console.log("Error saving energy efficient systems program", error);
     }
   };
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
-      const file_path = location.pathname;
+      const file_path = location;
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);
@@ -104,9 +104,9 @@ const EnergyEfficientSystemsData = ({ setManualData, setUploadManually }) => {
       startDate === "" ||
       duration === "" ||
       location === "" ||
-      typeOfFunding === "" ||
-      amountFunded === "" ||
-      numberOfProjects === ""
+      typeOfSystem === "" ||
+      numberOfSystemsInstalled === "" ||
+      efficiencyRate === ""
 
     ){
       toast.error("Please fill in all required fields", {
@@ -150,14 +150,14 @@ const EnergyEfficientSystemsData = ({ setManualData, setUploadManually }) => {
       return;
     }
 
-    const newProgram: HealthcareFundingType = {
+    const newProgram: EnergyEfficientSystemsDataType = {
       programName,
       startDate:BigInt(new Date(startDate).getTime()),
       duration,
       location,
-      typeOfFunding,
-      amountFunded: BigInt(amountFunded),
-      numberOfProjects: BigInt(numberOfProjects),
+      typeOfSystem,
+      numberOfSystemsInstalled: BigInt(numberOfSystemsInstalled),
+      efficiencyRate: BigInt(efficiencyRate),
       dataVerification:false,
       supportingFiles:urls,
       created:BigInt(Date.now()),
@@ -167,9 +167,9 @@ const EnergyEfficientSystemsData = ({ setManualData, setUploadManually }) => {
     setStartDate("");
     setDuration("");
     setLocation("");
-    setTypeOfFunding("");
-    setAmountFunded("");
-    setNumberOfProjects("");
+    setTypeOfSystem("");
+    setNumberOfSystemsInstalled("");
+    setEfficiencyRate("");
     setSupportFiles(null);
     setShowForm(false);
     setSaving(false);
@@ -180,7 +180,7 @@ const EnergyEfficientSystemsData = ({ setManualData, setUploadManually }) => {
     <div>
       <div className=" items-center">
         <h3 className="text-white text-xl text-center">
-          Health Care Funding
+          Energy Efficient Systems
         </h3>
         <div className="flex justify-end py-3">
           <button
@@ -205,16 +205,16 @@ const EnergyEfficientSystemsData = ({ setManualData, setUploadManually }) => {
         <div className={styles.munualDataForm}>
           <div className={styles.formHeader}>
             <h3 className={styles.formTitle}>
-              Add a Healthcare Funding Program
+              Add a Energy Efficient Systems Program
             </h3>
           </div>
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>What is the name of the Healthcare Funding program?</label>
+            <label htmlFor={styles.inputLabel}>What is the name of the Energy Efficient Systems program?</label>
             <input
               className={styles.formInput}
               id="programName"
               type="text"
-              placeholder="Enter the specific name of the healthcare funding program."
+              placeholder="Enter the name of the program focused on energy-efficient systems."
               value={programName}
               onChange={(e) => setProgramName(e.target.value)}
               required
@@ -226,7 +226,7 @@ const EnergyEfficientSystemsData = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="startDate"
               type="date"
-              placeholder="Indicate when the funding program was initiated."
+              placeholder="Indicate when the installation of systems began."
               value={startDate}
               required
               onChange={(e) => setStartDate(e.target.value)}
@@ -238,7 +238,7 @@ const EnergyEfficientSystemsData = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="duration"
               type="text"
-              placeholder="Provide the duration that the funding program has been running."
+              placeholder="Provide the duration that the systems installation program has been running."
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
             />
@@ -249,7 +249,7 @@ const EnergyEfficientSystemsData = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="location"
               type="text"
-              placeholder="Specify the city and country where the funding is directed."
+              placeholder="Specify the city and country where the systems are installed."
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               required
@@ -257,41 +257,42 @@ const EnergyEfficientSystemsData = ({ setManualData, setUploadManually }) => {
           </div>
 
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>What type of funding is provided?</label>
+            <label htmlFor={styles.inputLabel}>What type of system is installed?</label>
             <select
               className={styles.formSelectInput}
-              id="typeOfFunding"
-              value={typeOfFunding}
-              onChange={(e) => setTypeOfFunding(e.target.value)}
+              id="typeOfSystem"
+              value={typeOfSystem}
+              onChange={(e) => setTypeOfSystem(e.target.value)}
               required
             >
-              <option value="">Select the primary type of funding from the dropdown.</option>
-              <option value="financial">Direct Funding</option>
-              <option value="resource-based">Grants</option>
-              <option value="consultation">Public-Private Partnerships</option>
+              <option value="">Select the type of energy-efficient system installed from the dropdown.</option>
+              <option value="HVAC">HVAC</option>
+              <option value="lighting">Lighting</option>
+              <option value="insulation">Insulation</option>
+              <option value="energy-management-systems">Energy Management Systems</option>
             </select>
           </div>
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>How many health care projects are funded?</label>
+            <label htmlFor={styles.inputLabel}>How many systems are installed?</label>
             <input
               className={styles.formInput}
-              id="numberOfProjects"
+              id="numberOfSystemsInstalled"
               type="number"
-              placeholder="Indicate the number of healthcare projects supported by this funding."
-              value={numberOfProjects}
-              onChange={(e) => setNumberOfProjects(e.target.value)}
+              placeholder="Enter the number of energy-efficient systems installed under this initiative."
+              value={numberOfSystemsInstalled}
+              onChange={(e) => setNumberOfSystemsInstalled(e.target.value)}
               required
             />
           </div>
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>What is the total amount funded? (In ZAR)</label>
+            <label htmlFor={styles.inputLabel}>What is the efficiency rate?</label>
             <input
               className={styles.formInput}
-              id="amountFunded"
+              id="efficiencyRate"
               type="number"
-              placeholder="Enter the total amount of funding allocated."
-              value={amountFunded}
-              onChange={(e) => setAmountFunded(e.target.value)}
+              placeholder="Enter the efficiency rate of the energy-efficient systems installed."
+              value={efficiencyRate}
+              onChange={(e) => setEfficiencyRate(e.target.value)}
               required
             />
           </div>
@@ -357,4 +358,4 @@ const EnergyEfficientSystemsData = ({ setManualData, setUploadManually }) => {
   );
 };
 
-export default HealthcareFunding;
+export default EnergyEfficientSystemsData;

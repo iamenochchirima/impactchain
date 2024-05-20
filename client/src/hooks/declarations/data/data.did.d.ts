@@ -44,7 +44,7 @@ export interface CollaborativeSDGProjectsData {
   'dataVerification' : boolean,
   'location' : string,
   'startDate' : bigint,
-  'scopeOfCollaborativeEfforts' : string,
+  'numberOfProjects' : bigint,
 }
 export interface CommunityPeaceProgramsData {
   'created' : bigint,
@@ -52,7 +52,7 @@ export interface CommunityPeaceProgramsData {
   'supportingFiles' : Array<string>,
   'dataVerification' : boolean,
   'typeOfProgram' : string,
-  'communityImpact' : string,
+  'numberOfPrograms' : bigint,
   'programName' : string,
   'location' : string,
   'startDate' : bigint,
@@ -106,12 +106,13 @@ export interface EnergyEfficientSystemsData {
   'created' : bigint,
   'supportingFiles' : Array<string>,
   'numberOfSystemsInstalled' : bigint,
-  'totalCost' : bigint,
+  'typeOfSystem' : string,
   'efficiencyRate' : bigint,
   'dataVerification' : boolean,
   'programName' : string,
   'location' : string,
   'startDate' : bigint,
+  'duration' : string,
 }
 export interface FoodDonation {
   'created' : bigint,
@@ -360,9 +361,7 @@ export interface LandRehabilitationData {
   'duration' : string,
   'supportingFiles' : Array<string>,
   'dataVerification' : boolean,
-  'typeOfRehabilitation' : string,
   'programName' : string,
-  'typeOfLand' : string,
   'location' : string,
   'areaOfLandRehabilitated' : bigint,
   'startDate' : bigint,
@@ -918,7 +917,7 @@ export interface OceanPollutionReductionData {
 export interface OrganizationalResourceFootprintReductionData {
   'created' : bigint,
   'duration' : string,
-  'reductionInResourceFootprint' : number,
+  'reductionInResourceFootprint' : bigint,
   'typeOfResources' : string,
   'supportingFiles' : Array<string>,
   'dataVerification' : boolean,
@@ -949,19 +948,17 @@ export interface PeopleBenefitingFromInfrastructureData {
 export interface ReforestationProjectsData {
   'created' : bigint,
   'duration' : string,
-  'projectName' : string,
+  'programName' : string,
   'areaOfLandReforested' : bigint,
   'supportingFiles' : Array<string>,
   'dataVerification' : boolean,
-  'typeOfProject' : string,
   'location' : string,
   'startDate' : bigint,
 }
 export interface RenewableEnergyInvestmentData {
-  'numberOfProjects' : bigint,
   'created' : bigint,
   'duration' : string,
-  'typeOfRenewableEnergyInvestemt' : string,
+  'typeOfRenewableEnergyInvestment' : string,
   'supportingFiles' : Array<string>,
   'dataVerification' : boolean,
   'programName' : string,
@@ -990,8 +987,10 @@ export interface SDGAdvocacyCampaignsData {
   'supportingFiles' : Array<string>,
   'scopeOfCampaign' : string,
   'dataVerification' : boolean,
-  'campaignName' : string,
+  'numberOfCampaigns':bigint,
+  'programName' : string,
   'startDate' : bigint,
+  'location':string,
 }
 export interface STEMInnovationEducationData {
   'created' : bigint,
@@ -1071,10 +1070,11 @@ export interface SustainableInfrastructureData {
   'startDate' : bigint,
 }
 export interface SustainableSupplyChainInvestmentData {
-  'supplyChainImproved' : string,
+  'numberOfSupplyChainImproved' : bigint,
   'created' : bigint,
   'duration' : string,
   'supportingFiles' : Array<string>,
+  'typeOfInvestment':string,
   'dataVerification' : boolean,
   'programName' : string,
   'amountInvested' : bigint,
@@ -1094,14 +1094,12 @@ export interface UrbanLivingConditionsData {
 export interface UrbanSustainabilityProjectsData {
   'created' : bigint,
   'duration' : string,
-  'typeOfSustainabilityFeatures' : string,
-  'projectName' : string,
+  'programName' : string,
   'supportingFiles' : Array<string>,
   'dataVerification' : boolean,
   'typeOfProject' : string,
-  'totalFunding' : bigint,
+  'numberOfProjects' : bigint,
   'location' : string,
-  'projectScope' : string,
   'startDate' : bigint,
 }
 export interface UserRecord {
@@ -1145,6 +1143,7 @@ export interface WaterConservationInitiativesData {
   'dataVerification' : boolean,
   'totalFunding' : bigint,
   'programName' : string,
+  'numberOfInitiatives' : bigint,
   'location' : string,
   'typeOfInitiative' : string,
   'startDate' : bigint,
@@ -1156,7 +1155,6 @@ export interface WaterSanitationAccessData {
   'supportingFiles' : Array<string>,
   'dataVerification' : boolean,
   'programName' : string,
-  'typeOfSupport' : string,
   'totalFundsAllocated' : bigint,
   'location' : string,
   'startDate' : bigint,

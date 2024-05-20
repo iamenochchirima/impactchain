@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { uploadFile } from "../../../../../config/storage/functions";
 import { useSelector } from "react-redux";
@@ -7,88 +6,59 @@ import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
-import {WaterConservationInitiativesData as WaterConservationInitiativesDataType } from "../../../../../hooks/declarations/data/data.did";
+import { WaterConservationInitiativesData as WaterConservationInitiativesDataType } from "../../../../../hooks/declarations/data/data.did";
+import { ManualData } from "../../MetricRecords";
+import { IoMdAdd } from "react-icons/io";
+import Program from "../support/Program";
 
-
-const WaterConservation = ({ setManualData, setUploadManually }) => {
+const WaterConservationInitiativesData = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
   const [supportFiles, setSupportFiles] = useState<File[] | null>(null);
-  const {storageInitiated } = useSelector((state: RootState) => state.app);
+  const { storageInitiated } = useSelector((state: RootState) => state.app);
   const [countDown, setCountDown] = useState<number>(0);
 
   const [startDate, setStartDate] = useState<string>("");
-  const [endDate, setEndDate] = useState<string>("");
+  const [duration, setDuration] = useState<string>("");
   const [location, setLocation] = useState<string>("");
 
-  const [facilityName, setFacilityName] = useState<string>("");
-  const [projectDescription, setProjectDescription] = useState<string>("");
+  const [programName, setProgramName] = useState<string>("");
+  const [typeOfInitiative, setTypeOfInitiative] = useState<string>("");
+  const [totalFunding, setTotalFunding] = useState<string>("");
+  const [numberOfInitiatives, setNumberOfInitiatives] = useState<string>("");
 
+  const [programs, setPrograms] = useState<WaterConservationInitiativesDataType[]>([]);
+  const [showForm, setShowForm] = useState<boolean>(false);
+  const [goal, setGoal] = useState<string>("");
+  const goalareaRef = useRef<HTMLTextAreaElement>(null);
   
-  const [typeOfFacilities, setTypeOfFacilities] = useState<string>("");
-  const [feedbackFromCommunity, setFeedbackFromCommunity] = useState<string>("");
-  const [impactOnHealth, setImpactOnHealth] = useState<string>("");
-  const [operationalChallenges, setOperationalChallenges] = useState<string>("");
-  const [completionDate, setCompletionDate] = useState<string>("");
-  const [complianceWithStandards, setComplianceWithStandards] = useState<string>("");
-  const [numberOfFacilitiesBuilt, setNumberOfFacilitiesBuilt] = useState("");
-  const [numberOfFacilitiesRenovated, setNumberOfFacilitiesRenovated] = useState("");
-  const [totalInvestment, setTotalInvestment] = useState("");
-  const [populationServed, setPopulationServed] = useState("");
-  
-
   const handleSubmit = async () => {
+    if (goal === "") {
+      toast.error("Please enter a goal", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+      });
+      return;
+    }
+    if (programs.length === 0) {
+      toast.error("Please add at least one water conservation initiative program you did", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+      });
+      return;
+    }
     try {
-      setSaving(true);
-      const checkedFiles: File[] = [];
-      if (supportFiles) {
-        for (const file of supportFiles) {
-          if (file.size <= 4 * 1024 * 1024) {
-            checkedFiles.push(file);
-          }
-        }
-      }
-
-      if (checkedFiles.length === 0) {
-        toast.error("Please upload support documents", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-        });
-        setSaving(false);
-        return;
-      }
-
-      const urls = await uploadAsset(checkedFiles);
-
-      const startDateMilliseconds = new Date(startDate).getTime();
-      const endDateMilliseconds = new Date(endDate).getTime();
-
-      // const SanitationFacilitiesData : SanitationFacilitiesDataType = {
-      //   startDate: BigInt(startDateMilliseconds),
-      //   endDate: BigInt(endDateMilliseconds),
-      //   location: location,
-      //   facilityName: facilityName,
-      //   projectDescription: projectDescription,
-      //   typeOfFacilities: typeOfFacilities,
-      //   feedbackFromCommunity: feedbackFromCommunity,
-      //   impactOnHealth: impactOnHealth,
-      //   operationalChallenges: operationalChallenges,
-      //   completionDate:completionDate,
-      //   complianceWithStandards:complianceWithStandards,
-      //   numberOfFacilitiesBuilt: BigInt(numberOfFacilitiesBuilt),
-      //   numberOfFacilitiesRenovated: BigInt(numberOfFacilitiesRenovated),
-      //   totalInvestment: BigInt(totalInvestment),
-      //   populationServed: BigInt(populationServed),
-      //   dataVerification: false,
-      //   supportingFiles: urls ? urls : [],
-      //   created: BigInt(Date.now()),
-      // };
-      // setManualData(SanitationFacilitiesData);
+      const data: ManualData = {
+        goal: goal,
+        data: programs,
+      };
+      setManualData(data);
       setUploadManually(false);
     } catch (error) {
-        setSaving(false);
-      console.log("Error saving Sanitation Facilities Data", error);
+      console.log("Error saving water conservation initiative program", error);
     }
   };
 
@@ -116,214 +86,275 @@ const WaterConservation = ({ setManualData, setUploadManually }) => {
     }
   };
 
+  const calcHeight = (value: string): number => {
+    const numberOfLineBreaks = (value.match(/\n/g) || []).length;
+    return numberOfLineBreaks * 20 + 50;
+  };
+
+  useEffect(() => {
+    if (goalareaRef.current) {
+      goalareaRef.current.style.height = `${calcHeight(goal)}px`;
+    }
+  }, [goal]);
+
+  const handleSave = async () => {
+    setSaving(true);
+    if(
+      programName === "" ||
+      startDate === "" ||
+      duration === "" ||
+      location === "" ||
+      typeOfInitiative === "" ||
+      totalFunding === "" ||
+      numberOfInitiatives === ""
+
+    ){
+      toast.error("Please fill in all required fields", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+      });
+      setSaving(false);
+      return;
+    }
+    const checkedFiles: File[] = [];
+    if (supportFiles) {
+      for(const file of supportFiles){
+        if (file.size <= 4 * 1024 * 1024) {
+          checkedFiles.push(file);
+        }
+      }
+    }
+
+    if(checkedFiles.length === 0){
+      toast.error("Please upload support documents", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+      });
+      setSaving(false);
+      return;
+    }
+
+    const urls = await uploadAsset(checkedFiles);
+    if(!urls){
+      toast.error("Error uploading files", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+      });
+      setSaving(false);
+      return;
+    }
+
+    const newProgram: WaterConservationInitiativesDataType = {
+      programName,
+      startDate:BigInt(new Date(startDate).getTime()),
+      duration,
+      location,
+      typeOfInitiative,
+      totalFunding: BigInt(totalFunding),
+      numberOfInitiatives: BigInt(numberOfInitiatives),
+      dataVerification:false,
+      supportingFiles:urls,
+      created:BigInt(Date.now()),
+    };
+    setPrograms([...programs, newProgram]);
+    setProgramName("");
+    setStartDate("");
+    setDuration("");
+    setLocation("");
+    setTypeOfInitiative("");
+    setTotalFunding("");
+    setNumberOfInitiatives("");
+    setSupportFiles(null);
+    setShowForm(false);
+    setSaving(false);
+
+  };
+
   return (
     <div>
-      <form className={`${styles.munualDataForm}`}>
-        <div className={`${styles.formHeader}`}>
-          <h3 className={`${styles.formTitle}`}>Sanitation Facilities Data</h3>
+      <div className=" items-center">
+        <h3 className="text-white text-xl text-center">
+          Water Conservation Initiatives
+        </h3>
+        <div className="flex justify-end py-3">
+          <button
+            onClick={() => setShowForm(true)}
+            className="flex items-center gap-2 text-custom-green"
+          >
+            <IoMdAdd />
+            <span>Add a program</span>
+          </button>
         </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Facility Name</label>
-          <input
-            className={`${styles.formInput}`}
-            id="facilityName"
-            type="text"
-            placeholder="Name of the Facility"
-            value={facilityName}
-            onChange={(e) => setFacilityName(e.target.value)}
-            required
-          />
 
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Project Description</label>
-          <textarea
-            className={`${styles.formInput}`}
-            id="projectDescription"
-            placeholder="Description of the Project"
-            value={projectDescription}
-            onChange={(e) => setProjectDescription(e.target.value)}
-            required
-            style={{ overflow: "hidden" }}
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Start Date</label>
-          <input
-            className={`${styles.formInput}`}
-            id="startDate"
-            type="date"
-            placeholder="Start Date"
-            value={startDate}
-            required
-            onChange={(e) => setStartDate(e.target.value)}
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>End Date</label>
-          <input
-            className={`${styles.formInput}`}
-            id="endDate"
-            type="date"
-            placeholder="End Date"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}> Location</label>
-          <input
-            className={`${styles.formInput}`}
-            id="location"
-            type="text"
-            placeholder="Location"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Type Of Facilities</label>
-          <input
-            className={`${styles.formInput}`}
-            id="typeOfFacilities"
-            type="text"
-            placeholder="Type of Facilities"
-            value={typeOfFacilities}
-            onChange={(e) => setTypeOfFacilities(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Feedback From Community</label>
-          <input
-            className={`${styles.formInput}`}
-            id="feedbackFromCommunity"
-            type="text"
-            placeholder="Communities Feedback"
-            value={feedbackFromCommunity}
-            onChange={(e) => setFeedbackFromCommunity(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Impact On Health</label>
-          <input
-            className={`${styles.formInput}`}
-            id="impactOnHealth"
-            type="text"
-            placeholder="The Impact on Health"
-            value={impactOnHealth}
-            onChange={(e) => setImpactOnHealth(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Operational Challenges</label>
-          <input
-            className={`${styles.formInput}`}
-            id="operationalChallenges"
-            type="text"
-            placeholder="Operational Challenges Faced"
-            value={operationalChallenges}
-            onChange={(e) => setOperationalChallenges(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Completion Date</label>
-          <input
-            className={`${styles.formInput}`}
-            id="completionDate"
-            type="text"
-            placeholder="Date of Completion"
-            value={completionDate}
-            onChange={(e) => setCompletionDate(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Compliance With Standards</label>
-          <input
-            className={`${styles.formInput}`}
-            id="complianceWithStandards"
-            type="text"
-            placeholder="Compliance with Standards"
-            value={complianceWithStandards}
-            onChange={(e) => setComplianceWithStandards(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Number Of Facilities Built</label>
-          <input
-            className={`${styles.formInput}`}
-            id="numberOfFacilitiesBuilt"
-            type="number"
-            placeholder="Number of Facilities Built"
-            value={numberOfFacilitiesBuilt}
-            onChange={(e) => setNumberOfFacilitiesBuilt(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Number of Facilities Renovated</label>
-          <input
-            className={`${styles.formInput}`}
-            id="numberOfFacilitiesRenovated"
-            type="number"
-            placeholder="Number of Facilities Renovated"
-            value={numberOfFacilitiesRenovated}
-            onChange={(e) => setNumberOfFacilitiesRenovated(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Total Investment</label>
-          <input
-            className={`${styles.formInput}`}
-            id="totalInvesment"
-            type="number"
-            placeholder="Total Investment Amount"
-            value={totalInvestment}
-            onChange={(e) => setTotalInvestment(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Population Served</label>
-          <input
-            className={`${styles.formInput}`}
-            id="populationServed"
-            type="number"
-            placeholder="Number of People Served"
-            value={populationServed}
-            onChange={(e) => setPopulationServed(e.target.value)}
-            required
-          />
-        </div>
-      </form>
-
-      <FilesInput {...{ setSupportFiles, supportFiles }} />
-
-      <div className="flex justify-between items-center py-4">
-        <button
-          onClick={() => setUploadManually(false)}
-          className={`${styles.roundedButton}`}
-        >
-          Cancel
-        </button>
-        <button
-          onClick={handleSubmit}
-          disabled={saving}
-          className={`${styles.roundedButton}`}
-        >
-          {saving ? `Uploading ${countDown}` : "Save"}
-        </button>
+        {programs.length > 0 && (
+          <div className={styles.programsDiv}>
+            {programs.map((program, index) => (
+              <Program key={index} {...{ program, programs, setPrograms }} />
+            ))}
+          </div>
+        )}
       </div>
+
+      {showForm && (
+        <div className={styles.munualDataForm}>
+          <div className={styles.formHeader}>
+            <h3 className={styles.formTitle}>
+              Add a Water Conservation Initiatives Program
+            </h3>
+          </div>
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>What is the name of the Water Conservation Initiatives program?</label>
+            <input
+              className={styles.formInput}
+              id="programName"
+              type="text"
+              placeholder="Enter the name of the water conservation initiative."
+              value={programName}
+              onChange={(e) => setProgramName(e.target.value)}
+              required
+            />
+          </div>
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>When did this program begin?</label>
+            <input
+              className={styles.formInput}
+              id="startDate"
+              type="date"
+              placeholder="Indicate when the initiative began."
+              value={startDate}
+              required
+              onChange={(e) => setStartDate(e.target.value)}
+            />
+          </div>
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>How long has the program been running?</label>
+            <input
+              className={styles.formInput}
+              id="duration"
+              type="text"
+              placeholder="Provide the duration that the initiative has been running."
+              value={duration}
+              onChange={(e) => setDuration(e.target.value)}
+            />
+          </div>
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>Where is this program located? (City and Country)</label>
+            <input
+              className={styles.formInput}
+              id="location"
+              type="text"
+              placeholder="Specify the city and country where the initiative is implemented."
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>What type of Conservation Initiative is used?</label>
+            <select
+              className={styles.formSelectInput}
+              id="typeOfInitiative"
+              value={typeOfInitiative}
+              onChange={(e) => setTypeOfInitiative(e.target.value)}
+              required
+            >
+              <option value="">Select the main type of conservation initiative from the dropdown.</option>
+              <option value="rainwater-harvesting">Rainwater Harvesting</option>
+              <option value="water-recycling">Water Recycling</option>
+              <option value="water-efficient-imigration">Water Efficient Imigration</option>
+            </select>
+          </div>
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>How many initiatives are included in this program?</label>
+            <input
+              className={styles.formInput}
+              id="numberOfInitiatives"
+              type="number"
+              placeholder="Enter the number of initiatives conducted under this program."
+              value={numberOfInitiatives}
+              onChange={(e) => setNumberOfInitiatives(e.target.value)}
+              required
+            />
+          </div>
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>What is the total amount funded? (In ZAR)</label>
+            <input
+              className={styles.formInput}
+              id="totalFunding"
+              type="number"
+              placeholder="Enter the total amount of funding allocated."
+              value={totalFunding}
+              onChange={(e) => setTotalFunding(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="">
+        <div className={styles.goalDiv}>
+          <h3 className={styles.goalTitle}>
+            What is your goal for this Metric?
+          </h3>
+        </div>
+        <div className={styles.goalInputDiv}>
+          <textarea
+            ref={goalareaRef}
+            className={styles.goalInput}
+            id="goal"
+            placeholder="Enter your goal here"
+            value={goal}
+            onChange={(e) => setGoal(e.target.value)}
+            required
+          />
+        </div>
+      </div>
+          <FilesInput {...{ setSupportFiles, supportFiles }} />
+
+          <div className={styles.buttonsDiv}>
+            <button
+              onClick={() => {
+                setShowForm(false);
+                setSaving(false);
+              }}
+              className="text-custom-green font-bold"
+            >
+              <span>Cancel</span>
+            </button>
+            <button
+              onClick={handleSave}
+              disabled={saving}
+              className={styles.roundedButton}
+            >
+              {saving ? `Saving... ${countDown}` : "Save"}
+            </button>
+          </div>
+        </div>
+      )}
+       {!showForm && (
+        <div className="flex justify-between items-center py-4">
+          <button
+            onClick={() => setUploadManually(false)}
+            className={styles.roundedButton}
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleSubmit}
+            disabled={saving}
+            className={`${styles.roundedButton} `}
+          >
+            Continue
+          </button>
+        </div>
+      )}
     </div>
   );
 };
 
-export default WaterConservation;
+export default WaterConservationInitiativesData;

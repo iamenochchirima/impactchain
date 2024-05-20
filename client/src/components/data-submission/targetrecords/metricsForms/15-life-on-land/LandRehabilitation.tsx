@@ -6,12 +6,12 @@ import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
-import { HealthcareFunding as HealthcareFundingType } from "../../../../../hooks/declarations/data/data.did";
+import {LandRehabilitationData as LandRehabilitationDataType } from "../../../../../hooks/declarations/data/data.did";
 import { ManualData } from "../../MetricRecords";
 import { IoMdAdd } from "react-icons/io";
 import Program from "../support/Program";
 
-const HealthcareFunding = ({ setManualData, setUploadManually }) => {
+const LandRehabilitationData = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
   const [supportFiles, setSupportFiles] = useState<File[] | null>(null);
   const { storageInitiated } = useSelector((state: RootState) => state.app);
@@ -22,11 +22,9 @@ const HealthcareFunding = ({ setManualData, setUploadManually }) => {
   const [location, setLocation] = useState<string>("");
 
   const [programName, setProgramName] = useState<string>("");
-  const [typeOfFunding, setTypeOfFunding] = useState<string>("");
-  const [amountFunded, setAmountFunded] = useState<string>("");
-  const [numberOfProjects, setNumberOfProjects] = useState<string>("");
+  const [areaOfLandRehabilitated, setAreaOfLandRehabilitated] = useState<string>("");
 
-  const [programs, setPrograms] = useState<HealthcareFundingType[]>([]);
+  const [programs, setPrograms] = useState<LandRehabilitationDataType[]>([]);
   const [showForm, setShowForm] = useState<boolean>(false);
   const [goal, setGoal] = useState<string>("");
   const goalareaRef = useRef<HTMLTextAreaElement>(null);
@@ -42,7 +40,7 @@ const HealthcareFunding = ({ setManualData, setUploadManually }) => {
       return;
     }
     if (programs.length === 0) {
-      toast.error("Please add at least one healthcare funding program you did", {
+      toast.error("Please add at least one land rehabilitation program you did", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -58,7 +56,7 @@ const HealthcareFunding = ({ setManualData, setUploadManually }) => {
       setManualData(data);
       setUploadManually(false);
     } catch (error) {
-      console.log("Error saving healthcare funding program", error);
+      console.log("Error saving land rehabilitation program", error);
     }
   };
 
@@ -104,9 +102,7 @@ const HealthcareFunding = ({ setManualData, setUploadManually }) => {
       startDate === "" ||
       duration === "" ||
       location === "" ||
-      typeOfFunding === "" ||
-      amountFunded === "" ||
-      numberOfProjects === ""
+      areaOfLandRehabilitated === "" 
 
     ){
       toast.error("Please fill in all required fields", {
@@ -150,14 +146,12 @@ const HealthcareFunding = ({ setManualData, setUploadManually }) => {
       return;
     }
 
-    const newProgram: HealthcareFundingType = {
+    const newProgram: LandRehabilitationDataType = {
       programName,
       startDate:BigInt(new Date(startDate).getTime()),
       duration,
       location,
-      typeOfFunding,
-      amountFunded: BigInt(amountFunded),
-      numberOfProjects: BigInt(numberOfProjects),
+      areaOfLandRehabilitated: BigInt(areaOfLandRehabilitated),
       dataVerification:false,
       supportingFiles:urls,
       created:BigInt(Date.now()),
@@ -167,9 +161,7 @@ const HealthcareFunding = ({ setManualData, setUploadManually }) => {
     setStartDate("");
     setDuration("");
     setLocation("");
-    setTypeOfFunding("");
-    setAmountFunded("");
-    setNumberOfProjects("");
+    setAreaOfLandRehabilitated("");
     setSupportFiles(null);
     setShowForm(false);
     setSaving(false);
@@ -180,7 +172,7 @@ const HealthcareFunding = ({ setManualData, setUploadManually }) => {
     <div>
       <div className=" items-center">
         <h3 className="text-white text-xl text-center">
-          Health Care Funding
+          Land Rehabilitation
         </h3>
         <div className="flex justify-end py-3">
           <button
@@ -205,16 +197,16 @@ const HealthcareFunding = ({ setManualData, setUploadManually }) => {
         <div className={styles.munualDataForm}>
           <div className={styles.formHeader}>
             <h3 className={styles.formTitle}>
-              Add a Healthcare Funding Program
+              Add a Land Rehabilitation Program
             </h3>
           </div>
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>What is the name of the Healthcare Funding program?</label>
+            <label htmlFor={styles.inputLabel}>What is the name of the Land Rehabilitation program?</label>
             <input
               className={styles.formInput}
               id="programName"
               type="text"
-              placeholder="Enter the specific name of the healthcare funding program."
+              placeholder="Enter the name of the land rehabilitation or conservation project."
               value={programName}
               onChange={(e) => setProgramName(e.target.value)}
               required
@@ -226,7 +218,7 @@ const HealthcareFunding = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="startDate"
               type="date"
-              placeholder="Indicate when the funding program was initiated."
+              placeholder="Indicate when the project began."
               value={startDate}
               required
               onChange={(e) => setStartDate(e.target.value)}
@@ -238,7 +230,7 @@ const HealthcareFunding = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="duration"
               type="text"
-              placeholder="Provide the duration that the funding program has been running."
+              placeholder="Provide the duration that the project has been running."
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
             />
@@ -249,7 +241,7 @@ const HealthcareFunding = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="location"
               type="text"
-              placeholder="Specify the city and country where the funding is directed."
+              placeholder="Specify the city and country where the project is implemented."
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               required
@@ -257,41 +249,14 @@ const HealthcareFunding = ({ setManualData, setUploadManually }) => {
           </div>
 
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>What type of funding is provided?</label>
-            <select
-              className={styles.formSelectInput}
-              id="typeOfFunding"
-              value={typeOfFunding}
-              onChange={(e) => setTypeOfFunding(e.target.value)}
-              required
-            >
-              <option value="">Select the primary type of funding from the dropdown.</option>
-              <option value="financial">Direct Funding</option>
-              <option value="resource-based">Grants</option>
-              <option value="consultation">Public-Private Partnerships</option>
-            </select>
-          </div>
-          <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>How many health care projects are funded?</label>
+            <label htmlFor={styles.inputLabel}>What is the size of the area rehabilitated?</label>
             <input
               className={styles.formInput}
-              id="numberOfProjects"
+              id="areaOfLandRehabilitated"
               type="number"
-              placeholder="Indicate the number of healthcare projects supported by this funding."
-              value={numberOfProjects}
-              onChange={(e) => setNumberOfProjects(e.target.value)}
-              required
-            />
-          </div>
-          <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>What is the total amount funded? (In ZAR)</label>
-            <input
-              className={styles.formInput}
-              id="amountFunded"
-              type="number"
-              placeholder="Enter the total amount of funding allocated."
-              value={amountFunded}
-              onChange={(e) => setAmountFunded(e.target.value)}
+              placeholder="Specify the area of land rehabilitated by this project."
+              value={areaOfLandRehabilitated}
+              onChange={(e) => setAreaOfLandRehabilitated(e.target.value)}
               required
             />
           </div>
@@ -357,4 +322,4 @@ const HealthcareFunding = ({ setManualData, setUploadManually }) => {
   );
 };
 
-export default HealthcareFunding;
+export default LandRehabilitationData;

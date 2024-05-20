@@ -1,10 +1,6 @@
-import React, {FC} from 'react'
 
-type Props = {
-  setPage: (page: string) => void;
-};
 
-const BrandKit: FC<Props> = ({setPage}) => {
+const BrandKit = () => {
   return (
     <div>
       <div className="flex items-center gap-3 mt-10 ml-5">
@@ -25,7 +21,6 @@ const BrandKit: FC<Props> = ({setPage}) => {
             </div>
           </div>
         </div>
-
 
         {/* Color Palette Section */}
         <div className="w-full flex flex-col">

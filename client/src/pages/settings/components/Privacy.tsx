@@ -1,8 +1,5 @@
-import React, { FC } from 'react'
-type Props = {
-  setPage: (page: string) => void;
-};
-const Privacy: FC<Props> = ({ setPage }) => {
+
+const Privacy = () => {
   return (
     <div>
       <div className="flex items-center gap-3 mt-10 ml-5 font-TelegraphRegular">

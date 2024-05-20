@@ -23,15 +23,15 @@ const SettingsPage = () => {
           />
         </div>
       )}
-      {page === "Settings" && <Settings {...{ setPage }} />}
-      {page === "Profile" && <Profile {...{ setPage }} />}
-      {page === "Password" && <Password {...{ setPage }} />}
-      {page === "BrandKit" && <BrandKit {...{ setPage }} />}
-      {page === "ESG" && <ESG {...{ setPage }} />}
-      {page === "Payment" && <Payment {...{ setPage }} />}
-      {page === "Terms" && <Terms {...{ setPage }} />}
-      {page === "Privacy" && <Privacy {...{ setPage }} />}
-      {page === "Litepaper" && <Litepaper {...{ setPage }} />}
+      {page === "Settings" && <Settings  />}
+      {page === "Profile" && <Profile  />}
+      {page === "Password" && <Password  />}
+      {page === "BrandKit" && <BrandKit  />}
+      {page === "ESG" && <ESG  />}
+      {page === "Payment" && <Payment  />}
+      {page === "Terms" && <Terms  />}
+      {page === "Privacy" && <Privacy  />}
+      {page === "Litepaper" && <Litepaper  />}
     </div>
   );
 };

@@ -1,12 +1,8 @@
-import React, { FC } from "react";
+
 import { MdOutlineChevronRight } from "react-icons/md";
-import { Link } from "react-router-dom";
 
-type Props = {
-  setPage: (page: string) => void;
-};
 
-const Settings: FC<Props> = ({ setPage }) => {
+const Settings= () => {
   return (
     <div>
       <div className="flex items-center gap-3 mt-10 ml-5 font-TelegraphRegular">

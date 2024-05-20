@@ -111,11 +111,11 @@ const ShowReport = () => {
       {loadingReport ? (
         <Loading />
       ) : (
-        <div id="chartContainer" className="overflow-auto ">
+        <div id="chartContainer" className="overflow-auto bg-white text-black">
           <div className="mt-3">
             <ReportPeriod periodOfTime={reportPromptResponse?.periodOfTime} />
           </div>
-          <div className="flex flex-col text-[100px] leading-[0.9] mt-4">
+          <div className="flex flex-col font-semibold text-[100px] leading-[0.9] mt-4">
             <span>ESG</span>
             <span>Performance</span>
             <span>Report</span>
@@ -132,14 +132,61 @@ const ShowReport = () => {
             />
           </div>
           <div className="">
-            <div className="flex flex-col text-[80px] leading-[0.9] mt-20">
+            <div className="flex flex-col font-semibold text-[90px] leading-[0.9] mt-20">
               <span>Executive</span>
               <span>Summary</span>
             </div>
             <div className="">
               <p className=" whitespace-pre-wrap my-4">
-              <ReactMarkdown>{report?.overview.content || ""}</ReactMarkdown>
+                <ReactMarkdown>{report?.overview.content || ""}</ReactMarkdown>
               </p>
+            </div>
+
+            {/* Statistics */}
+
+            <div className="flex flex-wrap justify-center items-center p-4 font-PoppinsRegular bg-purple-50 text-white">
+              <div className="w-1/3 p-2">
+                <div className="text-center bg-purple-500 p-8">
+                  <h2 className="text-[100px] font-bold">1k</h2>
+                  <p className="text-sm mt-2 text-nowrap">
+                    AVERAGE PARTICIPANTS
+                  </p>
+                </div>
+              </div>
+              <div className="w-1/3 p-2">
+                <div className="text-center bg-purple-500 p-8">
+                  <h2 className="text-[100px] font-bold">3</h2>
+                  <p className="text-sm mt-2">AVERAGE PROGRAMS</p>
+                </div>
+              </div>
+              <div className="w-1/3 p-2">
+                <div className="text-center bg-purple-500 p-8">
+                  <h2 className="text-[100px] font-bold">6</h2>
+                  <p className="text-sm mt-2">AVERAGE DURATION</p>
+                </div>
+              </div>
+              <div className="flex w-full">
+                <div className="w-2/3 p-4">
+                  <div className="text-center bg-white text-purple-500 p-8">
+                    <h2 className="text-[100px] font-bold">+3.11%</h2>
+                    <p className="text-sm mt-2 text-black">OVERALL IMPACT</p>
+                  </div>
+                </div>
+                <div className="w-1/3 p-2">
+                  <div className="text-center bg-purple-500 p-8">
+                    <h2 className="text-[100px] font-bold">1</h2>
+                    <p className="text-sm mt-2">LOCATIONS</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col ">
+              <span
+                className="tracking-widest mt-4"
+              >PREPARED BY</span>
+              <span className="font-bold">
+                {userRecord ? userRecord.aboutCompany.name : ""}
+              </span>
             </div>
             {report && (
               <BarGraph data={report.overalGraph} graphKey="overalGraph" />
@@ -149,6 +196,7 @@ const ShowReport = () => {
             <span>Specific</span>
             <span>Metrics</span>
           </div>
+
           {/* SPECIFIC METRICS */}
           <div className="">
             {report?.specificMetrics.map((metricData, index) => (

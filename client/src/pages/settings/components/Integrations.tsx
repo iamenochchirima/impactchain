@@ -1,8 +1,5 @@
-import React, { FC } from 'react'
-type Props = {
-  setPage: (page: string) => void;
-};
-const Integrations: FC<Props> = ({ setPage }) => {
+
+const Integrations = () => {
   return (
     <div>
       <div className="flex items-center gap-3 mt-10 ml-5 font-TelegraphRegular">

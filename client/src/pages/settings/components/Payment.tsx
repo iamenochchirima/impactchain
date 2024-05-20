@@ -1,8 +1,5 @@
-import React, { FC } from 'react'
-type Props = {
-  setPage: (page: string) => void;
-};
-const Payment: FC<Props> = ({setPage}) => {
+
+const Payment = () => {
   return (
     <div>
       <div className="flex items-center gap-3 mt-10 ml-5 font-TelegraphRegular">

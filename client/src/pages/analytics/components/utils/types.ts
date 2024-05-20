@@ -26,7 +26,13 @@ export type pieData = {
   y: number;
 };
 
-
+export type avarageStatsData = {
+  avarageParticipants: number;
+  avaragePrograms: number;
+  avarageDuration: number;
+  overallImpact: number;
+  locations: number;
+}
 
 export type MetricReportData = {
   name: string;

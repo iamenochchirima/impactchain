@@ -1,16 +1,14 @@
 import React, { FC, useState } from "react";
 import { RootState } from "../../../redux/store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useAuth } from "../../../hooks/AppContext";
 import { useUpdateUserMutation } from "../../../redux/api/usersApiSlice";
 import { UserRecord } from "../../../hooks/declarations/data/data.did";
+import { setUserInfo } from "../../../redux/slices/app";
 
-type Props = {
-  setPage: (page: string) => void;
-};
-
-const Profile: FC<Props> = ({ setPage }) => {
+const Profile = () => {
   const { dataActor } = useAuth();
+  const dispatch = useDispatch();
   const [updateUser] = useUpdateUserMutation();
   const { userRecord, userInfo } = useSelector((state: RootState) => state.app);
   const [initFirstname, setInitFirstname] = useState<string>(
@@ -42,8 +40,15 @@ const Profile: FC<Props> = ({ setPage }) => {
     const user = {
       firstname,
       lastname,
+      email: userInfo.email,
     };
     updateUser(user);
+    const _updatedUserInfo = {
+      ...userInfo,
+      firstname,
+      lastname,
+    };
+    dispatch(setUserInfo(_updatedUserInfo));
     if (companyName !== initFompanyName && userRecord) {
      const updadtedUserRecord: UserRecord = {
         ...userRecord,

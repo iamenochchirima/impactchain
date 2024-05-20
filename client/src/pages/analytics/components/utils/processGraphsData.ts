@@ -9,6 +9,78 @@ import {
   xisVals,
 } from "./types";
 
+/**
+ * Calculates the total impact for the given period
+ * Calculates the total impact for the same amount of period before the given period
+ * Returns the difference between the two, to determine whether the impact has increased or decreased as a percentage
+ * If period is "AllTime", calculates the total impact for all time
+ */
+export const calculateImpact = (data: any[], valueKey: string, period: string): number => {
+  if  (period === "AllTime") {
+    const totalImpact = data.reduce((acc, item) => acc + item[valueKey], 0);
+    return totalImpact;
+  } 
+
+  else if (period === "1Month") {
+    const oneMonthAgo = new Date();
+    oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+    const totalImpact = data.reduce((acc, item) => {
+      const startDate = new Date(Number(item.startDate));
+      return startDate >= oneMonthAgo ? acc + item[valueKey] : acc;
+    }, 0);
+    return totalImpact;
+  } 
+  else if (period === "3Months") {
+    const threeMonthsAgo = new Date();
+    threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+    const totalImpact = data.reduce((acc, item) => {
+      const startDate = new Date(Number(item.startDate));
+      return startDate >= threeMonthsAgo ? acc + item[valueKey] : acc;
+    }, 0);
+    return totalImpact;
+  } 
+  else if (period === "6Months") {
+    const sixMonthsAgo = new Date();
+    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+    const totalImpact = data.reduce((acc, item) => {
+      const startDate = new Date(Number(item.startDate));
+      return startDate >= sixMonthsAgo ? acc + item[valueKey] : acc;
+    }, 0);
+    return totalImpact;
+  } 
+  else if (period === "1Year") {
+    const oneYearAgo = new Date();
+    oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+    const totalImpact = data.reduce((acc, item) => {
+      const startDate = new Date(Number(item.startDate));
+      return startDate >= oneYearAgo ? acc + item[valueKey] : acc;
+    }, 0);
+    return totalImpact;
+  } 
+  else if (period === "3Years") {
+    const threeYearsAgo = new Date();
+    threeYearsAgo.setFullYear(threeYearsAgo.getFullYear() - 3);
+    const totalImpact = data.reduce((acc, item) => {
+      const startDate = new Date(Number(item.startDate));
+      return startDate >= threeYearsAgo ? acc + item[valueKey] : acc;
+    }, 0);
+    return totalImpact;
+  } 
+  else if (period === "5Years") {
+    const fiveYearsAgo = new Date();
+    fiveYearsAgo.setFullYear(fiveYearsAgo.getFullYear() - 5);
+    const totalImpact = data.reduce((acc, item) => {
+      const startDate = new Date(Number(item.startDate));
+      return startDate >= fiveYearsAgo ? acc + item[valueKey] : acc;
+    }, 0);
+    return totalImpact;
+  } 
+  else {
+    return 0;
+  }
+};
+
+
 export const mergeBarGraphData = (graphs: BarGraphData[]): BarGraphData => {
   const dataMap = new Map<string, { totalY: number; count: number }>();
 

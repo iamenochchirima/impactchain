@@ -84,7 +84,7 @@ export interface EndangeredSpeciesProtectionData {
   'duration' : string,
   'conservationMeasures' : string,
   'supportingFiles' : Array<string>,
-  'numberofSpeciesProtected' : bigint,
+  'numberfSpeciesProtected' : bigint,
   'typeOfSpecies' : string,
   'dataVerification' : boolean,
   'programName' : string,
@@ -186,7 +186,7 @@ export interface HumanRightsInitiativesData {
   'created' : bigint,
   'duration' : string,
   'supportingFiles' : Array<string>,
-  'scopeOfHumanRightsActivities' : string,
+  'numberOfInitiatives' : bigint,
   'dataVerification' : boolean,
   'programName' : string,
   'location' : string,
@@ -350,7 +350,6 @@ export interface LandConservationReforestationData {
   'areaOfLandConserved' : bigint,
   'supportingFiles' : Array<string>,
   'typeOfLandConservation' : string,
-  'typeOfLandUse' : string,
   'dataVerification' : boolean,
   'programName' : string,
   'location' : string,
@@ -983,6 +982,7 @@ export interface RenewableEnergyProjectsData {
 }
 export type Result = { 'ok' : UserRecord } |
   { 'err' : string };
+  
 export interface SDGAdvocacyCampaignsData {
   'created' : bigint,
   'duration' : string,
@@ -1056,6 +1056,7 @@ export interface SustainableFishingSupportData {
   'supportingFiles' : Array<string>,
   'programName' : string,
   'typeOfSupport' : string,
+  'dataVerification' : boolean,
   'location' : string,
   'startDate' : bigint,
 }

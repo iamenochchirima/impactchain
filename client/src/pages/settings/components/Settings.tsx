@@ -2,7 +2,7 @@
 import { MdOutlineChevronRight } from "react-icons/md";
 
 
-const Settings= () => {
+const Settings= ({setPage}) => {
   return (
     <div>
       <div className="flex items-center gap-3 mt-10 ml-5 font-TelegraphRegular">

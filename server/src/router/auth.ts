@@ -1,6 +1,6 @@
 
-import {  localVariables, verifyUser } from "../middlewares/auth";
-import { generateOTP, login, logout, register, resetPassword, verifyOTP } from "../controllers/auth";
+import {  localVariables, protect, verifyUser } from "../middlewares/auth";
+import { generateOTP, login, logout, register, resestAuthenticatedUserPassword, resetPassword, verifyOTP } from "../controllers/auth";
 import { Router } from "express";
 import { registerMail } from "../controllers/mailer";
 
@@ -13,4 +13,5 @@ export default (router: Router) => {
   router.post("/auth/generate-otp", verifyUser, localVariables, generateOTP)
   router.post("/auth/verify-otp", verifyUser, verifyOTP)
   router.put("/auth/reset-password", verifyUser, resetPassword)
+  router.put("/auth/change-password", protect, resestAuthenticatedUserPassword)
 };

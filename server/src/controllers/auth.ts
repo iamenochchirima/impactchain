@@ -88,6 +88,34 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
+export const resestAuthenticatedUserPassword = async (req: Request, res: Response) => {
+  try {
+    const { email, currentPassword, newPassword, confirmPassword } = req.body;
+    if (!email || !currentPassword || !newPassword || !confirmPassword) {
+      return res.sendStatus(400);
+    }
+    if (newPassword !== confirmPassword) {
+      return res.status(400).json({ message: "Passwords do not match" });
+    }
+    if (newPassword.length < 6) {
+      return res.status(400).json({ message: "Password must be at least 6 characters long" });
+    }
+    const user = await getUserByEmail(email).select("+password");
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
+    if (!(await user.matchPassword(currentPassword))) {
+      return res.status(400).json({ message: "Invalid current password" });
+    }
+    user.password = newPassword;
+    await user.save();
+    res.status(200).json({ message: "Password reset" });
+  } catch (error) {
+    console.log("Error in resestAuthenticatedUserPassword: ", error);
+    res.sendStatus(400);
+  }
+}
+
 export const logout = async (req: Request, res: Response) => {
   res.clearCookie("IMPACT_CHAIN_JWT");
   res.status(200).json({ message: "User logged out" });

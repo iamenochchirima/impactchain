@@ -23,7 +23,7 @@ const SettingsPage = () => {
           />
         </div>
       )}
-      {page === "Settings" && <Settings  />}
+      {page === "Settings" && <Settings {...{setPage}}  />}
       {page === "Profile" && <Profile  />}
       {page === "Password" && <Password  />}
       {page === "BrandKit" && <BrandKit  />}

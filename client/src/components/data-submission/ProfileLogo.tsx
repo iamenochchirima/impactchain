@@ -6,6 +6,7 @@ import { useAuth } from "../../hooks/AppContext";
 import { UserRecord } from "../../hooks/declarations/data/data.did";
 import { uploadFile } from "../../config/storage/functions";
 
+const bubbleText ="Upload your company logo- This will appear on all report headers, reinforcing your brand indentity.";
 const ProfileLogo = () => {
   const dispatch = useDispatch();
   const [logo, setLogo] = useState<File | null>(null);
@@ -109,6 +110,7 @@ const ProfileLogo = () => {
         </div>
       </div>
       <div className="flex justify-between items-center mt-20 mb-10 mx-20 ">
+      <Bubbles {...{bubbleText}}/>
         <button onClick={handleBack}>
           <span className="text-custom-green md:text-sm text-lg">Back</span>
         </button>

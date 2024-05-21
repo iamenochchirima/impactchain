@@ -13,6 +13,7 @@ import { UserRecord } from "../../hooks/declarations/data/data.did";
 import { ImpactTargetType } from "../../utils/types";
 import { getTargetMetrics } from "../../utils/targets";
 
+const bubbleText="Identify which of the UN's Sustainable Development Goals your company is committed to. Selecting the relevant SDGs helps tailor the analytics and reporting to better reflect your sustainability efforts.You may select more than one.";
 const ImpactTarget = () => {
   const { dataActor } = useAuth();
   const { impactTargets, userRecord } = useSelector(
@@ -165,6 +166,7 @@ const ImpactTarget = () => {
         </div>
 
         <div className=" flex justify-center items-center gap-5">
+        <Bubbles {...{bubbleText}}/>
           <button onClick={handleBack}>
             <span className="text-custom-green">Back</span>
           </button>

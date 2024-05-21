@@ -167,24 +167,6 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
 
   return (
     <div>
-      <div className="">
-        <div className={styles.goalDiv}>
-          <h3 className={styles.goalTitle}>
-            What is your goal for this Metric?
-          </h3>
-        </div>
-        <div className={styles.goalInputDiv}>
-          <textarea
-            ref={goalareaRef}
-            className={styles.goalInput}
-            id="text"
-            placeholder="Enter your goal here"
-            value={goal}
-            onChange={(e) => setGoal(e.target.value)}
-            required
-          />
-        </div>
-      </div>
 
       <div className=" items-center">
         <h3 className="text-white text-xl text-center">
@@ -274,6 +256,24 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
               required
             />
           </div>
+          <div className="">
+        <div className={styles.goalDiv}>
+          <h3 className={styles.goalTitle}>
+            What is your goal for this Metric?
+          </h3>
+        </div>
+        <div className={styles.goalInputDiv}>
+          <textarea
+            ref={goalareaRef}
+            className={styles.goalInput}
+            id="goal"
+            placeholder="Enter your goal here"
+            value={goal}
+            onChange={(e) => setGoal(e.target.value)}
+            required
+          />
+        </div>
+      </div>
           <FilesInput {...{ setSupportFiles, supportFiles }} />
 
           <div className={styles.buttonsDiv}>

@@ -11,8 +11,6 @@ import { ManualData } from "../../MetricRecords";
 import { IoMdAdd } from "react-icons/io";
 import Program from "../support/Program";
 
-
-const HealthCheckupVaccinationData = ({ setUploadManually }) => {
 const HealthServicesData = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
   const [supportFiles, setSupportFiles] = useState<File[] | null>(null);
@@ -24,64 +22,15 @@ const HealthServicesData = ({ setManualData, setUploadManually }) => {
   const [location, setLocation] = useState<string>("");
 
   const [programName, setProgramName] = useState<string>("");
-  const [totalParticipants, setTotalParticipants] = useState<string>("");
   const [typeOfService, setTypeOfService] = useState<string>("");
-  
+  const [totalParticipants, setTotalParticipants] = useState<string>("");
+
   const [programs, setPrograms] = useState<HealthServicesDataType[]>([]);
   const [showForm, setShowForm] = useState<boolean>(false);
   const [goal, setGoal] = useState<string>("");
   const goalareaRef = useRef<HTMLTextAreaElement>(null);
   
-
   const handleSubmit = async () => {
-    try {
-      setSaving(true);
-      const checkedFiles: File[] = [];
-      if (supportFiles) {
-        for (const file of supportFiles) {
-          if (file.size <= 4 * 1024 * 1024) {
-            checkedFiles.push(file);
-          }
-        }
-      }
-
-      if (checkedFiles.length === 0) {
-        toast.error("Please upload support documents", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-        });
-        setSaving(false);
-        return;
-      }
-
-      const urls = await uploadAsset(checkedFiles);
-
-      const startDateMilliseconds = new Date(startDate).getTime();
-      const endDateMilliseconds = new Date(endDate).getTime();
-
-      // const healthCheckupVaccinationData: HealthCheckupVaccinationDataType = {
-      //   startDate: BigInt(startDateMilliseconds),
-      //   endDate: BigInt(endDateMilliseconds),
-      //   location: location,
-      //   programName: programName,
-      //   programDescription: programDescription,
-      //   operationalChallenges: operationalChallenges,
-      //   feedbackFromParticipants: feedbackFromParticipants,
-      //   followUpActions: followUpActions,
-      //   healthOutcomesMeasured:healthOutcomesMeasured,
-      //   communityImpact: communityImpact,
-      //   typeOfService: typeOfService,
-      //   totalServicesProvided: BigInt(totalServicesProvided),
-      //   totalParticipants: BigInt(totalParticipants),
-      //   vaccinationCoverage: BigInt(vaccinationCoverage),
-      //   dataVerification: false,
-      //   supportingFiles: urls ? urls : [],
-      //   created: BigInt(Date.now()),
-      // };
-      // setManualData(healthCheckupVaccinationData);
-      setUploadManually(false);
     if (goal === "") {
       toast.error("Please enter a goal", {
         position: "top-center",
@@ -92,7 +41,7 @@ const HealthServicesData = ({ setManualData, setUploadManually }) => {
       return;
     }
     if (programs.length === 0) {
-      toast.error("Please add at least one health checkup program you did", {
+      toast.error("Please add at least one health services program you did", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -108,14 +57,13 @@ const HealthServicesData = ({ setManualData, setUploadManually }) => {
       setManualData(data);
       setUploadManually(false);
     } catch (error) {
-      console.log("Error saving health checkup program", error);
+      console.log("Error saving health services program", error);
     }
   };
 
   const uploadAsset = async (files: File[]) => {
     if (storageInitiated) {
       const file_path = location;
-      const file_path = location.pathname;
       try {
         const urls: string[] = [];
         setCountDown((prev) => prev + files.length);
@@ -155,8 +103,8 @@ const HealthServicesData = ({ setManualData, setUploadManually }) => {
       startDate === "" ||
       duration === "" ||
       location === "" ||
-      totalParticipants === "" ||
-      typeOfService === "" 
+      typeOfService === "" ||
+      totalParticipants === "" 
 
     ){
       toast.error("Please fill in all required fields", {
@@ -224,12 +172,11 @@ const HealthServicesData = ({ setManualData, setUploadManually }) => {
 
   };
 
-
   return (
     <div>
-       <div className=" items-center">
+      <div className=" items-center">
         <h3 className="text-white text-xl text-center">
-          Health Check-ups or Vaccination Drives
+          Health Services
         </h3>
         <div className="flex justify-end py-3">
           <button
@@ -254,11 +201,11 @@ const HealthServicesData = ({ setManualData, setUploadManually }) => {
         <div className={styles.munualDataForm}>
           <div className={styles.formHeader}>
             <h3 className={styles.formTitle}>
-              Add a Health Check-up Program
+              Add a Health Services Program
             </h3>
           </div>
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>What is the name of the Health Check-up or Vaccination program?</label>
+            <label htmlFor={styles.inputLabel}>What is the name of the Health Services program?</label>
             <input
               className={styles.formInput}
               id="programName"
@@ -306,7 +253,7 @@ const HealthServicesData = ({ setManualData, setUploadManually }) => {
           </div>
 
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>What type of Service is provided?</label>
+            <label htmlFor={styles.inputLabel}>What type of service is provided?</label>
             <select
               className={styles.formSelectInput}
               id="typeOfService"
@@ -315,17 +262,17 @@ const HealthServicesData = ({ setManualData, setUploadManually }) => {
               required
             >
               <option value="">Select the main type of service provided from the dropdown.</option>
-              <option value="resource-based">Vaccination</option>
-              <option value="consultation">Health Check-up</option>
+              <option value="health-check-up">Health Check-up</option>
+              <option value="vaccination">Vaccination</option>
             </select>
           </div>
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>How many participants are there?</label>
+            <label htmlFor={styles.inputLabel}>How many participants are assisted by this program?</label>
             <input
               className={styles.formInput}
               id="totalParticipants"
               type="number"
-              placeholder="Indicate the number of participants in these programs"
+              placeholder="Indicate the number of participants in these programs."
               value={totalParticipants}
               onChange={(e) => setTotalParticipants(e.target.value)}
               required
@@ -393,5 +340,4 @@ const HealthServicesData = ({ setManualData, setUploadManually }) => {
   );
 };
 
-export default HealthCheckupVaccinationData;
 export default HealthServicesData;

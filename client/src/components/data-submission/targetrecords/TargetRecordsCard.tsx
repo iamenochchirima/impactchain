@@ -195,6 +195,7 @@ const TargetRecordsCard: FC<Props> = ({
           )}
         </div>
         <div className="w-full flex justify-between my-4">
+          
           <button
             className={` bg-custom-green px-10 py-1 rounded-full text-black font-bold`}
             onClick={handleBack}

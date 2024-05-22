@@ -5,6 +5,7 @@ import { RootState } from "../../redux/store";
 import { useAuth } from "../../hooks/AppContext";
 import { UserRecord } from "../../hooks/declarations/data/data.did";
 import { uploadFile } from "../../config/storage/functions";
+import Bubbles from "../Bubbles";
 
 const bubbleText ="Upload your company logo- This will appear on all report headers, reinforcing your brand indentity.";
 const ProfileLogo = () => {

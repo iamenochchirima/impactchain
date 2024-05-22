@@ -3,6 +3,7 @@ import { CategoryType } from "../../pages/analytics/types";
 import { ImpactTargetType, Metric } from "../../utils/types";
 import { UserRecord } from "../../hooks/declarations/data/data.did";
 import { FullReportData } from "../../pages/analytics/components/utils/types";
+import { TargetOption } from "../../data/constants";
 
 export type TargetRecordStateType = {
   color: string;
@@ -45,6 +46,15 @@ export type CurrentMetricInfo = {
   category: CategoryType;
 };
 
+export type CurrentSDGInfoType = {
+  targetOption: TargetOption;
+  target: ImpactTargetType;
+};
+
+export type CurrectSDGInfoRequest = {
+  currentSDGInfo: CurrentSDGInfoType | null;
+};
+
 export interface GlobalState {
   userEmail: string;
   isAuthenticated: boolean;
@@ -78,6 +88,8 @@ export interface GlobalState {
   report: FullReportData | null;
 
   currentMetricInfo: CurrentMetricInfo | null;
+
+  currentSDGInfo : CurrentSDGInfoType | null;
 }
 
 const initialState: GlobalState = {
@@ -112,6 +124,7 @@ const initialState: GlobalState = {
   report: null,
 
   currentMetricInfo: null,
+  currentSDGInfo: null,
 };
 
 export const appSlice = createSlice({
@@ -233,6 +246,13 @@ export const appSlice = createSlice({
     ) => {
       state.currentMetricInfo = action.payload.currentMetricInfo;
     },
+
+    setCurrentSDGInfo: (
+      state: GlobalState,
+      action: PayloadAction<CurrectSDGInfoRequest>
+    ) => {
+      state.currentSDGInfo = action.payload.currentSDGInfo;
+    },
   },
 });
 
@@ -262,6 +282,7 @@ export const {
   setCurrentMetricInfo,
   setMetricReportPromptModal,
   setMetricAnanlyticsModal,
+  setCurrentSDGInfo,
 } = appSlice.actions;
 
 export default appSlice.reducer;

@@ -19,10 +19,11 @@ import { getImpactTargetsArray } from "../utils/targets";
 import GenerateReportPrompt from "../pages/analytics/components/main-report/GenerateReportPrompt";
 import GenerateMetricReportPrompt from "../pages/analytics/components/metric-report/GenerateMetricReportPrompt";
 import MetricAnalysis from "../pages/analytics/components/metric-report/MetricAnalysis";
+import SDGInfo from "../pages/settings/components/ESG/comps/SDGInfo";
 
 
 const Header = () => {
-  const { showDataForm, userInfo, reportModal, openHelp, reportPromptModal, metricReportPromptModal, metricAnanlyticsModal } = useSelector(
+  const { showDataForm, userInfo, reportModal, openHelp, reportPromptModal, metricReportPromptModal, metricAnanlyticsModal, currentSDGInfo } = useSelector(
     (state: RootState) => state.app
   );
   const userMenuRef = useRef<HTMLDivElement>(null);
@@ -96,6 +97,7 @@ const Header = () => {
       {reportPromptModal && <GenerateReportPrompt />}
       {metricReportPromptModal && <GenerateMetricReportPrompt />}
       {metricAnanlyticsModal && <MetricAnalysis />}
+      {currentSDGInfo && <SDGInfo/>}
       <div className="fixed bg-black z-40 left-64 right-0">
         <div className="pt-4">
           <div className="h-5 flex items-center justify-end bg-custom-gray mx-10 py-10 rounded-xl border border-green-700">

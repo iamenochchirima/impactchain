@@ -18,6 +18,9 @@ import { useAuth } from "../../../hooks/AppContext";
 import { ImpactTargetType, Metric } from "../../../utils/types";
 import { UserRecord } from "../../../hooks/declarations/data/data.did";
 import { getTargetMetrics } from "../../../utils/targets";
+import Bubbles from "../../Bubbles";
+
+const bubbleText="Now that you have selected your key metrics, the next step is to collect the corresponding data. This information will be used to track your progress against the chosen SDGs and generate detailed reports.";
 
 type Props = {
   target: TargetOption;
@@ -195,7 +198,7 @@ const TargetRecordsCard: FC<Props> = ({
           )}
         </div>
         <div className="w-full flex justify-between my-4">
-          
+          <Bubbles {...{bubbleText}}/>
           <button
             className={` bg-custom-green px-10 py-1 rounded-full text-black font-bold`}
             onClick={handleBack}

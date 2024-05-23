@@ -1,5 +1,6 @@
 import { getAiOverview } from "../../../../helpers/helpers";
 import { ReportPromptsResponses } from "../../../../redux/slices/app";
+import Metrics from '../../../../components/data-submission/metrics/Metrics';
 import {
   BarGraphData,
   LineGraphData,
@@ -8,6 +9,7 @@ import {
   pieData,
   xisVals,
 } from "./types";
+import { Metric } from "../../../../utils/types";
 
 /**
  * Calculates the total impact for the given period
@@ -434,14 +436,15 @@ export const getPieChartData = (
 /// and filters metrics with data for the given time period, then returns the metrics with data for the given time period.
 
 export const getMetricsWithDataForTheGivenTimePeriod = (
-  response: ReportPromptsResponses
+  selectedMetrics: Metric[],
+  periodOfTime: string
 ) => {
-  if (response.periodOfTime === "AllTime") {
-    return response.selectedMetrics;
+  if (periodOfTime === "AllTime") {
+    return selectedMetrics;
   }
 
-  if (response.periodOfTime === "1Month") {
-    const res = response.selectedMetrics
+  if (periodOfTime === "1Month") {
+    const res = selectedMetrics
       .map((metric) => {
         const data = metric.data.filter((item) => {
           const startDate = new Date(Number(item.startDate));
@@ -456,8 +459,8 @@ export const getMetricsWithDataForTheGivenTimePeriod = (
     return res.length > 0 ? res : null;
   }
 
-  if (response.periodOfTime === "3Months") {
-    const res = response.selectedMetrics
+  if (periodOfTime === "3Months") {
+    const res = selectedMetrics
       .map((metric) => {
         const data = metric.data.filter((item) => {
           const startDate = new Date(Number(item.startDate));
@@ -471,8 +474,8 @@ export const getMetricsWithDataForTheGivenTimePeriod = (
     return res.length > 0 ? res : null;
   }
 
-  if (response.periodOfTime === "6Months") {
-    const res = response.selectedMetrics
+  if (periodOfTime === "6Months") {
+    const res = selectedMetrics
       .map((metric) => {
         const data = metric.data.filter((item) => {
           const startDate = new Date(Number(item.startDate));
@@ -487,8 +490,8 @@ export const getMetricsWithDataForTheGivenTimePeriod = (
     return res.length > 0 ? res : null;
   }
 
-  if (response.periodOfTime === "1Year") {
-    const res = response.selectedMetrics
+  if (periodOfTime === "1Year") {
+    const res = selectedMetrics
       .map((metric) => {
         const data = metric.data.filter((item) => {
           const startDate = new Date(Number(item.startDate));
@@ -503,8 +506,8 @@ export const getMetricsWithDataForTheGivenTimePeriod = (
     return res.length > 0 ? res : null;
   }
 
-  if (response.periodOfTime === "3Years") {
-    const res = response.selectedMetrics
+  if (periodOfTime === "3Years") {
+    const res = selectedMetrics
       .map((metric) => {
         const data = metric.data.filter((item) => {
           const startDate = new Date(Number(item.startDate));
@@ -518,8 +521,8 @@ export const getMetricsWithDataForTheGivenTimePeriod = (
     return res.length > 0 ? res : null;
   }
 
-  if (response.periodOfTime === "5Years") {
-    const res = response.selectedMetrics
+  if (periodOfTime === "5Years") {
+    const res = selectedMetrics
       .map((metric) => {
         const data = metric.data.filter((item) => {
           const startDate = new Date(Number(item.startDate));

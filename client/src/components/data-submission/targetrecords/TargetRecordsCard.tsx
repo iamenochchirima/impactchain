@@ -162,9 +162,9 @@ const TargetRecordsCard: FC<Props> = ({
 
   return (
     <>
-      <div className="flex flex-col items-center  w-[90%] sm:w-3/4 md:w-[60%] px-6 py-2 min-w-min max-w-full mx-[100px] mt">
+      <div className="flex flex-col items-center   px-6 py-2 min-w-min max-w-full ">
         <div className="text-3xl font-bold text-white mt-4 bg-gra text-center font-TelegraphBold flex gap-3 items-center">
-          <span>How do you record your data for {target.name}</span>{" "}
+          <span>How do you record your data for {target.name}</span>
           <img
             className="h-20 w-20 ml-2 rounded-lg"
             src={target.icon}
@@ -198,7 +198,7 @@ const TargetRecordsCard: FC<Props> = ({
           )}
         </div>
         <div className="w-full flex justify-between my-4">
-          <Bubbles {...{bubbleText}}/>
+          {/* <Bubbles {...{bubbleText}}/> */}
           <button
             className={` bg-custom-green px-10 py-1 rounded-full text-black font-bold`}
             onClick={handleBack}

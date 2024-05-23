@@ -13,7 +13,9 @@ import {
 } from "../../../redux/slices/app";
 import { toast } from "react-toastify";
 import { ImpactTargetType } from '../../../utils/types';
+import Bubbles from "../../Bubbles";
 
+const bubbleText="Under each SDG, tick the boxes next to, up to three metrics you plan to monitor. You can change your selections at any time to reflect shifts in your sustainability focus"
 const Metrics = () => {
   const { dataActor } = useAuth();
   const { impactTargets, metricsUpdated , userRecord} = useSelector(
@@ -131,6 +133,7 @@ const Metrics = () => {
         ))}
       </div>
       <div className="flex justify-between my-5 items-center">
+      <Bubbles {...{bubbleText}}/>
         <button
           onClick={currentIndex === 0 ? handleBack : handlePrevious}
           className={` bg-custom-green px-10 py-1 rounded-full text-black font-bold`}

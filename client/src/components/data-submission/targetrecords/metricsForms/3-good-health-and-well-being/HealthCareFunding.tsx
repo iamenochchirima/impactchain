@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { uploadFile } from "../../../../../config/storage/functions";
 import { useSelector } from "react-redux";
@@ -8,7 +7,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
 import { HealthcareFunding as HealthcareFundingType } from "../../../../../hooks/declarations/data/data.did";
-
+import { ManualData } from "../../MetricRecords";
+import { IoMdAdd } from "react-icons/io";
+import Program from "../support/Program";
 
 const HealthcareFunding = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
@@ -17,73 +18,47 @@ const HealthcareFunding = ({ setManualData, setUploadManually }) => {
   const [countDown, setCountDown] = useState<number>(0);
 
   const [startDate, setStartDate] = useState<string>("");
-  const [endDate, setEndDate] = useState<string>("");
+  const [duration, setDuration] = useState<string>("");
   const [location, setLocation] = useState<string>("");
 
   const [programName, setProgramName] = useState<string>("");
-  const [programDescription, setProgramDescription] = useState<string>("");
+  const [typeOfFunding, setTypeOfFunding] = useState<string>("");
+  const [amountFunded, setAmountFunded] = useState<string>("");
+  const [numberOfProjects, setNumberOfProjects] = useState<string>("");
 
-  const [healthOutcomes, setHealthOutcomes] = useState<string>("");
-  const [fundingSources, setFundingSources] = useState<string>("");
-  const [feedbackFromBeneficiaries, setFeedbackFromBeneficiaries] = useState<string>("");
-  const [typesOfServicesFunded, setTypesOfServicesFunded] = useState<string>("");
-  const [challengesFaced, setChallengesFaced] = useState<string>("");
-  const [impactOnHealthServices, setImpactOnHealthServices] = useState<string>("");
-  const [numberOfHealthProjects, setNumberOfHealthProjects] = useState("");
-  const [totalFundingAmount, setTotalFundingAmount] = useState("");
+  const [programs, setPrograms] = useState<HealthcareFundingType[]>([]);
+  const [showForm, setShowForm] = useState<boolean>(false);
+  const [goal, setGoal] = useState<string>("");
+  const goalareaRef = useRef<HTMLTextAreaElement>(null);
   
-
   const handleSubmit = async () => {
+    if (goal === "") {
+      toast.error("Please enter a goal", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+      });
+      return;
+    }
+    if (programs.length === 0) {
+      toast.error("Please add at least one healthcare funding program you did", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+      });
+      return;
+    }
     try {
-      setSaving(true);
-      const checkedFiles: File[] = [];
-      if (supportFiles) {
-        for (const file of supportFiles) {
-          if (file.size <= 4 * 1024 * 1024) {
-            checkedFiles.push(file);
-          }
-        }
-      }
-
-      if (checkedFiles.length === 0) {
-        toast.error("Please upload support documents", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-        });
-        setSaving(false);
-        return;
-      }
-
-      const urls = await uploadAsset(checkedFiles);
-
-      const startDateMilliseconds = new Date(startDate).getTime();
-      const endDateMilliseconds = new Date(endDate).getTime();
-
-      // const healthcareFunding: HealthcareFundingType = {
-      //   startDate: BigInt(startDateMilliseconds),
-      //   endDate: BigInt(endDateMilliseconds),
-      //   location: location,
-      //   programName: programName,
-      //   programDescription: programDescription,
-      //   healthOutcomes: healthOutcomes,
-      //   fundingSources: fundingSources,
-      //   feedbackFromBeneficiaries: feedbackFromBeneficiaries,
-      //   typesOfServicesFunded:typesOfServicesFunded,
-      //   challengesFaced: challengesFaced,
-      //   impactOnHealthServices: impactOnHealthServices,
-      //   numberOfHealthProjects: BigInt(numberOfHealthProjects),
-      //   totalFundingAmount: BigInt(totalFundingAmount),
-      //   dataVerification: false,
-      //   supportingFiles: urls ? urls : [],
-      //   created: BigInt(Date.now()),
-      // };
-      // setManualData(healthcareFunding);
+      const data: ManualData = {
+        goal: goal,
+        data: programs,
+      };
+      setManualData(data);
       setUploadManually(false);
     } catch (error) {
-        setSaving(false);
-      console.log("Error saving health care funding", error);
+      console.log("Error saving healthcare funding program", error);
     }
   };
 
@@ -111,188 +86,273 @@ const HealthcareFunding = ({ setManualData, setUploadManually }) => {
     }
   };
 
+  const calcHeight = (value: string): number => {
+    const numberOfLineBreaks = (value.match(/\n/g) || []).length;
+    return numberOfLineBreaks * 20 + 50;
+  };
+
+  useEffect(() => {
+    if (goalareaRef.current) {
+      goalareaRef.current.style.height = `${calcHeight(goal)}px`;
+    }
+  }, [goal]);
+
+  const handleSave = async () => {
+    setSaving(true);
+    if(
+      programName === "" ||
+      startDate === "" ||
+      duration === "" ||
+      location === "" ||
+      typeOfFunding === "" ||
+      amountFunded === "" ||
+      numberOfProjects === ""
+
+    ){
+      toast.error("Please fill in all required fields", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+      });
+      setSaving(false);
+      return;
+    }
+    const checkedFiles: File[] = [];
+    if (supportFiles) {
+      for(const file of supportFiles){
+        if (file.size <= 4 * 1024 * 1024) {
+          checkedFiles.push(file);
+        }
+      }
+    }
+
+    if(checkedFiles.length === 0){
+      toast.error("Please upload support documents", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+      });
+      setSaving(false);
+      return;
+    }
+
+    const urls = await uploadAsset(checkedFiles);
+    if(!urls){
+      toast.error("Error uploading files", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+      });
+      setSaving(false);
+      return;
+    }
+
+    const newProgram: HealthcareFundingType = {
+      programName,
+      startDate:BigInt(new Date(startDate).getTime()),
+      duration,
+      location,
+      typeOfFunding,
+      amountFunded: BigInt(amountFunded),
+      numberOfProjects: BigInt(numberOfProjects),
+      dataVerification:false,
+      supportingFiles:urls,
+      created:BigInt(Date.now()),
+    };
+    setPrograms([...programs, newProgram]);
+    setProgramName("");
+    setStartDate("");
+    setDuration("");
+    setLocation("");
+    setTypeOfFunding("");
+    setAmountFunded("");
+    setNumberOfProjects("");
+    setSupportFiles(null);
+    setShowForm(false);
+    setSaving(false);
+
+  };
+
   return (
     <div>
-      <form className={`${styles.munualDataForm}`}>
-        <div className={`${styles.formHeader}`}>
-          <h3 className={`${styles.formTitle}`}>Health Care Funding</h3>
+      <div className=" items-center">
+        <h3 className="text-white text-xl text-center">
+          Health Care Funding
+        </h3>
+        <div className="flex justify-end py-3">
+          <button
+            onClick={() => setShowForm(true)}
+            className="flex items-center gap-2 text-custom-green"
+          >
+            <IoMdAdd />
+            <span>Add a program</span>
+          </button>
         </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Program Name</label>
-          <input
-            className={`${styles.formInput}`}
-            id="programName"
-            type="text"
-            placeholder="Program Name"
-            value={programName}
-            onChange={(e) => setProgramName(e.target.value)}
-            required
-          />
 
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Program Description</label>
-          <textarea
-            className={`${styles.formInput}`}
-            id="programDescription"
-            placeholder="Program Description"
-            value={programDescription}
-            onChange={(e) => setProgramDescription(e.target.value)}
-            required
-            style={{ overflow: "hidden" }}
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Start Date</label>
-          <input
-            className={`${styles.formInput}`}
-            id="startDate"
-            type="date"
-            placeholder="Start Date"
-            value={startDate}
-            required
-            onChange={(e) => setStartDate(e.target.value)}
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>End Date</label>
-          <input
-            className={`${styles.formInput}`}
-            id="endDate"
-            type="date"
-            placeholder="End Date"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}> Location</label>
-          <input
-            className={`${styles.formInput}`}
-            id="location"
-            type="text"
-            placeholder="Location"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Health Outcomes</label>
-          <input
-            className={`${styles.formInput}`}
-            id="healthOutcomes"
-            type="text"
-            placeholder="Health Outcomes"
-            value={healthOutcomes}
-            onChange={(e) => setHealthOutcomes(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Funding Sources</label>
-          <input
-            className={`${styles.formInput}`}
-            id="fundingSources"
-            type="text"
-            placeholder="Funding Sources"
-            value={fundingSources}
-            onChange={(e) => setFundingSources(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Feedback From Beneficiaries</label>
-          <input
-            className={`${styles.formInput}`}
-            id="feedbackFromBeneficiaries"
-            type="text"
-            placeholder="Beneficiaries Feedback"
-            value={feedbackFromBeneficiaries}
-            onChange={(e) => setFeedbackFromBeneficiaries(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Types of Services Funded</label>
-          <input
-            className={`${styles.formInput}`}
-            id="typesOfServicesFunded"
-            type="text"
-            placeholder="Types of Services Funded"
-            value={typesOfServicesFunded}
-            onChange={(e) => setTypesOfServicesFunded(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Challenges Faced</label>
-          <input
-            className={`${styles.formInput}`}
-            id="challengesFaced"
-            type="text"
-            placeholder="Challenges Faced"
-            value={challengesFaced}
-            onChange={(e) => setChallengesFaced(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Impact on Health Services</label>
-          <input
-            className={`${styles.formInput}`}
-            id="impactOnHealthServices"
-            type="text"
-            placeholder="Impact on Health Services"
-            value={impactOnHealthServices}
-            onChange={(e) => setImpactOnHealthServices(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>The Number of Health Projects</label>
-          <input
-            className={`${styles.formInput}`}
-            id="numberOfHealthProjects"
-            type="number"
-            placeholder="The Number of Health Projects"
-            value={numberOfHealthProjects}
-            onChange={(e) => setNumberOfHealthProjects(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>The Total Funding Amount</label>
-          <input
-            className={`${styles.formInput}`}
-            id="totalFundingAmount"
-            placeholder="The Total Funding Amount"
-            type="number"
-            value={totalFundingAmount}
-            onChange={(e) => setTotalFundingAmount(e.target.value)}
-            required
-          />
-        </div>
-      </form>
-
-      <FilesInput {...{ setSupportFiles, supportFiles }} />
-
-      <div className="flex justify-between items-center py-4">
-        <button
-          onClick={() => setUploadManually(false)}
-          className={`${styles.roundedButton}`}
-        >
-          Cancel
-        </button>
-        <button
-          onClick={handleSubmit}
-          disabled={saving}
-          className={`${styles.roundedButton}`}
-        >
-          {saving ? `Uploading ${countDown}` : "Save"}
-        </button>
+        {programs.length > 0 && (
+          <div className={styles.programsDiv}>
+            {programs.map((program, index) => (
+              <Program key={index} {...{ program, programs, setPrograms }} />
+            ))}
+          </div>
+        )}
       </div>
+
+      {showForm && (
+        <div className={styles.munualDataForm}>
+          <div className={styles.formHeader}>
+            <h3 className={styles.formTitle}>
+              Add a Healthcare Funding Program
+            </h3>
+          </div>
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>What is the name of the Healthcare Funding program?</label>
+            <input
+              className={styles.formInput}
+              id="programName"
+              type="text"
+              placeholder="Enter the specific name of the healthcare funding program."
+              value={programName}
+              onChange={(e) => setProgramName(e.target.value)}
+              required
+            />
+          </div>
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>When did this program begin?</label>
+            <input
+              className={styles.formInput}
+              id="startDate"
+              type="date"
+              placeholder="Indicate when the funding program was initiated."
+              value={startDate}
+              required
+              onChange={(e) => setStartDate(e.target.value)}
+            />
+          </div>
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>How long has the program been running?</label>
+            <input
+              className={styles.formInput}
+              id="duration"
+              type="text"
+              placeholder="Provide the duration that the funding program has been running."
+              value={duration}
+              onChange={(e) => setDuration(e.target.value)}
+            />
+          </div>
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>Where is this program located? (City and Country)</label>
+            <input
+              className={styles.formInput}
+              id="location"
+              type="text"
+              placeholder="Specify the city and country where the funding is directed."
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>What type of funding is provided?</label>
+            <select
+              className={styles.formSelectInput}
+              id="typeOfFunding"
+              value={typeOfFunding}
+              onChange={(e) => setTypeOfFunding(e.target.value)}
+              required
+            >
+              <option value="">Select the primary type of funding from the dropdown.</option>
+              <option value="financial">Direct Funding</option>
+              <option value="resource-based">Grants</option>
+              <option value="consultation">Public-Private Partnerships</option>
+            </select>
+          </div>
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>How many health care projects are funded?</label>
+            <input
+              className={styles.formInput}
+              id="numberOfProjects"
+              type="number"
+              placeholder="Indicate the number of healthcare projects supported by this funding."
+              value={numberOfProjects}
+              onChange={(e) => setNumberOfProjects(e.target.value)}
+              required
+            />
+          </div>
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>What is the total amount funded? (In ZAR)</label>
+            <input
+              className={styles.formInput}
+              id="amountFunded"
+              type="number"
+              placeholder="Enter the total amount of funding allocated."
+              value={amountFunded}
+              onChange={(e) => setAmountFunded(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="">
+        <div className={styles.goalDiv}>
+          <h3 className={styles.goalTitle}>
+            What is your goal for this Metric?
+          </h3>
+        </div>
+        <div className={styles.goalInputDiv}>
+          <textarea
+            ref={goalareaRef}
+            className={styles.goalInput}
+            id="goal"
+            placeholder="Enter your goal here"
+            value={goal}
+            onChange={(e) => setGoal(e.target.value)}
+            required
+          />
+        </div>
+      </div>
+          <FilesInput {...{ setSupportFiles, supportFiles }} />
+
+          <div className={styles.buttonsDiv}>
+            <button
+              onClick={() => {
+                setShowForm(false);
+                setSaving(false);
+              }}
+              className="text-custom-green font-bold"
+            >
+              <span>Cancel</span>
+            </button>
+            <button
+              onClick={handleSave}
+              disabled={saving}
+              className={styles.roundedButton}
+            >
+              {saving ? `Saving... ${countDown}` : "Save"}
+            </button>
+          </div>
+        </div>
+      )}
+       {!showForm && (
+        <div className="flex justify-between items-center py-4">
+          <button
+            onClick={() => setUploadManually(false)}
+            className={styles.roundedButton}
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleSubmit}
+            disabled={saving}
+            className={`${styles.roundedButton} `}
+          >
+            Continue
+          </button>
+        </div>
+      )}
     </div>
   );
 };

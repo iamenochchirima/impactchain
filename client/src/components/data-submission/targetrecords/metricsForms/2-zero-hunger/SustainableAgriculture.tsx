@@ -175,24 +175,6 @@ const SustainableAgriculture = ({ setManualData, setUploadManually }) => {
 
   return (
     <div>
-      <div className="">
-        <div className={styles.goalDiv}>
-          <h3 className={styles.goalTitle}>
-            What is your goal for this Metric?
-          </h3>
-        </div>
-        <div className={styles.goalInputDiv}>
-          <textarea
-            ref={goalareaRef}
-            className={styles.goalInput}
-            id="goal"
-            placeholder="Enter your goal here"
-            value={goal}
-            onChange={(e) => setGoal(e.target.value)}
-            required
-          />
-        </div>
-      </div>
 
       <div className=" items-center">
         <h3 className="text-white text-xl text-center">
@@ -232,7 +214,7 @@ const SustainableAgriculture = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="projectName"
               type="text"
-              placeholder="Program Name"
+              placeholder="Enter the name of the sustainable agriculture investment program."
               value={projectName}
               onChange={(e) => setProgramName(e.target.value)}
               required
@@ -246,7 +228,7 @@ const SustainableAgriculture = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="startDate"
               type="date"
-              placeholder="Start Date"
+              placeholder="Indicate when the investment began."
               value={startDate}
               required
               onChange={(e) => setStartDate(e.target.value)}
@@ -260,7 +242,7 @@ const SustainableAgriculture = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="duration"
               type="text"
-              placeholder="Duration e.g 6 months"
+              placeholder="Provide the duration of the investment program."
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
             />
@@ -273,7 +255,7 @@ const SustainableAgriculture = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="programLocation"
               type="text"
-              placeholder="Program Location"
+              placeholder="Specify the city and country where the investment is happening."
               value={programLocation}
               onChange={(e) => setProgramLocation(e.target.value)}
               required
@@ -287,7 +269,7 @@ const SustainableAgriculture = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="totalInvestment"
               type="number"
-              placeholder="Total Investment in ZAR e.g 105000"
+              placeholder="Enter the total amount of money invested in sustainable agriculture in ZAR e.g 105000"
               value={totalInvestment}
               onChange={(e) => setTotalInvestment(e.target.value)}
               required
@@ -304,7 +286,7 @@ const SustainableAgriculture = ({ setManualData, setUploadManually }) => {
               onChange={(e) => setTypeOfInvestment(e.target.value)}
               required
             >
-              <option value="">Select Type of Investment</option>
+              <option value="">Select the primary type of investment from the dropdown.</option>
               <option value="technology">Technology</option>
               <option value="land-management">Land Management</option>
               <option value="crop-diversification">Crop Diversification</option>
@@ -319,12 +301,31 @@ const SustainableAgriculture = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="numberOfProjects"
               type="number"
-              placeholder="Number of Projects e.g 5"
+              placeholder="Specify the number of projects funded under this investment e.g 5"
               value={numberOfProjects}
               onChange={(e) => setNumberOfProjects(e.target.value)}
               required
             />
           </div>
+
+          <div className="">
+        <div className={styles.goalDiv}>
+          <h3 className={styles.goalTitle}>
+            What is your goal for this Metric?
+          </h3>
+        </div>
+        <div className={styles.goalInputDiv}>
+          <textarea
+            ref={goalareaRef}
+            className={styles.goalInput}
+            id="goal"
+            placeholder="Enter your goal here"
+            value={goal}
+            onChange={(e) => setGoal(e.target.value)}
+            required
+          />
+        </div>
+      </div>
           <FilesInput {...{ setSupportFiles, supportFiles }} />
 
           <div className={styles.buttonsDiv}>
@@ -347,6 +348,7 @@ const SustainableAgriculture = ({ setManualData, setUploadManually }) => {
           </div>
         </div>
       )}
+      
 
       {!showForm && (
         <div className="flex justify-between items-center py-4">

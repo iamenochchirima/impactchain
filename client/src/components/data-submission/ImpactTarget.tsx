@@ -12,7 +12,9 @@ import { useAuth } from "../../hooks/AppContext";
 import { UserRecord } from "../../hooks/declarations/data/data.did";
 import { ImpactTargetType } from "../../utils/types";
 import { getTargetMetrics } from "../../utils/targets";
+import Bubbles from "../Bubbles";
 
+const bubbleText="Identify which of the UN's Sustainable Development Goals your company is committed to. Selecting the relevant SDGs helps tailor the analytics and reporting to better reflect your sustainability efforts.You may select more than one.";
 const ImpactTarget = () => {
   const { dataActor } = useAuth();
   const { impactTargets, userRecord } = useSelector(
@@ -140,7 +142,7 @@ const ImpactTarget = () => {
       <h3 className="text-3xl font-bold text-white mt-4 text-center font-TelegraphBold mr-12">
         What Impact are you targeting?
       </h3>
-      <div className="grid grid-cols-6 gap-4 mt-6 bg-black p-5 rounded-3xl mb-10 mr-20 ml-5">
+      <div className="grid grid-cols-6 gap-4 mt-6 bg-[#202020] p-5 rounded-3xl mb-10 mr-20 ml-5">
         {targetOptions.map((target) => (
           <div
             key={target.id}
@@ -165,6 +167,7 @@ const ImpactTarget = () => {
         </div>
 
         <div className=" flex justify-center items-center gap-5">
+        <Bubbles {...{bubbleText}}/>
           <button onClick={handleBack}>
             <span className="text-custom-green">Back</span>
           </button>

@@ -5,7 +5,9 @@ import { RootState } from "../../redux/store";
 import { useAuth } from "../../hooks/AppContext";
 import { UserRecord } from "../../hooks/declarations/data/data.did";
 import { uploadFile } from "../../config/storage/functions";
+import Bubbles from "../Bubbles";
 
+const bubbleText ="Upload your company logo- This will appear on all report headers, reinforcing your brand indentity.";
 const ProfileLogo = () => {
   const dispatch = useDispatch();
   const [logo, setLogo] = useState<File | null>(null);
@@ -71,14 +73,14 @@ const ProfileLogo = () => {
   return (
     <div className="">
       <div className=""></div>
-      <h3 className="text-3xl font-bold text-white mt-4 text-center font-TelegraphBold mr-12">
+      <h3 className="md:text-xl text-3xl font-bold text-white mt-4 text-center font-NeueMachinaUltrabold ">
         Upload your company logo
       </h3>
       <div className="flex justify-center">
         <div
           className={`${
             logourl ? "flex-col gap-5 p-5 min-w-[460px]" : "min-w-[400px]"
-          } mt-10 min-h-[310px]  bg-black flex justify-center items-center rounded-3xl `}
+          } mt-10 min-h-[310px] bg-transparent shadow-md shadow-custom-green flex justify-center items-center rounded-3xl `}
         >
           {logourl && (
             <img
@@ -109,20 +111,22 @@ const ProfileLogo = () => {
         </div>
       </div>
       <div className="flex justify-between items-center mt-20 mb-10 mx-20 ">
+      <Bubbles {...{bubbleText}}/>
         <button onClick={handleBack}>
-          <span className="text-custom-green">Back</span>
+          <span className="text-custom-green md:text-sm text-lg">Back</span>
         </button>
         <button
           onClick={handleSubmit}
           disabled={!logo}
           className={` ${
             logourl ? "bg-custom-green" : "bg-green-700"
-          } px-10 py-1.5  rounded-full text-black font-bold`}
+          } px-10 py-1.5  rounded-full text-black md:text-sm font-TelegraphUltraLightfont-bold`}
         >
        {loading ? "Loading..." : "Continue"}
         </button>
+        
         <button onClick={handleNext}>
-          <span className="text-custom-green">Skip</span>
+          <span className="text-custom-green md:text-sm text-lg">Skip</span>
         </button>
       </div>
     </div>

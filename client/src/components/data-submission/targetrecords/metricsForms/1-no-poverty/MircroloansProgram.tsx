@@ -16,18 +16,19 @@ const MicroloansProgram = ({ setManualData, setUploadManually }) => {
   const [supportFiles, setSupportFiles] = useState<File[] | null>(null);
   const { storageInitiated } = useSelector((state: RootState) => state.app);
   const [countDown, setCountDown] = useState<number>(0);
-  const [programName, setProgramName] = useState<string>("");
+
   const [startDate, setStartDate] = useState<string>("");
   const [duration, setDuration] = useState<string>("");
   const [programLocation, setProgramLocation] = useState<string>("");
+
+  const [programName, setProgramName] = useState<string>("");
+  
   const [typeOfProgram, setTypeOfProgram] = useState<string>("");
   const [numberOfLoans, setNumberOfLoans] = useState<string>("");
   const [amountDisbursed, setAmountDisbursed] = useState<string>("");
 
   const [programs, setPrograms] = useState<MicroloanProgram[]>([]);
-
   const [showForm, setShowForm] = useState<boolean>(false);
-
   const [goal, setGoal] = useState<string>("");
   const goalareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -175,24 +176,6 @@ const MicroloansProgram = ({ setManualData, setUploadManually }) => {
 
   return (
     <div>
-      <div className="">
-        <div className={styles.goalDiv}>
-          <h3 className={styles.goalTitle}>
-            What is your goal for this Metric?
-          </h3>
-        </div>
-        <div className={styles.goalInputDiv}>
-          <textarea
-            ref={goalareaRef}
-            className={styles.goalInput}
-            id="goal"
-            placeholder="Enter your goal here"
-            value={goal}
-            onChange={(e) => setGoal(e.target.value)}
-            required
-          />
-        </div>
-      </div>
 
       <div className=" items-center">
         <h3 className="text-white text-xl text-center">
@@ -230,7 +213,7 @@ const MicroloansProgram = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="programName"
               type="text"
-              placeholder="Program Name"
+              placeholder="Enter the name of the microloan or grant program."
               value={programName}
               onChange={(e) => setProgramName(e.target.value)}
               required
@@ -242,7 +225,7 @@ const MicroloansProgram = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="startDate"
               type="date"
-              placeholder="Start Date"
+              placeholder="Indicate when the program began."
               value={startDate}
               required
               onChange={(e) => setStartDate(e.target.value)}
@@ -254,7 +237,7 @@ const MicroloansProgram = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="duration"
               type="text"
-              placeholder="Duration e.g 6 months"
+              placeholder="Provide the duration that the program has been operational."
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
             />
@@ -265,7 +248,7 @@ const MicroloansProgram = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="programLocation"
               type="text"
-              placeholder="Program Location"
+              placeholder="Specify the city and country where the program operates."
               value={programLocation}
               onChange={(e) => setProgramLocation(e.target.value)}
               required
@@ -281,7 +264,7 @@ const MicroloansProgram = ({ setManualData, setUploadManually }) => {
               onChange={(e) => setTypeOfProgram(e.target.value)}
               required
             >
-              <option value="">Select Type of Program</option>
+              <option value="">Select the primary form of support provided by the program from the dropdown.</option>
               <option value="financial">Financial</option>
               <option value="resource-based">Resource Based</option>
               <option value="consultation">Consultatin</option>
@@ -293,7 +276,7 @@ const MicroloansProgram = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="numberOfLoans"
               type="number"
-              placeholder="Number of Loans"
+              placeholder="Enter the number of microloans or grants distributed."
               value={numberOfLoans}
               onChange={(e) => setNumberOfLoans(e.target.value)}
               required
@@ -305,12 +288,31 @@ const MicroloansProgram = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="amountDisbursed"
               type="number"
-              placeholder="Amount Disbursed e.g 1000000"
+              placeholder="Specify the total amount of money disbursed by the program."
               value={amountDisbursed}
               onChange={(e) => setAmountDisbursed(e.target.value)}
               required
             />
           </div>
+
+          <div className="">
+        <div className={styles.goalDiv}>
+          <h3 className={styles.goalTitle}>
+            What is your goal for this Metric?
+          </h3>
+        </div>
+        <div className={styles.goalInputDiv}>
+          <textarea
+            ref={goalareaRef}
+            className={styles.goalInput}
+            id="goal"
+            placeholder="Enter your goal here"
+            value={goal}
+            onChange={(e) => setGoal(e.target.value)}
+            required
+          />
+        </div>
+      </div>
           <FilesInput {...{ setSupportFiles, supportFiles }} />
 
           <div className={styles.buttonsDiv}>

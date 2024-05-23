@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { uploadFile } from "../../../../../config/storage/functions";
 import { useSelector } from "react-redux";
@@ -7,8 +6,10 @@ import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
-import {WorkplaceGenderEqualityPoliciesData as WorkplaceGenderEqualityPoliciesDataType } from "../../../../../hooks/declarations/data/data.did";
-
+import { WorkplaceGenderEqualityPoliciesData as WorkplaceGenderEqualityPoliciesDataType } from "../../../../../hooks/declarations/data/data.did";
+import { ManualData } from "../../MetricRecords";
+import { IoMdAdd } from "react-icons/io";
+import Program from "../support/Program";
 
 const WorkplaceGenderEqualityPoliciesData = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
@@ -17,72 +18,45 @@ const WorkplaceGenderEqualityPoliciesData = ({ setManualData, setUploadManually 
   const [countDown, setCountDown] = useState<number>(0);
 
   const [startDate, setStartDate] = useState<string>("");
-  const [endDate, setEndDate] = useState<string>("");
+  const [duration, setDuration] = useState<string>("");
   const [location, setLocation] = useState<string>("");
 
-  const [policyName, setPolicyName] = useState<string>("");
-  const [policyDescription, setPolicyDescription] = useState<string>("");
-  const [challengesFaced, setChallengesFaced] = useState<string>("");
-  const [reviewDate, setReviewDate] = useState<string>("");
-  const [implementationDate, setImplementationDate] = useState<string>("");
-  const [feedbackFromEmployees, setFeedbackFromEmployees] = useState<string>("");
-  const [measuresTaken, setMeasuresTaken] = useState<string>("");
-  const [outcomesAchieved, setOutcomesAchieved] = useState<string>("");
-  const [numberOfEmployeesAffected, setNumberOfEmployeesAffected] = useState("");
-  const [complianceRate, setComplianceRate] = useState("");
+  const [programName, setProgramName] = useState<string>("");
+  const [typeOfPolicy, setTypeOfPolicy] = useState<string>("");
+
+  const [programs, setPrograms] = useState<WorkplaceGenderEqualityPoliciesDataType[]>([]);
+  const [showForm, setShowForm] = useState<boolean>(false);
+  const [goal, setGoal] = useState<string>("");
+  const goalareaRef = useRef<HTMLTextAreaElement>(null);
   
-
   const handleSubmit = async () => {
+    if (goal === "") {
+      toast.error("Please enter a goal", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+      });
+      return;
+    }
+    if (programs.length === 0) {
+      toast.error("Please add at least one workplace gender equality program you did", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+      });
+      return;
+    }
     try {
-      setSaving(true);
-      const checkedFiles: File[] = [];
-      if (supportFiles) {
-        for (const file of supportFiles) {
-          if (file.size <= 4 * 1024 * 1024) {
-            checkedFiles.push(file);
-          }
-        }
-      }
-
-      if (checkedFiles.length === 0) {
-        toast.error("Please upload support documents", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-        });
-        setSaving(false);
-        return;
-      }
-
-      const urls = await uploadAsset(checkedFiles);
-
-      const startDateMilliseconds = new Date(startDate).getTime();
-      const endDateMilliseconds = new Date(endDate).getTime();
-
-      // const WorkplaceGenderEqualityPoliciesData : WorkplaceGenderEqualityPoliciesDataType = {
-      //   startDate: BigInt(startDateMilliseconds),
-      //   endDate: BigInt(endDateMilliseconds),
-      //   location: location,
-      //   policyName: policyName,
-      //   policyDescription: policyDescription,
-      //   challengesFaced: challengesFaced,
-      //   reviewDate:reviewDate,
-      //   implementationDate: implementationDate,
-      //   feedbackFromEmployees: feedbackFromEmployees,
-      //   measuresTaken: measuresTaken,
-      //   outcomesAchieved:outcomesAchieved,
-      //   numberOfEmployeesAffected: BigInt(numberOfEmployeesAffected),
-      //   complianceRate:BigInt(complianceRate),
-      //   dataVerification: false,
-      //   supportingFiles: urls ? urls : [],
-      //   created: BigInt(Date.now()),
-      // };
-      // setManualData(WorkplaceGenderEqualityPoliciesData);
+      const data: ManualData = {
+        goal: goal,
+        data: programs,
+      };
+      setManualData(data);
       setUploadManually(false);
     } catch (error) {
-        setSaving(false);
-      console.log("Error saving Work Place Gender Equality Policies Data", error);
+      console.log("Error savingworkplace gender equality program", error);
     }
   };
 
@@ -110,188 +84,243 @@ const WorkplaceGenderEqualityPoliciesData = ({ setManualData, setUploadManually 
     }
   };
 
+  const calcHeight = (value: string): number => {
+    const numberOfLineBreaks = (value.match(/\n/g) || []).length;
+    return numberOfLineBreaks * 20 + 50;
+  };
+
+  useEffect(() => {
+    if (goalareaRef.current) {
+      goalareaRef.current.style.height = `${calcHeight(goal)}px`;
+    }
+  }, [goal]);
+
+  const handleSave = async () => {
+    setSaving(true);
+    if(
+      programName === "" ||
+      startDate === "" ||
+      duration === "" ||
+      location === "" ||
+      typeOfPolicy === "" 
+    ){
+      toast.error("Please fill in all required fields", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+      });
+      setSaving(false);
+      return;
+    }
+    const checkedFiles: File[] = [];
+    if (supportFiles) {
+      for(const file of supportFiles){
+        if (file.size <= 4 * 1024 * 1024) {
+          checkedFiles.push(file);
+        }
+      }
+    }
+
+    if(checkedFiles.length === 0){
+      toast.error("Please upload support documents", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+      });
+      setSaving(false);
+      return;
+    }
+
+    const urls = await uploadAsset(checkedFiles);
+    if(!urls){
+      toast.error("Error uploading files", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+      });
+      setSaving(false);
+      return;
+    }
+
+    const newProgram: WorkplaceGenderEqualityPoliciesDataType = {
+      programName,
+      startDate:BigInt(new Date(startDate).getTime()),
+      duration,
+      location,
+      typeOfPolicy,
+      dataVerification:false,
+      supportingFiles:urls,
+      created:BigInt(Date.now()),
+    };
+    setPrograms([...programs, newProgram]);
+    setProgramName("");
+    setStartDate("");
+    setDuration("");
+    setLocation("");
+    setTypeOfPolicy("");
+    setSupportFiles(null);
+    setShowForm(false);
+    setSaving(false);
+
+  };
+
   return (
     <div>
-      <form className={`${styles.munualDataForm}`}>
-        <div className={`${styles.formHeader}`}>
-          <h3 className={`${styles.formTitle}`}>Workplace Gender Equality Policies Data</h3>
+      <div className=" items-center">
+        <h3 className="text-white text-xl text-center">
+          Workplace Gender Equality Policies
+        </h3>
+        <div className="flex justify-end py-3">
+          <button
+            onClick={() => setShowForm(true)}
+            className="flex items-center gap-2 text-custom-green"
+          >
+            <IoMdAdd />
+            <span>Add a program</span>
+          </button>
         </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Policy Name</label>
-          <input
-            className={`${styles.formInput}`}
-            id="policyName"
-            type="text"
-            placeholder="Name of the Policy"
-            value={policyName}
-            onChange={(e) => setPolicyName(e.target.value)}
-            required
-          />
 
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Policy Description</label>
-          <textarea
-            className={`${styles.formInput}`}
-            id="policyDescription"
-            placeholder="Description of the Policy"
-            value={policyDescription}
-            onChange={(e) => setPolicyDescription(e.target.value)}
-            required
-            style={{ overflow: "hidden" }}
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Start Date</label>
-          <input
-            className={`${styles.formInput}`}
-            id="startDate"
-            type="date"
-            placeholder="Start Date"
-            value={startDate}
-            required
-            onChange={(e) => setStartDate(e.target.value)}
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>End Date</label>
-          <input
-            className={`${styles.formInput}`}
-            id="endDate"
-            type="date"
-            placeholder="End Date"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}> Location</label>
-          <input
-            className={`${styles.formInput}`}
-            id="location"
-            type="text"
-            placeholder="Location"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Challenges Faced</label>
-          <input
-            className={`${styles.formInput}`}
-            id="challengesFaced"
-            type="text"
-            placeholder="The Challenges Faced"
-            value={challengesFaced}
-            onChange={(e) => setChallengesFaced(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Review Date</label>
-          <input
-            className={`${styles.formInput}`}
-            id="reviewDate"
-            type="text"
-            placeholder="Date of Review"
-            value={reviewDate}
-            onChange={(e) => setReviewDate(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Implementation Date</label>
-          <input
-            className={`${styles.formInput}`}
-            id="implementation Date"
-            type="text"
-            placeholder="Date of Implementation"
-            value={implementationDate}
-            onChange={(e) => setImplementationDate(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Feedback From Employees</label>
-          <input
-            className={`${styles.formInput}`}
-            id="feedbackFromEmployees"
-            type="text"
-            placeholder="Employees Feedback"
-            value={feedbackFromEmployees}
-            onChange={(e) => setFeedbackFromEmployees(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Measures Taken</label>
-          <input
-            className={`${styles.formInput}`}
-            id="measuresTaken"
-            type="text"
-            placeholder="What're the measures taken?"
-            value={measuresTaken}
-            onChange={(e) => setMeasuresTaken(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Outcomes Achieved</label>
-          <input
-            className={`${styles.formInput}`}
-            id="outcomesAchieved"
-            type="text"
-            placeholder="What're the Outcomes Achieved"
-            value={outcomesAchieved}
-            onChange={(e) => setOutcomesAchieved(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Number of Employees Affected</label>
-          <input
-            className={`${styles.formInput}`}
-            id="numberOfEmployeesAffected"
-            type="number"
-            placeholder="The Number of Employees Affected"
-            value={numberOfEmployeesAffected}
-            onChange={(e) => setNumberOfEmployeesAffected(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Compliance Rate</label>
-          <input
-            className={`${styles.formInput}`}
-            id="complianceRate"
-            type="number"
-            placeholder="Rate of Compliance"
-            value={complianceRate}
-            onChange={(e) => setComplianceRate(e.target.value)}
-            required
-          />
-        </div>
-      </form>
-
-      <FilesInput {...{ setSupportFiles, supportFiles }} />
-
-      <div className="flex justify-between items-center py-4">
-        <button
-          onClick={() => setUploadManually(false)}
-          className={`${styles.roundedButton}`}
-        >
-          Cancel
-        </button>
-        <button
-          onClick={handleSubmit}
-          disabled={saving}
-          className={`${styles.roundedButton}`}
-        >
-          {saving ? `Uploading ${countDown}` : "Save"}
-        </button>
+        {programs.length > 0 && (
+          <div className={styles.programsDiv}>
+            {programs.map((program, index) => (
+              <Program key={index} {...{ program, programs, setPrograms }} />
+            ))}
+          </div>
+        )}
       </div>
+
+      {showForm && (
+        <div className={styles.munualDataForm}>
+          <div className={styles.formHeader}>
+            <h3 className={styles.formTitle}>
+              Add a Workplace Gender Equality Policy Program
+            </h3>
+          </div>
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>What is the name of the Workplace Gender Equality Policy program?</label>
+            <input
+              className={styles.formInput}
+              id="programName"
+              type="text"
+              placeholder="Enter the name of the initiative involving the implementation of gender equality policies at work."
+              value={programName}
+              onChange={(e) => setProgramName(e.target.value)}
+              required
+            />
+          </div>
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>When did this program begin?</label>
+            <input
+              className={styles.formInput}
+              id="startDate"
+              type="date"
+              placeholder="Indicate when the policy was first implemented."
+              value={startDate}
+              required
+              onChange={(e) => setStartDate(e.target.value)}
+            />
+          </div>
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>How long has the policy been running?</label>
+            <input
+              className={styles.formInput}
+              id="duration"
+              type="text"
+              placeholder="Provide the duration that the policy has been in place."
+              value={duration}
+              onChange={(e) => setDuration(e.target.value)}
+            />
+          </div>
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>Where is this program located? (City and Country)</label>
+            <input
+              className={styles.formInput}
+              id="location"
+              type="text"
+              placeholder="Specify the city and country where the policy is implemented."
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>What type of policies are implemented?</label>
+            <select
+              className={styles.formSelectInput}
+              id="typeOfPolicy"
+              value={typeOfPolicy}
+              onChange={(e) => setTypeOfPolicy(e.target.value)}
+              required
+            >
+              <option value="">Select the type of policy implemented from the dropdown.</option>
+              <option value="financial">Pay Equity</option>
+              <option value="resource-based">Recruitment</option>
+              <option value="consultation">Harassment Prevention</option>
+              <option value="training">Promotion</option>
+            </select>
+          </div>
+
+          <div className="">
+        <div className={styles.goalDiv}>
+          <h3 className={styles.goalTitle}>
+            What is your goal for this Metric?
+          </h3>
+        </div>
+        <div className={styles.goalInputDiv}>
+          <textarea
+            ref={goalareaRef}
+            className={styles.goalInput}
+            id="goal"
+            placeholder="Enter your goal here"
+            value={goal}
+            onChange={(e) => setGoal(e.target.value)}
+            required
+          />
+        </div>
+      </div>
+          <FilesInput {...{ setSupportFiles, supportFiles }} />
+
+          <div className={styles.buttonsDiv}>
+            <button
+              onClick={() => {
+                setShowForm(false);
+                setSaving(false);
+              }}
+              className="text-custom-green font-bold"
+            >
+              <span>Cancel</span>
+            </button>
+            <button
+              onClick={handleSave}
+              disabled={saving}
+              className={styles.roundedButton}
+            >
+              {saving ? `Saving... ${countDown}` : "Save"}
+            </button>
+          </div>
+        </div>
+      )}
+       {!showForm && (
+        <div className="flex justify-between items-center py-4">
+          <button
+            onClick={() => setUploadManually(false)}
+            className={styles.roundedButton}
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleSubmit}
+            disabled={saving}
+            className={`${styles.roundedButton} `}
+          >
+            Continue
+          </button>
+        </div>
+      )}
     </div>
   );
 };

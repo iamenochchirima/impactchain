@@ -4,7 +4,7 @@ export { idlFactory as fileScalingManagerIdlFactory } from "./declarations/file_
 
 // Env is a variant type that can be either "development" or "production"
 
-type Env = "development" | "production";
+//type Env = "development" | "production";
 
 // export const environment: Env = "production";
 // export const API_BASE_URL = "https://impactchain-production.up.railway.app"

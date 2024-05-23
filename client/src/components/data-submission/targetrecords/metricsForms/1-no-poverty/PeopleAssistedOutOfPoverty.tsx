@@ -167,28 +167,10 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
 
   return (
     <div>
-      <div className="">
-        <div className={styles.goalDiv}>
-          <h3 className={styles.goalTitle}>
-            What is your goal for this Metric?
-          </h3>
-        </div>
-        <div className={styles.goalInputDiv}>
-          <textarea
-            ref={goalareaRef}
-            className={styles.goalInput}
-            id="goal"
-            placeholder="Enter your goal here"
-            value={goal}
-            onChange={(e) => setGoal(e.target.value)}
-            required
-          />
-        </div>
-      </div>
 
       <div className=" items-center">
         <h3 className="text-white text-xl text-center">
-          Peaople Assisted Out of Poverty
+          People Assisted Out of Poverty
         </h3>
         <div className="flex justify-end py-3">
           <button
@@ -222,7 +204,7 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="programName"
               type="text"
-              placeholder="Program Name"
+              placeholder="Enter the name of the job training or educational program."
               value={programName}
               onChange={(e) => setProgramName(e.target.value)}
               required
@@ -234,7 +216,7 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="startDate"
               type="date"
-              placeholder="Start Date"
+              placeholder="Indicate when the program began."
               value={startDate}
               required
               onChange={(e) => setStartDate(e.target.value)}
@@ -246,7 +228,7 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="duration"
               type="text"
-              placeholder="Duration e.g 6 months"
+              placeholder="Provide the duration that the program has been running."
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
             />
@@ -257,7 +239,7 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="programLocation"
               type="text"
-              placeholder="Program Location"
+              placeholder="Specify the city and country where the program is implemented."
               value={programLocation}
               onChange={(e) => setProgramLocation(e.target.value)}
               required
@@ -270,12 +252,31 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="numberOfPeopleAssisted"
               type="number"
-              placeholder="Number of people assisted"
+              placeholder="Enter the total number of individuals assisted by this program."
               value={numberOfPeopleAssisted}
               onChange={(e) => setNumberOfPeopleAssisted(e.target.value)}
               required
             />
           </div>
+
+          <div className="">
+        <div className={styles.goalDiv}>
+          <h3 className={styles.goalTitle}>
+            What is your goal for this Metric?
+          </h3>
+        </div>
+        <div className={styles.goalInputDiv}>
+          <textarea
+            ref={goalareaRef}
+            className={styles.goalInput}
+            id="goal"
+            placeholder="Enter your goal here"
+            value={goal}
+            onChange={(e) => setGoal(e.target.value)}
+            required
+          />
+        </div>
+      </div>
           <FilesInput {...{ setSupportFiles, supportFiles }} />
 
           <div className={styles.buttonsDiv}>

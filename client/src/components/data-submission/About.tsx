@@ -6,7 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { setDataComponent, setUserRecord } from "../../redux/slices/app";
 import { toast } from "react-toastify";
+import Bubbles from "../Bubbles";
 
+const bubbleText = "Before we begin enhancing your ESG reporting and analytics capabilities, we need some details about your company. This information will enable us to tailor our analysis and reports to better suit your organization's specific needs and goals."
 const About = () => {
   const dispatch = useDispatch();
   const { userInfo, userRecord } = useSelector((state: RootState) => state.app);
@@ -71,17 +73,17 @@ const About = () => {
   };
 
   return (
-    <div className="text-white">
+    <div className="text-white pt-">
       {" "}
-      <h3 className="text-2xl font-bold text-white mt-4 text-center font-TelegraphBold mr-12 ">
+      <h3 className="md:text-xl text-3xl font-bold text-white mt-4 text-center font-NeueMachinaUltrabold  ">
         Basic Organisation Information
       </h3>
       <div className="min-h-96 pr-24 pl-12 mt-10 ">
-      <h3 className="font-TelegrapUltraLight">Name of Organisation?</h3>
+      <h3 className="font-TelegrapUltraLight md:text-sm">Name of Organisation?</h3>
         <form action="" className="mt-3">
           <div className="mb-4 ">
             <input
-              className="shadow placeholder-gray-500 text-white min-w-[300px] rounded-xl appearance-none border-2 border-green-500 w-full py-3.5 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow placeholder-gray-500 text-white md:text-sm text-xl min-w-[300px] rounded-xl appearance-none border-2 border-green-500 w-full py-3.5 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
               id="company-name"
               type="company-name"
               value={companyName}
@@ -89,11 +91,11 @@ const About = () => {
               placeholder="Company Name"
             />
           </div>
-          <div className="mt-5">
+          <div className="mt-5 md:text-sm">
             <h3>In Which Industry Does the Organisation Operate?</h3>
             <div className="relative mt-3">
               <select
-                className="appearance-none shadow placeholder-white text-white min-w-[300px] rounded-xl border-2 border-green-500 w-full py-3.5 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
+                className="appearance-none shadow placeholder-white text-white md:text-sm text-xl min-w-[300px] rounded-xl border-2 border-green-500 w-full py-3.5 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
                 name="industry"
                 id="industry"
                 value={industry}
@@ -104,6 +106,7 @@ const About = () => {
                 <option value="education">Education</option>
                 <option value="finance">Finance</option>
                 <option value="healthcare">Healthcare</option>
+                <option value="other">Other</option>
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                 <GoSingleSelect size={20} className="text-white" />
@@ -111,13 +114,13 @@ const About = () => {
             </div>
           </div>
 
-          <div className="mt-5">
+          <div className="mt-5 md:text-sm">
             <h2>What Is The Size of Your Organisation?</h2>
             <div className="mt-4 flex items-center gap-3">
               <button
                 className={` ${
                   selectedButton === "2-10" ? "bg-custom-green" : " bg-gray-500"
-                } py-1 px-4 rounded-xl text-black font-bold`}
+                } py-1 px-4 rounded-lg text-black text-xs font-bold`}
                 type="button"
                 onClick={() => {
                   setSelectedButton("2-10");
@@ -129,7 +132,7 @@ const About = () => {
               <button
                 className={` ${
                   selectedButton === "10-25" ? "bg-custom-green" : "bg-gray-500"
-                } py-1 px-4 rounded-xl text-black font-bold`}
+                } py-1 px-4 rounded-lg text-black text-xs font-bold`}
                 type="button"
                 onClick={() => {
                   setSelectedButton("10-25");
@@ -141,7 +144,7 @@ const About = () => {
               <button
                 className={` ${
                   selectedButton === "25-50" ? "bg-custom-green" : "bg-gray-500"
-                } py-1 px-4 rounded-xl text-black font-bold`}
+                } py-1 px-4 rounded-lg text-black text-xs font-bold`}
                 type="button"
                 onClick={() => {
                   setSelectedButton("25-50");
@@ -153,7 +156,7 @@ const About = () => {
               <button
                 className={` ${
                   selectedButton === "50-100" ? "bg-custom-green" : "bg-gray-500"
-                } py-1 px-4 rounded-xl text-black font-bold`}
+                } py-1 px-4 rounded-lg text-black text-xs font-bold`}
                 type="button"
                 onClick={() => {
                   setSelectedButton("50-100");
@@ -166,10 +169,11 @@ const About = () => {
           </div>
         </form>
       </div>
-      <div className="flex justify-end items-center  mb-5 ">
+      <div className="flex justify-between items-center  mb-5 ">
+        <Bubbles {...{bubbleText}}/>
         <button
           onClick={handleSubmit}
-          className="mr-24 px-10 py-1.5 bg-custom-green rounded-xl text-black font-bold"
+          className="mr-24 px-10 py-1.5 bg-custom-green rounded-xl text-black font-TelegraphUltraLight md:text-sm text-lg font-bold"
         >
           {loading ? "Loading..." : "Continue"}
         </button>

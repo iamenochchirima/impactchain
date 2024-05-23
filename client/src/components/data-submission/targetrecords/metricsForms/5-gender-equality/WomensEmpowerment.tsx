@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { uploadFile } from "../../../../../config/storage/functions";
 import { useSelector } from "react-redux";
@@ -7,8 +6,10 @@ import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
-import {WomensEmpowermentProgramData as WomensEmpowermentProgramDataType } from "../../../../../hooks/declarations/data/data.did";
-
+import { WomensEmpowermentProgramData as WomensEmpowermentProgramDataType } from "../../../../../hooks/declarations/data/data.did";
+import { ManualData } from "../../MetricRecords";
+import { IoMdAdd } from "react-icons/io";
+import Program from "../support/Program";
 
 const WomensEmpowermentProgramData = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
@@ -17,73 +18,46 @@ const WomensEmpowermentProgramData = ({ setManualData, setUploadManually }) => {
   const [countDown, setCountDown] = useState<number>(0);
 
   const [startDate, setStartDate] = useState<string>("");
-  const [endDate, setEndDate] = useState<string>("");
+  const [duration, setDuration] = useState<string>("");
   const [location, setLocation] = useState<string>("");
 
   const [programName, setProgramName] = useState<string>("");
-  const [programDescription, setProgramDescription] = useState<string>("");
+  const [typeOfProgram, setTypeOfProgram] = useState<string>("");
+  const [numberOfParticipants, setNumberOfParticipants] = useState<string>("");
 
-  const [challengesFaced, setChallengesFaced] = useState<string>("");
-  const [typeOfActivities, setTypeOfActivities] = useState<string>("");
-  const [feedbackFromParticipants, setFeedbackFromParticipants] = useState<string>("");
-  const [impactOnParticipants, setImpactOnParticipants] = useState<string>("");
-  const [followUpSupport, setFollowUpSupport] = useState<string>("");
-  const [outcomesAchieved, setOutcomesAchieved] = useState<string>("");
-  const [partnershipsFormed, setPartnershipsFormed] = useState<string>("");
-  const [numberOfParticipants, setNumberOfParticipants] = useState("");
+  const [programs, setPrograms] = useState<WomensEmpowermentProgramDataType[]>([]);
+  const [showForm, setShowForm] = useState<boolean>(false);
+  const [goal, setGoal] = useState<string>("");
+  const goalareaRef = useRef<HTMLTextAreaElement>(null);
   
-
   const handleSubmit = async () => {
+    if (goal === "") {
+      toast.error("Please enter a goal", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+      });
+      return;
+    }
+    if (programs.length === 0) {
+      toast.error("Please add at least one womens empowerment program you did", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+      });
+      return;
+    }
     try {
-      setSaving(true);
-      const checkedFiles: File[] = [];
-      if (supportFiles) {
-        for (const file of supportFiles) {
-          if (file.size <= 4 * 1024 * 1024) {
-            checkedFiles.push(file);
-          }
-        }
-      }
-
-      if (checkedFiles.length === 0) {
-        toast.error("Please upload support documents", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-        });
-        setSaving(false);
-        return;
-      }
-
-      const urls = await uploadAsset(checkedFiles);
-
-      const startDateMilliseconds = new Date(startDate).getTime();
-      const endDateMilliseconds = new Date(endDate).getTime();
-
-      // const WomensEmpowermentProgramData : WomensEmpowermentProgramDataType = {
-      //   startDate: BigInt(startDateMilliseconds),
-      //   endDate: BigInt(endDateMilliseconds),
-      //   location: location,
-      //   programName: programName,
-      //   programDescription: programDescription,
-      //   challengesFaced: challengesFaced,
-      //   typeOfActivities: typeOfActivities,
-      //   feedbackFromParticipants: feedbackFromParticipants,
-      //   impactOnParticipants: impactOnParticipants,
-      //   followUpSupport:followUpSupport,
-      //   outcomesAchieved:outcomesAchieved,
-      //   partnershipsFormed:partnershipsFormed,
-      //   numberOfParticipants: BigInt(numberOfParticipants),
-      //   dataVerification: false,
-      //   supportingFiles: urls ? urls : [],
-      //   created: BigInt(Date.now()),
-      // };
-      // setManualData(WomensEmpowermentProgramData);
+      const data: ManualData = {
+        goal: goal,
+        data: programs,
+      };
+      setManualData(data);
       setUploadManually(false);
     } catch (error) {
-        setSaving(false);
-      console.log("Error saving Womens Empowerment Program Data", error);
+      console.log("Error saving womens empowerment program", error);
     }
   };
 
@@ -111,188 +85,258 @@ const WomensEmpowermentProgramData = ({ setManualData, setUploadManually }) => {
     }
   };
 
+  const calcHeight = (value: string): number => {
+    const numberOfLineBreaks = (value.match(/\n/g) || []).length;
+    return numberOfLineBreaks * 20 + 50;
+  };
+
+  useEffect(() => {
+    if (goalareaRef.current) {
+      goalareaRef.current.style.height = `${calcHeight(goal)}px`;
+    }
+  }, [goal]);
+
+  const handleSave = async () => {
+    setSaving(true);
+    if(
+      programName === "" ||
+      startDate === "" ||
+      duration === "" ||
+      location === "" ||
+      typeOfProgram === "" ||
+      numberOfParticipants === ""
+
+    ){
+      toast.error("Please fill in all required fields", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+      });
+      setSaving(false);
+      return;
+    }
+    const checkedFiles: File[] = [];
+    if (supportFiles) {
+      for(const file of supportFiles){
+        if (file.size <= 4 * 1024 * 1024) {
+          checkedFiles.push(file);
+        }
+      }
+    }
+
+    if(checkedFiles.length === 0){
+      toast.error("Please upload support documents", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+      });
+      setSaving(false);
+      return;
+    }
+
+    const urls = await uploadAsset(checkedFiles);
+    if(!urls){
+      toast.error("Error uploading files", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+      });
+      setSaving(false);
+      return;
+    }
+
+    const newProgram: WomensEmpowermentProgramDataType = {
+      programName,
+      startDate:BigInt(new Date(startDate).getTime()),
+      duration,
+      location,
+      typeOfProgram,
+      numberOfParticipants: BigInt(numberOfParticipants),
+      dataVerification:false,
+      supportingFiles:urls,
+      created:BigInt(Date.now()),
+    };
+    setPrograms([...programs, newProgram]);
+    setProgramName("");
+    setStartDate("");
+    setDuration("");
+    setLocation("");
+    setTypeOfProgram("");
+    setNumberOfParticipants("");
+    setSupportFiles(null);
+    setShowForm(false);
+    setSaving(false);
+
+  };
+
   return (
     <div>
-      <form className={`${styles.munualDataForm}`}>
-        <div className={`${styles.formHeader}`}>
-          <h3 className={`${styles.formTitle}`}>Women Empowerment Program Data</h3>
+      <div className=" items-center">
+        <h3 className="text-white text-xl text-center">
+          Women Empowerment
+        </h3>
+        <div className="flex justify-end py-3">
+          <button
+            onClick={() => setShowForm(true)}
+            className="flex items-center gap-2 text-custom-green"
+          >
+            <IoMdAdd />
+            <span>Add a program</span>
+          </button>
         </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Program Name</label>
-          <input
-            className={`${styles.formInput}`}
-            id="programName"
-            type="text"
-            placeholder="Name of the program"
-            value={programName}
-            onChange={(e) => setProgramName(e.target.value)}
-            required
-          />
 
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Program Description</label>
-          <textarea
-            className={`${styles.formInput}`}
-            id="programDescription"
-            placeholder="Description of the Program"
-            value={programDescription}
-            onChange={(e) => setProgramDescription(e.target.value)}
-            required
-            style={{ overflow: "hidden" }}
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Start Date</label>
-          <input
-            className={`${styles.formInput}`}
-            id="startDate"
-            type="date"
-            placeholder="Start Date"
-            value={startDate}
-            required
-            onChange={(e) => setStartDate(e.target.value)}
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>End Date</label>
-          <input
-            className={`${styles.formInput}`}
-            id="endDate"
-            type="date"
-            placeholder="End Date"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}> Location</label>
-          <input
-            className={`${styles.formInput}`}
-            id="location"
-            type="text"
-            placeholder="Location"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Challenges Faced</label>
-          <input
-            className={`${styles.formInput}`}
-            id="challengesFaced"
-            type="text"
-            placeholder="The Challenges Faced"
-            value={challengesFaced}
-            onChange={(e) => setChallengesFaced(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Type Of Activities</label>
-          <input
-            className={`${styles.formInput}`}
-            id="typeOfActivities"
-            type="text"
-            placeholder="What're the Type Of Activities?"
-            value={typeOfActivities}
-            onChange={(e) => setTypeOfActivities(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Feedback From Participants</label>
-          <input
-            className={`${styles.formInput}`}
-            id="feedbackFromParticipants"
-            type="text"
-            placeholder="Participants Feedback"
-            value={feedbackFromParticipants}
-            onChange={(e) => setFeedbackFromParticipants(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Impact On Participants</label>
-          <input
-            className={`${styles.formInput}`}
-            id="impactOnParticipants"
-            type="text"
-            placeholder="The Impact on Participants"
-            value={impactOnParticipants}
-            onChange={(e) => setImpactOnParticipants(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Follow-up Support</label>
-          <input
-            className={`${styles.formInput}`}
-            id="followUpSupport"
-            type="text"
-            placeholder="Support Follow-up in place?"
-            value={followUpSupport}
-            onChange={(e) => setFollowUpSupport(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Outcomes Achieved</label>
-          <input
-            className={`${styles.formInput}`}
-            id="outcomesAchieved"
-            type="text"
-            placeholder="What're the Outcomes Achieved"
-            value={outcomesAchieved}
-            onChange={(e) => setOutcomesAchieved(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Partnerships Formed</label>
-          <input
-            className={`${styles.formInput}`}
-            id="partnershipsFormed"
-            type="text"
-            placeholder="Partnerships that have Formed"
-            value={partnershipsFormed}
-            onChange={(e) => setPartnershipsFormed(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`${styles.inputDiv}`}>
-          <label htmlFor={`${styles.inputLabel}`}>Number of Participants</label>
-          <input
-            className={`${styles.formInput}`}
-            id="numberOfParticipants"
-            type="number"
-            placeholder="The Number of Participants"
-            value={numberOfParticipants}
-            onChange={(e) => setNumberOfParticipants(e.target.value)}
-            required
-          />
-        </div>
-      </form>
-
-      <FilesInput {...{ setSupportFiles, supportFiles }} />
-
-      <div className="flex justify-between items-center py-4">
-        <button
-          onClick={() => setUploadManually(false)}
-          className={`${styles.roundedButton}`}
-        >
-          Cancel
-        </button>
-        <button
-          onClick={handleSubmit}
-          disabled={saving}
-          className={`${styles.roundedButton}`}
-        >
-          {saving ? `Uploading ${countDown}` : "Save"}
-        </button>
+        {programs.length > 0 && (
+          <div className={styles.programsDiv}>
+            {programs.map((program, index) => (
+              <Program key={index} {...{ program, programs, setPrograms }} />
+            ))}
+          </div>
+        )}
       </div>
+
+      {showForm && (
+        <div className={styles.munualDataForm}>
+          <div className={styles.formHeader}>
+            <h3 className={styles.formTitle}>
+              Add a Women Empowerment Program
+            </h3>
+          </div>
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>What is the name of the Women Empowerment program?</label>
+            <input
+              className={styles.formInput}
+              id="programName"
+              type="text"
+              placeholder="Enter the specific name of the women's empowerment program."
+              value={programName}
+              onChange={(e) => setProgramName(e.target.value)}
+              required
+            />
+          </div>
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>When did this program begin?</label>
+            <input
+              className={styles.formInput}
+              id="startDate"
+              type="date"
+              placeholder="Indicate when the program was initiated."
+              value={startDate}
+              required
+              onChange={(e) => setStartDate(e.target.value)}
+            />
+          </div>
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>How long has the program been running?</label>
+            <input
+              className={styles.formInput}
+              id="duration"
+              type="text"
+              placeholder="Provide the duration that the program has been running."
+              value={duration}
+              onChange={(e) => setDuration(e.target.value)}
+            />
+          </div>
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>Where is this program located? (City and Country)</label>
+            <input
+              className={styles.formInput}
+              id="location"
+              type="text"
+              placeholder="Specify the city and country where the program is implemented."
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>What type of program is it?</label>
+            <select
+              className={styles.formSelectInput}
+              id="typeOfProgram"
+              value={typeOfProgram}
+              onChange={(e) => setTypeOfProgram(e.target.value)}
+              required
+            >
+              <option value="">Select the primary focus of the program from the dropdown.</option>
+              <option value="financial">Economic Inclusion</option>
+              <option value="resource-based">Legal Rights</option>
+              <option value="consultation">Leadership Training</option>
+            </select>
+          </div>
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>How many participants are involved?</label>
+            <input
+              className={styles.formInput}
+              id="numberOfarticipants"
+              type="number"
+              placeholder="Indicate the number of participants involved in the program."
+              value={numberOfParticipants}
+              onChange={(e) => setNumberOfParticipants(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="">
+        <div className={styles.goalDiv}>
+          <h3 className={styles.goalTitle}>
+            What is your goal for this Metric?
+          </h3>
+        </div>
+        <div className={styles.goalInputDiv}>
+          <textarea
+            ref={goalareaRef}
+            className={styles.goalInput}
+            id="goal"
+            placeholder="Enter your goal here"
+            value={goal}
+            onChange={(e) => setGoal(e.target.value)}
+            required
+          />
+        </div>
+      </div>
+          <FilesInput {...{ setSupportFiles, supportFiles }} />
+
+          <div className={styles.buttonsDiv}>
+            <button
+              onClick={() => {
+                setShowForm(false);
+                setSaving(false);
+              }}
+              className="text-custom-green font-bold"
+            >
+              <span>Cancel</span>
+            </button>
+            <button
+              onClick={handleSave}
+              disabled={saving}
+              className={styles.roundedButton}
+            >
+              {saving ? `Saving... ${countDown}` : "Save"}
+            </button>
+          </div>
+        </div>
+      )}
+       {!showForm && (
+        <div className="flex justify-between items-center py-4">
+          <button
+            onClick={() => setUploadManually(false)}
+            className={styles.roundedButton}
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleSubmit}
+            disabled={saving}
+            className={`${styles.roundedButton} `}
+          >
+            Continue
+          </button>
+        </div>
+      )}
     </div>
   );
 };

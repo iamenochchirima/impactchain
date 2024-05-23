@@ -5,19 +5,19 @@ import { CategoryType } from "./types";
 const categories: CategoryType[] = [
   {
     id: 1,
-    title: "Environmental Impact Report",
+    title: "Environmental Impact",
     icon: "./earth.svg",
     category: "Environmental",
   },
   {
     id: 2,
-    title: "Social Impact Report",
+    title: "Social Impact",
     icon: "./couple.svg",
     category: "Social",
   },
   {
     id: 3,
-    title: "Governance Impact Report",
+    title: "Governance Impact",
     icon: "./scale.svg",
     category: "Governance",
   },

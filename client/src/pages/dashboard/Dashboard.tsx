@@ -1,18 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaChevronDown } from "react-icons/fa6";
-import { IoIosArrowRoundDown } from "react-icons/io";
-import { IoIosArrowRoundUp } from "react-icons/io";
-import { IoMdAdd } from "react-icons/io";
 import MainChart from "./components/MainChat";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import TartgetsCharts from "./components/TartgetsCharts";
 import TargetsCircles from "./components/TargetsCircles";
 import { Metric } from "../../utils/types";
+import { getMetricsWithDataForTheGivenTimePeriod, mergeLineGraphData } from "../analytics/components/utils/processGraphsData";
+import { toast } from "react-toastify";
+import { getMetricsGraphsData } from '../analytics/components/utils/getGraphsData';
+import { LineGraphData } from "../analytics/components/utils/types";
 
 
 const Dashboard = () => {
   const {userRecord, impactTargets} = useSelector((state: RootState) => state.app);
+  const [graph, setGraph] = useState<LineGraphData | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState("Time Period");
   const [timePeriod, setTimePeriod] = useState("1Year");
@@ -32,7 +34,35 @@ const Dashboard = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [dropdownRef])
 
-  useEffect(() => {}, [userRecord]);
+  useEffect(() => {
+if (userRecord && impactTargets) {
+  const allMetrics = impactTargets.flatMap((target) => target.metrics);
+      const res = getMetricsWithDataForTheGivenTimePeriod(allMetrics, timePeriod);
+      if (res) {
+        setMetricsWithDataForPeriod(res);
+      }
+    }
+  }, [userRecord, impactTargets]);
+
+  useEffect(() => {
+    if (metricsWithDataForPeriod ) {
+      getData(metricsWithDataForPeriod, timePeriod);
+    }
+  }, [metricsWithDataForPeriod, timePeriod]);
+
+  const getData = async (arg1: Metric[], arg2) => {
+
+    const _res = await getMetricsGraphsData(arg1, arg2);
+    if (!_res) {
+      toast.error("Error Generating report", {
+        position: "top-right",
+        autoClose: 10000,
+        hideProgressBar: false,
+      });
+      return;
+    }
+    setGraph(mergeLineGraphData(_res.allLineGraphData),)
+  };
 
   return (
     <div className=" ml-5 flex flex-col gap-5">
@@ -77,7 +107,7 @@ const Dashboard = () => {
           <span>Generate Report</span>
         </button>
       </div>
-      <MainChart />
+      {graph && <MainChart {...{graph}} />}
       <TargetsCircles />
       <TartgetsCharts />
     </div>

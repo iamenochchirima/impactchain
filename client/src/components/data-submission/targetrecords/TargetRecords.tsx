@@ -60,7 +60,7 @@ export const TargetRecords = () => {
   return (
     <div>
       {impactTargets && (
-        <>
+        <div  className="flex flex-col justify-center items-center">
           {displayedTargets.map((target, index) => {
             return (
               <TargetRecordsCard
@@ -69,7 +69,7 @@ export const TargetRecords = () => {
               />
             );
           })}
-        </>
+        </div>
       )}
     </div>
   );

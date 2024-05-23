@@ -14,7 +14,6 @@ import {
   testsustainableAgricultureInvestments,
 } from "./test";
 import { MetricReportData, LineGraphData } from './types';
-
 export const getMetricsReportData = async (
   metricsWithDataForPeriod: Metric[],
   periodOfTime: string
@@ -2381,4 +2380,801 @@ export const getMetricsReportData = async (
   }
   const averageImpact = impact / metricsData.length;
   return { metricsData, allLineGraphData, averageImpact };
+};
+
+export const getMetricsGraphsData = async (
+  metricsWithDataForPeriod: Metric[],
+  periodOfTime: string
+) => {
+
+  const allLineGraphData: LineGraphData[] = [];
+  for (const metric of metricsWithDataForPeriod) {
+    if (metric.data.length === 0) {
+      continue;
+    }
+
+    /************************************
+    Job Training and Educational Programs
+    ************************************/
+
+    if (metric.key === "jobTraining") {
+      const valueKey = "numberOfBeneficiaries";
+      const graphName = "Job Training and Educational Programs";
+
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+
+      /************************************
+       * Microloans or Grants Provided Program
+       * **********************************/
+    } else if (metric.key === "microloans") {
+      const valueKey = "amountDisbursed";
+      const graphName = "Microloans or grants provided program";
+
+    
+
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+      
+
+      /********************************
+       * People Assisted Out of Poverty
+       *******************************/
+    } else if (metric.key === "peopleAssistedOutOfPoverty") {
+      const valueKey = "numberOfPeopleAssisted";
+      const graphName = "People assisted out of poverty";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+      /********************************
+       * Food Donation Programs
+       ********************************/
+    } else if (metric.key === "foodDonation") {
+      const valueKey = "numberOfBeneficiaries";
+      const graphName = "Food Donation";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+
+      /********************************
+       * Sustainable Agriculture
+       * ******************************/
+    } else if (metric.key === "sustainableAgriculture") {
+      const valueKey = "totalInvestment";
+      const graphName = "Sustainable Agriculture";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+    } else if (metric.key === "peopleFedWithNutritiousFood") {
+      const valueKey = "numberOfBeneficiaries";
+      const graphName = "People with regular nutritious food";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "healthcareFunding") {
+      const valueKey = "amountFunded";
+      const graphName = "Healthcare Funding";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+    } else if (metric.key === "healthCheckups") {
+      const valueKey = "totalParticipantss";
+      const graphName = "Health check-ups or vaccination drives";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+  
+    } else if (metric.key === "peopleAccessingHealthcare") {
+      const valueKey = "numberOfBeneficiaries";
+      const graphName = "People accessing healthcare services";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "schoolsBuilt") {
+      const valueKey = "numberOfSchoolsSupported";
+      const graphName = "Schools built or supported";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    
+    } else if (metric.key === "educationalGrants") {
+      const valueKey = "totalAmountAwarded";
+      const graphName = "Educational grants";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "studentsBenefiting") {
+      const valueKey = "totalStudentsBenefited";
+      const graphName = "Students benefiting from educational programs";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+
+    } else if (metric.key === "womensEmpowerment") {
+      const valueKey = "numberOfParticipants";
+      const graphName = "Women's Empowerment Programs";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "genderEqualityWorkshops") {
+      const valueKey = "numberOfParticipants";
+      const graphName = "Gender Equality Workshops";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+    } else if (metric.key === "workplaceGenderEquality") {
+      const valueKey = "numberOfPolicies";
+      const graphName = "Workplace Gender Equality Policies";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+    } else if (metric.key === "sanitationFacilities") {
+      const valueKey = "numberOfFacilities";
+      const graphName = "Sanitation Facilities Provided";
+  
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+  
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+    } else if (metric.key === "waterConservation") {
+      const valueKey = "waterSaved";
+      const graphName = "Water Conservation Programs";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+    } else if (metric.key === "peopleWithAccessToWater") {
+      const valueKey = "numberOfBeneficiaries";
+      const graphName = "People with Access to Clean Water Programs";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "renewableEnergyProjects") {
+      const valueKey = "numberOfProjects";
+      const graphName = "Renewable Energy Projects";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "energyEfficientSystems") {
+      const valueKey = "numberOfSystemsInstalled";
+      const graphName = "Energy Efficient Systems Installed";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+    } else if (metric.key === "energyConsumptionReduction") {
+      const valueKey = "reductionInEnergyConsumption";
+      const graphName = "Energy Consumption Reduction Programs";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "jobCreation") {
+      const valueKey = "jobsCreated";
+      const graphName = "Job Creation Programs";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "vocationalTraining") {
+      const valueKey = "totalParticipants";
+      const graphName = "Vocational Training Programs";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    
+    } else if (metric.key === "employmentImprovements") {
+      const valueKey = "numberOfBeneficiaries";
+      const graphName = "Employment Improvements Programs";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "stemEducation") {
+      const valueKey = "totalParticipants";
+      const graphName = "STEM Education Programs";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "sustainableInfrastructure") {
+      const valueKey = "numberOfProjects";
+      const graphName = "Sustainable Infrastructure Projects";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "peopleBenefitingFromInfrastructure") {
+      const valueKey = "totalBeneficiaries";
+      const graphName = "People Benefiting from Infrastructure Projects";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "marginalizedCommunitySupport") {
+      const valueKey = "numberOfBeneficiaries";
+      const graphName = "Marginalized Community Support Programs";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "inclusionPolicies") {
+      const valueKey = "numberOfPolicies";
+      const graphName = "Inclusion Policies Implemented";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "beneficiariesOfInequalityReduction") {
+      const valueKey = "totalBeneficiaries";
+      const graphName = "Beneficiaries of Inequality Reduction Programs";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "urbanSustainability") {
+      const valueKey = "numberOfProjects";
+      const graphName = "Urban Sustainability Programs";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "affordableHousing") {
+      const valueKey = "numberOfHousingUnitsSupported";
+      const graphName = "Affordable Housing Projects";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "urbanLivingConditions") {
+      const valueKey = "numberOfAreasImproved";
+      const graphName = "Urban Living Conditions Improvement Programs";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "wasteReduction") {
+      const valueKey = "totalWasteReduced";
+      const graphName = "Waste Reduction Programs";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "sustainableSupplyChain") {
+      const valueKey = "supplyChainImproved";
+      const graphName = "Sustainable Supply Chain Programs";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "resourceFootprintReduction") {
+      const valueKey = "reductionInResourceFootprint";
+      const graphName = "Resource Footprint Reduction Programs";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "carbonEmissionReduction") {
+      const valueKey = "reductionInEmission";
+      const graphName = "Carbon Emission Reduction Programs";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "renewableEnergyInvestment") {
+      const valueKey = "amountInvested";
+      const graphName = "Renewable Energy Investment Programs";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "reforestationProjects") {
+      const valueKey = "areaOfLandReforested";
+      const graphName = "Reforestation Program";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "marineEcosystemProtection") {
+      const valueKey = "areaOfEcosystemProtected";
+      const graphName = "Marine Ecosystem Protection Programs";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "oceanPollutionReduction") {
+      const valueKey = "reductionInPollution";
+      const graphName = "Ocean Pollution Reduction Programs";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "sustainableFishing") {
+      const valueKey = "numberOfSustainableFishingProjects";
+      const graphName = "Sustainable Fishing Programs";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "landConservation") {
+      const valueKey = "areaOfLandConserved";
+      const graphName = "Land Conservation Programs";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "endangeredSpeciesProtection") {
+      const valueKey = "numberOfSpeciesProtected";
+      const graphName = "Endangered Species Protection Programs";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "landRehabilitation") {
+      const valueKey = "areaOfLandRehabilitated";
+      const graphName = "Land Rehabilitation Programs";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+    } else if (metric.key === "antiCorruptionPrograms") {
+      const valueKey = "numberOfPrograms";
+      const graphName = "Anti-Corruption Programs Implemented";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "humanRightsInitiatives") {
+      const valueKey = "numberOfInitiatives";
+      const graphName = "Human Rights Initiatives Implemented";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "communityPeacePrograms") {
+      const valueKey = "numberOfPrograms";
+      const graphName = "Community Peace Programs Implemented";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "collaborativeSDGProjects") {
+      const valueKey = "numberOfProjects";
+      const graphName = "Collaborative SDG Projects Implemented";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+  
+    } else if (metric.key === "globalPartnershipFinancialContributions") {
+      const valueKey = "amountContributed";
+      const graphName = "Global Partnership Financial Contributions";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else if (metric.key === "sdgAdvocacy") {
+      const valueKey = "numberOfCampaigns";
+      const graphName = "SDG Advocacy Campaigns Implemented";
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+    
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
+      }
+
+    } else {
+      console.log("Unknown metric key:", metric.key);
+      continue;
+    }
+  }
+
+  return { allLineGraphData };
 };

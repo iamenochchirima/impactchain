@@ -44,7 +44,7 @@ const ShowReport = () => {
 
   useEffect(() => {
     if (reportPromptResponse) {
-      const res = getMetricsWithDataForTheGivenTimePeriod(reportPromptResponse);
+      const res = getMetricsWithDataForTheGivenTimePeriod(reportPromptResponse.selectedMetrics, reportPromptResponse.periodOfTime);
       if (res) {
         setMetricsWithDataForPeriod(res);
       }

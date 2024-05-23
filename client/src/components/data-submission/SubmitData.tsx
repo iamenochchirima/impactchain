@@ -29,7 +29,7 @@ const SubmitData = () => {
   return (
     <div className="fixed z-50 inset-0 text-cyan-700 overflow-y-auto bg-black ">
       <div className=" flex items-center justify-center py-3 px-4 sm:px-6 lg:px-8 font-TelegraphRegular">
-        <div style={gradientStyle} className={`${targetRecord ? "" : "bg-black"}  w-full rounded-xl px-3 py-2 space-y-8`}>
+        <div style={gradientStyle} className={`${targetRecord ? "" : "bg-black"} h-screen flex flex-col justify-center items-center  w-full rounded-xl px-3 py-2 space-y-8`}>
           <div className="flex">
             <div className="flex justify-start">
               <img src="i.c.logo2.png" alt="logo-image" className="h-20 w-20" />

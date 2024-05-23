@@ -68,6 +68,6 @@ export type GraphsData =  LineGraphData | BarGraphData | PieChartData | null;
 
 export type FullReportData = {
   overview : any;
-  overalGraph: BarGraphData;
+  overalGraph: LineGraphData;
   specificMetrics: MetricReportData[];
 };

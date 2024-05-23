@@ -1,5 +1,4 @@
 import { getAiOverview } from "../../../../helpers/helpers";
-import { ReportPromptsResponses } from "../../../../redux/slices/app";
 import { Metric } from "../../../../utils/types";
 import {
   calculateImpact,
@@ -14,7 +13,7 @@ import {
   testpeopleAssistedOut,
   testsustainableAgricultureInvestments,
 } from "./test";
-import { BarGraphData, MetricReportData } from "./types";
+import { MetricReportData, LineGraphData } from './types';
 
 export const getMetricsReportData = async (
   metricsWithDataForPeriod: Metric[],
@@ -23,7 +22,7 @@ export const getMetricsReportData = async (
   const metricsData: MetricReportData[] = [];
   let impact = 0;
 
-  const allBarGraphData: BarGraphData[] = [];
+  const allLineGraphData: LineGraphData[] = [];
   for (const metric of metricsWithDataForPeriod) {
     if (metric.data.length === 0) {
       continue;
@@ -44,8 +43,15 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
       const modifiedData: unknown[] = [];
 
@@ -109,8 +115,15 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      const lineGraphData = getLineGraphData(
+        periodOfTime,
+        metric.data,
+        graphName,
+        valueKey
+      );
+
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const modifiedData: unknown[] = [];
@@ -177,15 +190,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      const barGraphData = getTimeBarGraphData(
-        periodOfTime,
-        metric.data,
-        graphName,
-        valueKey
-      );
-
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const modifiedData: unknown[] = [];
@@ -250,15 +256,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      const barGraphData = getTimeBarGraphData(
-        periodOfTime,
-        metric.data,
-        graphName,
-        valueKey
-      );
-
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
       const modifiedData: unknown[] = [];
 
@@ -322,15 +321,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      const barGraphData = getTimeBarGraphData(
-        periodOfTime,
-        metric.data,
-        graphName,
-        valueKey
-      );
-
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const modifiedData: unknown[] = [];
@@ -396,8 +388,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -440,8 +432,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -483,8 +475,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -526,8 +518,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -569,8 +561,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -613,8 +605,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -656,8 +648,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -700,8 +692,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -744,8 +736,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -788,8 +780,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -860,8 +852,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -904,8 +896,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -947,8 +939,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -991,8 +983,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -1035,8 +1027,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -1079,8 +1071,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -1123,8 +1115,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -1167,8 +1159,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -1211,8 +1203,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -1255,8 +1247,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -1299,8 +1291,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -1343,8 +1335,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -1387,8 +1379,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -1431,8 +1423,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -1475,8 +1467,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -1519,8 +1511,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -1563,8 +1555,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -1607,8 +1599,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -1651,8 +1643,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -1695,8 +1687,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -1739,8 +1731,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -1783,8 +1775,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -1827,8 +1819,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -1871,8 +1863,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -1915,8 +1907,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -1959,8 +1951,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -2003,8 +1995,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -2047,8 +2039,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -2091,8 +2083,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -2135,8 +2127,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -2179,8 +2171,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -2223,8 +2215,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -2267,8 +2259,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -2311,8 +2303,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -2355,8 +2347,8 @@ export const getMetricsReportData = async (
         valueKey
       );
 
-      if (barGraphData) {
-        allBarGraphData.push(barGraphData);
+      if (lineGraphData) {
+        allLineGraphData.push(lineGraphData);
       }
 
       const _reportData: MetricReportData = {
@@ -2388,5 +2380,5 @@ export const getMetricsReportData = async (
     }
   }
   const averageImpact = impact / metricsData.length;
-  return { metricsData, allBarGraphData, averageImpact };
+  return { metricsData, allLineGraphData, averageImpact };
 };

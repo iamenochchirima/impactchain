@@ -8,12 +8,17 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import TartgetsCharts from "./components/TartgetsCharts";
 import TargetsCircles from "./components/TargetsCircles";
+import { Metric } from "../../utils/types";
 
 
 const Dashboard = () => {
-  const {userRecord} = useSelector((state: RootState) => state.app);
+  const {userRecord, impactTargets} = useSelector((state: RootState) => state.app);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState("Time Period");
+  const [timePeriod, setTimePeriod] = useState("1Year");
+  const [metricsWithDataForPeriod, setMetricsWithDataForPeriod] = useState<
+    Metric[] | null
+  >(null);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -26,6 +31,8 @@ const Dashboard = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [dropdownRef])
+
+  useEffect(() => {}, [userRecord]);
 
   return (
     <div className=" ml-5 flex flex-col gap-5">

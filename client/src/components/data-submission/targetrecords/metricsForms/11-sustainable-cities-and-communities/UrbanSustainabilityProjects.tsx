@@ -175,7 +175,7 @@ const UrbanSustainabilityProjectsData = ({ setManualData, setUploadManually }) =
   return (
     <div>
       <div className=" items-center">
-        <h3 className="text-white text-xl text-center">
+        <h3 className="text-white mt-3 text-xl text-center">
           Urban Sustainability Project
         </h3>
         <div className="flex justify-end py-3">
@@ -292,7 +292,7 @@ const UrbanSustainabilityProjectsData = ({ setManualData, setUploadManually }) =
             ref={goalareaRef}
             className={styles.goalInput}
             id="goal"
-            placeholder="Enter your goal here"
+            placeholder="Write your goal here"
             value={goal}
             onChange={(e) => setGoal(e.target.value)}
             required

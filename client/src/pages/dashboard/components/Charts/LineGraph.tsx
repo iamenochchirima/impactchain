@@ -2,6 +2,8 @@ import React, { FC, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 import { LineGraphData } from "../../../analytics/components/utils/types";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../redux/store";
 
 interface LineGraphState {
   series: {
@@ -16,6 +18,7 @@ type Props = {
 };
 
 const LineGraph: FC<Props> = ({ data, graphKey }) => {
+  const {reportPromptResponse} = useSelector((state: RootState) => state.app);
   const [state, setState] = useState<LineGraphState>({
     series: [
       {
@@ -78,7 +81,7 @@ const LineGraph: FC<Props> = ({ data, graphKey }) => {
           <div className="flex w-full max-w-45 justify-end">
             <div className="inline-flex items-center rounded-md bg-white p-1.5">
               <button className="rounded py-1 px-3 text-xs font-medium text-black hover:bg-gray-100 hover:shadow-card">
-                Month
+                {reportPromptResponse ? reportPromptResponse.periodOfTime : "All Time"}
               </button>
             </div>
           </div>

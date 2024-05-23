@@ -73,7 +73,7 @@ const ProfileLogo = () => {
   return (
     <div className="">
       <div className=""></div>
-      <h3 className="md:text-xl text-3xl font-bold text-white mt-4 text-center font-NeueMachinaUltrabold ">
+      <h3 className="md:text-xl text-3xl font-bold text-white  text-center font-NeueMachinaUltrabold ">
         Upload your company logo
       </h3>
       <div className="flex justify-center">

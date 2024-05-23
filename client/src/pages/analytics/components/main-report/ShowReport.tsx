@@ -15,11 +15,11 @@ import ReportPeriod from "./ReportPeriod";
 import {
   generateOverralOverview,
   getMetricsWithDataForTheGivenTimePeriod,
-  mergeBarGraphData,
+  mergeLineGraphData,
 } from "../utils/processGraphsData";
 import Loading from "../Loading";
-import BarGraph from "../../../dashboard/components/Charts/BarGraph";
 import ReactMarkdown from "react-markdown";
+import LineGraph from "../../../dashboard/components/Charts/LineGraph";
 
 const ShowReport = () => {
   const dispatch = useDispatch();
@@ -85,7 +85,7 @@ const ShowReport = () => {
     }
     const overview = await generateOverralOverview(
       _res.metricsData,
-      mergeBarGraphData(_res.allBarGraphData),
+      mergeLineGraphData(_res.allLineGraphData),
       reportPromptResponse.periodOfTime,
       reportCategory.category
     );
@@ -99,7 +99,7 @@ const ShowReport = () => {
     }
     const report: FullReportData = {
       overview: overview.choices[0].message,
-      overalGraph: mergeBarGraphData(_res.allBarGraphData),
+      overalGraph: mergeLineGraphData(_res.allLineGraphData),
       specificMetrics: _res.metricsData,
     };
     dispatch(setReport({ report }));
@@ -189,7 +189,7 @@ const ShowReport = () => {
               </span>
             </div>
             {report && (
-              <BarGraph data={report.overalGraph} graphKey="overalGraph" />
+              <LineGraph data={report.overalGraph} graphKey="overalGraph" />
             )}
           </div>
           <div className="flex flex-col text-[100px] leading-[0.9] mt-4">

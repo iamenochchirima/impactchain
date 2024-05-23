@@ -62,7 +62,7 @@ export const calculateImpact = (data: any[], valueKey: string, period: string): 
     threeYearsAgo.setFullYear(threeYearsAgo.getFullYear() - 3);
     const totalImpact = data.reduce((acc, item) => {
       const startDate = new Date(Number(item.startDate));
-      return startDate >= threeYearsAgo ? acc + item[valueKey] : acc;
+      return startDate >= threeYearsAgo ? acc + Number(item[valueKey]) : acc;
     }, 0);
     return totalImpact;
   } 
@@ -80,9 +80,9 @@ export const calculateImpact = (data: any[], valueKey: string, period: string): 
   }
 };
 
-
 export const mergeBarGraphData = (graphs: BarGraphData[]): BarGraphData => {
   const dataMap = new Map<string, { totalY: number; count: number }>();
+
 
   for (const graph of graphs) {
     for (const data of graph.data) {
@@ -98,27 +98,86 @@ export const mergeBarGraphData = (graphs: BarGraphData[]): BarGraphData => {
     }
   }
 
-  const averageData: xisVals[] = Array.from(
-    dataMap,
-    ([x, { totalY, count }]) => ({
-      x: x,
-      y: totalY / count,
-    })
-  );
+  const impactData: xisVals[] = [];
+  const impactCategories: string[] = [];
 
-  const uniqueCategories = new Set<string>();
-  graphs.forEach((graph) => {
-    graph.categories.forEach((category) => {
-      uniqueCategories.add(category);
+
+  if (!graphs.every(graph => graph.categories.length === graphs[0].categories.length)) {
+    throw new Error("All graphs must have the same number of categories.");
+  }
+
+  for (let i = 0; i < graphs[0].categories.length - 1; i++) {
+    let totalDifference = 0;
+    let totalInitialValue = 0;
+    const combinedCategory = `${graphs[0].categories[i]}-${graphs[0].categories[i + 1]}`;
+
+
+    graphs.forEach(graph => {
+      const initialValue = graph.data.find(d => d.x === graphs[0].categories[i])?.y || 0;
+      const nextValue = graph.data.find(d => d.x === graphs[0].categories[i + 1])?.y || 0;
+      totalDifference += nextValue - initialValue;
+      totalInitialValue += initialValue;
     });
-  });
+
+    const averagePercentageChange = (totalDifference / totalInitialValue) * 100;
+
+    impactData.push({
+      x: combinedCategory,
+      y: averagePercentageChange,
+    });
+    impactCategories.push(combinedCategory);
+  }
 
   return {
-    name: "Average Performance",
-    data: averageData,
-    categories: Array.from(uniqueCategories),
+    name: "Impact Performance",
+    data: impactData,
+    categories: impactCategories,
   };
 };
+
+export const mergeLineGraphData = (graphs: LineGraphData[]): LineGraphData => {
+  const mergedData: number[] = [];
+  const mergedCategories: string[] = [];
+
+  if (!graphs.every(graph => graph.data.length === graphs[0].data.length)) {
+    throw new Error("All graphs must have the same number of data points.");
+  }
+
+  for (let i = 0; i < graphs[0].data.length - 1; i++) {
+    let totalDifference = 0;
+    let totalInitialValue = 0;
+    let totalValidInitialValues = 0;
+    const combinedCategory = `${graphs[0].categories[i]}-${graphs[0].categories[i + 1]}`;
+
+    graphs.forEach(graph => {
+      const initialValue = graph.data[i];
+      const nextValue = graph.data[i + 1];
+
+      if (initialValue !== 0) {
+        totalValidInitialValues += 1;
+        totalInitialValue += initialValue;
+      }
+      totalDifference += nextValue - initialValue;
+    });
+
+    const averagePercentageChange = totalValidInitialValues > 0 
+      ? (totalDifference / totalInitialValue) * 100 
+      : totalDifference !== 0 ? 100 : 0;
+
+    mergedData.push(averagePercentageChange);
+    mergedCategories.push(combinedCategory);
+  }
+
+  return {
+    name: "Impact Performance",
+    data: mergedData,
+    categories: mergedCategories,
+  };
+};
+
+
+
+
 
 export const getLineGraphData = (
   periodOfTime: string,
@@ -479,7 +538,7 @@ export const getMetricsWithDataForTheGivenTimePeriod = (
 
 export const generateOverralOverview = async (
   metricsData: MetricReportData[],
-  allBarGraphData: BarGraphData,
+  allBarGraphData: LineGraphData,
   timePeriod: string,
   category: string
 ) => {
@@ -490,7 +549,7 @@ export const generateOverralOverview = async (
   const prompt = `We are generating an Environmental, Social, and Governance (ESG) report for a company on our platform focusing on ${category}. The company has been using our platform to track their ESG metrics. The report will cover the company's performance over the last ${timePeriod}. Here is an array of AI-generated overviews for each metric: ${aiOverviews.join(
     ", "
   )}. The report will also include a bar graph showing the overall average performance of all metrics over the last ${timePeriod}. Here is the bar graph data: ${allBarGraphData.data
-    .map((data) => `${data.x}: ${data.y}`)
+    .map((data) => `${data}: ${category}`)
     .join(
       ", "
     )}. In less than 175 words and some line breaks for better visualization, write an overall overview of the company's performance over the last ${timePeriod} focusing on ${category}. Here is an example: "Overview: Starbucks offers comprehensive health benefits, stock options, and education opportunities to all employees, including part-time workers. Performance: High employee satisfaction scores; reduced turnover by 28% in 2019. Future Goals: Expand mental health benefits and professional development programs globally."`;

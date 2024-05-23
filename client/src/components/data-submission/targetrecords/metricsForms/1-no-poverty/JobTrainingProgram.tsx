@@ -167,28 +167,46 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
 
   return (
     <div>
-
       <div className=" items-center">
-        <h3 className="text-white text-xl text-center">
+        <h3 className="text-white mt-3 text-xl text-center">
           Your Job Training/Educational Programs
         </h3>
-        <div className="flex justify-end py-3">
-          <button
-            onClick={() => setShowForm(true)}
-            className="flex items-center gap-2 text-custom-green"
-          >
-            <IoMdAdd />
-            <span>Add a program</span>
-          </button>
-        </div>
-
-        {programs.length > 0 && (
-          <div className={styles.programsDiv}>
-            {programs.map((program, index) => (
-              <Program key={index} {...{ program, programs, setPrograms }} />
-            ))}
+        {programs.length === 0 && !showForm && (
+          <div className="flex items-center justify-center min-h-[300px] py-3">
+            <div className="flex flex-col justify-center items-center gap-6">
+              <p className="font-bold text-white">
+                {programs.length > 0 && "You have not added any programs yet."}
+              </p>
+              <button
+                onClick={() => setShowForm(true)}
+                className="flex items-center gap-2 text-custom-green"
+              >
+                <IoMdAdd />
+                <span>Add a program</span>
+              </button>
+            </div>
           </div>
         )}
+        <div className="mt-16">
+          {programs.length > 0 && (
+            <div className={styles.programsDiv}>
+              {programs.map((program, index) => (
+                <Program key={index} {...{ program, programs, setPrograms }} />
+              ))}
+            </div>
+          )}
+          {programs.length > 0 && (
+            <div className="flex justify-end mt-4 mb-10">
+              <button
+                onClick={() => setShowForm(true)}
+                className="flex items-center gap-2 text-custom-green"
+              >
+                <IoMdAdd />
+                <span>Add a program</span>
+              </button>
+            </div>
+          )}
+        </div>
       </div>
 
       {showForm && (
@@ -197,7 +215,9 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
             <h3 className={styles.formTitle}>Job Training Program</h3>
           </div>
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>What is the name of the job training or educational program?</label>
+            <label htmlFor={styles.inputLabel}>
+              What is the name of the job training or educational program?
+            </label>
             <input
               className={styles.formInput}
               id="programName"
@@ -209,7 +229,9 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
             />
           </div>
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>When did this program begin?</label>
+            <label htmlFor={styles.inputLabel}>
+              When did this program begin?
+            </label>
             <input
               className={styles.formInput}
               id="startDate"
@@ -221,7 +243,9 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
             />
           </div>
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>How long has the program been running?</label>
+            <label htmlFor={styles.inputLabel}>
+              How long has the program been running?
+            </label>
             <input
               className={styles.formInput}
               id="duration"
@@ -232,7 +256,9 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
             />
           </div>
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>Where is this program located? (City and Country)</label>
+            <label htmlFor={styles.inputLabel}>
+              Where is this program located? (City and Country)
+            </label>
             <input
               className={styles.formInput}
               id="programLocation"
@@ -245,7 +271,9 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
           </div>
 
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>How many participants are there in these programs?</label>
+            <label htmlFor={styles.inputLabel}>
+              How many participants are there in these programs?
+            </label>
             <input
               className={styles.formInput}
               id="numberOfBeneficiaries"
@@ -257,23 +285,23 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
             />
           </div>
           <div className="">
-        <div className={styles.goalDiv}>
-          <h3 className={styles.goalTitle}>
-            What is your goal for this Metric?
-          </h3>
-        </div>
-        <div className={styles.goalInputDiv}>
-          <textarea
-            ref={goalareaRef}
-            className={styles.goalInput}
-            id="goal"
-            placeholder="Enter your goal here"
-            value={goal}
-            onChange={(e) => setGoal(e.target.value)}
-            required
-          />
-        </div>
-      </div>
+            <div className={styles.goalDiv}>
+              <h3 className={styles.goalTitle}>
+                What is your goal for this Metric?
+              </h3>
+            </div>
+            <div className={styles.goalInputDiv}>
+              <textarea
+                ref={goalareaRef}
+                className={styles.goalInput}
+                id="goal"
+                placeholder="Write your goal here"
+                value={goal}
+                onChange={(e) => setGoal(e.target.value)}
+                required
+              />
+            </div>
+          </div>
           <FilesInput {...{ setSupportFiles, supportFiles }} />
 
           <div className={styles.buttonsDiv}>

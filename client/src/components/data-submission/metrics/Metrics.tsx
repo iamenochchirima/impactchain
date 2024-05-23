@@ -121,7 +121,7 @@ const Metrics = () => {
 
   return (
     <div>
-      <h3 className="text-3xl font-bold text-white mt-4 text-center font-TelegraphBold">
+      <h3 className="text-2xl font-bold text-white mt-4 text-center font-TelegraphBold">
         What metrics do you need to measure?
       </h3>
       <div className="grid grid-cols-3 gap-4 mt-5">
@@ -132,11 +132,11 @@ const Metrics = () => {
           />
         ))}
       </div>
-      <div className="flex justify-between my-5 items-center">
+      <div className="flex justify-between  my-5 items-center">
       <Bubbles {...{bubbleText}}/>
         <button
           onClick={currentIndex === 0 ? handleBack : handlePrevious}
-          className={` bg-custom-green px-10 py-1 rounded-full text-black font-bold`}
+          className={` bg-custom-green p-2 py-1.5 rounded-xl text-black font-TelegraphUltraLight font-bold`}
         >
           {currentIndex === 0 ? "Back" : "Previous"}
         </button>
@@ -148,7 +148,7 @@ const Metrics = () => {
         <button
           onClick={handleSave}
           disabled={saving}
-          className={`bg-custom-green px-10 py-1.5 rounded-full text-black font-bold`}
+          className={`bg-custom-green p-2 py-1.5 rounded-xl text-black font-TelegraphUltraLight font-bold`}
         >
           {saving ? "Saving..." : "Continue"}
         </button>

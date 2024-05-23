@@ -7,6 +7,7 @@ import { getTargetMetrics } from "../../../utils/targets";
 import { setImpactTargets } from "../../../redux/slices/app";
 import { useDispatch } from "react-redux";
 
+
 type Props = {
   target: ImpactTargetType;
   record: UserRecord | null;
@@ -87,8 +88,8 @@ const MetricCard: FC<Props> = ({
   }, [selectedMetrics]);
 
   return (
-    <div className="flex flex-col rounded-3xl bg-black p-10 slide-fwd-center  ">
-      <div className="flex items-center justify-center">
+    <div className="flex flex-col rounded-3xl bg-black shadow-md p-10 slide-fwd-center  " style={{boxShadow : targetOP?.shadow}}>
+      <div className="flex items-center justify-center ">
         <img
           src={targetOP?.icon}
           alt={target.name}

@@ -110,7 +110,7 @@ const ProfileLogo = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-between items-center mt-20 mb-10 mx-20 ">
+      <div className="flex justify-between gap-2 items-center mt-20 mb-10 mx-20 ">
       <Bubbles {...{bubbleText}}/>
         <button onClick={handleBack}>
           <span className="text-custom-green md:text-sm text-lg">Back</span>
@@ -120,7 +120,7 @@ const ProfileLogo = () => {
           disabled={!logo}
           className={` ${
             logourl ? "bg-custom-green" : "bg-green-700"
-          } px-10 py-1.5  rounded-full text-black md:text-sm font-TelegraphUltraLightfont-bold`}
+          } p-2 py-1.5  rounded-xl text-black md:text-sm font-TelegraphUltraLight font-bold`}
         >
        {loading ? "Loading..." : "Continue"}
         </button>

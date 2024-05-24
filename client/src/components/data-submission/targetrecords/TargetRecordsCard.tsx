@@ -198,9 +198,10 @@ const TargetRecordsCard: FC<Props> = ({
           )}
         </div>
         <div className="w-full flex justify-between my-4">
-          {/* <Bubbles {...{bubbleText}}/> */}
+          <Bubbles {...{bubbleText}}/>
+          <div className="flex flex-row gap-2">
           <button
-            className={` bg-custom-green px-10 py-1 rounded-full text-black font-bold`}
+            className={` bg-custom-green px-4 py-1 rounded-xl text-black font-bold`}
             onClick={handleBack}
           >
             <span className="">Back</span>
@@ -217,7 +218,7 @@ const TargetRecordsCard: FC<Props> = ({
             )}
 
             <button
-              className={` bg-custom-green px-10 py-1 rounded-full text-black font-bold`}
+              className={` bg-custom-green px-4 py-1 rounded-xl text-black font-bold`}
               disabled={saving}
               onClick={handleNext}
             >
@@ -227,6 +228,7 @@ const TargetRecordsCard: FC<Props> = ({
                   : `${saving ? "Saving" : "Next"}`}
               </span>
             </button>
+          </div>
           </div>
         </div>
       </div>

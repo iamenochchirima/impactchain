@@ -1,6 +1,4 @@
 import { getAiOverview } from "../../../../helpers/helpers";
-import { ReportPromptsResponses } from "../../../../redux/slices/app";
-import Metrics from '../../../../components/data-submission/metrics/Metrics';
 import {
   BarGraphData,
   LineGraphData,
@@ -18,69 +16,119 @@ import { Metric } from "../../../../utils/types";
  * If period is "AllTime", calculates the total impact for all time
  */
 export const calculateImpact = (data: any[], valueKey: string, period: string): number => {
-  if  (period === "AllTime") {
-    const totalImpact = data.reduce((acc, item) => acc + item[valueKey], 0);
-    return totalImpact;
-  } 
+  const getTotalImpact = (startDate: Date, endDate: Date) => {
+    return data.reduce((acc, item) => {
+      const itemDate = new Date(Number(item.startDate));
+      return itemDate >= startDate && itemDate < endDate ? acc + Number(item[valueKey]) : acc;
+    }, 0);
+  };
 
-  else if (period === "1Month") {
-    const oneMonthAgo = new Date();
-    oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
-    const totalImpact = data.reduce((acc, item) => {
-      const startDate = new Date(Number(item.startDate));
-      return startDate >= oneMonthAgo ? acc + item[valueKey] : acc;
-    }, 0);
+  const getDateRange = (months: number): [Date, Date] => {
+    const now = new Date();
+    const endDate = new Date(now);
+    const startDate = new Date(now);
+    startDate.setMonth(now.getMonth() - months);
+    return [startDate, endDate];
+  };
+
+  const periods = {
+    "1Month": 1,
+    "3Months": 3,
+    "6Months": 6,
+    "1Year": 12,
+    "3Years": 36,
+    "5Years": 60,
+  };
+
+  if (period === "AllTime") {
+    const totalImpact = data.reduce((acc, item) => acc + Number(item[valueKey]), 0);
     return totalImpact;
-  } 
-  else if (period === "3Months") {
-    const threeMonthsAgo = new Date();
-    threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
-    const totalImpact = data.reduce((acc, item) => {
-      const startDate = new Date(Number(item.startDate));
-      return startDate >= threeMonthsAgo ? acc + item[valueKey] : acc;
-    }, 0);
-    return totalImpact;
-  } 
-  else if (period === "6Months") {
-    const sixMonthsAgo = new Date();
-    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
-    const totalImpact = data.reduce((acc, item) => {
-      const startDate = new Date(Number(item.startDate));
-      return startDate >= sixMonthsAgo ? acc + item[valueKey] : acc;
-    }, 0);
-    return totalImpact;
-  } 
-  else if (period === "1Year") {
-    const oneYearAgo = new Date();
-    oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-    const totalImpact = data.reduce((acc, item) => {
-      const startDate = new Date(Number(item.startDate));
-      return startDate >= oneYearAgo ? acc + item[valueKey] : acc;
-    }, 0);
-    return totalImpact;
-  } 
-  else if (period === "3Years") {
-    const threeYearsAgo = new Date();
-    threeYearsAgo.setFullYear(threeYearsAgo.getFullYear() - 3);
-    const totalImpact = data.reduce((acc, item) => {
-      const startDate = new Date(Number(item.startDate));
-      return startDate >= threeYearsAgo ? acc + Number(item[valueKey]) : acc;
-    }, 0);
-    return totalImpact;
-  } 
-  else if (period === "5Years") {
-    const fiveYearsAgo = new Date();
-    fiveYearsAgo.setFullYear(fiveYearsAgo.getFullYear() - 5);
-    const totalImpact = data.reduce((acc, item) => {
-      const startDate = new Date(Number(item.startDate));
-      return startDate >= fiveYearsAgo ? acc + item[valueKey] : acc;
-    }, 0);
-    return totalImpact;
-  } 
-  else {
+  }
+
+  if (periods[period]) {
+    const [currentStartDate, currentEndDate] = getDateRange(periods[period]);
+    const [previousStartDate, previousEndDate] = getDateRange(periods[period] * 2);
+
+    const currentImpact = getTotalImpact(currentStartDate, currentEndDate);
+    const previousImpact = getTotalImpact(previousStartDate, currentStartDate);
+
+    if (previousImpact === 0) {
+      return currentImpact > 0 ? 100 : 0; 
+    }
+
+    const impactChange = ((currentImpact - previousImpact) / previousImpact) * 100;
+    return impactChange;
+  } else {
     return 0;
   }
 };
+
+// TODO: REVISIT THE LOGIC OF THIS FUNCTION
+export const getAvaragePeriod = (data: any[]): string => {
+
+
+    let Zezo_1MonthCount = 0
+    let One_3MonthsCount = 0
+    let Three_6MonthsCount = 0
+    let Six_1YearCount = 0
+    let OneYear_3YearsCount = 0
+    let ThreeYears_5YearsCount = 0
+    let Over5YearsCount = 0
+
+    data.map((item) => {
+      if (item.duration === "0-1Month") {
+        Zezo_1MonthCount += 1;
+      } else if (item.duration === "1-3Months") {
+        One_3MonthsCount += 1;
+      } else if (item.duration === "3-6Months") {
+        Three_6MonthsCount += 1;
+      } else if (item.duration === "6-1Year") {
+        Six_1YearCount += 1;
+      } else if (item.duration === "1-3Years") {
+        OneYear_3YearsCount += 1;
+      } else if (item.duration === "3-5Years") {
+        ThreeYears_5YearsCount += 1;
+      } else if (item.duration === "Over5Years") {
+        Over5YearsCount += 1;
+      }
+    });
+
+    const counts = [
+      Zezo_1MonthCount,
+      One_3MonthsCount,
+      Three_6MonthsCount,
+      Six_1YearCount,
+      OneYear_3YearsCount,
+      ThreeYears_5YearsCount,
+      Over5YearsCount,
+    ];
+
+    const maxCount = Math.max(...counts);
+    const maxIndex = counts.indexOf(maxCount);
+
+    switch (maxIndex) {
+      case 0:
+        return "0-1Month";
+      case 1:
+        return "1-3Months";
+      case 2:
+        return "3-6Months";
+      case 3:
+        return "6-1Year";
+      case 4:
+        return "1-3Years";
+      case 5:
+        return "3-5Years";
+      case 6:
+        return "Over5Years";
+      default:
+        return "";
+    }
+  return "";
+
+}
+
+
 
 export const mergeBarGraphData = (graphs: BarGraphData[]): BarGraphData => {
   const dataMap = new Map<string, { totalY: number; count: number }>();
@@ -176,10 +224,6 @@ export const mergeLineGraphData = (graphs: LineGraphData[]): LineGraphData => {
     categories: mergedCategories,
   };
 };
-
-
-
-
 
 export const getLineGraphData = (
   periodOfTime: string,

@@ -138,7 +138,7 @@ const ImpactTarget = () => {
   };
 
   return (
-    <div>
+    <div className="">
       <h3 className="text-3xl font-bold text-white text-center font-TelegraphBold mr-12">
         What Impact are you targeting?
       </h3>

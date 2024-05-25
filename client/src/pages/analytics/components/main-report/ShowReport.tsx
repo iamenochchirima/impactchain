@@ -44,7 +44,10 @@ const ShowReport = () => {
 
   useEffect(() => {
     if (reportPromptResponse) {
-      const res = getMetricsWithDataForTheGivenTimePeriod(reportPromptResponse.selectedMetrics, reportPromptResponse.periodOfTime);
+      const res = getMetricsWithDataForTheGivenTimePeriod(
+        reportPromptResponse.selectedMetrics,
+        reportPromptResponse.periodOfTime
+      );
       if (res) {
         setMetricsWithDataForPeriod(res);
       }
@@ -70,7 +73,7 @@ const ShowReport = () => {
 
   const getData = async (arg1: Metric[], arg2) => {
     if (!reportPromptResponse || !reportCategory) {
-      console.error("No reportPromptResponse or reportCategory found");
+      console.error("No reportPromptResponse or reportCategory found in state");
       return;
     }
     dispatch(setLoadingReport(true));
@@ -97,10 +100,15 @@ const ShowReport = () => {
       });
       return;
     }
+
     const report: FullReportData = {
       overview: overview.choices[0].message,
       overalGraph: mergeLineGraphData(_res.allLineGraphData),
       specificMetrics: _res.metricsData,
+      avgDuration: _res.avgDurationCount,
+      avgPrograms: _res.avgProgramsCount,
+      participants: _res.avgParticipantsCount,
+      location: _res.locationCount,
     };
     dispatch(setReport({ report }));
     dispatch(setLoadingReport(false));
@@ -181,9 +189,7 @@ const ShowReport = () => {
               </div>
             </div>
             <div className="flex flex-col ">
-              <span
-                className="tracking-widest mt-4"
-              >PREPARED BY</span>
+              <span className="tracking-widest mt-4">PREPARED BY</span>
               <span className="font-bold">
                 {userRecord ? userRecord.aboutCompany.name : ""}
               </span>

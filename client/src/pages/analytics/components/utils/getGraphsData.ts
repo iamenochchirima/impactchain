@@ -52,11 +52,12 @@ export const getMetricsReportData = async (
           locations.push(location);
         }
       }
-
+        // Get the average number of participants at the data.valueKey
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur[valueKey]),
         0
       );
+
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
@@ -142,7 +143,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
 
@@ -235,7 +236,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -318,7 +319,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -400,7 +401,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -478,7 +479,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -539,7 +540,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -599,7 +600,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -659,7 +660,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -719,7 +720,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -780,7 +781,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -840,7 +841,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -901,7 +902,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -962,7 +963,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -1023,7 +1024,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -1084,7 +1085,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       // TODO: Add pie chart data
@@ -1129,7 +1130,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -1190,7 +1191,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -1250,7 +1251,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -1311,7 +1312,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -1372,7 +1373,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -1433,7 +1434,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -1494,7 +1495,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -1555,7 +1556,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -1616,7 +1617,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -1677,7 +1678,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -1738,7 +1739,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -1799,7 +1800,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -1860,7 +1861,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -1921,7 +1922,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -1982,7 +1983,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -2043,7 +2044,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -2104,7 +2105,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -2165,7 +2166,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -2226,7 +2227,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -2287,7 +2288,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -2348,7 +2349,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -2409,7 +2410,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -2470,7 +2471,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -2531,7 +2532,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -2592,7 +2593,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -2653,7 +2654,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -2714,7 +2715,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -2775,7 +2776,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -2835,7 +2836,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -2895,7 +2896,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -2956,7 +2957,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -3017,7 +3018,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -3078,7 +3079,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
 
@@ -3140,7 +3141,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(
@@ -3201,7 +3202,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + cur.valueKey,
+        (acc, cur) => acc + Number(cur.valueKey),
         0
       );
       const lineGraphData = getLineGraphData(

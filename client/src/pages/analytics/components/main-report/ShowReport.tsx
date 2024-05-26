@@ -100,11 +100,11 @@ const ShowReport = () => {
       });
       return;
     }
-
     const report: FullReportData = {
       overview: overview.choices[0].message,
       overalGraph: mergeLineGraphData(_res.allLineGraphData),
       specificMetrics: _res.metricsData,
+      overalImpact: _res.averageImpact,
       avgDuration: _res.avgDurationCount,
       avgPrograms: _res.avgProgramsCount,
       participants: _res.avgParticipantsCount,
@@ -152,39 +152,43 @@ const ShowReport = () => {
 
             {/* Statistics */}
 
-            <div className="flex flex-wrap justify-center items-center p-4 font-PoppinsRegular bg-purple-50 text-white">
-              <div className="w-1/3 p-2">
-                <div className="text-center bg-purple-500 p-8">
-                  <h2 className="text-[100px] font-bold">1k</h2>
+            <div className="grid grid-cols-3 gap-3 justify-center items-center p-4 font-PoppinsRegular bg-purple-50 text-white">
+              <div className=" bg-purple-500 h-full flex flex-col justify-center items-center p-2">
+                <div className="text-center p-8">
+                  <h2 className="text-[100px] font-bold">
+                    {report?.participants}
+                  </h2>
                   <p className="text-sm mt-2 text-nowrap">
                     AVERAGE PARTICIPANTS
                   </p>
                 </div>
               </div>
-              <div className="w-1/3 p-2">
-                <div className="text-center bg-purple-500 p-8">
-                  <h2 className="text-[100px] font-bold">3</h2>
+              <div className=" bg-purple-500 h-full flex flex-col justify-center items-center p-2">
+                <div className="text-center p-8">
+                  <h2 className="text-[100px] font-bold">
+                    {report?.avgPrograms}
+                  </h2>
                   <p className="text-sm mt-2">AVERAGE PROGRAMS</p>
                 </div>
               </div>
-              <div className="w-1/3 p-2">
-                <div className="text-center bg-purple-500 p-8">
-                  <h2 className="text-[100px] font-bold">6</h2>
+              <div className=" p-2 bg-purple-500 h-full flex flex-col justify-center items-center ">
+                <div className="text-center p-8">
+                  <h2 className=" font-bold">{report?.avgDuration}</h2>
                   <p className="text-sm mt-2">AVERAGE DURATION</p>
                 </div>
               </div>
-              <div className="flex w-full">
-                <div className="w-2/3 p-4">
-                  <div className="text-center bg-white text-purple-500 p-8">
-                    <h2 className="text-[100px] font-bold">+3.11%</h2>
-                    <p className="text-sm mt-2 text-black">OVERALL IMPACT</p>
-                  </div>
+              <div className=" p-2 col-span-2 h-full flex flex-col justify-center items-center">
+                <div className="text-center bg-white text-purple-500 p-8">
+                  <h2 className="text-[100px] font-bold">
+                    {report?.overalImpact} % 
+                  </h2>
+                  <p className="text-sm mt-2 text-black">OVERALL IMPACT (Increase )</p>
                 </div>
-                <div className="w-1/3 p-2">
-                  <div className="text-center bg-purple-500 p-8">
-                    <h2 className="text-[100px] font-bold">1</h2>
-                    <p className="text-sm mt-2">LOCATIONS</p>
-                  </div>
+              </div>
+              <div className=" bg-purple-500 h-full flex flex-col justify-center items-center p-2">
+                <div className="text-center p-8">
+                  <h2 className="text-[100px] font-bold">{report?.location}</h2>
+                  <p className="text-sm mt-2">LOCATIONS</p>
                 </div>
               </div>
             </div>

@@ -70,6 +70,7 @@ export type FullReportData = {
   overview : any;
   overalGraph: LineGraphData;
   specificMetrics: MetricReportData[];
+  overalImpact: number;
   participants: number;
   avgPrograms: number;
   avgDuration: string;

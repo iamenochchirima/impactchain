@@ -89,14 +89,14 @@ const MetricCard: FC<Props> = ({
 
   return (
     <div
-    className="flex flex-col rounded-3xl bg-black p-10 slide-fwd-center "
+    className="flex flex-col rounded-3xl bg-black py-16 px-8 slide-fwd-center "
     style={{ boxShadow: `0 4px 6px ${targetOP?.color}` }}
   >
       <div className="flex items-center justify-center">
         <img
           src={targetOP?.icon}
           alt={target.name}
-          className="h-[100px] w-[100px]"
+          className="h-[100px] w-[100px] rounded-xl"
         />
       </div>
       <div className="flex flex-col gap-3 mt-5">

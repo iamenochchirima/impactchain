@@ -163,7 +163,7 @@ const TargetRecordsCard: FC<Props> = ({
   return (
     <>
       <div className="flex flex-col items-center   px-6 py-2 min-w-min max-w-full ">
-        <div className="text-3xl font-bold text-white mt-4 bg-gra text-center font-TelegraphBold flex gap-3 items-center">
+        <div className="md:text-xl text-3xl font-bold text-white mt-4 bg-gra text-center font-TelegraphBold flex gap-3 items-center">
           <span>How do you record your data for {target.name}</span>
           <img
             className="h-20 w-20 ml-2 rounded-lg"
@@ -173,7 +173,9 @@ const TargetRecordsCard: FC<Props> = ({
         </div>
         <div className="mt-5">
           <span
-            className={`text-white text-xl font-bold mt-4 text-center font-TelegraphBold`}
+            className={`text-white text-xl font-bold mt-4 text-center font-TelegraphBold ${
+              saving? "opacity-50 cursor-not-allowed" : ""
+            }`}
           >
             {impactIndex + 1} of {impactTargets.length}
           </span>
@@ -183,7 +185,7 @@ const TargetRecordsCard: FC<Props> = ({
           className={` rounded-3xl min-h-[300px] w-full mt-5`}
         >
           {impact && (
-            <div className="grid grid-col gap-3 justify-center items-center py-3">
+            <div className="grid grid-col gap-3 justify-center items-center py-3 ">
               {metrics.map((metric, index) => (
                 <MetricRecords
                   key={index}
@@ -198,10 +200,10 @@ const TargetRecordsCard: FC<Props> = ({
           )}
         </div>
         <div className="w-full flex justify-between my-4">
-          <Bubbles {...{bubbleText}}/>
+          <Bubbles {...{bubbleText}} />
           <div className="flex flex-row gap-2">
           <button
-            className={` bg-custom-green px-4 py-1 rounded-xl text-black font-bold`}
+            className={`bg-custom-green px-4 py-1 rounded-xl text-black font-bold font-TelegraphUltraLight`}
             onClick={handleBack}
           >
             <span className="">Back</span>
@@ -211,14 +213,14 @@ const TargetRecordsCard: FC<Props> = ({
             {currentIndex > 0 && (
               <button
                 onClick={handlePrevious}
-                className="px-10 py-1 text-custom-green font-bold"
+                className="px-4 py-1 text-custom-green font-bold"
               >
                 <span>Previous</span>
               </button>
             )}
 
             <button
-              className={` bg-custom-green px-4 py-1 rounded-xl text-black font-bold`}
+              className={` bg-custom-green px-4 py-1 rounded-xl text-black font-bold font-TelegraphUltraLight`}
               disabled={saving}
               onClick={handleNext}
             >

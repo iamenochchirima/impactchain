@@ -134,22 +134,22 @@ const Metrics = () => {
       </div>
       <div className="flex justify-between my-5 items-center">
       <Bubbles {...{bubbleText}}/>
-      <div className="grid grid-cols-3 ">
+      <div className="grid grid-cols-4 ">
         <button
           onClick={currentIndex === 0 ? handleBack : handlePrevious}
-          className={` bg-custom-green p-2 py-1.5 rounded-xl text-sm text-black font-TelegraphUltraLight font-bold`}
+          className={` bg-custom-green px-2 py-1.5 rounded-xl text-sm text-black font-TelegraphUltraLight font-bold`}
         >
           {currentIndex === 0 ? "Back" : "Previous"}
         </button>
         <div>
-          <span className="text-custom-green ml-5 text-sm">
+          <span className="text-custom-green ml-5 text-xs">
             {currentPage} of {totalPages}
           </span>
         </div>
         <button
           onClick={handleSave}
           disabled={saving}
-          className={`bg-custom-green px-3  py-1.5  rounded-xl text-sm text-black font-TelegraphUltraLight font-bold`}
+          className={`bg-custom-green pr-6 pl-2 rounded-xl text-sm text-black font-TelegraphUltraLight font-bold`}
         >
           {saving ? "Saving..." : "Continue"}
         </button>

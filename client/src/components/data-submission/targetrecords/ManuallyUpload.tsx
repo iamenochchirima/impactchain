@@ -65,12 +65,12 @@ const ManuallyUpload: FC<Props> = ({
   metric,
 }) => {
   return (
-    <div className="fixed z-100 inset-0 text-cyan-700 overflow-y-auto bg-black bg-opacity-75">
-      <div className=" flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-TelegraphRegular">
+    <div className="fixed z-50  inset-0 text-cyan-700 overflow-y-auto bg-black bg-opacity-75">
+      <div className=" flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-TelegraphRegular ">
         <div
-          className={`bg-gray-900 rounded w-full px-6 py-2 min-w-min max-w-[1200px] space-y-8`}
+          className={`bg-[#202020] rounded-2xl w-full px-6 py-2 min-w-min max-w-[1200px] space-y-8`}
         >
-          <div className="flex">
+          <div className="flex mr-5">
             <div className="flex justify-start w-[100px]">
               <img src="i.c.logo2.png" alt="logo-image" className="h-20 w-20" />
             </div>

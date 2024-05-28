@@ -78,7 +78,7 @@ const Profile = () => {
       <div>
         <div className="flex w-full justify-between">
           <div className="flex w-full flex-col gap-2 ml-5 mt-10">
-            <p className="  text-white text-lg font-TelegraphRegular">
+            <p className="  text-white md:text-xl text-2xl font-TelegraphRegular">
               First Name:
             </p>
             <input
@@ -86,11 +86,11 @@ const Profile = () => {
               type="text"
               disabled={!edit}
               onChange={(e) => setFirstname(e.target.value)}
-              className="bg-black border-2 w-full border-custom-green rounded-2xl p-2"
+              className="bg-black border-2 w-full border-custom-green rounded-xl p-2"
             ></input>
           </div>
           <div className="flex w-full flex-col gap-2 ml-5 mt-10">
-            <p className="  text-white text-lg font-TelegraphRegular">
+            <p className="  text-white md:text-xl text-2xl font-TelegraphRegular">
               Last Name:
             </p>
             <input
@@ -98,13 +98,13 @@ const Profile = () => {
               onChange={(e) => setLastname(e.target.value)}
               type="text"
               disabled={!edit}
-              className="bg-black border-2 border-custom-green rounded-2xl p-2"
+              className="bg-black border-2 border-custom-green rounded-xl p-2"
             ></input>
           </div>
         </div>
 
         <div className="flex flex-col gap-2 ml-5 mt-10">
-          <label className="  text-white text-lg font-TelegraphRegular">
+          <label className="  text-white md:text-xl text-2xl font-TelegraphRegular">
             Company Name:
           </label>
           <input
@@ -112,28 +112,28 @@ const Profile = () => {
             disabled={!edit}
             value={companyName}
             onChange={(e) => setCompanyName(e.target.value)}
-            className="bg-black border-2 border-custom-green rounded-2xl p-2"
+            className="bg-black border-2 border-custom-green rounded-xl p-2"
           ></input>
         </div>
 
         <div className="ml-5 mt-5 mb-5">
           <button
             onClick={edit ? handleEdit : () => setEdit(true)}
-            className=" bg-custom-green px-5 py-2 rounded-3xl"
+            className=" bg-custom-green px-5 py-2 rounded-xl"
           >
-            <span className="text-black font-TelegraphRegular text-xl">
+            <span className="text-black font-TelegraphUltraLight font-bold md:text-base text-xl">
               {edit ? `${loading ? "Saving..." : "Save"}` : "Edit"}
             </span>
           </button>
         </div>
 
         <div className="mt-4 ml-5">
-          <h1 className="text-lg font-bold">Email</h1>
+          <h1 className="md:text-xl text-2xl font-TelegraphRegular">Email:</h1>
           <div className="flex items-center">
             <div className="">
               <span className="font-bold">{userInfo.email}</span>
-              <button className=" text-custom-green px-5  rounded-3xl">
-                <span className=" font-TelegraphRegular text-xl">
+              <button className=" text-custom-green px-5  rounded-xl">
+                <span className=" font-TelegraphUltraLight font-bold md:text-base text-xl">
                   Change Email
                 </span>
               </button>
@@ -142,18 +142,18 @@ const Profile = () => {
         </div>
 
         <div className="ml-5 mt-5">
-          <p className=" text-white text-lg font-TelegraphRegular">
+          <p className=" text-white md:text-xl text-2xl font-TelegraphRegular">
             Appearance:
           </p>
           <div className="flex gap-4">
-            <button className=" bg-custom-green px-5 py-2 mt-3 rounded-3xl">
-              <span className=" text-white font-TelegraphRegular text-xl">
+            <button className=" bg-custom-green px-5 py-2 mt-3 rounded-xl">
+              <span className=" text-white font-TelegraphUltraLight font-bold md:text-base text-xl">
                 Light
               </span>
             </button>
 
-            <button className=" bg-custom-green px-5 py-2 mt-3 rounded-3xl">
-              <span className=" text-black font-TelegraphRegular text-xl">
+            <button className=" bg-custom-green px-5 py-2 mt-3 rounded-xl">
+              <span className=" text-black font-TelegraphUltraLight font-bold md:text-base text-xl">
                 Dark
               </span>
             </button>
@@ -161,18 +161,18 @@ const Profile = () => {
         </div>
 
         <div className="flex flex-col gap-2 ml-5 mt-10">
-          <p className="  text-white text-xl font-TelegraphBold">
+          <p className="  text-white md:text-xl text-2xl font-TelegraphRegular">
             Delete your Organisation:
           </p>
-          <p className="text-white font-TelegraphRegular">
+          <p className="text-white md:text-sm font-TelegraphUltraLight">
             You may delete your organisation at any time.
           </p>
-          <p className="text-white font-TelegraphRegular">
+          <p className="text-white md:text-sm font-TelegraphUltraLight">
             This will delete all of your data.
           </p>
         </div>
-        <button className=" bg-custom-green px-5 py-2 mt-3 ml-5 rounded-3xl">
-          <span className=" text-black font-TelegraphRegular text-xl">
+        <button className=" bg-custom-green px-5 py-2 mt-3 ml-5 rounded-xl">
+          <span className=" text-black font-TelegraphUltraLight font-bold md:text-base text-xl">
             Delete Organisation
           </span>
         </button>

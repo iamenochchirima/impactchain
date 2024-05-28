@@ -67,15 +67,15 @@ if (userRecord && impactTargets) {
   return (
     <div className=" ml-5 flex flex-col gap-5">
       <div className="flex items-center justify-between ">
-        <div className="flex items-center gap-4 mt-10">
-          <div className=" text-center text-white text-4xl font-NeueMachinaUltrabold">
+        <div className="flex items-center gap-4 mt-3">
+          <div className=" text-center text-white md:text-2xl text-4xl font-NeueMachinaUltrabold">
             Impact Overview
           </div>
           {/* Drop down Menu */}
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="bg-[#d9d9d9] text-black font-TelegraphRegular flex gap-2 rounded-3xl px-3 py-2 text-center items-center"
+              className="bg-[#d9d9d9] text-black font-TelegraphRegular flex gap-2 rounded-xl px-3 py-2 text-center items-center"
             >
               <span>{selectedItem}</span>
               <FaChevronDown />
@@ -102,7 +102,7 @@ if (userRecord && impactTargets) {
             )}
           </div>
         </div>
-        <button className="flex items-center bg-custom-green text-black rounded-full px-3 py-1 ">
+        <button className="flex items-center bg-custom-green text-black rounded-xl px-3 py-1 ">
           <img src="/smiley.svg" alt="logo" className="h-8 w-8" />
           <span>Generate Report</span>
         </button>

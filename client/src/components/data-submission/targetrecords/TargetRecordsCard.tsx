@@ -162,7 +162,7 @@ const TargetRecordsCard: FC<Props> = ({
 
   return (
     <>
-      <div className="flex flex-col items-center   px-6 py-2 min-w-min max-w-full ">
+      <div className="flex flex-col items-center   px-6 py-2 min-w-min max-w-full mr-16 ">
         <div className="md:text-xl text-3xl font-bold text-white mt-4 bg-gra text-center font-TelegraphBold flex gap-3 items-center">
           <span>How do you record your data for {target.name}</span>
           <img
@@ -201,6 +201,7 @@ const TargetRecordsCard: FC<Props> = ({
         </div>
         <div className="w-full flex justify-between my-4">
           <Bubbles {...{bubbleText}} />
+          <div>
           <div className="flex flex-row gap-2">
           <button
             className={`bg-custom-green px-4 py-1 rounded-xl text-black font-bold font-TelegraphUltraLight`}
@@ -230,6 +231,7 @@ const TargetRecordsCard: FC<Props> = ({
                   : `${saving ? "Saving" : "Next"}`}
               </span>
             </button>
+          </div>
           </div>
           </div>
         </div>

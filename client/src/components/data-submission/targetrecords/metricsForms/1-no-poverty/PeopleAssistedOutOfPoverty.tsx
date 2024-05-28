@@ -169,7 +169,7 @@ const PeopleAssistedOutOfPoverty = ({ setManualData, setUploadManually }) => {
     <div>
 
       <div className=" items-center">
-        <h3 className="text-white mt-3 text-xl text-center">
+        <h3 className="text-white mt-3 text-xl text-center font-NeueMachinaUltrabold">
           People Assisted Out of Poverty
         </h3>
         <div className="flex justify-end py-3">

@@ -178,7 +178,7 @@ const MicroloansProgram = ({ setManualData, setUploadManually }) => {
     <div>
 
       <div className=" items-center">
-        <h3 className="text-white mt-3 text-xl text-center">
+        <h3 className="text-white mt-3 text-xl text-center font-NeueMachinaUltrabold">
           Microloans Programs you did
         </h3>
         <div className="flex justify-end py-3">
@@ -264,10 +264,10 @@ const MicroloansProgram = ({ setManualData, setUploadManually }) => {
               onChange={(e) => setTypeOfProgram(e.target.value)}
               required
             >
-              <option value="">Select the primary form of support provided by the program from the dropdown.</option>
+              <option className={styles.dropDownText} value="">Select the primary form of support provided by the program from the dropdown.</option>
               <option value="financial">Financial</option>
               <option value="resource-based">Resource Based</option>
-              <option value="consultation">Consultatin</option>
+              <option value="consultation">Consultation</option>
             </select>
           </div>
           <div className={styles.inputDiv}>

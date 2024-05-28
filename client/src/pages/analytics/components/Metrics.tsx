@@ -86,7 +86,7 @@ const Metrics: FC<Props> = ({ setOpenModal, category }) => {
           <div className="mb-10">
             <div className="flex justify-between items-center">
               <img src="i.c.logo2.png" alt="logo-image" className="h-20 w-20" />
-              <h3 className="text-3xl font-bold text-white mt-4 text-center font-TelegraphBold">
+              <h3 className="text-3xl font-bold text-white mt-4 text-center font-NeueMachinaRegular">
                 {category.title}s
               </h3>
               <button onClick={() => setOpenModal(false)} className="">
@@ -139,7 +139,7 @@ const Metrics: FC<Props> = ({ setOpenModal, category }) => {
                 <div className="w-full flex  justify-center items center">
                   <button
                     onClick={handleGenerate}
-                    className="bg-custom-green text-black rounded px-2 py-2 w-3/4"
+                    className="bg-custom-green text-black rounded-xl px-2 py-2 w-3/4"
                   >
                     Generate Report
                   </button>

@@ -179,7 +179,7 @@ const WaterConservationInitiativesData = ({ setManualData, setUploadManually }) 
   return (
     <div>
       <div className=" items-center">
-        <h3 className="text-white mt-3 text-xl text-center">
+        <h3 className="text-white mt-3 text-xl text-center font-NeueMachinaUltrabold">
           Water Conservation Initiatives
         </h3>
         <div className="flex justify-end py-3">

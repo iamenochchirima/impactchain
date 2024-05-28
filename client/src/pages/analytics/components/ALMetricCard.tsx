@@ -17,12 +17,12 @@ const ALMetricCard: FC<Props> = ({ target, category }) => {
   );
 
   return (
-    <div className="flex flex-col rounded-3xl bg-black p-10 slide-fwd-center  ">
+    <div className="flex flex-col rounded-xl bg-black p-10 slide-fwd-center  ">
       <div className="flex items-center justify-center">
         <img
           src={target.icon}
           alt={target.name}
-          className="h-[100px] w-[100px]"
+          className="h-[100px] w-[100px] rounded-xl"
         />
       </div>
       <div className="flex flex-col gap-4 mt-5 ">

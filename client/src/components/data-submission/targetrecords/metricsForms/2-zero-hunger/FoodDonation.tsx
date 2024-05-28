@@ -178,7 +178,7 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
     <div>
 
       <div className=" items-center">
-        <h3 className="text-white mt-3 text-xl text-center">
+        <h3 className="text-white mt-3 text-xl text-center font-NeueMachinaUltrabold">
           Food Donation Programs
         </h3>
         <div className="flex justify-end py-3">

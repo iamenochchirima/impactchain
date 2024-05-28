@@ -100,12 +100,12 @@ const Header = () => {
       {currentSDGInfo && <SDGInfo/>}
       <div className="fixed bg-black z-40 left-64 right-0">
         <div className="pt-4">
-          <div className="h-5 flex items-center justify-end bg-custom-gray mx-10 py-10 rounded-xl border border-green-700">
-            <div className="flex items-center justify-between gap-5">
+          <div className=" h-4 flex items-center justify-end bg-custom-gray mx-10 py-10 rounded-xl border border-green-700">
+            <div className="flex items-center justify-between gap-2">
               <Link to="/askai">
                 <img src="/smiley.svg" alt="smiley" className="h-10 w-10" />
               </Link>
-              <button className="flex items-center gap-12 bg-custom-green text-black py-1 rounded-full px-5 mr-5">
+              <button className="flex items-center gap-6 bg-custom-green text-black py-1 rounded-xl px-5 mr-5">
                 <span>Search</span>
                 <CiSearch size={18} />
               </button>

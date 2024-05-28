@@ -102,7 +102,7 @@ const ProfileLogo = () => {
               {" "}
               <label
                 htmlFor="logo"
-                className="bg-custom-green text-black px-10 py-2 rounded-full cursor-pointer"
+                className="bg-custom-green text-black px-10 py-2 rounded-xl cursor-pointer"
               >
                 {logourl ? "Change Logo" : "Upload Logo"}
               </label>

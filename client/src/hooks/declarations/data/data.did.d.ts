@@ -82,9 +82,8 @@ export interface EmploymentConditionsImprovementData {
 export interface EndangeredSpeciesProtectionData {
   'created' : bigint,
   'duration' : string,
-  'conservationMeasures' : string,
   'supportingFiles' : Array<string>,
-  'numberfSpeciesProtected' : bigint,
+  'numberOfSpeciesProtected' : bigint,
   'typeOfSpecies' : string,
   'dataVerification' : boolean,
   'programName' : string,
@@ -1173,7 +1172,7 @@ export interface WomensEmpowermentProgramData {
 export interface WorkplaceGenderEqualityPoliciesData {
   'created' : bigint,
   'duration' : string,
-  'pName' : string,
+  'programName' : string,
   'supportingFiles' : Array<string>,
   'typeOfPolicy' : string,
   'dataVerification' : boolean,

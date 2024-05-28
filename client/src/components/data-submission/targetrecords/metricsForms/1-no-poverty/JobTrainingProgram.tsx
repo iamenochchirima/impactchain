@@ -168,7 +168,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
   return (
     <div>
       <div className=" items-center">
-        <h3 className="text-white mt-3 text-xl text-center">
+        <h3 className="text-white mt-3 text-xl text-center font-NeueMachinaUltrabold">
           Your Job Training/Educational Programs
         </h3>
         {programs.length === 0 && !showForm && (

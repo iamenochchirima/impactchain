@@ -7,7 +7,6 @@ import {
   BarGraphData,
 } from "../../../analytics/components/utils/types";
 
-// Extend dayjs with the quarterOfYear plugin
 dayjs.extend(quarterOfYear);
 
 type Props = {
@@ -89,7 +88,14 @@ const BarGraph: FC<Props> = ({ data, graphKey }) => {
           height={380}
         />
       </div>
-      <div id="html-dist"></div>
+      <div className="">
+        <h3>
+          Key
+        </h3>
+        X: {data.x_label}
+        <br />
+        Y: {data.y_label}
+      </div>
     </div>
   );
 };

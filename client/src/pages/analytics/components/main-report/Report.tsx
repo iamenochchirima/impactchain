@@ -19,7 +19,7 @@ const Report = () => {
     dispatch(setReportModal(false));
   };
 
-  const getDataUri = async (chartId) => {
+  const getDataUri = async (chartId: string) => {
     return await ApexCharts.exec(chartId, "dataURI").then(({ imgURI }) => {
       return imgURI;
     });
@@ -31,6 +31,7 @@ const Report = () => {
     graph: string;
     aiOverview: any;
   };
+
   const createAndDownloadPdf = async () => {
     if (!reportPromptResponse || !reportCategory || !report || !userRecord) {
       console.error("No report data found");

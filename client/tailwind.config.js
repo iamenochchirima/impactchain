@@ -19,7 +19,6 @@ export default {
         TelegraphBold: ['Telegraph-bold', 'sans-serif'],
         TelegraphRegular: ['Telegraph-regular', 'sans-serif'],
         TelegraphUltraLight: ['Telegraph-ultra-light', 'sans-serif']
-
       },
     },
     screens: {
@@ -29,7 +28,7 @@ export default {
       sm: "770px",
       md: "900px",
       lg: "1200px",
-      llg:"1300px",
+      llg: "1300px",
       xl: "1700px",
     },
   },

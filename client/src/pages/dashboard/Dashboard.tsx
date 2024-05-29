@@ -9,7 +9,7 @@ import { Metric } from "../../utils/types";
 import { getMetricsWithDataForTheGivenTimePeriod, mergeLineGraphData } from "../analytics/components/utils/processGraphsData";
 import { toast } from "react-toastify";
 import { getMetricsGraphsData } from '../analytics/components/utils/getGraphsData';
-import { LineGraphData } from "../analytics/components/utils/types";
+import { GraphLabel, LineGraphData } from "../analytics/components/utils/types";
 
 
 const Dashboard = () => {
@@ -61,7 +61,11 @@ if (userRecord && impactTargets) {
       });
       return;
     }
-    setGraph(mergeLineGraphData(_res.allLineGraphData),)
+    const labels: GraphLabel = {
+      x_label: "Time",
+      y_label: "Impact % change",
+    }
+    setGraph(mergeLineGraphData(_res.allLineGraphData, labels),)
   };
 
   return (

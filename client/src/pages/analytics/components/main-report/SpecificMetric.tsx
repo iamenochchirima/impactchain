@@ -9,7 +9,7 @@ import {
   PieChartData,
 } from "../utils/types";
 import { FC } from "react";
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from "react-markdown";
 
 type Props = {
   metricData: MetricReportData;
@@ -44,18 +44,22 @@ const SpecificMetric: FC<Props> = ({ metricData }) => {
   }
 
   return (
-    <div>
-      <h3 className="text-2xl font-bold  my-4 underline">{metricData.name}</h3>
-      <p className="whitespace-pre-wrap mb-3">
+    <div className="grid grid-cols-2 mt-5 gap-2 ">
+      <div className=" col-span-1">
+        <h3 className="text-2xl font-bold  my-4 underline">
+          {metricData.name}
+        </h3>
+        <p className="whitespace-pre-wrap mb-3">
           <ReactMarkdown>{metricData.aiOverview.content}</ReactMarkdown>
-      </p>
+        </p>
+      </div>
 
-      <div className="border-x border-y border-custom-green rounded-lg p-3 ">
+      <div className="col-span-1 flex flex-col justify-center item   rounded-lg p-3 ">
         {graphs[1]?.graph && isLineGraphData(graphs[1].graph) && (
           <LineGraph data={graphs[1].graph} graphKey={metricData.key} />
         )}
         {graphs[1]?.graph && isPieChartData(graphs[1].graph) && (
-          <PieChart data={graphs[1].graph} graphKey={metricData.key}/>
+          <PieChart data={graphs[1].graph} graphKey={metricData.key} />
         )}
         {graphs[1]?.graph && isBarGraphData(graphs[1].graph) && (
           <BarGraph data={graphs[1].graph} graphKey={metricData.key} />
@@ -75,7 +79,7 @@ const SpecificMetric: FC<Props> = ({ metricData }) => {
           <LineGraph data={graphs[3].graph} graphKey={metricData.key} />
         )}
         {graphs[3]?.graph && isPieChartData(graphs[3].graph) && (
-          <PieChart data={graphs[3].graph} graphKey={metricData.key} />
+          <PieChart data={graphs[3].graph}  graphKey={metricData.key} />
         )}
         {graphs[3]?.graph && isBarGraphData(graphs[3].graph) && (
           <BarGraph data={graphs[3].graph} graphKey={metricData.key} />

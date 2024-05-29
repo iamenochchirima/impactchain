@@ -6,10 +6,21 @@ import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
-import { FoodDonation as FoodDonationType } from "../../../../../hooks/declarations/data/data.did";
+import {
+  FoodDonation as FoodDonationType,
+  Testimonials,
+} from "../../../../../hooks/declarations/data/data.did";
 import { ManualData } from "../../MetricRecords";
 import { IoMdAdd } from "react-icons/io";
 import Program from "../support/Program";
+import Testimonial from "../support/Testimonial";
+
+type Testimonial = {
+  description: string;
+  file: File | null;
+};
+
+const MAX_FILE_SIZE = 4 * 1024 * 1024;
 
 const FoodDonation = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
@@ -24,6 +35,17 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
   const [numberOfBeneficiaries, setNumberOfBeneficiaries] =
     useState<string>("");
   const [volumeDonatedFood, setVolumeDonatedFood] = useState<string>("");
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [description, setDescription] = useState<string>("");
+  const [objectives, setObjectives] = useState<string>("");
+  const [challenges, setChallenges] = useState<string>("");
+  const [notableAchievements, setNotableAchievements] = useState<string>("");
+  const [futureObjectives, setFutureObjectives] = useState<string>("");
+  const [plannedInitiatives, setPlannedInitiatives] = useState<string>("");
+  const [communityImpact, setCommunityImpact] = useState<string>("");
+  const [testimonialDescription, setTestimonialDescription] =
+    useState<string>("");
+  const [testimonialFile, setTestimonialFile] = useState<File | null>(null);
 
   const [programs, setPrograms] = useState<FoodDonationType[]>([]);
 
@@ -107,7 +129,14 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
       programLocation === "" ||
       typeOfFoodDonated === "" ||
       numberOfBeneficiaries === "" ||
-      volumeDonatedFood === ""
+      volumeDonatedFood === "" ||
+      description === "" ||
+      objectives === "" ||
+      challenges === "" ||
+      notableAchievements === "" ||
+      futureObjectives === "" ||
+      plannedInitiatives === "" ||
+      communityImpact === ""
     ) {
       toast.error("Please fill out all fields", {
         position: "top-center",
@@ -149,6 +178,20 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
       setSaving(false);
       return;
     }
+    const testMonials: Testimonials[] = [];
+
+    for (const testimonial of testimonials) {
+      if (testimonial.file) {
+        if (testimonial.file.size <= MAX_FILE_SIZE) {
+          const url = await uploadFile(testimonial.file, location.pathname);
+          testMonials.push({
+            description: testimonial.description,
+            image: url,
+          });
+        }
+      }
+    }
+
     const newProgram: FoodDonationType = {
       programName,
       startDate: BigInt(new Date(startDate).getTime()),
@@ -157,6 +200,14 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
       volumeOfDonatedFood: BigInt(volumeDonatedFood),
       numberOfBeneficiaries: BigInt(numberOfBeneficiaries),
       typeOfFoodDonated: typeOfFoodDonated,
+      description,
+      objectives,
+      notableAchievements,
+      challenges,
+      plannedInitiatives,
+      futureObjectives,
+      testimonials: testMonials,
+      communityImpact,
       dataVerification: false,
       supportingFiles: urls,
       created: BigInt(Date.now()),
@@ -169,35 +220,106 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
     setVolumeDonatedFood("");
     setTypeOfFoodDonated("");
     setProgramLocation("");
+    setDescription("");
+    setObjectives("");
+    setChallenges("");
+    setNotableAchievements("");
+    setFutureObjectives("");
+    setPlannedInitiatives("");
+    setCommunityImpact("");
+    setTestimonials([]);
+    setTestimonialDescription("");
+    setTestimonialFile(null);
     setSupportFiles(null);
     setShowForm(false);
     setSaving(false);
   };
 
+  const handleAddTestimonial = () => {
+    if (testimonialDescription === "" || !testimonialFile) {
+      toastError("Please fill out all fields");
+      return;
+    }
+    setTestimonials([
+      ...testimonials,
+      { description: testimonialDescription, file: testimonialFile },
+    ]);
+    setTestimonialDescription("");
+    setTestimonialFile(null);
+  };
+
+  const handleRemoveTestimonial = (index: number) => {
+    const updatedTestimonials = testimonials.filter((_, i) => i !== index);
+    setTestimonials(updatedTestimonials);
+  };
+
+  const handleTestimonialFileChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    if (e.target.files) {
+      const file = e.target.files[0];
+      if (file.size > MAX_FILE_SIZE) {
+        toastError("File is too big");
+        return;
+      }
+      setTestimonialFile(file);
+    }
+  };
+
+  const handleCancelTestimonial = () => {
+    setTestimonialDescription("");
+    setTestimonialFile(null);
+  };
+
+  const toastError = (message: string) => {
+    toast.error(message, {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+    });
+  };
+
   return (
     <div>
-
-      <div className=" items-center">
-        <h3 className="text-white mt-3 text-xl text-center font-NeueMachinaUltrabold">
-          Food Donation Programs
-        </h3>
-        <div className="flex justify-end py-3">
-          <button
-            onClick={() => setShowForm(true)}
-            className="flex items-center gap-2 text-custom-green"
-          >
-            <IoMdAdd />
-            <span>Add a program</span>
-          </button>
-        </div>
-
-        {programs.length > 0 && (
-          <div className={styles.programsDiv}>
-            {programs.map((program, index) => (
-              <Program key={index} {...{ program, programs, setPrograms }} />
-            ))}
+      <div className="">
+        <h3 className={styles.title}> Food Donation Programs</h3>
+        {programs.length === 0 && !showForm && (
+          <div className={styles.addProgramDiv1}>
+            <div className={styles.addProgramDiv2}>
+              <p className={styles.addProgramP}>
+                {programs.length > 0 && "You have not added any programs yet."}
+              </p>
+              <button
+                onClick={() => setShowForm(true)}
+                className={styles.addProgramButton}
+              >
+                <IoMdAdd />
+                <span>Add a program</span>
+              </button>
+            </div>
           </div>
         )}
+        <div className="mt-16">
+          {programs.length > 0 && (
+            <div className={styles.programsDiv}>
+              {programs.map((program, index) => (
+                <Program key={index} {...{ program, programs, setPrograms }} />
+              ))}
+            </div>
+          )}
+          {programs.length > 0 && (
+            <div className={styles.addProgramBDiv}>
+              <button
+                onClick={() => setShowForm(true)}
+                className={styles.addProgramButton}
+              >
+                <IoMdAdd />
+                <span>Add a program</span>
+              </button>
+            </div>
+          )}
+        </div>
       </div>
 
       {showForm && (
@@ -265,7 +387,7 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
 
           <div className={styles.inputDiv}>
             <label htmlFor={styles.inputLabel}>
-            What type of food is donated?
+              What type of food is donated?
             </label>
             <select
               className={styles.formSelectInput}
@@ -274,7 +396,9 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
               onChange={(e) => setTypeOfFoodDonated(e.target.value)}
               required
             >
-              <option value="">Select the type of food donated from the dropdown.</option>
+              <option value="">
+                Select the type of food donated from the dropdown.
+              </option>
               <option value="perishable">Perishable</option>
               <option value="non-perishable">Non-Perishable</option>
               <option value="fresh">Fresh</option>
@@ -311,27 +435,202 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
             />
           </div>
 
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>
+              Please provide a description of the program.
+            </label>
+            <textarea
+              className={styles.textAreaInput}
+              id="description"
+              placeholder="Provide a description of the program."
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>
+              What are the objectives of the program?
+            </label>
+            <textarea
+              className={styles.textAreaInput}
+              id="objectives"
+              placeholder="Provide the objectives of the program."
+              value={objectives}
+              onChange={(e) => setObjectives(e.target.value)}
+              required
+            />
+          </div>
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>
+              What are the challenges faced in implementing the program?
+            </label>
+            <textarea
+              className={styles.textAreaInput}
+              id="challenges"
+              placeholder="Provide the challenges faced in implementing the program."
+              value={challenges}
+              onChange={(e) => setChallenges(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>
+              What are the notable achievements of the program?
+            </label>
+            <textarea
+              className={styles.textAreaInput}
+              id="notableAchievements"
+              placeholder="Provide the notable achievements of the program."
+              value={notableAchievements}
+              onChange={(e) => setNotableAchievements(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>
+              What are the future objectives of the program?
+            </label>
+            <textarea
+              className={styles.textAreaInput}
+              id="futureObjectives"
+              placeholder="Provide the future objectives of the program."
+              value={futureObjectives}
+              onChange={(e) => setFutureObjectives(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>
+              What are the planned initiatives for the program?
+            </label>
+            <textarea
+              className={styles.textAreaInput}
+              id="plannedInitiatives"
+              placeholder="Provide the planned initiatives for the program."
+              value={plannedInitiatives}
+              onChange={(e) => setPlannedInitiatives(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className={styles.inputDiv}>
+            <label htmlFor={styles.inputLabel}>
+              What is the community impact of the program?
+            </label>
+            <textarea
+              className={styles.textAreaInput}
+              id="communityImpact"
+              placeholder="Briefly describe the community impact of the program."
+              value={communityImpact}
+              onChange={(e) => setCommunityImpact(e.target.value)}
+              required
+            />
+          </div>
+
+          <hr />
+
           <div className="">
-        <div className={styles.goalDiv}>
-          <h3 className={styles.goalTitle}>
-            What is your goal for this Metric?
-          </h3>
-        </div>
-        <div className={styles.goalInputDiv}>
-          <textarea
-            ref={goalareaRef}
-            className={styles.goalInput}
-            id="goal"
-            placeholder="Write your goal here"
-            value={goal}
-            onChange={(e) => setGoal(e.target.value)}
-            required
-          />
-        </div>
-      </div>
+            <div className={styles.goalDiv}>
+              <h3 className={styles.goalTitle}>
+                What is your goal for this Metric?
+              </h3>
+            </div>
+            <div className={styles.goalInputDiv}>
+              <textarea
+                ref={goalareaRef}
+                className={styles.goalInput}
+                id="goal"
+                placeholder="Write your goal here"
+                value={goal}
+                onChange={(e) => setGoal(e.target.value)}
+                required
+              />
+            </div>
+          </div>
+
+          <hr className="my-10" />
+
+          {/* Testimonials */}
+
+          <div className={styles.testimonialDiv}>
+            <h3 className={styles.testimonialTitle}>
+              {" "}
+              Add Testimonials (Optional)
+            </h3>
+            {testimonials.length > 0 && (
+              <div className={styles.testmoCardDiv}>
+                {testimonials.map((testimonial, index) => (
+                  <Testimonial
+                    {...{ testimonial, handleRemoveTestimonial, index }}
+                  />
+                ))}
+              </div>
+            )}
+            <div className={styles.inputDiv}>
+              <label htmlFor={styles.testimonialLabel}>
+                Please provide a description of the testimonial.
+              </label>
+              <textarea
+                className={styles.textAreaInput}
+                id="testimonialDescription"
+                placeholder="Provide a description of the testimonial."
+                value={testimonialDescription}
+                onChange={(e) => setTestimonialDescription(e.target.value)}
+                required
+              />
+            </div>
+            {testimonialFile && (
+              <div className={styles.testimoUploadDiv}>
+                <p className={styles.testimoFileName}>{testimonialFile.name}</p>
+              </div>
+            )}
+            <div className={styles.inputDiv}>
+              <input
+                type="file"
+                id="testimonialFile"
+                onChange={handleTestimonialFileChange}
+                accept="image/*"
+                className="hidden"
+              />
+              <button>
+                <label
+                  htmlFor="testimonialFile"
+                  className={styles.roundedButton}
+                >
+                  {testimonialFile
+                    ? "Change File"
+                    : "Upload Testimonial Image, Max 4MB"}
+                </label>
+              </button>
+            </div>
+            <div className={styles.testmoButtonDiv}>
+              {testimonialDescription && testimonialFile && (
+                <button
+                  onClick={handleCancelTestimonial}
+                  className={styles.testimoCancelBtn}
+                >
+                  Cancel
+                </button>
+              )}
+              <button
+                onClick={handleAddTestimonial}
+                className={styles.roundedButton}
+              >
+                Add
+              </button>
+            </div>
+          </div>
+
+          <hr className="mt-10" />
+
           <FilesInput {...{ setSupportFiles, supportFiles }} />
 
-          
+          <hr />
 
           <div className={styles.buttonsDiv}>
             <button
@@ -339,7 +638,7 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
                 setShowForm(false);
                 setSaving(false);
               }}
-              className="text-custom-green font-bold"
+              className={styles.cancelButton}
             >
               <span>Cancel</span>
             </button>
@@ -353,10 +652,9 @@ const FoodDonation = ({ setManualData, setUploadManually }) => {
           </div>
         </div>
       )}
-      
 
       {!showForm && (
-        <div className="flex justify-between items-center py-4">
+        <div className={styles.bottomDiv}>
           <button
             onClick={() => setUploadManually(false)}
             className={styles.roundedButton}

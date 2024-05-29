@@ -2,6 +2,7 @@ import { getAiOverview } from "../../../../helpers/helpers";
 import { Metric } from "../../../../utils/types";
 import {
   calculateImpact,
+  getAvaragePeriod,
   getLineGraphData,
   getPieChartData,
   getTimeBarGraphData,
@@ -13,13 +14,17 @@ import {
   testpeopleAssistedOut,
   testsustainableAgricultureInvestments,
 } from "./test";
-import { MetricReportData, LineGraphData } from './types';
+import { MetricReportData, LineGraphData, GraphLabel } from "./types";
 export const getMetricsReportData = async (
   metricsWithDataForPeriod: Metric[],
   periodOfTime: string
 ) => {
   const metricsData: MetricReportData[] = [];
   let impact = 0;
+  let avgParticipants = 0;
+  let avgPrograms = 0;
+  const avgDuration: string[] = [];
+  const locations: string[] = [];
 
   const allLineGraphData: LineGraphData[] = [];
   for (const metric of metricsWithDataForPeriod) {
@@ -35,18 +40,48 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfBeneficiaries";
       const graphName = "Job Training and Educational Programs";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur[valueKey]),
+        0
+      );
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
-
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -88,8 +123,7 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "bar",
             name: "Job Training",
-            x_label: "Time",
-            y_label: "Number of Beneficiaries",
+
             graph: barGraphData,
           },
           2: undefined,
@@ -104,21 +138,49 @@ export const getMetricsReportData = async (
        * **********************************/
     } else if (metric.key === "microloans") {
       const valueKey = "amountDisbursed";
+      const participantsKey = "numberOfLoans";
       const graphName = "Microloans or grants provided program";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur[participantsKey]),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
 
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
-
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -163,8 +225,7 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "bar",
             name: "Microloans",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
           2: undefined,
@@ -182,11 +243,39 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfPeopleAssisted";
       const graphName = "People assisted out of poverty";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -229,8 +318,7 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "People Assisted",
-            x_label: "Time",
-            y_label: "Number of People",
+
             graph: lineGraphData,
           },
           2: undefined,
@@ -248,11 +336,38 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfBeneficiaries";
       const graphName = "Food Donation";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -294,8 +409,7 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Food Donation",
-            x_label: "Time",
-            y_label: "Number of People",
+
             graph: lineGraphData,
           },
           2: undefined,
@@ -313,11 +427,38 @@ export const getMetricsReportData = async (
       const valueKey = "totalInvestment";
       const graphName = "Sustainable Agriculture";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -361,8 +502,7 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Sustainable Agriculture",
-            x_label: "Time",
-            y_label: "Amount Invested",
+
             graph: lineGraphData,
           },
         },
@@ -374,17 +514,45 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfBeneficiaries";
       const graphName = "People with regular nutritious food";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -398,15 +566,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "People Fed",
-            x_label: "Time",
-            y_label: "Number of People",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "People Fed",
-            x_label: "Time",
-            y_label: "Number of People",
+
             graph: barGraphData,
           },
         },
@@ -418,17 +584,45 @@ export const getMetricsReportData = async (
       const valueKey = "amountFunded";
       const graphName = "Healthcare Funding";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -442,15 +636,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Healthcare Funding",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Healthcare Funding",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -461,17 +653,45 @@ export const getMetricsReportData = async (
       const valueKey = "totalParticipantss";
       const graphName = "Health check-ups or vaccination drives";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -485,15 +705,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Health Checkups",
-            x_label: "Time",
-            y_label: "Number of People",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Health Checkups",
-            x_label: "Time",
-            y_label: "Number of People",
+
             graph: barGraphData,
           },
         },
@@ -504,17 +722,45 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfBeneficiaries";
       const graphName = "People accessing healthcare services";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -528,15 +774,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "People Accessing Healthcare",
-            x_label: "Time",
-            y_label: "Number of People",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "People Accessing Healthcare",
-            x_label: "Time",
-            y_label: "Number of People",
+
             graph: barGraphData,
           },
         },
@@ -547,17 +791,45 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfSchoolsSupported";
       const graphName = "Schools built or supported";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -571,15 +843,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Schools Built",
-            x_label: "Time",
-            y_label: "Number of Schools",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Schools Built",
-            x_label: "Time",
-            y_label: "Number of Schools",
+
             graph: barGraphData,
           },
         },
@@ -591,17 +861,45 @@ export const getMetricsReportData = async (
       const valueKey = "totalAmountAwarded";
       const graphName = "Educational grants";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -615,15 +913,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Educational Grants",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Educational Grants",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -634,17 +930,45 @@ export const getMetricsReportData = async (
       const valueKey = "totalStudentsBenefited";
       const graphName = "Students benefiting from educational programs";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -658,15 +982,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Students Benefiting",
-            x_label: "Time",
-            y_label: "Number of Students",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Students Benefiting",
-            x_label: "Time",
-            y_label: "Number of Students",
+
             graph: barGraphData,
           },
         },
@@ -678,17 +1000,45 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfParticipants";
       const graphName = "Women's Empowerment Programs";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -702,15 +1052,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Women's Empowerment",
-            x_label: "Time",
-            y_label: "Participants",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Women's Empowerment",
-            x_label: "Time",
-            y_label: "Participants",
+
             graph: barGraphData,
           },
         },
@@ -722,17 +1070,45 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfParticipants";
       const graphName = "Gender Equality Workshops";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -746,15 +1122,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Gender Equality Workshops",
-            x_label: "Time",
-            y_label: "Workshops",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Gender Equality Workshops",
-            x_label: "Time",
-            y_label: "Workshops",
+
             graph: barGraphData,
           },
         },
@@ -766,17 +1140,45 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfPolicies";
       const graphName = "Workplace Gender Equality Policies";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -790,15 +1192,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Workplace Gender Equality Index",
-            x_label: "Time",
-            y_label: "Index",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Workplace Gender Equality Index",
-            x_label: "Time",
-            y_label: "Index",
+
             graph: barGraphData,
           },
         },
@@ -810,6 +1210,32 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfFacilities";
       const graphName = "Sanitation Facilities Provided";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       // TODO: Add pie chart data
       const pieChartData = getPieChartData(
         periodOfTime,
@@ -825,8 +1251,7 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Sanitation Facilities",
-            x_label: "Time",
-            y_label: "Facilities",
+
             graph: pieChartData,
           },
         },
@@ -838,17 +1263,45 @@ export const getMetricsReportData = async (
       const valueKey = "waterSaved";
       const graphName = "Water Conservation Programs";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -862,15 +1315,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Water Conservation",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Water Conservation",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -882,17 +1333,45 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfBeneficiaries";
       const graphName = "People with Access to Clean Water Programs";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -906,15 +1385,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "People with Access",
-            x_label: "Time",
-            y_label: "Number of People",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "People with Access",
-            x_label: "Time",
-            y_label: "Number of People",
+
             graph: barGraphData,
           },
         },
@@ -925,17 +1402,45 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfProjects";
       const graphName = "Renewable Energy Projects";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -949,15 +1454,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Renewable Energy Projects",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Renewable Energy Projects",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -969,17 +1472,45 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfSystemsInstalled";
       const graphName = "Energy Efficient Systems Installed";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -993,15 +1524,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Energy Efficient Systems",
-            x_label: "Time",
-            y_label: "Number of Systems",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Energy Efficient Systems",
-            x_label: "Time",
-            y_label: "Number of Systems",
+
             graph: barGraphData,
           },
         },
@@ -1013,17 +1542,45 @@ export const getMetricsReportData = async (
       const valueKey = "reductionInEnergyConsumption";
       const graphName = "Energy Consumption Reduction Programs";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1037,15 +1594,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Energy Consumption Reduction",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Energy Consumption Reduction",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -1057,17 +1612,45 @@ export const getMetricsReportData = async (
       const valueKey = "jobsCreated";
       const graphName = "Job Creation Programs";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1081,15 +1664,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Job Creation",
-            x_label: "Time",
-            y_label: "Number of Jobs",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Job Creation",
-            x_label: "Time",
-            y_label: "Number of Jobs",
+
             graph: barGraphData,
           },
         },
@@ -1101,17 +1682,45 @@ export const getMetricsReportData = async (
       const valueKey = "totalParticipants";
       const graphName = "Vocational Training Programs";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1125,15 +1734,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Vocational Training",
-            x_label: "Time",
-            y_label: "Number of Participants",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Vocational Training",
-            x_label: "Time",
-            y_label: "Number of Participants",
+
             graph: barGraphData,
           },
         },
@@ -1145,17 +1752,45 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfBeneficiaries";
       const graphName = "Employment Improvements Programs";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1169,15 +1804,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Employment Improvements",
-            x_label: "Time",
-            y_label: "Number of Beneficiaries",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Employment Improvements",
-            x_label: "Time",
-            y_label: "Number of Beneficiaries",
+
             graph: barGraphData,
           },
         },
@@ -1189,17 +1822,45 @@ export const getMetricsReportData = async (
       const valueKey = "totalParticipants";
       const graphName = "STEM Education Programs";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1213,15 +1874,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "STEM Education",
-            x_label: "Time",
-            y_label: "Number of Students",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "STEM Education",
-            x_label: "Time",
-            y_label: "Number of Students",
+
             graph: barGraphData,
           },
         },
@@ -1233,17 +1892,45 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfProjects";
       const graphName = "Sustainable Infrastructure Projects";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1257,15 +1944,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Sustainable Infrastructure",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Sustainable Infrastructure",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -1277,17 +1962,45 @@ export const getMetricsReportData = async (
       const valueKey = "totalBeneficiaries";
       const graphName = "People Benefiting from Infrastructure Projects";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1301,15 +2014,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "People Benefiting",
-            x_label: "Time",
-            y_label: "Number of People",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "People Benefiting",
-            x_label: "Time",
-            y_label: "Number of People",
+
             graph: barGraphData,
           },
         },
@@ -1321,17 +2032,45 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfBeneficiaries";
       const graphName = "Marginalized Community Support Programs";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1345,15 +2084,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Marginalized Community Support",
-            x_label: "Time",
-            y_label: "Number of Participants",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Marginalized Community Support",
-            x_label: "Time",
-            y_label: "Number of Participants",
+
             graph: barGraphData,
           },
         },
@@ -1365,17 +2102,45 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfPolicies";
       const graphName = "Inclusion Policies Implemented";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1389,15 +2154,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Inclusion Policies",
-            x_label: "Time",
-            y_label: "Number of Policies",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Inclusion Policies",
-            x_label: "Time",
-            y_label: "Number of Policies",
+
             graph: barGraphData,
           },
         },
@@ -1409,17 +2172,45 @@ export const getMetricsReportData = async (
       const valueKey = "totalBeneficiaries";
       const graphName = "Beneficiaries of Inequality Reduction Programs";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1433,15 +2224,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Beneficiaries of Inequality Reduction",
-            x_label: "Time",
-            y_label: "Number of Beneficiaries",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Beneficiaries of Inequality Reduction",
-            x_label: "Time",
-            y_label: "Number of Beneficiaries",
+
             graph: barGraphData,
           },
         },
@@ -1453,17 +2242,45 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfProjects";
       const graphName = "Urban Sustainability Programs";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1477,15 +2294,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Urban Sustainability",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Urban Sustainability",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -1497,17 +2312,45 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfHousingUnitsSupported";
       const graphName = "Affordable Housing Projects";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1521,15 +2364,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Affordable Housing",
-            x_label: "Time",
-            y_label: "Number of Houses",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Affordable Housing",
-            x_label: "Time",
-            y_label: "Number of Houses",
+
             graph: barGraphData,
           },
         },
@@ -1541,17 +2382,45 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfAreasImproved";
       const graphName = "Urban Living Conditions Improvement Programs";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1565,15 +2434,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Urban Living Conditions",
-            x_label: "Time",
-            y_label: "Number of Beneficiaries",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Urban Living Conditions",
-            x_label: "Time",
-            y_label: "Number of Beneficiaries",
+
             graph: barGraphData,
           },
         },
@@ -1585,17 +2452,45 @@ export const getMetricsReportData = async (
       const valueKey = "totalWasteReduced";
       const graphName = "Waste Reduction Programs";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1609,15 +2504,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Waste Reduction",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Waste Reduction",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -1629,17 +2522,45 @@ export const getMetricsReportData = async (
       const valueKey = "supplyChainImproved";
       const graphName = "Sustainable Supply Chain Programs";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1653,15 +2574,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Sustainable Supply Chain",
-            x_label: "Time",
-            y_label: "Number of Companies",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Sustainable Supply Chain",
-            x_label: "Time",
-            y_label: "Number of Companies",
+
             graph: barGraphData,
           },
         },
@@ -1673,17 +2592,45 @@ export const getMetricsReportData = async (
       const valueKey = "reductionInResourceFootprint";
       const graphName = "Resource Footprint Reduction Programs";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1697,15 +2644,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Resource Footprint Reduction",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Resource Footprint Reduction",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -1717,17 +2662,45 @@ export const getMetricsReportData = async (
       const valueKey = "reductionInEmission";
       const graphName = "Carbon Emission Reduction Programs";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1741,15 +2714,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Carbon Emission Reduction",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Carbon Emission Reduction",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -1761,17 +2732,45 @@ export const getMetricsReportData = async (
       const valueKey = "amountInvested";
       const graphName = "Renewable Energy Investment Programs";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1785,15 +2784,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Renewable Energy Investment",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Renewable Energy Investment",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -1805,17 +2802,45 @@ export const getMetricsReportData = async (
       const valueKey = "areaOfLandReforested";
       const graphName = "Reforestation Program";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1829,15 +2854,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Reforestation Projects",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Reforestation Projects",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -1849,17 +2872,45 @@ export const getMetricsReportData = async (
       const valueKey = "areaOfEcosystemProtected";
       const graphName = "Marine Ecosystem Protection Programs";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1873,15 +2924,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Marine Ecosystem Protection",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Marine Ecosystem Protection",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -1893,17 +2942,45 @@ export const getMetricsReportData = async (
       const valueKey = "reductionInPollution";
       const graphName = "Ocean Pollution Reduction Programs";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1917,15 +2994,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Ocean Pollution Reduction",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Ocean Pollution Reduction",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -1937,17 +3012,45 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfSustainableFishingProjects";
       const graphName = "Sustainable Fishing Programs";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1961,15 +3064,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Sustainable Fishing",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Sustainable Fishing",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -1981,17 +3082,45 @@ export const getMetricsReportData = async (
       const valueKey = "areaOfLandConserved";
       const graphName = "Land Conservation Programs";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -2005,15 +3134,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Land Conservation",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Land Conservation",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -2025,23 +3152,50 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfSpeciesProtected";
       const graphName = "Endangered Species Protection Programs";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
       const _reportData: MetricReportData = {
         name: "Endangered Species Protection Programs",
         key: "endangeredSpeciesProtection",
@@ -2049,15 +3203,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Endangered Species Protection",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Endangered Species Protection",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -2069,17 +3221,45 @@ export const getMetricsReportData = async (
       const valueKey = "areaOfLandRehabilitated";
       const graphName = "Land Rehabilitation Programs";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -2093,15 +3273,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Land Rehabilitation",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Land Rehabilitation",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -2113,17 +3291,44 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfPrograms";
       const graphName = "Anti-Corruption Programs Implemented";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -2137,15 +3342,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Anti-Corruption Programs",
-            x_label: "Time",
-            y_label: "Number of Programs",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Anti-Corruption Programs",
-            x_label: "Time",
-            y_label: "Number of Programs",
+
             graph: barGraphData,
           },
         },
@@ -2157,17 +3360,45 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfInitiatives";
       const graphName = "Human Rights Initiatives Implemented";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -2181,15 +3412,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Human Rights Initiatives",
-            x_label: "Time",
-            y_label: "Number of Initiatives",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Human Rights Initiatives",
-            x_label: "Time",
-            y_label: "Number of Initiatives",
+
             graph: barGraphData,
           },
         },
@@ -2201,17 +3430,45 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfPrograms";
       const graphName = "Community Peace Programs Implemented";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -2225,15 +3482,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Community Peace Programs",
-            x_label: "Time",
-            y_label: "Number of Programs",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Community Peace Programs",
-            x_label: "Time",
-            y_label: "Number of Programs",
+
             graph: barGraphData,
           },
         },
@@ -2245,17 +3500,46 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfProjects";
       const graphName = "Collaborative SDG Projects Implemented";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -2269,15 +3553,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Collaborative SDG Projects",
-            x_label: "Time",
-            y_label: "Number of Projects",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Collaborative SDG Projects",
-            x_label: "Time",
-            y_label: "Number of Projects",
+
             graph: barGraphData,
           },
         },
@@ -2289,17 +3571,45 @@ export const getMetricsReportData = async (
       const valueKey = "amountContributed";
       const graphName = "Global Partnership Financial Contributions";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -2313,15 +3623,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Financial Contributions",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Financial Contributions",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -2333,17 +3641,45 @@ export const getMetricsReportData = async (
       const valueKey = "numberOfCampaigns";
       const graphName = "SDG Advocacy Campaigns Implemented";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
+
+      avgPrograms += metric.data.length;
+
+      avgDuration.push(getAvaragePeriod(metric.data));
+
+      for (const location of Array.from(
+        new Set(metric.data.map((item) => item.location))
+      )) {
+        if (!locations.includes(location)) {
+          locations.push(location);
+        }
+      }
+
+      avgParticipants += metric.data.reduce(
+        (acc, cur) => acc + Number(cur.valueKey),
+        0
+      );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -2357,15 +3693,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Advocacy Campaigns",
-            x_label: "Time",
-            y_label: "Number of Campaigns",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Advocacy Campaigns",
-            x_label: "Time",
-            y_label: "Number of Campaigns",
+
             graph: barGraphData,
           },
         },
@@ -2379,14 +3713,41 @@ export const getMetricsReportData = async (
     }
   }
   const averageImpact = impact / metricsData.length;
-  return { metricsData, allLineGraphData, averageImpact };
+  const avgParticipantsCount = avgParticipants / metricsData.length;
+  const avgProgramsCount = avgPrograms / metricsData.length;
+
+  const averageDuration = avgDuration.reduce((acc: Record<string, number>, cur) => {
+    acc[cur] = (acc[cur] || 0) + 1;
+    return acc;
+  }, {});
+  
+  // Find the most common duration
+  let mostCommonDuration = "";
+  let maxCount = 0;
+  for (const [duration, count] of Object.entries(averageDuration)) {
+    if (count > maxCount) {
+      maxCount = count;
+      mostCommonDuration = duration;
+    }
+  }
+
+  const locationCount = locations.length;
+
+  return {
+    metricsData,
+    allLineGraphData,
+    averageImpact,
+    avgParticipantsCount,
+    avgProgramsCount,
+    averageDuration: mostCommonDuration,
+    locationCount,
+  };
 };
 
 export const getMetricsGraphsData = async (
   metricsWithDataForPeriod: Metric[],
   periodOfTime: string
 ) => {
-
   const allLineGraphData: LineGraphData[] = [];
   for (const metric of metricsWithDataForPeriod) {
     if (metric.data.length === 0) {
@@ -2401,17 +3762,26 @@ export const getMetricsGraphsData = async (
       const valueKey = "numberOfBeneficiaries";
       const graphName = "Job Training and Educational Programs";
 
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
 
       /************************************
        * Microloans or Grants Provided Program
@@ -2420,31 +3790,49 @@ export const getMetricsGraphsData = async (
       const valueKey = "amountDisbursed";
       const graphName = "Microloans or grants provided program";
 
-    
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
 
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-      
 
       /********************************
        * People Assisted Out of Poverty
        *******************************/
     } else if (metric.key === "peopleAssistedOutOfPoverty") {
       const valueKey = "numberOfPeopleAssisted";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "People assisted out of poverty";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -2456,30 +3844,51 @@ export const getMetricsGraphsData = async (
        ********************************/
     } else if (metric.key === "foodDonation") {
       const valueKey = "numberOfBeneficiaries";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Food Donation";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
 
-
       /********************************
        * Sustainable Agriculture
        * ******************************/
     } else if (metric.key === "sustainableAgriculture") {
       const valueKey = "totalInvestment";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Sustainable Agriculture";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -2487,26 +3896,47 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "peopleFedWithNutritiousFood") {
       const valueKey = "numberOfBeneficiaries";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "People with regular nutritious food";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "healthcareFunding") {
       const valueKey = "amountFunded";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Healthcare Funding";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -2514,119 +3944,190 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "healthCheckups") {
       const valueKey = "totalParticipantss";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Health check-ups or vaccination drives";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
-  
     } else if (metric.key === "peopleAccessingHealthcare") {
       const valueKey = "numberOfBeneficiaries";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "People accessing healthcare services";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "schoolsBuilt") {
       const valueKey = "numberOfSchoolsSupported";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Schools built or supported";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
-    
     } else if (metric.key === "educationalGrants") {
       const valueKey = "totalAmountAwarded";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Educational grants";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "studentsBenefiting") {
       const valueKey = "totalStudentsBenefited";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Students benefiting from educational programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
-
     } else if (metric.key === "womensEmpowerment") {
       const valueKey = "numberOfParticipants";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Women's Empowerment Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "genderEqualityWorkshops") {
       const valueKey = "numberOfParticipants";
       const graphName = "Gender Equality Workshops";
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
     } else if (metric.key === "workplaceGenderEquality") {
       const valueKey = "numberOfPolicies";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Workplace Gender Equality Policies";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
@@ -2634,542 +4135,867 @@ export const getMetricsGraphsData = async (
     } else if (metric.key === "sanitationFacilities") {
       const valueKey = "numberOfFacilities";
       const graphName = "Sanitation Facilities Provided";
-  
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-  
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
     } else if (metric.key === "waterConservation") {
       const valueKey = "waterSaved";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Water Conservation Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
     } else if (metric.key === "peopleWithAccessToWater") {
       const valueKey = "numberOfBeneficiaries";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "People with Access to Clean Water Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "renewableEnergyProjects") {
       const valueKey = "numberOfProjects";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Renewable Energy Projects";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "energyEfficientSystems") {
       const valueKey = "numberOfSystemsInstalled";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Energy Efficient Systems Installed";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
     } else if (metric.key === "energyConsumptionReduction") {
       const valueKey = "reductionInEnergyConsumption";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Energy Consumption Reduction Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "jobCreation") {
       const valueKey = "jobsCreated";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Job Creation Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "vocationalTraining") {
       const valueKey = "totalParticipants";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Vocational Training Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
-    
     } else if (metric.key === "employmentImprovements") {
       const valueKey = "numberOfBeneficiaries";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Employment Improvements Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "stemEducation") {
       const valueKey = "totalParticipants";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "STEM Education Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "sustainableInfrastructure") {
       const valueKey = "numberOfProjects";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Sustainable Infrastructure Projects";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "peopleBenefitingFromInfrastructure") {
       const valueKey = "totalBeneficiaries";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "People Benefiting from Infrastructure Projects";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "marginalizedCommunitySupport") {
       const valueKey = "numberOfBeneficiaries";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Marginalized Community Support Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "inclusionPolicies") {
       const valueKey = "numberOfPolicies";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Inclusion Policies Implemented";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "beneficiariesOfInequalityReduction") {
       const valueKey = "totalBeneficiaries";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Beneficiaries of Inequality Reduction Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "urbanSustainability") {
       const valueKey = "numberOfProjects";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Urban Sustainability Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "affordableHousing") {
       const valueKey = "numberOfHousingUnitsSupported";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Affordable Housing Projects";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "urbanLivingConditions") {
       const valueKey = "numberOfAreasImproved";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Urban Living Conditions Improvement Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "wasteReduction") {
       const valueKey = "totalWasteReduced";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Waste Reduction Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "sustainableSupplyChain") {
       const valueKey = "supplyChainImproved";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Sustainable Supply Chain Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "resourceFootprintReduction") {
       const valueKey = "reductionInResourceFootprint";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Resource Footprint Reduction Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "carbonEmissionReduction") {
       const valueKey = "reductionInEmission";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Carbon Emission Reduction Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "renewableEnergyInvestment") {
       const valueKey = "amountInvested";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Renewable Energy Investment Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "reforestationProjects") {
       const valueKey = "areaOfLandReforested";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Reforestation Program";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "marineEcosystemProtection") {
       const valueKey = "areaOfEcosystemProtected";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Marine Ecosystem Protection Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "oceanPollutionReduction") {
       const valueKey = "reductionInPollution";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Ocean Pollution Reduction Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "sustainableFishing") {
       const valueKey = "numberOfSustainableFishingProjects";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Sustainable Fishing Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "landConservation") {
       const valueKey = "areaOfLandConserved";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Land Conservation Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "endangeredSpeciesProtection") {
       const valueKey = "numberOfSpeciesProtected";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Endangered Species Protection Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "landRehabilitation") {
       const valueKey = "areaOfLandRehabilitated";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Land Rehabilitation Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
     } else if (metric.key === "antiCorruptionPrograms") {
       const valueKey = "numberOfPrograms";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Anti-Corruption Programs Implemented";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "humanRightsInitiatives") {
       const valueKey = "numberOfInitiatives";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Human Rights Initiatives Implemented";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "communityPeacePrograms") {
       const valueKey = "numberOfPrograms";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Community Peace Programs Implemented";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "collaborativeSDGProjects") {
       const valueKey = "numberOfProjects";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Collaborative SDG Projects Implemented";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
-  
     } else if (metric.key === "globalPartnershipFinancialContributions") {
       const valueKey = "amountContributed";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Global Partnership Financial Contributions";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else if (metric.key === "sdgAdvocacy") {
       const valueKey = "numberOfCampaigns";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "SDG Advocacy Campaigns Implemented";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
-    
 
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
-
     } else {
       console.log("Unknown metric key:", metric.key);
       continue;

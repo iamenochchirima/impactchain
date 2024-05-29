@@ -23,6 +23,7 @@ import ReactMarkdown from "react-markdown";
 import LineGraph from "../../../dashboard/components/Charts/LineGraph";
 import { formatDate } from "../../../../utils/time";
 import { Testimonials } from "../../../../hooks/declarations/data/data.did";
+import CaseStudiesSection from "./CaseStudiesSection";
 
 const ShowReport = () => {
   const dispatch = useDispatch();
@@ -139,11 +140,12 @@ const ShowReport = () => {
     return combinedData;
   };
 
-  const getTestimonials = (metrics: Metric[]):  TestimonialType[] => {
+  const getTestimonials = (metrics: Metric[]): TestimonialType[] => {
     const combinedData: TestimonialType[] = [];
-    metrics.forEach(metric => {
-      metric.data.forEach(dataEntry => {
+    metrics.forEach((metric) => {
+      metric.data.forEach((dataEntry) => {
         const testimonial: TestimonialType = {
+          projectName: dataEntry.programName,
           testimonials: dataEntry.testimonials,
           description: dataEntry.description,
           notableAchievements: dataEntry.notableAchievements,
@@ -154,7 +156,7 @@ const ShowReport = () => {
         };
         combinedData.push(testimonial);
       });
-    })
+    });
     return combinedData;
   };
 
@@ -365,8 +367,21 @@ const ShowReport = () => {
             <div className="flex flex-col font-bold text-[100px] leading-[0.9] mt-5">
               <span>Case Studies and Testimonials</span>
             </div>
-            <div className=""></div>
+            <div className="my-5">
+              <h2 className="text-xl font-bold mb-4">
+                Specific Projects and Case Studies
+              </h2>
+            </div>
+            <div className="">
+              {report?.testimonials.map((testimonial, index) => (
+                <CaseStudiesSection
+                  key={index}
+                  {...{ testimonials: testimonial }}
+                />
+              ))}
+            </div>
           </div>
+      
         </div>
       )}
     </div>

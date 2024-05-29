@@ -47,7 +47,7 @@ const Sidebar = () => {
             >
               <div className="flex items-center justify-center gap-2">
                 <img src="/i.c.logo2.png" alt="logo" className="w-10 h-10" />
-                <h4 className="text-2xl">
+                <h4 className="md:text-xl text-2xl font-NeueMachinaUltrabold">
                   <span className="text-custom-green">impact.</span>chain
                 </h4>
               </div>
@@ -252,7 +252,7 @@ const Sidebar = () => {
                   <span>Ask AI</span>
                 </Link>
               </li>
-              <li className="items-center">
+              {/*<li className="items-center">
                 <Link
                   to="/carbon-credits"
                   onClick={() => setTab("carbon-credits")}
@@ -272,7 +272,7 @@ const Sidebar = () => {
                   />
                   <span>Carbon Credits</span>
                 </Link>
-              </li>
+                  </li>*/}
             </ul>
 
             {/* Divider */}

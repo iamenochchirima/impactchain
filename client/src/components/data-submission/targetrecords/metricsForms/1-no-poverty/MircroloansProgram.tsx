@@ -401,7 +401,7 @@ const MicroloansProgram = ({ setManualData, setUploadManually }) => {
               </option>
               <option value="financial">Financial</option>
               <option value="resource-based">Resource Based</option>
-              <option value="consultation">Consultatin</option>
+              <option value="consultation">Consultation</option>
             </select>
           </div>
           <div className={styles.inputDiv}>

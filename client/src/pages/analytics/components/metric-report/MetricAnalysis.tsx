@@ -171,7 +171,7 @@ const MetricAnalysis = () => {
             <div className="my-4 flex justify-between items-center">
               <h3 className="text-xl">{currentMetricInfo?.category.title}</h3>
               <button
-                className="bg-white px-4 py-1.5 rounded-3xl text-black font-bold"
+                className="bg-white px-4 py-1.5 rounded-xl text-black font-bold"
               >
                 <select
                   className="focus:outline-none "

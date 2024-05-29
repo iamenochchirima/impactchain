@@ -17,10 +17,10 @@ const Category: FC<Props> = ({ category }) => {
     <>
       <div
         onClick={handleClick}
-        className="w-1/3 flex cursor-pointer flex-col items-center gap-4 justify-center bg-custom-gray p-5 rounded-[56px] "
+        className="w-1/5 flex cursor-pointer flex-col items-center gap-4 justify-center bg-custom-gray p-5 rounded-3xl "
       >
         <img className="w-28 h-28" src={`${category.icon}`} />
-        <span className="text-3xl text-center">{category.title}</span>
+        <span className=" md:text-xl text-3xl text-center">{category.title}</span>
       </div>
       {openModal && <Metrics {...{ setOpenModal, category }} />}
     </>

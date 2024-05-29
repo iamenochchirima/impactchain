@@ -46,13 +46,13 @@ const MetricRecords: FC<Props> = ({
 
 
   return (
-    <div className="text-white px-5 py-3 flex flex-col items-center border-x border-y rounded border-green-200">
+    <div className="text-white px-5 py-3 flex flex-col items-center border-x border-y rounded-xl border-green-200 font-TelegraphRegular">
       <h1>{metric.name}</h1>
       <div className="mt-3 flex items-center justify-between">
         <button
           onClick={() => setUploadManually(true)}
           disabled={manualData !== null}
-          className=" flex items-center gap-2 bg-white px-4 py-2 text-black rounded-3xl"
+          className=" flex items-center gap-2 bg-white px-4 py-2 text-black rounded-xl"
         >
           {metric.data.length > 0 ? <IoCheckmark size={20} /> : <IoMdAdd size={20} />}
          <span> {metric.data.length > 0 ? "Data recorded" : "Record your data"}</span>

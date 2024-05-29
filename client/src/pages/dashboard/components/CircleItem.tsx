@@ -13,7 +13,7 @@ const CircleItem = ({ target }) => {
     return `${text.slice(0, maxLength)}...`;
   };
   return (
-    <li className="flex flex-col w-1/6 py-2 items-center gap-2">
+    <li className="flex flex-col w-1/6 py-2 items-center gap-3">
       <a data-tooltip-id="my-tooltip" data-tooltip-content={`${target.name}`}>
         <Tooltip id="my-tooltip" />
         <h3 className="text-sm ">{truncateEnd(target.name)}</h3>

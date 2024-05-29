@@ -80,7 +80,7 @@ const About = () => {
       </h3>
       <div className="min-h-96 pr-24 pl-12 mt-10 ">
       <h3 className="font-TelegrapUltraLight md:text-sm">Name of Organisation?</h3>
-        <form action="" className="mt-3">
+        <form action="" className="mt-2">
           <div className="mb-4 ">
             <input
               className="shadow placeholder-gray-500 text-white md:text-sm text-xl min-w-[300px] rounded-xl appearance-none border-2 border-green-500 w-full py-3.5 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
@@ -93,7 +93,7 @@ const About = () => {
           </div>
           <div className="mt-5 md:text-sm">
             <h3>In Which Industry Does the Organisation Operate?</h3>
-            <div className="relative mt-3">
+            <div className="relative mt-2">
               <select
                 className="appearance-none shadow placeholder-white text-white md:text-sm text-xl min-w-[300px] rounded-xl border-2 border-green-500 w-full py-3.5 px-3 text-gray-white bg-black leading-tight focus:outline-none focus:shadow-outline"
                 name="industry"
@@ -116,7 +116,7 @@ const About = () => {
 
           <div className="mt-5 md:text-sm">
             <h2>What Is The Size of Your Organisation?</h2>
-            <div className="mt-4 flex items-center gap-3">
+            <div className="mt-2 flex items-center gap-3">
               <button
                 className={` ${
                   selectedButton === "2-10" ? "bg-custom-green" : " bg-gray-500"
@@ -173,7 +173,7 @@ const About = () => {
         <Bubbles {...{bubbleText}}/>
         <button
           onClick={handleSubmit}
-          className="mr-24 px-10 py-1.5 bg-custom-green rounded-xl text-black font-TelegraphUltraLight md:text-sm text-lg font-bold"
+          className="mr-24 p-2 py-1.5 bg-custom-green rounded-xl text-black font-TelegraphUltraLight md:text-sm text-lg font-bold"
         >
           {loading ? "Loading..." : "Continue"}
         </button>

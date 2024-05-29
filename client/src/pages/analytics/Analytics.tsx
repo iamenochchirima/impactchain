@@ -27,10 +27,10 @@ const Analytics = () => {
   return (
     <div>
       <div className="ml-5 mr-10">
-        <h1 className="font-NeueMachinaUltrabold text-4xl mt-10">
+        <h1 className="font-NeueMachinaUltrabold md:text-2xl text-4xl mt-3">
           Monitor your impact
         </h1>
-        <div className="flex w-full font-NeueMachinaRegular gap-28 mt-20 ">
+        <div className="flex w-full font-NeueMachinaRegular gap-10 mt-10 ">
           {categories.map((category, index) => (
            <Category key={index} {...{category}} />
           ))}

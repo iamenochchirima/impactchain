@@ -24,7 +24,7 @@ const HealthcareAccessData = ({ setManualData, setUploadManually }) => {
   const [programName, setProgramName] = useState<string>("");
   const [numberOfBeneficiaries, setNumberOfBeneficiaries] = useState<string>("");
 
-  const [programs, setPrograms] = useState<HealthcareFundingType[]>([]);
+  const [programs, setPrograms] = useState<HealthcareAccessDataType[]>([]);
   const [showForm, setShowForm] = useState<boolean>(false);
   const [goal, setGoal] = useState<string>("");
   const goalareaRef = useRef<HTMLTextAreaElement>(null);
@@ -193,7 +193,7 @@ const HealthcareAccessData = ({ setManualData, setUploadManually }) => {
   return (
     <div>
       <div className=" items-center">
-        <h3 className="text-white mt-3 text-xl text-center">
+        <h3 className="text-white mt-3 text-xl text-center font-NeueMachinaUltrabold">
           Healthcare Access Data
         </h3>
         <div className="flex justify-end py-3">

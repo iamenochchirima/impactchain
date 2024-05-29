@@ -23,11 +23,11 @@ const FilesInput: FC<Props> = ({ setSupportFiles, supportFiles }) => {
 
   return (
     <div>
-      <h3 className="text-xl font-bold text-white mt-4 text-center font-TelegraphBold ">
+      <h3 className="text-xl font-bold text-white mt-4 text-center font-TelegraphRegular ">
         Please upload any supporting files that will help us verify the data you
         have submitted. You can upload images or PDFs only.
       </h3>
-      <div className="min-h-[200px]  bg-black rounded-2xl mb-3 mt-8">
+      <div className="min-h-[200px]  bg-black rounded-2xl mb-3 mt-8 font-TelegraphUltraLight font-bold">
         <div className=" justify-center items-center h-full">
           <div className="flex min-h-[200px] py-4 flex-col justify-center items-center">
             <p className="text-white ">Drag and Drop</p>

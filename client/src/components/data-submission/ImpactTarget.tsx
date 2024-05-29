@@ -138,11 +138,11 @@ const ImpactTarget = () => {
   };
 
   return (
-    <div className="">
-      <h3 className="text-3xl font-bold text-white text-center font-TelegraphBold mr-12">
+    <div>
+      <h3 className="md:text-xl text-3xl mt-4 font-bold text-white text-center font-NeueMachinaUltrabold mr-12">
         What Impact are you targeting?
       </h3>
-      <div className="grid grid-cols-6 gap-4 mt-6 bg-[#202020] p-5 rounded-3xl mb-10 mr-20 ml-5">
+      <div className="grid grid-cols-6 gap-2 mt-5 bg-[#202020] p-5 rounded-2xl mb-5 mr-20 ml-5">
         {targetOptions.map((target) => (
           <div
             key={target.id}
@@ -153,18 +153,6 @@ const ImpactTarget = () => {
         ))}
       </div>
       <div className="flex justify-between mt-10 mb-10  ">
-        <div className="flex cursor-pointer relative h-24 rounded-lg items-end  mt- ">
-          <img
-            src="/smiley.svg"
-            alt="smiley-icon"
-            className="w-14 h-14 mr-2 mb-1"
-          />
-          <div className="text-white w-3/5 bg-black rounded-3xl p-3 ">
-            <p>
-              Select the Sustainable Development Goal you would like to measure
-            </p>
-          </div>
-        </div>
 
         <div className=" flex justify-center items-center gap-5">
         <Bubbles {...{bubbleText}}/>
@@ -175,7 +163,7 @@ const ImpactTarget = () => {
             onClick={handleSubmit}
             className={` ${
               selectedTargets.length > 0 ? "bg-custom-green" : "bg-green-700"
-            } px-10 py-1.5  rounded-full text-black font-bold mr-20`}
+            } p-2 py-1.5  rounded-xl text-black font-TelegraphUltraLight font-bold mr-20`}
           >
             {loading ? "Saving..." : "Continue"}
           </button>

@@ -125,7 +125,7 @@ export const calculateImpact = (
 
 // TODO: REVISIT THE LOGIC OF THIS FUNCTION
 export const getAvaragePeriod = (data: any[]): string => {
-  let Zezo_1MonthCount = 0;
+  let Zero_1MonthCount = 0;
   let One_3MonthsCount = 0;
   let Three_6MonthsCount = 0;
   let Six_1YearCount = 0;
@@ -135,7 +135,7 @@ export const getAvaragePeriod = (data: any[]): string => {
 
   data.map((item) => {
     if (item.duration === "0-1Month") {
-      Zezo_1MonthCount += 1;
+      Zero_1MonthCount += 1;
     } else if (item.duration === "1-3Months") {
       One_3MonthsCount += 1;
     } else if (item.duration === "3-6Months") {
@@ -152,7 +152,7 @@ export const getAvaragePeriod = (data: any[]): string => {
   });
 
   const counts = [
-    Zezo_1MonthCount,
+    Zero_1MonthCount,
     One_3MonthsCount,
     Three_6MonthsCount,
     Six_1YearCount,
@@ -182,8 +182,8 @@ export const getAvaragePeriod = (data: any[]): string => {
     default:
       return "";
   }
-  return "";
 };
+
 
 export const mergeBarGraphData = (graphs: BarGraphData[], labels: GraphLabel): BarGraphData => {
   const dataMap = new Map<string, { totalY: number; count: number }>();

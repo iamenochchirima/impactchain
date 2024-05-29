@@ -57,16 +57,17 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur[valueKey]),
         0
       );
-      
+
       const lineGraphLabels: GraphLabel = {
-        x_label: "Time",
-        y_label: "Number of Beneficiaries",
+        x_label: "",
+        y_label: "",
       };
 
       const barGraphLabels: GraphLabel = {
-        x_label: "Time",
-        y_label: "Number of Beneficiaries",
+        x_label: "",
+        y_label: "",
       };
+
 
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
@@ -122,8 +123,7 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "bar",
             name: "Job Training",
-            x_label: "Time",
-            y_label: "Number of Beneficiaries",
+
             graph: barGraphData,
           },
           2: undefined,
@@ -138,6 +138,7 @@ export const getMetricsReportData = async (
        * **********************************/
     } else if (metric.key === "microloans") {
       const valueKey = "amountDisbursed";
+      const participantsKey = "numberOfLoans";
       const graphName = "Microloans or grants provided program";
       impact += calculateImpact(metric.data, valueKey, periodOfTime);
 
@@ -154,7 +155,7 @@ export const getMetricsReportData = async (
       }
 
       avgParticipants += metric.data.reduce(
-        (acc, cur) => acc + Number(cur.valueKey),
+        (acc, cur) => acc + Number(cur[participantsKey]),
         0
       );
       const lineGraphLabels: GraphLabel = {
@@ -224,8 +225,7 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "bar",
             name: "Microloans",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
           2: undefined,
@@ -318,8 +318,7 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "People Assisted",
-            x_label: "Time",
-            y_label: "Number of People",
+
             graph: lineGraphData,
           },
           2: undefined,
@@ -410,8 +409,7 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Food Donation",
-            x_label: "Time",
-            y_label: "Number of People",
+
             graph: lineGraphData,
           },
           2: undefined,
@@ -504,8 +502,7 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Sustainable Agriculture",
-            x_label: "Time",
-            y_label: "Amount Invested",
+
             graph: lineGraphData,
           },
         },
@@ -569,15 +566,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "People Fed",
-            x_label: "Time",
-            y_label: "Number of People",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "People Fed",
-            x_label: "Time",
-            y_label: "Number of People",
+
             graph: barGraphData,
           },
         },
@@ -641,15 +636,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Healthcare Funding",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Healthcare Funding",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -712,15 +705,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Health Checkups",
-            x_label: "Time",
-            y_label: "Number of People",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Health Checkups",
-            x_label: "Time",
-            y_label: "Number of People",
+
             graph: barGraphData,
           },
         },
@@ -783,15 +774,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "People Accessing Healthcare",
-            x_label: "Time",
-            y_label: "Number of People",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "People Accessing Healthcare",
-            x_label: "Time",
-            y_label: "Number of People",
+
             graph: barGraphData,
           },
         },
@@ -854,15 +843,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Schools Built",
-            x_label: "Time",
-            y_label: "Number of Schools",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Schools Built",
-            x_label: "Time",
-            y_label: "Number of Schools",
+
             graph: barGraphData,
           },
         },
@@ -926,15 +913,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Educational Grants",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Educational Grants",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -997,15 +982,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Students Benefiting",
-            x_label: "Time",
-            y_label: "Number of Students",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Students Benefiting",
-            x_label: "Time",
-            y_label: "Number of Students",
+
             graph: barGraphData,
           },
         },
@@ -1069,15 +1052,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Women's Empowerment",
-            x_label: "Time",
-            y_label: "Participants",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Women's Empowerment",
-            x_label: "Time",
-            y_label: "Participants",
+
             graph: barGraphData,
           },
         },
@@ -1141,15 +1122,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Gender Equality Workshops",
-            x_label: "Time",
-            y_label: "Workshops",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Gender Equality Workshops",
-            x_label: "Time",
-            y_label: "Workshops",
+
             graph: barGraphData,
           },
         },
@@ -1213,15 +1192,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Workplace Gender Equality Index",
-            x_label: "Time",
-            y_label: "Index",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Workplace Gender Equality Index",
-            x_label: "Time",
-            y_label: "Index",
+
             graph: barGraphData,
           },
         },
@@ -1274,8 +1251,7 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Sanitation Facilities",
-            x_label: "Time",
-            y_label: "Facilities",
+
             graph: pieChartData,
           },
         },
@@ -1339,15 +1315,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Water Conservation",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Water Conservation",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -1411,15 +1385,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "People with Access",
-            x_label: "Time",
-            y_label: "Number of People",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "People with Access",
-            x_label: "Time",
-            y_label: "Number of People",
+
             graph: barGraphData,
           },
         },
@@ -1482,15 +1454,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Renewable Energy Projects",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Renewable Energy Projects",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -1554,15 +1524,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Energy Efficient Systems",
-            x_label: "Time",
-            y_label: "Number of Systems",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Energy Efficient Systems",
-            x_label: "Time",
-            y_label: "Number of Systems",
+
             graph: barGraphData,
           },
         },
@@ -1626,15 +1594,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Energy Consumption Reduction",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Energy Consumption Reduction",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -1698,15 +1664,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Job Creation",
-            x_label: "Time",
-            y_label: "Number of Jobs",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Job Creation",
-            x_label: "Time",
-            y_label: "Number of Jobs",
+
             graph: barGraphData,
           },
         },
@@ -1770,15 +1734,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Vocational Training",
-            x_label: "Time",
-            y_label: "Number of Participants",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Vocational Training",
-            x_label: "Time",
-            y_label: "Number of Participants",
+
             graph: barGraphData,
           },
         },
@@ -1842,15 +1804,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Employment Improvements",
-            x_label: "Time",
-            y_label: "Number of Beneficiaries",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Employment Improvements",
-            x_label: "Time",
-            y_label: "Number of Beneficiaries",
+
             graph: barGraphData,
           },
         },
@@ -1914,15 +1874,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "STEM Education",
-            x_label: "Time",
-            y_label: "Number of Students",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "STEM Education",
-            x_label: "Time",
-            y_label: "Number of Students",
+
             graph: barGraphData,
           },
         },
@@ -1986,15 +1944,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Sustainable Infrastructure",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Sustainable Infrastructure",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -2058,15 +2014,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "People Benefiting",
-            x_label: "Time",
-            y_label: "Number of People",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "People Benefiting",
-            x_label: "Time",
-            y_label: "Number of People",
+
             graph: barGraphData,
           },
         },
@@ -2130,15 +2084,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Marginalized Community Support",
-            x_label: "Time",
-            y_label: "Number of Participants",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Marginalized Community Support",
-            x_label: "Time",
-            y_label: "Number of Participants",
+
             graph: barGraphData,
           },
         },
@@ -2202,15 +2154,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Inclusion Policies",
-            x_label: "Time",
-            y_label: "Number of Policies",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Inclusion Policies",
-            x_label: "Time",
-            y_label: "Number of Policies",
+
             graph: barGraphData,
           },
         },
@@ -2274,15 +2224,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Beneficiaries of Inequality Reduction",
-            x_label: "Time",
-            y_label: "Number of Beneficiaries",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Beneficiaries of Inequality Reduction",
-            x_label: "Time",
-            y_label: "Number of Beneficiaries",
+
             graph: barGraphData,
           },
         },
@@ -2346,15 +2294,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Urban Sustainability",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Urban Sustainability",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -2418,15 +2364,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Affordable Housing",
-            x_label: "Time",
-            y_label: "Number of Houses",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Affordable Housing",
-            x_label: "Time",
-            y_label: "Number of Houses",
+
             graph: barGraphData,
           },
         },
@@ -2490,15 +2434,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Urban Living Conditions",
-            x_label: "Time",
-            y_label: "Number of Beneficiaries",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Urban Living Conditions",
-            x_label: "Time",
-            y_label: "Number of Beneficiaries",
+
             graph: barGraphData,
           },
         },
@@ -2562,15 +2504,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Waste Reduction",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Waste Reduction",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -2634,15 +2574,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Sustainable Supply Chain",
-            x_label: "Time",
-            y_label: "Number of Companies",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Sustainable Supply Chain",
-            x_label: "Time",
-            y_label: "Number of Companies",
+
             graph: barGraphData,
           },
         },
@@ -2706,15 +2644,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Resource Footprint Reduction",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Resource Footprint Reduction",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -2778,15 +2714,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Carbon Emission Reduction",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Carbon Emission Reduction",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -2850,15 +2784,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Renewable Energy Investment",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Renewable Energy Investment",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -2922,15 +2854,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Reforestation Projects",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Reforestation Projects",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -2994,15 +2924,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Marine Ecosystem Protection",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Marine Ecosystem Protection",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -3066,15 +2994,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Ocean Pollution Reduction",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Ocean Pollution Reduction",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -3138,15 +3064,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Sustainable Fishing",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Sustainable Fishing",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -3210,15 +3134,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Land Conservation",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Land Conservation",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -3281,15 +3203,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Endangered Species Protection",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Endangered Species Protection",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -3353,15 +3273,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Land Rehabilitation",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Land Rehabilitation",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -3424,15 +3342,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Anti-Corruption Programs",
-            x_label: "Time",
-            y_label: "Number of Programs",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Anti-Corruption Programs",
-            x_label: "Time",
-            y_label: "Number of Programs",
+
             graph: barGraphData,
           },
         },
@@ -3496,15 +3412,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Human Rights Initiatives",
-            x_label: "Time",
-            y_label: "Number of Initiatives",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Human Rights Initiatives",
-            x_label: "Time",
-            y_label: "Number of Initiatives",
+
             graph: barGraphData,
           },
         },
@@ -3568,15 +3482,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Community Peace Programs",
-            x_label: "Time",
-            y_label: "Number of Programs",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Community Peace Programs",
-            x_label: "Time",
-            y_label: "Number of Programs",
+
             graph: barGraphData,
           },
         },
@@ -3641,15 +3553,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Collaborative SDG Projects",
-            x_label: "Time",
-            y_label: "Number of Projects",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Collaborative SDG Projects",
-            x_label: "Time",
-            y_label: "Number of Projects",
+
             graph: barGraphData,
           },
         },
@@ -3713,15 +3623,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Financial Contributions",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Financial Contributions",
-            x_label: "Time",
-            y_label: "Amount",
+
             graph: barGraphData,
           },
         },
@@ -3785,15 +3693,13 @@ export const getMetricsReportData = async (
           1: {
             typeOfGraph: "line",
             name: "Advocacy Campaigns",
-            x_label: "Time",
-            y_label: "Number of Campaigns",
+
             graph: lineGraphData,
           },
           2: {
             typeOfGraph: "bar",
             name: "Advocacy Campaigns",
-            x_label: "Time",
-            y_label: "Number of Campaigns",
+
             graph: barGraphData,
           },
         },
@@ -3810,10 +3716,20 @@ export const getMetricsReportData = async (
   const avgParticipantsCount = avgParticipants / metricsData.length;
   const avgProgramsCount = avgPrograms / metricsData.length;
 
-  const avgDurationCount = avgDuration.reduce((acc, cur) => {
+  const averageDuration = avgDuration.reduce((acc: Record<string, number>, cur) => {
     acc[cur] = (acc[cur] || 0) + 1;
     return acc;
-  });
+  }, {});
+  
+  // Find the most common duration
+  let mostCommonDuration = "";
+  let maxCount = 0;
+  for (const [duration, count] of Object.entries(averageDuration)) {
+    if (count > maxCount) {
+      maxCount = count;
+      mostCommonDuration = duration;
+    }
+  }
 
   const locationCount = locations.length;
 
@@ -3823,7 +3739,7 @@ export const getMetricsReportData = async (
     averageImpact,
     avgParticipantsCount,
     avgProgramsCount,
-    avgDurationCount,
+    averageDuration: mostCommonDuration,
     locationCount,
   };
 };

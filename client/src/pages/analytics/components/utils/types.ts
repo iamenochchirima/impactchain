@@ -1,3 +1,4 @@
+import { Testimonials } from "../../../../hooks/declarations/data/data.did";
 import { Metric } from "../../../../utils/types";
 
 export type LineGraphData = {
@@ -73,6 +74,16 @@ export type GraphLabel = {
 export type GraphsData =  LineGraphData | BarGraphData | PieChartData | null;
 
 
+export type TestimonialType = {
+  testimonials: Testimonials;
+  location: string;
+  startDate: string;
+  duration: string;
+  description: string;
+  notableAchievements: string;
+  challenges: string;
+}
+
 export type FullReportData = {
   companyName: string;
   overview : any;
@@ -83,5 +94,6 @@ export type FullReportData = {
   participants: number;
   avgPrograms: number;
   avgDuration: string;
+  testimonials: TestimonialType[];
   location: number;
 };

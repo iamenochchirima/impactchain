@@ -9,7 +9,7 @@ import {
   setReportPromptModal,
 } from "../../../../redux/slices/app";
 import { Metric } from "../../../../utils/types";
-import { FullReportData, GraphLabel } from "../utils/types";
+import { FullReportData, GraphLabel, TestimonialType } from "../utils/types";
 import SpecificMetric from "./SpecificMetric";
 import ReportPeriod from "./ReportPeriod";
 import {
@@ -22,6 +22,7 @@ import Loading from "../Loading";
 import ReactMarkdown from "react-markdown";
 import LineGraph from "../../../dashboard/components/Charts/LineGraph";
 import { formatDate } from "../../../../utils/time";
+import { Testimonials } from "../../../../hooks/declarations/data/data.did";
 
 const ShowReport = () => {
   const dispatch = useDispatch();
@@ -107,19 +108,22 @@ const ShowReport = () => {
       return;
     }
 
+    const rawMetrics = filterMetricsData(
+      metricsWithDataForPeriod,
+      reportPromptResponse.periodOfTime
+    );
+
     const report: FullReportData = {
       companyName: userRecord?.aboutCompany.name || "",
       overview: overview.choices[0].message,
       overalGraph: mergeLineGraphData(_res.allLineGraphData, labels),
       specificMetrics: _res.metricsData,
-      rawMetrics: filterMetricsData(
-        metricsWithDataForPeriod,
-        reportPromptResponse.periodOfTime
-      ),
+      rawMetrics,
       overalImpact: _res.averageImpact,
-      avgDuration: _res.avgDurationCount,
+      avgDuration: _res.averageDuration,
       avgPrograms: _res.avgProgramsCount,
       participants: _res.avgParticipantsCount,
+      testimonials: getTestimonials(rawMetrics),
       location: _res.locationCount,
     };
     dispatch(setReport({ report }));
@@ -132,6 +136,25 @@ const ShowReport = () => {
       combinedData = combinedData.concat(metric.data);
     });
 
+    return combinedData;
+  };
+
+  const getTestimonials = (metrics: Metric[]):  TestimonialType[] => {
+    const combinedData: TestimonialType[] = [];
+    metrics.forEach(metric => {
+      metric.data.forEach(dataEntry => {
+        const testimonial: TestimonialType = {
+          testimonials: dataEntry.testimonials,
+          description: dataEntry.description,
+          notableAchievements: dataEntry.notableAchievements,
+          challenges: dataEntry.challenges,
+          location: dataEntry.location,
+          startDate: formatDate(Number(dataEntry.startDate)),
+          duration: dataEntry.duration,
+        };
+        combinedData.push(testimonial);
+      });
+    })
     return combinedData;
   };
 
@@ -315,7 +338,7 @@ const ShowReport = () => {
                       <strong>Duration:</strong> {program.duration}
                     </p>
                     <h3 className="font-bold mb-2">Objective</h3>
-                    <p className="mb-3">{program.objective}</p>
+                    <p className="mb-3">{program.objectives}</p>
                     <h3 className=" font-bold mb-2">Community Impact</h3>
                     <p>{program.communityImpact}</p>
                   </div>
@@ -338,8 +361,11 @@ const ShowReport = () => {
 
           {/* Case Studies and testimonials */}
 
-          <div className="flex flex-col font-bold text-[100px] leading-[0.9] mt-5">
-            <span>Case Studies and Testimonials</span>
+          <div className="">
+            <div className="flex flex-col font-bold text-[100px] leading-[0.9] mt-5">
+              <span>Case Studies and Testimonials</span>
+            </div>
+            <div className=""></div>
           </div>
         </div>
       )}

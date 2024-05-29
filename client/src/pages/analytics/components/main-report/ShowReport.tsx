@@ -22,7 +22,6 @@ import Loading from "../Loading";
 import ReactMarkdown from "react-markdown";
 import LineGraph from "../../../dashboard/components/Charts/LineGraph";
 import { formatDate } from "../../../../utils/time";
-import { Testimonials } from "../../../../hooks/declarations/data/data.did";
 import CaseStudiesSection from "./CaseStudiesSection";
 
 const ShowReport = () => {

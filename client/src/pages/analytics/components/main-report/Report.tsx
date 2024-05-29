@@ -53,6 +53,14 @@ const Report = () => {
       });
     }
 
+    const stats = {
+      avarageParticipants: report.participants,
+      avaragePrograms: report.avgPrograms,
+      avarageDuration: report.avgDuration,
+      overallImpact: report.overalImpact,
+      locations: report.location,
+    };
+
     const body = {
       period: getReportTimeTitle(reportPromptResponse.periodOfTime),
       logo: userRecord.aboutCompany.logo,
@@ -60,6 +68,7 @@ const Report = () => {
       overview: report.overview,
       overalGraph: overalGraphChartUri,
       metrics: templateMetrics,
+      stats,
     };
 
     axios

@@ -17,8 +17,8 @@ type Props = {
   graphKey: string;
 };
 
-const LineGraph: FC<Props> = ({ data, graphKey}) => {
-  const {reportPromptResponse} = useSelector((state: RootState) => state.app);
+const LineGraph: FC<Props> = ({ data, graphKey }) => {
+  const { reportPromptResponse } = useSelector((state: RootState) => state.app);
   const [state, setState] = useState<LineGraphState>({
     series: [
       {
@@ -81,7 +81,9 @@ const LineGraph: FC<Props> = ({ data, graphKey}) => {
           <div className="flex w-full max-w-45 justify-end">
             <div className="inline-flex items-center rounded-md bg-white p-1.5">
               <button className="rounded py-1 px-3 text-xs font-medium text-black hover:bg-gray-100 hover:shadow-card">
-                {reportPromptResponse ? reportPromptResponse.periodOfTime : "All Time"}
+                {reportPromptResponse
+                  ? reportPromptResponse.periodOfTime
+                  : "All Time"}
               </button>
             </div>
           </div>
@@ -97,13 +99,11 @@ const LineGraph: FC<Props> = ({ data, graphKey}) => {
             />
           </div>
           <div className="">
-        <h3>
-          Key
-        </h3>
-        X: {data.x_label}
-        <br />
-        Y: {data.y_label}
-      </div>
+            <h3>Key</h3>
+            X: {data.x_label}
+            <br />
+            Y: {data.y_label}
+          </div>
         </div>
       </div>
     </div>

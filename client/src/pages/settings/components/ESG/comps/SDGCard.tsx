@@ -36,7 +36,7 @@ const SDGCard: FC<Props> = ({ sdg }) => {
         onMouseOver={() => setHover(true)}
         onMouseOut={() => setHover(false)}
         style={{ backgroundImage: `url(${sdg.icon})` }}
-        className="relative bg-cover w-32 h-32  bg-center col-span-3 text-white "
+        className="relative bg-cover w-32 h-32 rounded-xl bg-center col-span-3 text-white "
       >
         <div
           className={`absolute top-0 left-0 w-full bg-black h-full ${

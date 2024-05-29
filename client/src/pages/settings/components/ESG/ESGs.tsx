@@ -38,7 +38,7 @@ const ESGs = () => {
 
       <div className="w-full flex flex-col">
         <div className=" h-full  mt-5  bg-custom-gray rounded-2xl p-5">
-        <h3 className="font-NeueMachinaUltrabold text-xl">Chosen SDGs</h3>
+        <h3 className="font-TelegraphBold text-xl">Chosen SDGs</h3>
           <div className="grid grid-cols-6 gap-4 mt-6 bg-black p-5 rounded-3xl mb-10 mr-20 ">
             {selectedSDGs.map((sdg) => (
               <SDGCard key={sdg.id} {...{ sdg }} />
@@ -46,8 +46,8 @@ const ESGs = () => {
           </div>
         </div>
         <div className=" h-screen  mt-5  bg-[#202020] rounded-2xl p-5">
-          <h3 className="font-NeueMachinaUltrabold text-xl">Select New SDGs</h3>
-          <div className="grid grid-cols-6 gap-4 mt-6 bg-black p-5 rounded-3xl mb-10 mr-20 ">
+          <h3 className="font-TelegraphBold text-xl">Select New SDGs</h3>
+          <div className="grid grid-cols-6 gap-4 mt-6 bg-black p-5 rounded-3xl mb-3 mr-20 ">
             {unselectedSDGs.map((target) => (
               <div
                 key={target.id}
@@ -58,7 +58,7 @@ const ESGs = () => {
             ))}
           </div>
           <button
-            className="bg-custom-green rounded-3xl px-5 py-2 text-black"
+            className="bg-custom-green rounded-xl p-1.5 text-black"
             onClick={() => console.log("Save")}
           >
             Add New

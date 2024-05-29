@@ -45,7 +45,7 @@ const   STTargetCard = ({ target, setSelectedTargets }) => {
       <img
         className={`${
           selectedButton ? "opacity-40" : ""
-        } hover:scale-105 duration-300 fade-in-fwd`}
+        } hover:scale-105 duration-300 fade-in-fwd rounded-xl`}
         src={target.icon}
         alt={target.name}
       />

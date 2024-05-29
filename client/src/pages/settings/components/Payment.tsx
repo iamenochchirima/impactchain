@@ -13,13 +13,13 @@ const Payment = () => {
       <div className="flex flex-col gap-2 ml-5 mt-10">
         <p className=" uppercase text-white text-xl font-TelegraphBold">Current Plan</p>
         <hr className=" w-4/6 text-custom-green "></hr>
-        <p className=" text-xl font-TelegraphRegular">impact.chain - basic</p>
-        <h2 className=" font-TelegraphBold text-3xl">US$0.00 per month</h2>
-        <p className=" text-xl font-TelegraphRegular">Your plan renews 30 December 2023</p>
+        <p className=" text-lg font-TelegraphRegular">impact.chain - basic</p>
+        <h2 className=" font-TelegraphBold text-2xl">US$0.00 per month</h2>
+        <p className=" text-lg font-TelegraphRegular">Your plan renews 30 December 2023</p>
 
       </div>
-      <button className="bg-custom-green p-3 ml-5 mt-3 rounded-3xl">
-        <span className="font-TelegraphRegular text-xl text-black">Upgrade Plan
+      <button className="bg-custom-green p-2 ml-5 mt-3 rounded-xl">
+        <span className="font-TelegraphUltraLight font-bold text-sm text-black">Upgrade Plan
         </span>
         </button>
 
@@ -34,33 +34,33 @@ const Payment = () => {
 
         <div className="flex gap-5">
           <p>Account Holder</p>
-          <input type="account" className="bg-black border-2 border-custom-green rounded-2xl p-2"></input>
+          <input type="account" className="bg-black border-2 border-custom-green rounded-xl p-2"></input>
         </div>
 
         <div className="flex gap-5">
           <p>Bank</p>
-          <input type="bank" className="bg-black border-2 border-custom-green rounded-2xl p-2"></input>
+          <input type="bank" className="bg-black border-2 border-custom-green rounded-xl p-2"></input>
         </div>
 
         <div className="flex gap-5">
           <p>Card Number</p>
-          <input type="card number" className="bg-black border-2 border-custom-green rounded-2xl p-2"></input>
+          <input type="card number" className="bg-black border-2 border-custom-green rounded-xl p-2"></input>
         </div>
 
         <div className="flex gap-5">
           <p>CSS</p>
-          <input type="css" className="bg-black border-2 border-custom-green rounded-2xl p-2"></input>
+          <input type="css" className="bg-black border-2 border-custom-green rounded-xl p-2"></input>
         </div>
 
         <div className="flex gap-4">
-        <button className="bg-custom-green px-4 py-2.5  mt-3 rounded-3xl">
-        <span className="font-TelegraphRegular text-black">
+        <button className="bg-custom-green px-3 py-1  mt-3 rounded-xl">
+        <span className="font-TelegraphUltraLight font-bold text-sm text-black">
           Update
         </span>
         </button>
 
-        <button className="bg-custom-green px-4 py-2.5 mt-3 rounded-3xl">
-        <span className="font-TelegraphRegular text-black">
+        <button className="bg-custom-green px-3 py-1 mt-3 rounded-xl">
+        <span className="font-TelegraphUltraLight font-bold text-sm text-black">
           Delete
         </span>
         </button>
@@ -76,22 +76,22 @@ const Payment = () => {
 
         <div className="flex gap-5">
           <p>Email</p>
-          <input type="email" className="bg-black border-2 border-custom-green rounded-2xl p-2"></input>
+          <input type="email" className="bg-black border-2 border-custom-green rounded-xl p-2"></input>
         </div>
 
         <div className="flex gap-5">
           <p>Company Name</p>
-          <input type="company" className="bg-black border-2 border-custom-green rounded-2xl p-2"></input>
+          <input type="company" className="bg-black border-2 border-custom-green rounded-xl p-2"></input>
         </div>
 
         <div className="flex gap-5">
           <p>Address</p>
-          <input type="address" className="bg-black border-2 border-custom-green rounded-2xl p-2"></input>
+          <input type="address" className="bg-black border-2 border-custom-green rounded-xl p-2"></input>
         </div>
 
         <div className="flex gap-5">
           <p>Tax Number</p>
-          <input type="tax" className="bg-black border-2 border-custom-green rounded-2xl p-2"></input>
+          <input type="tax" className="bg-black border-2 border-custom-green rounded-xl p-2"></input>
         </div>
       </div>
 

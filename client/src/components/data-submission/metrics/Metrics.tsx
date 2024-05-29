@@ -149,7 +149,7 @@ const Metrics = () => {
         <button
           onClick={handleSave}
           disabled={saving}
-          className={`bg-custom-green pr-6 pl-2 rounded-xl text-sm text-black font-TelegraphUltraLight font-bold`}
+          className={`bg-custom-green px-3 rounded-xl text-sm text-black font-TelegraphUltraLight font-bold`}
         >
           {saving ? "Saving..." : "Continue"}
         </button>

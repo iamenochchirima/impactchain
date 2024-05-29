@@ -148,18 +148,18 @@ const GenderEqualityWorkshopsData = ({ setManualData, setUploadManually }) => {
       return;
     }
 
-    const newProgram: GenderEqualityWorkshopsDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      typeOfWorkshop,
-      numberOfParticipants: BigInt(numberOfParticipants),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: GenderEqualityWorkshopsDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   typeOfWorkshop,
+    //   numberOfParticipants: BigInt(numberOfParticipants),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

@@ -148,18 +148,18 @@ const CarbonEmissionReductionData = ({ setManualData, setUploadManually }) => {
       return;
     }
 
-    const newProgram: CarbonEmissionReductionDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      typeOfEmissionReduced,
-      reductionInEmission: BigInt(reductionInEmission),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: CarbonEmissionReductionDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   typeOfEmissionReduced,
+    //   reductionInEmission: BigInt(reductionInEmission),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

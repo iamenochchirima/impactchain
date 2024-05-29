@@ -148,18 +148,18 @@ const MarineEcosystemProtectionData = ({ setManualData, setUploadManually }) => 
       return;
     }
 
-    const newProgram: MarineEcosystemProtectionDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      typeOfEcosystem,
-      areaOfEcosystemProtected: BigInt(areaOfEcosystemProtected),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: MarineEcosystemProtectionDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   typeOfEcosystem,
+    //   areaOfEcosystemProtected: BigInt(areaOfEcosystemProtected),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

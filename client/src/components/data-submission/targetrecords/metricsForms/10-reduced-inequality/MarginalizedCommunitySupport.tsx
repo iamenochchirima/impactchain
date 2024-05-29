@@ -148,18 +148,18 @@ const  MarginalizedCommunitySupportData = ({ setManualData, setUploadManually })
       return;
     }
 
-    const newProgram: MarginalizedCommunitySupportDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      typeOfCommunity,
-      totalFunding: BigInt(totalFunding),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: MarginalizedCommunitySupportDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   typeOfCommunity,
+    //   totalFunding: BigInt(totalFunding),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

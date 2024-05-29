@@ -52,7 +52,7 @@ const Password = () => {
       setNewPassword("");
       setConfirmNewPassword("");
     } else if (isError && error) {
-      toast.error("Error resetting password: " + error.data.message);
+      toast.error("Error resetting password");
     } else {
       return;
     }

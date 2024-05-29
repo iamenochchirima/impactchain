@@ -148,18 +148,18 @@ const LandConservationReforestationData = ({ setManualData, setUploadManually })
       return;
     }
 
-    const newProgram: LandConservationReforestationDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      typeOfLandConservation,
-      areaOfLandConserved: BigInt(areaOfLandConserved),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: LandConservationReforestationDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   typeOfLandConservation,
+    //   areaOfLandConserved: BigInt(areaOfLandConserved),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

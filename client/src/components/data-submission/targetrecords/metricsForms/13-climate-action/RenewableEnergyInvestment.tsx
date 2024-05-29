@@ -149,18 +149,18 @@ const RenewableEnergyInvestmentData = ({ setManualData, setUploadManually }) => 
       return;
     }
 
-    const newProgram: RenewableEnergyInvestmentDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      typeOfRenewableEnergyInvestment,
-      amountInvested: BigInt(amountInvested),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: RenewableEnergyInvestmentDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   typeOfRenewableEnergyInvestment,
+    //   amountInvested: BigInt(amountInvested),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

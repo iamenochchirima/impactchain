@@ -148,18 +148,18 @@ const CommunityPeaceProgramsData = ({ setManualData, setUploadManually }) => {
       return;
     }
 
-    const newProgram: CommunityPeaceProgramsDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      typeOfProgram,
-      numberOfPrograms: BigInt(numberOfPrograms),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: CommunityPeaceProgramsDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   typeOfProgram,
+    //   numberOfPrograms: BigInt(numberOfPrograms),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

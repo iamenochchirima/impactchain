@@ -148,18 +148,18 @@ const CollaborativeSDGProjectsData = ({ setManualData, setUploadManually }) => {
       return;
     }
 
-    const newProgram: CollaborativeSDGProjectsDataType = {
-      projectName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      typeOfCollaboration,
-      numberOfProjects: BigInt(numberOfProjects),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: CollaborativeSDGProjectsDataType = {
+    //   projectName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   typeOfCollaboration,
+    //   numberOfProjects: BigInt(numberOfProjects),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProjectName("");
     setStartDate("");
     setDuration("");

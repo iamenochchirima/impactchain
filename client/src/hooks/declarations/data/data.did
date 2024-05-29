@@ -12,7 +12,7 @@ type WorkplaceGenderEqualityPoliciesData =
    notableAchievements: text;
    numberOfPolicies: nat;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -32,7 +32,7 @@ type WomensEmpowermentProgramData =
    notableAchievements: text;
    numberOfParticipants: nat;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -52,7 +52,7 @@ type WaterSanitationAccessData =
    notableAchievements: text;
    numberOfBeneficiaries: nat;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -71,7 +71,7 @@ type WaterConservationInitiativesData =
    location: text;
    notableAchievements: text;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -92,7 +92,7 @@ type WasteReductionRecyclingData =
    location: text;
    notableAchievements: text;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    recyclingProcessInvolved: text;
    startDate: int;
@@ -112,7 +112,7 @@ type VocationalTrainingProgramsData =
    location: text;
    notableAchievements: text;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -146,7 +146,7 @@ type UrbanSustainabilityProjectsData =
    notableAchievements: text;
    numberOfProjects: nat;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -166,7 +166,7 @@ type UrbanLivingConditionsData =
    notableAchievements: text;
    numberOfAreasImproved: nat;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -191,7 +191,7 @@ type SustainableSupplyChainInvestmentData =
    notableAchievements: text;
    numberOfsupplyChainImproved: text;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -211,7 +211,7 @@ type SustainableInfrastructureData =
    notableAchievements: text;
    numberOfProjects: nat;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -231,7 +231,7 @@ type SustainableFishingSupportData =
    notableAchievements: text;
    numberOfSustainableFishingProjects: nat;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -251,7 +251,7 @@ type SustainableAgricultureInvestment =
    notableAchievements: text;
    numberOfProjects: nat;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    projectName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -272,7 +272,7 @@ type StudentsBenefitingData =
    location: text;
    notableAchievements: text;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -293,7 +293,7 @@ type SchoolsSupportedData =
    notableAchievements: text;
    numberOfSchoolsSupported: nat;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    projectName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -313,7 +313,7 @@ type SanitationFacilitiesData =
    location: text;
    notableAchievements: text;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -333,7 +333,7 @@ type STEMInnovationEducationData =
    location: text;
    notableAchievements: text;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -371,7 +371,7 @@ type RenewableEnergyProjectsData =
    notableAchievements: text;
    numberOfProjects: nat;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -391,7 +391,7 @@ type RenewableEnergyInvestmentData =
    location: text;
    notableAchievements: text;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -411,7 +411,7 @@ type ReforestationProjectsData =
    location: text;
    notableAchievements: text;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    projectName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -429,7 +429,7 @@ type PeopleBenefitingFromInfrastructureData =
    location: text;
    notableAchievements: text;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -450,7 +450,7 @@ type PeopleAssistedOutOfPoverty =
    notableAchievements: text;
    numberOfPeopleAssisted: nat;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -468,7 +468,7 @@ type OrganizationalResourceFootprintReductionData =
    location: text;
    notableAchievements: text;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    reductionInResourceFootprint: float64;
    startDate: int;
@@ -488,7 +488,7 @@ type OceanPollutionReductionData =
    location: text;
    notableAchievements: text;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    reductionInPollution: float64;
    startDate: int;
@@ -509,7 +509,7 @@ type NutritiousFoodProgram =
    notableAchievements: text;
    numberOfBeneficiaries: nat;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -529,7 +529,7 @@ type MicroloanProgram =
    notableAchievements: text;
    numberOfLoans: nat;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1110,7 +1110,7 @@ type MarineEcosystemProtectionData =
    location: text;
    notableAchievements: text;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1130,7 +1130,7 @@ type MarginalizedCommunitySupportData =
    notableAchievements: text;
    numberOfBeneficiaries: nat;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1152,7 +1152,7 @@ type LandRehabilitationData =
    location: text;
    notableAchievements: text;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1171,7 +1171,7 @@ type LandConservationReforestationData =
    location: text;
    notableAchievements: text;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1212,7 +1212,7 @@ type JobCreationInitiativesData =
    location: text;
    notableAchievements: text;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1230,7 +1230,7 @@ type InequalityReductionBeneficiariesData =
    location: text;
    notableAchievements: text;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1251,7 +1251,7 @@ type InclusionPoliciesData =
    notableAchievements: text;
    numberOfPolicies: nat;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    policyName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1399,7 +1399,7 @@ type HumanRightsInitiativesData =
    notableAchievements: text;
    numberOfInitiatives: nat;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    scopeOfHumanRightsActivities: text;
    startDate: int;
@@ -1421,7 +1421,7 @@ type HealthcareFunding =
    notableAchievements: text;
    numberOfProjects: nat;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1441,7 +1441,7 @@ type HealthcareAccessData =
    notableAchievements: text;
    numberOfBeneficiaries: nat;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1459,7 +1459,7 @@ type HealthServicesData =
    location: text;
    notableAchievements: text;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1480,7 +1480,7 @@ type GlobalPartnershipFinancialContributionsData =
    location: text;
    notableAchievements: text;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    sourceOfFunds: text;
    startDate: int;
@@ -1501,7 +1501,7 @@ type GenderEqualityWorkshopsData =
    notableAchievements: text;
    numberOfParticipants: nat;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1522,7 +1522,7 @@ type FoodDonation =
    notableAchievements: text;
    numberOfBeneficiaries: nat;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1556,7 +1556,7 @@ type EnergyConsumptionReductionData =
    measurementsUnitsUsed: text;
    notableAchievements: text;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    reductionInEnergyConsumption: nat;
    startDate: int;
@@ -1577,7 +1577,7 @@ type EndangeredSpeciesProtectionData =
    notableAchievements: text;
    numberofSpeciesProtected: nat;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1597,7 +1597,7 @@ type EmploymentConditionsImprovementData =
    notableAchievements: text;
    numberOfBeneficiaries: nat;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1616,7 +1616,7 @@ type EducationalGrantsData =
    location: text;
    notableAchievements: text;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1636,7 +1636,7 @@ type CommunityPeaceProgramsData =
    location: text;
    notableAchievements: text;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1656,7 +1656,7 @@ type CollaborativeSDGProjectsData =
    notableAchievements: text;
    numberOfProjects: nat;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1675,7 +1675,7 @@ type CarbonEmissionReductionData =
    location: text;
    notableAchievements: text;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    reductionInEmission: float64;
    startDate: int;
@@ -1697,7 +1697,7 @@ type AntiCorruptionProgramsData =
    notableAchievements: text;
    numberOfPrograms: nat;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
@@ -1717,7 +1717,7 @@ type AffordableHousingSupportData =
    notableAchievements: text;
    numberOfHousingUnitsSupported: nat;
    objectives: text;
-   plannedIntiatives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;

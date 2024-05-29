@@ -148,18 +148,18 @@ const RenewableEnergyProjectsData = ({ setManualData, setUploadManually }) => {
       return;
     }
 
-    const newProgram: RenewableEnergyProjectsDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      typeOfRenewableEnergy,
-      numberOfProjects: BigInt(numberOfProjects),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: RenewableEnergyProjectsDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   typeOfRenewableEnergy,
+    //   numberOfProjects: BigInt(numberOfProjects),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

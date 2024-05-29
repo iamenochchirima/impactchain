@@ -148,18 +148,18 @@ const EmploymentConditionsImprovementData = ({ setManualData, setUploadManually 
       return;
     }
 
-    const newProgram: EmploymentConditionsImprovementDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      typeOfImprovement,
-      numberOfBeneficiaries: BigInt(numberOfBeneficiaries),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: EmploymentConditionsImprovementDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   typeOfImprovement,
+    //   numberOfBeneficiaries: BigInt(numberOfBeneficiaries),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

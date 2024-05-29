@@ -148,18 +148,18 @@ const VocationalTrainingProgramsData = ({ setManualData, setUploadManually }) =>
       return;
     }
 
-    const newProgram: VocationalTrainingProgramsDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      typeOfTraining,
-      totalParticipants: BigInt(totalParticipants),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: VocationalTrainingProgramsDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   typeOfTraining,
+    //   totalParticipants: BigInt(totalParticipants),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

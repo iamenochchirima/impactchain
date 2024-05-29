@@ -150,19 +150,19 @@ const SDGAdvocacyCampaignsData = ({ setManualData, setUploadManually }) => {
       return;
     }
 
-    const newProgram: SDGAdvocacyCampaignDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      typeOfCampaign,
-      numberOfCampaigns: BigInt(numberOfCampaigns),
-      scopeOfCampaign,
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: SDGAdvocacyCampaignDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   typeOfCampaign,
+    //   numberOfCampaigns: BigInt(numberOfCampaigns),
+    //   scopeOfCampaign,
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

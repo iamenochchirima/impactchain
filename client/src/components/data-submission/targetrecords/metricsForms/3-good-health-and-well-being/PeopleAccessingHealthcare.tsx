@@ -55,7 +55,7 @@ const HealthcareAccessData = ({ setManualData, setUploadManually }) => {
       const urls = await uploadAsset(checkedFiles);
 
       const startDateMilliseconds = new Date(startDate).getTime();
-      const endDateMilliseconds = new Date(endDate).getTime();
+      // const endDateMilliseconds = new Date(endDate).getTime();
 
       // const healthcareAccessData : HealthcareAccessDataType = {
       //   startDate: BigInt(startDateMilliseconds),
@@ -169,17 +169,17 @@ const HealthcareAccessData = ({ setManualData, setUploadManually }) => {
       return;
     }
 
-    const newProgram: HealthcareAccessDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      numberOfBeneficiaries: BigInt(numberOfBeneficiaries),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: HealthcareAccessDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   numberOfBeneficiaries: BigInt(numberOfBeneficiaries),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

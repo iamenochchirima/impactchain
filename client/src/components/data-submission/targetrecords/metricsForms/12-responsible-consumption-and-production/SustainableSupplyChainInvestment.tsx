@@ -150,19 +150,19 @@ const SustainableSupplyChainInvestmentData = ({ setManualData, setUploadManually
       return;
     }
 
-    const newProgram: SustainableSupplyChainInvestmentDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      typeOfInvestment,
-      amountInvested: BigInt(amountInvested),
-      numberOfSupplyChainImproved: BigInt(numberOfSupplyChainImproved),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: SustainableSupplyChainInvestmentDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   typeOfInvestment,
+    //   amountInvested: BigInt(amountInvested),
+    //   numberOfSupplyChainImproved: BigInt(numberOfSupplyChainImproved),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

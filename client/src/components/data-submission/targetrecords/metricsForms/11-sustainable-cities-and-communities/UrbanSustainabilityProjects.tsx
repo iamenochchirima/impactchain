@@ -148,18 +148,18 @@ const UrbanSustainabilityProjectsData = ({ setManualData, setUploadManually }) =
       return;
     }
 
-    const newProgram: UrbanSustainabilityProjectsDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      typeOfProject,
-      numberOfProjects: BigInt(numberOfProjects),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: UrbanSustainabilityProjectsDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   typeOfProject,
+    //   numberOfProjects: BigInt(numberOfProjects),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

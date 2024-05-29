@@ -150,19 +150,19 @@ const HealthcareFunding = ({ setManualData, setUploadManually }) => {
       return;
     }
 
-    const newProgram: HealthcareFundingType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      typeOfFunding,
-      amountFunded: BigInt(amountFunded),
-      numberOfProjects: BigInt(numberOfProjects),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: HealthcareFundingType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   typeOfFunding,
+    //   amountFunded: BigInt(amountFunded),
+    //   numberOfProjects: BigInt(numberOfProjects),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

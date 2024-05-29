@@ -148,18 +148,18 @@ const OrganizationalResourceFootprintReductionData = ({ setManualData, setUpload
       return;
     }
 
-    const newProgram: OrganizationalResourceFootprintReductionDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      typeOfResources,
-      reductionInResourceFootprint: BigInt(reductionInResourceFootprint),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: OrganizationalResourceFootprintReductionDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   typeOfResources,
+    //   reductionInResourceFootprint: BigInt(reductionInResourceFootprint),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

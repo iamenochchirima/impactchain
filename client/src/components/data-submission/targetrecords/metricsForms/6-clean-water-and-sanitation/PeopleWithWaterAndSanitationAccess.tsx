@@ -148,18 +148,18 @@ const WaterSanitationAccessData = ({ setManualData, setUploadManually }) => {
       return;
     }
 
-    const newProgram: WaterSanitationAccessDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      totalFundsAllocated: BigInt(totalFundsAllocated),
-      numberOfBeneficiaries: BigInt(numberOfBeneficiaries),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: WaterSanitationAccessDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   totalFundsAllocated: BigInt(totalFundsAllocated),
+    //   numberOfBeneficiaries: BigInt(numberOfBeneficiaries),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

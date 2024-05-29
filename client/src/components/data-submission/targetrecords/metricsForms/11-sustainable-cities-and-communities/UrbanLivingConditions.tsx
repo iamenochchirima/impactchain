@@ -146,17 +146,17 @@ const UrbanLivingConditionsData = ({ setManualData, setUploadManually }) => {
       return;
     }
 
-    const newProgram: UrbanLivingConditionsDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      numberOfAreasImproved: BigInt(numberOfAreasImproved),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: UrbanLivingConditionsDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   numberOfAreasImproved: BigInt(numberOfAreasImproved),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

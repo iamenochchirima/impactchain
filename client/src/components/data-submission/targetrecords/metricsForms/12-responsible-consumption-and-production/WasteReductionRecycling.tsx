@@ -150,19 +150,19 @@ const WasteReductionRecyclingData = ({ setManualData, setUploadManually }) => {
       return;
     }
 
-    const newProgram: WasteReductionRecyclingDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      typeOfWaste,
-      recyclingProcessInvolved,
-      totalWasteReduced: BigInt(totalWasteReduced),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: WasteReductionRecyclingDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   typeOfWaste,
+    //   recyclingProcessInvolved,
+    //   totalWasteReduced: BigInt(totalWasteReduced),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

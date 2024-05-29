@@ -148,18 +148,18 @@ const EducationalGrantsData = ({ setManualData, setUploadManually }) => {
       return;
     }
 
-    const newProgram: EducationalGrantsDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      typeOfGrant,
-      totalAmountAwarded: BigInt(totalAmountAwarded),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: EducationalGrantsDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   typeOfGrant,
+    //   totalAmountAwarded: BigInt(totalAmountAwarded),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

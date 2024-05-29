@@ -36,7 +36,7 @@ import UrbanLivingConditions from "./metricsForms/11-sustainable-cities-and-comm
 import WasteReductionRecycling from "./metricsForms/12-responsible-consumption-and-production/WasteReductionRecycling";
 import SustainableSupplyChainInvestment from "./metricsForms/12-responsible-consumption-and-production/SustainableSupplyChainInvestment";
 import OrganizationalResourceFootprintReduction from "./metricsForms/12-responsible-consumption-and-production/OrganizationalResourceFootprintReduction";
-import { CarbonEmissionReduction } from "./metricsForms/13-climate-action/CarbonEmissionReduction";
+import  CarbonEmissionReduction  from "./metricsForms/13-climate-action/CarbonEmissionReduction";
 import RenewableEnergyInvestment from './metricsForms/13-climate-action/RenewableEnergyInvestment';
 import ReforestationProjects from './metricsForms/13-climate-action/ReforestationProjects';
 import MarineEcosystemProtection from './metricsForms/14-life-below-water/MarineEcosystemProtection';
@@ -89,7 +89,7 @@ const ManuallyUpload: FC<Props> = ({
               {metric.key === "foodDonation" && (
                 <FoodDonation {...{ setManualData, setUploadManually }} />
               )}
-              {metric.key === "sustainableAgriculture" && (
+              {/* {metric.key === "sustainableAgriculture" && (
                 <SustainableAgriculture
                   {...{ setManualData, setUploadManually }}
                 />
@@ -153,7 +153,7 @@ const ManuallyUpload: FC<Props> = ({
                 <PeopleWithWaterAndSanitationAccess
                   {...{ setManualData, setUploadManually }}
                 />
-              )}
+              )} */}
               {/* {metric.key === "renewableEnergyProjects" && (
                 <RenewableEnergyProjects
                   {...{ setManualData, setUploadManually }}

@@ -5,6 +5,7 @@ import type { IDL } from '@dfinity/candid';
 export interface AffordableHousingSupportData {
   'created' : bigint,
   'duration' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'numberOfHousingUnitsSupported' : bigint,
@@ -18,12 +19,12 @@ export interface AffordableHousingSupportData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface AntiCorruptionProgramsData {
   'created' : bigint,
   'duration' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'numberOfPrograms' : bigint,
   'description' : string,
@@ -38,13 +39,13 @@ export interface AntiCorruptionProgramsData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface CarbonEmissionReductionData {
   'created' : bigint,
   'duration' : string,
   'reductionInEmission' : number,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -57,7 +58,6 @@ export interface CarbonEmissionReductionData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface CollaborativeSDGProjectsData {
@@ -65,6 +65,7 @@ export interface CollaborativeSDGProjectsData {
   'created' : bigint,
   'duration' : string,
   'typeOfCollaboration' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -76,12 +77,12 @@ export interface CollaborativeSDGProjectsData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface CommunityPeaceProgramsData {
   'created' : bigint,
   'duration' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -94,13 +95,13 @@ export interface CommunityPeaceProgramsData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface EducationalGrantsData {
   'created' : bigint,
   'duration' : string,
   'totalAmountAwarded' : bigint,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -113,7 +114,6 @@ export interface EducationalGrantsData {
   'location' : string,
   'typeOfGrant' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface EmploymentConditionsImprovementData {
@@ -121,6 +121,7 @@ export interface EmploymentConditionsImprovementData {
   'duration' : string,
   'numberOfBeneficiaries' : bigint,
   'typeOfImprovement' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -132,13 +133,13 @@ export interface EmploymentConditionsImprovementData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface EndangeredSpeciesProtectionData {
   'created' : bigint,
   'duration' : string,
   'conservationMeasures' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'numberofSpeciesProtected' : bigint,
@@ -152,13 +153,13 @@ export interface EndangeredSpeciesProtectionData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface EnergyConsumptionReductionData {
   'reductionInEnergyConsumption' : bigint,
   'created' : bigint,
   'duration' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -170,7 +171,6 @@ export interface EnergyConsumptionReductionData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'measurementsUnitsUsed' : string,
   'startDate' : bigint,
 }
@@ -190,6 +190,7 @@ export interface FoodDonation {
   'created' : bigint,
   'duration' : string,
   'numberOfBeneficiaries' : bigint,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'volumeOfDonatedFood' : bigint,
@@ -203,7 +204,6 @@ export interface FoodDonation {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface GenderEqualityWorkshopsData {
@@ -211,6 +211,7 @@ export interface GenderEqualityWorkshopsData {
   'duration' : string,
   'typeOfWorkshop' : string,
   'workshopDescription' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -223,12 +224,12 @@ export interface GenderEqualityWorkshopsData {
   'location' : string,
   'numberOfParticipants' : bigint,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface GlobalPartnershipFinancialContributionsData {
   'created' : bigint,
   'duration' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -243,13 +244,13 @@ export interface GlobalPartnershipFinancialContributionsData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface HealthServicesData {
   'created' : bigint,
   'duration' : string,
   'totalParticipants' : bigint,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -262,13 +263,13 @@ export interface HealthServicesData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface HealthcareAccessData {
   'created' : bigint,
   'duration' : string,
   'numberOfBeneficiaries' : bigint,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -280,13 +281,13 @@ export interface HealthcareAccessData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface HealthcareFunding {
   'numberOfProjects' : bigint,
   'created' : bigint,
   'duration' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -300,12 +301,12 @@ export interface HealthcareFunding {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface HumanRightsInitiativesData {
   'created' : bigint,
   'duration' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'scopeOfHumanRightsActivities' : string,
@@ -320,7 +321,6 @@ export interface HumanRightsInitiativesData {
   'location' : string,
   'typeOfInitiative' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface IOTDevice {
@@ -436,6 +436,7 @@ export interface InclusionPoliciesData {
   'created' : bigint,
   'duration' : string,
   'policyName' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'typeOfPolicy' : string,
@@ -448,13 +449,13 @@ export interface InclusionPoliciesData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface InequalityReductionBeneficiariesData {
   'created' : bigint,
   'duration' : string,
   'typeOfInequalityAddressed' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -467,13 +468,13 @@ export interface InequalityReductionBeneficiariesData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface JobCreationInitiativesData {
   'jobsCreated' : bigint,
   'created' : bigint,
   'duration' : string,
+  'plannedInitiatives' : string,
   'jobsSectors' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
@@ -486,7 +487,6 @@ export interface JobCreationInitiativesData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface JobTrainingProgram {
@@ -511,6 +511,7 @@ export interface LandConservationReforestationData {
   'created' : bigint,
   'duration' : string,
   'areaOfLandConserved' : bigint,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'typeOfLandConservation' : string,
@@ -524,12 +525,12 @@ export interface LandConservationReforestationData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface LandRehabilitationData {
   'created' : bigint,
   'duration' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -542,13 +543,13 @@ export interface LandRehabilitationData {
   'location' : string,
   'notableAchievements' : string,
   'areaOfLandRehabilitated' : bigint,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface MarginalizedCommunitySupportData {
   'created' : bigint,
   'duration' : string,
   'numberOfBeneficiaries' : bigint,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -563,13 +564,13 @@ export interface MarginalizedCommunitySupportData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface MarineEcosystemProtectionData {
   'created' : bigint,
   'duration' : string,
   'typeOfEcosystem' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -582,7 +583,6 @@ export interface MarineEcosystemProtectionData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface Matrics15 {
@@ -1082,6 +1082,7 @@ export interface MicroloanProgram {
   'created' : bigint,
   'duration' : string,
   'amountDisbursed' : bigint,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -1095,13 +1096,13 @@ export interface MicroloanProgram {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface NutritiousFoodProgram {
   'created' : bigint,
   'duration' : string,
   'numberOfBeneficiaries' : bigint,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -1113,13 +1114,13 @@ export interface NutritiousFoodProgram {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface OceanPollutionReductionData {
   'created' : bigint,
   'duration' : string,
   'typesOfPollutantsTargeted' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -1131,7 +1132,6 @@ export interface OceanPollutionReductionData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
   'reductionInPollution' : number,
 }
@@ -1140,6 +1140,7 @@ export interface OrganizationalResourceFootprintReductionData {
   'duration' : string,
   'typeOfResource' : string,
   'reductionInResourceFootprint' : number,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -1151,12 +1152,12 @@ export interface OrganizationalResourceFootprintReductionData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface PeopleAssistedOutOfPoverty {
   'created' : bigint,
   'duration' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -1169,12 +1170,12 @@ export interface PeopleAssistedOutOfPoverty {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface PeopleBenefitingFromInfrastructureData {
   'created' : bigint,
   'duration' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -1188,7 +1189,6 @@ export interface PeopleBenefitingFromInfrastructureData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface ReforestationProjectsData {
@@ -1196,6 +1196,7 @@ export interface ReforestationProjectsData {
   'duration' : string,
   'projectName' : string,
   'areaOfLandReforested' : bigint,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -1206,13 +1207,13 @@ export interface ReforestationProjectsData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface RenewableEnergyInvestmentData {
   'created' : bigint,
   'duration' : string,
   'typeOfRenewableEnergyInvestemt' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -1225,13 +1226,13 @@ export interface RenewableEnergyInvestmentData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface RenewableEnergyProjectsData {
   'numberOfProjects' : bigint,
   'created' : bigint,
   'duration' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -1244,7 +1245,6 @@ export interface RenewableEnergyProjectsData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export type Result = { 'ok' : UserRecord } |
@@ -1264,6 +1264,7 @@ export interface STEMInnovationEducationData {
   'created' : bigint,
   'duration' : string,
   'totalParticipants' : bigint,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -1276,13 +1277,13 @@ export interface STEMInnovationEducationData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface SanitationFacilitiesData {
   'created' : bigint,
   'duration' : string,
   'totalInvestment' : bigint,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -1296,13 +1297,13 @@ export interface SanitationFacilitiesData {
   'location' : string,
   'notableAchievements' : string,
   'facilityDescription' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface SchoolsSupportedData {
   'created' : bigint,
   'duration' : string,
   'projectName' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -1315,13 +1316,13 @@ export interface SchoolsSupportedData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface StudentsBenefitingData {
   'created' : bigint,
   'duration' : string,
   'totalStudentsBenefited' : bigint,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -1335,7 +1336,6 @@ export interface StudentsBenefitingData {
   'location' : string,
   'educationalLevel' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface SustainableAgricultureInvestment {
@@ -1345,6 +1345,7 @@ export interface SustainableAgricultureInvestment {
   'totalInvestment' : bigint,
   'projectName' : string,
   'typeOfInvestment' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -1355,12 +1356,12 @@ export interface SustainableAgricultureInvestment {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface SustainableFishingSupportData {
   'created' : bigint,
   'duration' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -1374,13 +1375,13 @@ export interface SustainableFishingSupportData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface SustainableInfrastructureData {
   'numberOfProjects' : bigint,
   'created' : bigint,
   'duration' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -1393,13 +1394,13 @@ export interface SustainableInfrastructureData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface SustainableSupplyChainInvestmentData {
   'created' : bigint,
   'duration' : string,
   'typeOfInvestment' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -1413,13 +1414,13 @@ export interface SustainableSupplyChainInvestmentData {
   'location' : string,
   'numberOfsupplyChainImproved' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface Testimonials { 'description' : string, 'image' : string }
 export interface UrbanLivingConditionsData {
   'created' : bigint,
   'duration' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'numberOfAreasImproved' : bigint,
@@ -1432,13 +1433,13 @@ export interface UrbanLivingConditionsData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface UrbanSustainabilityProjectsData {
   'numberOfProjects' : bigint,
   'created' : bigint,
   'duration' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -1451,7 +1452,6 @@ export interface UrbanSustainabilityProjectsData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface UserRecord {
@@ -1469,6 +1469,7 @@ export interface VocationalTrainingProgramsData {
   'created' : bigint,
   'duration' : string,
   'totalParticipants' : bigint,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -1480,7 +1481,6 @@ export interface VocationalTrainingProgramsData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
   'typeOfTraining' : string,
 }
@@ -1488,6 +1488,7 @@ export interface WasteReductionRecyclingData {
   'created' : bigint,
   'duration' : string,
   'recyclingProcessInvolved' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -1500,13 +1501,13 @@ export interface WasteReductionRecyclingData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface WaterConservationInitiativesData {
   'created' : bigint,
   'duration' : string,
   'waterSaved' : bigint,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -1520,13 +1521,13 @@ export interface WaterConservationInitiativesData {
   'location' : string,
   'typeOfInitiative' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface WaterSanitationAccessData {
   'created' : bigint,
   'duration' : string,
   'numberOfBeneficiaries' : bigint,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -1539,12 +1540,12 @@ export interface WaterSanitationAccessData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface WomensEmpowermentProgramData {
   'created' : bigint,
   'duration' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'futureObjectives' : string,
@@ -1558,12 +1559,12 @@ export interface WomensEmpowermentProgramData {
   'location' : string,
   'numberOfParticipants' : bigint,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export interface WorkplaceGenderEqualityPoliciesData {
   'created' : bigint,
   'duration' : string,
+  'plannedInitiatives' : string,
   'supportingFiles' : Array<string>,
   'description' : string,
   'typeOfPolicy' : string,
@@ -1577,7 +1578,6 @@ export interface WorkplaceGenderEqualityPoliciesData {
   'challenges' : string,
   'location' : string,
   'notableAchievements' : string,
-  'plannedIntiatives' : string,
   'startDate' : bigint,
 }
 export type email = string;

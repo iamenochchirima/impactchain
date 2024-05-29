@@ -148,18 +148,18 @@ const JobCreationInitiativesData = ({ setManualData, setUploadManually }) => {
       return;
     }
 
-    const newProgram: JobCreationInitiativesDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      jobsSectors,
-      jobsCreated: BigInt(jobsCreated),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: JobCreationInitiativesDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   jobsSectors,
+    //   jobsCreated: BigInt(jobsCreated),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

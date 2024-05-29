@@ -150,19 +150,19 @@ const StudentsBenefitingData = ({ setManualData, setUploadManually }) => {
       return;
     }
 
-    const newProgram: StudentsBenefitingDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      typeOfBenefits,
-      educationalLevel,
-      totalStudentsBenefited: BigInt(totalStudentsBenefited),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: StudentsBenefitingDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   typeOfBenefits,
+    //   educationalLevel,
+    //   totalStudentsBenefited: BigInt(totalStudentsBenefited),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

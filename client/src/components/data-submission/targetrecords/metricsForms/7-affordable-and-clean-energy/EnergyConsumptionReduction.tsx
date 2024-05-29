@@ -148,18 +148,18 @@ const EnergyConsumptionReductionData = ({ setManualData, setUploadManually }) =>
       return;
     }
 
-    const newProgram: EnergyConsumptionReductionDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      measurementsUnitsUsed,
-      reductionInEnergyConsumption: BigInt(reductionInEnergyConsumption),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: EnergyConsumptionReductionDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   measurementsUnitsUsed,
+    //   reductionInEnergyConsumption: BigInt(reductionInEnergyConsumption),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

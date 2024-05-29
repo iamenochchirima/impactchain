@@ -149,18 +149,18 @@ const SchoolsBuiltSupportedData = ({ setManualData, setUploadManually }) => {
       return;
     }
 
-    const newProgram: SchoolsSupportedDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      typeOfSupport,
-      numberOfSchoolsSupported: BigInt(numberOfSchoolsSupported),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: SchoolsSupportedDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   typeOfSupport,
+    //   numberOfSchoolsSupported: BigInt(numberOfSchoolsSupported),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

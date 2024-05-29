@@ -150,19 +150,19 @@ const WaterConservationInitiativesData = ({ setManualData, setUploadManually }) 
       return;
     }
 
-    const newProgram: WaterConservationInitiativesDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      typeOfInitiative,
-      totalFunding: BigInt(totalFunding),
-      numberOfInitiatives: BigInt(numberOfInitiatives),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: WaterConservationInitiativesDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   typeOfInitiative,
+    //   totalFunding: BigInt(totalFunding),
+    //   numberOfInitiatives: BigInt(numberOfInitiatives),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

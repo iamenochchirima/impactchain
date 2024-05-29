@@ -148,18 +148,18 @@ const WomensEmpowermentProgramData = ({ setManualData, setUploadManually }) => {
       return;
     }
 
-    const newProgram: WomensEmpowermentProgramDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      typeOfProgram,
-      numberOfParticipants: BigInt(numberOfParticipants),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: WomensEmpowermentProgramDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   typeOfProgram,
+    //   numberOfParticipants: BigInt(numberOfParticipants),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

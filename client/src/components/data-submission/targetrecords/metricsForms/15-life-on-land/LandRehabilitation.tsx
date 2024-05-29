@@ -146,17 +146,17 @@ const LandRehabilitationData = ({ setManualData, setUploadManually }) => {
       return;
     }
 
-    const newProgram: LandRehabilitationDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      areaOfLandRehabilitated: BigInt(areaOfLandRehabilitated),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: LandRehabilitationDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   areaOfLandRehabilitated: BigInt(areaOfLandRehabilitated),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

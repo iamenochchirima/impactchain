@@ -148,18 +148,18 @@ const AffordableHousingSupportData = ({ setManualData, setUploadManually }) => {
       return;
     }
 
-    const newProgram: AffordableHousingSupportDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      numberOfHousingUnitsSupported: BigInt(numberOfHousingUnitsSupported),
-      totalFunding: BigInt(totalFunding),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: AffordableHousingSupportDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   numberOfHousingUnitsSupported: BigInt(numberOfHousingUnitsSupported),
+    //   totalFunding: BigInt(totalFunding),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

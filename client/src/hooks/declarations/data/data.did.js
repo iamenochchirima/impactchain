@@ -7,6 +7,7 @@ export const idlFactory = ({ IDL }) => {
     'created' : IDL.Int,
     'duration' : IDL.Text,
     'numberOfBeneficiaries' : IDL.Nat,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -21,7 +22,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const IOTDevice = IDL.Record({
@@ -41,6 +41,7 @@ export const idlFactory = ({ IDL }) => {
     'created' : IDL.Int,
     'duration' : IDL.Text,
     'policyName' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'typeOfPolicy' : IDL.Text,
@@ -53,7 +54,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric102 = IDL.Record({
@@ -68,6 +68,7 @@ export const idlFactory = ({ IDL }) => {
     'created' : IDL.Int,
     'duration' : IDL.Text,
     'typeOfInequalityAddressed' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -80,7 +81,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric103 = IDL.Record({
@@ -105,6 +105,7 @@ export const idlFactory = ({ IDL }) => {
     'numberOfProjects' : IDL.Nat,
     'created' : IDL.Int,
     'duration' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -117,7 +118,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric111 = IDL.Record({
@@ -131,6 +131,7 @@ export const idlFactory = ({ IDL }) => {
   const AffordableHousingSupportData = IDL.Record({
     'created' : IDL.Int,
     'duration' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'numberOfHousingUnitsSupported' : IDL.Nat,
@@ -144,7 +145,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric112 = IDL.Record({
@@ -158,6 +158,7 @@ export const idlFactory = ({ IDL }) => {
   const UrbanLivingConditionsData = IDL.Record({
     'created' : IDL.Int,
     'duration' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'numberOfAreasImproved' : IDL.Nat,
@@ -170,7 +171,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric113 = IDL.Record({
@@ -195,6 +195,7 @@ export const idlFactory = ({ IDL }) => {
     'created' : IDL.Int,
     'duration' : IDL.Text,
     'recyclingProcessInvolved' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -207,7 +208,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric121 = IDL.Record({
@@ -222,6 +222,7 @@ export const idlFactory = ({ IDL }) => {
     'created' : IDL.Int,
     'duration' : IDL.Text,
     'typeOfInvestment' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -235,7 +236,6 @@ export const idlFactory = ({ IDL }) => {
     'location' : IDL.Text,
     'numberOfsupplyChainImproved' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric122 = IDL.Record({
@@ -251,6 +251,7 @@ export const idlFactory = ({ IDL }) => {
     'duration' : IDL.Text,
     'typeOfResource' : IDL.Text,
     'reductionInResourceFootprint' : IDL.Float64,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -262,7 +263,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric123 = IDL.Record({
@@ -287,6 +287,7 @@ export const idlFactory = ({ IDL }) => {
     'created' : IDL.Int,
     'duration' : IDL.Text,
     'reductionInEmission' : IDL.Float64,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -299,7 +300,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric131 = IDL.Record({
@@ -314,6 +314,7 @@ export const idlFactory = ({ IDL }) => {
     'created' : IDL.Int,
     'duration' : IDL.Text,
     'typeOfRenewableEnergyInvestemt' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -326,7 +327,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric132 = IDL.Record({
@@ -342,6 +342,7 @@ export const idlFactory = ({ IDL }) => {
     'duration' : IDL.Text,
     'projectName' : IDL.Text,
     'areaOfLandReforested' : IDL.Nat,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -352,7 +353,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric133 = IDL.Record({
@@ -377,6 +377,7 @@ export const idlFactory = ({ IDL }) => {
     'created' : IDL.Int,
     'duration' : IDL.Text,
     'typeOfEcosystem' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -389,7 +390,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric141 = IDL.Record({
@@ -404,6 +404,7 @@ export const idlFactory = ({ IDL }) => {
     'created' : IDL.Int,
     'duration' : IDL.Text,
     'typesOfPollutantsTargeted' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -415,7 +416,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
     'reductionInPollution' : IDL.Float64,
   });
@@ -430,6 +430,7 @@ export const idlFactory = ({ IDL }) => {
   const SustainableFishingSupportData = IDL.Record({
     'created' : IDL.Int,
     'duration' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -443,7 +444,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric143 = IDL.Record({
@@ -468,6 +468,7 @@ export const idlFactory = ({ IDL }) => {
     'created' : IDL.Int,
     'duration' : IDL.Text,
     'areaOfLandConserved' : IDL.Nat,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'typeOfLandConservation' : IDL.Text,
@@ -481,7 +482,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric151 = IDL.Record({
@@ -496,6 +496,7 @@ export const idlFactory = ({ IDL }) => {
     'created' : IDL.Int,
     'duration' : IDL.Text,
     'conservationMeasures' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'numberofSpeciesProtected' : IDL.Nat,
@@ -509,7 +510,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric152 = IDL.Record({
@@ -523,6 +523,7 @@ export const idlFactory = ({ IDL }) => {
   const LandRehabilitationData = IDL.Record({
     'created' : IDL.Int,
     'duration' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -535,7 +536,6 @@ export const idlFactory = ({ IDL }) => {
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
     'areaOfLandRehabilitated' : IDL.Nat,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric153 = IDL.Record({
@@ -559,6 +559,7 @@ export const idlFactory = ({ IDL }) => {
   const AntiCorruptionProgramsData = IDL.Record({
     'created' : IDL.Int,
     'duration' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'numberOfPrograms' : IDL.Nat,
     'description' : IDL.Text,
@@ -573,7 +574,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric161 = IDL.Record({
@@ -587,6 +587,7 @@ export const idlFactory = ({ IDL }) => {
   const HumanRightsInitiativesData = IDL.Record({
     'created' : IDL.Int,
     'duration' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'scopeOfHumanRightsActivities' : IDL.Text,
@@ -601,7 +602,6 @@ export const idlFactory = ({ IDL }) => {
     'location' : IDL.Text,
     'typeOfInitiative' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric162 = IDL.Record({
@@ -615,6 +615,7 @@ export const idlFactory = ({ IDL }) => {
   const CommunityPeaceProgramsData = IDL.Record({
     'created' : IDL.Int,
     'duration' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -627,7 +628,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric163 = IDL.Record({
@@ -653,6 +653,7 @@ export const idlFactory = ({ IDL }) => {
     'created' : IDL.Int,
     'duration' : IDL.Text,
     'typeOfCollaboration' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -664,7 +665,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric171 = IDL.Record({
@@ -678,6 +678,7 @@ export const idlFactory = ({ IDL }) => {
   const GlobalPartnershipFinancialContributionsData = IDL.Record({
     'created' : IDL.Int,
     'duration' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -692,7 +693,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric172 = IDL.Record({
@@ -762,6 +762,7 @@ export const idlFactory = ({ IDL }) => {
     'created' : IDL.Int,
     'duration' : IDL.Text,
     'amountDisbursed' : IDL.Nat64,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -775,7 +776,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric12 = IDL.Record({
@@ -789,6 +789,7 @@ export const idlFactory = ({ IDL }) => {
   const PeopleAssistedOutOfPoverty = IDL.Record({
     'created' : IDL.Int,
     'duration' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -801,7 +802,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric13 = IDL.Record({
@@ -826,6 +826,7 @@ export const idlFactory = ({ IDL }) => {
     'created' : IDL.Int,
     'duration' : IDL.Text,
     'numberOfBeneficiaries' : IDL.Nat,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'volumeOfDonatedFood' : IDL.Nat,
@@ -839,7 +840,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric21 = IDL.Record({
@@ -857,6 +857,7 @@ export const idlFactory = ({ IDL }) => {
     'totalInvestment' : IDL.Nat,
     'projectName' : IDL.Text,
     'typeOfInvestment' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -867,7 +868,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric22 = IDL.Record({
@@ -882,6 +882,7 @@ export const idlFactory = ({ IDL }) => {
     'created' : IDL.Int,
     'duration' : IDL.Text,
     'numberOfBeneficiaries' : IDL.Nat,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -893,7 +894,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric23 = IDL.Record({
@@ -918,6 +918,7 @@ export const idlFactory = ({ IDL }) => {
     'numberOfProjects' : IDL.Nat,
     'created' : IDL.Int,
     'duration' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -931,7 +932,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric31 = IDL.Record({
@@ -946,6 +946,7 @@ export const idlFactory = ({ IDL }) => {
     'created' : IDL.Int,
     'duration' : IDL.Text,
     'totalParticipants' : IDL.Nat,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -958,7 +959,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric32 = IDL.Record({
@@ -973,6 +973,7 @@ export const idlFactory = ({ IDL }) => {
     'created' : IDL.Int,
     'duration' : IDL.Text,
     'numberOfBeneficiaries' : IDL.Nat,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -984,7 +985,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric33 = IDL.Record({
@@ -1009,6 +1009,7 @@ export const idlFactory = ({ IDL }) => {
     'created' : IDL.Int,
     'duration' : IDL.Text,
     'projectName' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -1021,7 +1022,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric41 = IDL.Record({
@@ -1036,6 +1036,7 @@ export const idlFactory = ({ IDL }) => {
     'created' : IDL.Int,
     'duration' : IDL.Text,
     'totalAmountAwarded' : IDL.Nat64,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -1048,7 +1049,6 @@ export const idlFactory = ({ IDL }) => {
     'location' : IDL.Text,
     'typeOfGrant' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric42 = IDL.Record({
@@ -1063,6 +1063,7 @@ export const idlFactory = ({ IDL }) => {
     'created' : IDL.Int,
     'duration' : IDL.Text,
     'totalStudentsBenefited' : IDL.Nat,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -1076,7 +1077,6 @@ export const idlFactory = ({ IDL }) => {
     'location' : IDL.Text,
     'educationalLevel' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric43 = IDL.Record({
@@ -1100,6 +1100,7 @@ export const idlFactory = ({ IDL }) => {
   const WomensEmpowermentProgramData = IDL.Record({
     'created' : IDL.Int,
     'duration' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -1113,7 +1114,6 @@ export const idlFactory = ({ IDL }) => {
     'location' : IDL.Text,
     'numberOfParticipants' : IDL.Nat,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric51 = IDL.Record({
@@ -1129,6 +1129,7 @@ export const idlFactory = ({ IDL }) => {
     'duration' : IDL.Text,
     'typeOfWorkshop' : IDL.Text,
     'workshopDescription' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -1141,7 +1142,6 @@ export const idlFactory = ({ IDL }) => {
     'location' : IDL.Text,
     'numberOfParticipants' : IDL.Nat,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric52 = IDL.Record({
@@ -1155,6 +1155,7 @@ export const idlFactory = ({ IDL }) => {
   const WorkplaceGenderEqualityPoliciesData = IDL.Record({
     'created' : IDL.Int,
     'duration' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'typeOfPolicy' : IDL.Text,
@@ -1168,7 +1169,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric53 = IDL.Record({
@@ -1193,6 +1193,7 @@ export const idlFactory = ({ IDL }) => {
     'created' : IDL.Int,
     'duration' : IDL.Text,
     'totalInvestment' : IDL.Nat,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -1206,7 +1207,6 @@ export const idlFactory = ({ IDL }) => {
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
     'facilityDescription' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric61 = IDL.Record({
@@ -1221,6 +1221,7 @@ export const idlFactory = ({ IDL }) => {
     'created' : IDL.Int,
     'duration' : IDL.Text,
     'waterSaved' : IDL.Nat,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -1234,7 +1235,6 @@ export const idlFactory = ({ IDL }) => {
     'location' : IDL.Text,
     'typeOfInitiative' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric62 = IDL.Record({
@@ -1249,6 +1249,7 @@ export const idlFactory = ({ IDL }) => {
     'created' : IDL.Int,
     'duration' : IDL.Text,
     'numberOfBeneficiaries' : IDL.Nat,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -1261,7 +1262,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric63 = IDL.Record({
@@ -1286,6 +1286,7 @@ export const idlFactory = ({ IDL }) => {
     'numberOfProjects' : IDL.Nat,
     'created' : IDL.Int,
     'duration' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -1298,7 +1299,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric71 = IDL.Record({
@@ -1333,6 +1333,7 @@ export const idlFactory = ({ IDL }) => {
     'reductionInEnergyConsumption' : IDL.Nat,
     'created' : IDL.Int,
     'duration' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -1344,7 +1345,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'measurementsUnitsUsed' : IDL.Text,
     'startDate' : IDL.Int,
   });
@@ -1370,6 +1370,7 @@ export const idlFactory = ({ IDL }) => {
     'jobsCreated' : IDL.Nat,
     'created' : IDL.Int,
     'duration' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'jobsSectors' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
@@ -1382,7 +1383,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric81 = IDL.Record({
@@ -1397,6 +1397,7 @@ export const idlFactory = ({ IDL }) => {
     'created' : IDL.Int,
     'duration' : IDL.Text,
     'totalParticipants' : IDL.Nat,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -1408,7 +1409,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
     'typeOfTraining' : IDL.Text,
   });
@@ -1425,6 +1425,7 @@ export const idlFactory = ({ IDL }) => {
     'duration' : IDL.Text,
     'numberOfBeneficiaries' : IDL.Nat,
     'typeOfImprovement' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -1436,7 +1437,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric83 = IDL.Record({
@@ -1461,6 +1461,7 @@ export const idlFactory = ({ IDL }) => {
     'created' : IDL.Int,
     'duration' : IDL.Text,
     'totalParticipants' : IDL.Nat,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -1473,7 +1474,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric91 = IDL.Record({
@@ -1488,6 +1488,7 @@ export const idlFactory = ({ IDL }) => {
     'numberOfProjects' : IDL.Nat,
     'created' : IDL.Int,
     'duration' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -1500,7 +1501,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric92 = IDL.Record({
@@ -1514,6 +1514,7 @@ export const idlFactory = ({ IDL }) => {
   const PeopleBenefitingFromInfrastructureData = IDL.Record({
     'created' : IDL.Int,
     'duration' : IDL.Text,
+    'plannedInitiatives' : IDL.Text,
     'supportingFiles' : IDL.Vec(IDL.Text),
     'description' : IDL.Text,
     'futureObjectives' : IDL.Text,
@@ -1527,7 +1528,6 @@ export const idlFactory = ({ IDL }) => {
     'challenges' : IDL.Text,
     'location' : IDL.Text,
     'notableAchievements' : IDL.Text,
-    'plannedIntiatives' : IDL.Text,
     'startDate' : IDL.Int,
   });
   const Metric93 = IDL.Record({

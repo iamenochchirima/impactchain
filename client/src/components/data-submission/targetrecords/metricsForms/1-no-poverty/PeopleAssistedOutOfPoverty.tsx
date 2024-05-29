@@ -6,7 +6,7 @@ import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
-import { PeopleAssistedOutOfPoverty as PeopleAssistedOutOfPovertyType } from "../../../../../hooks/declarations/data/data.did";
+import { PeopleAssistedOutOfPoverty as PeopleAssistedOutOfPovertyType, Testimonials } from "../../../../../hooks/declarations/data/data.did";
 import { ManualData } from "../../MetricRecords";
 import { IoMdAdd } from "react-icons/io";
 import Program from "../support/Program";

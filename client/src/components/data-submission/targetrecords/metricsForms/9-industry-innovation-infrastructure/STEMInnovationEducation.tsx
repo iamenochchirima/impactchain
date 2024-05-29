@@ -148,18 +148,18 @@ const STEMInnovationEducationData = ({ setManualData, setUploadManually }) => {
       return;
     }
 
-    const newProgram: STEMInnovationEducationDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      typeOfProgram,
-      totalParticipants: BigInt(totalParticipants),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: STEMInnovationEducationDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   typeOfProgram,
+    //   totalParticipants: BigInt(totalParticipants),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

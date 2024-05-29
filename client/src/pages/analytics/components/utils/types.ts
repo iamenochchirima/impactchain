@@ -4,7 +4,6 @@ import { Metric } from "../../../../utils/types";
 export type LineGraphData = {
   name: string;
   data: number[];
-  description: string;
   categories: string[];
   x_label: string;
   y_label: string;
@@ -13,7 +12,6 @@ export type LineGraphData = {
 export type BarGraphData = {
   name: string;
   data: xisVals[];
-  description: string;
   categories: string[];
   x_label: string;
   y_label: string;

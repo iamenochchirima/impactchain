@@ -146,17 +146,17 @@ const ReforestationProjectsData = ({ setManualData, setUploadManually }) => {
       return;
     }
 
-    const newProgram: ReforestationProjectsDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      areaOfLandReforested: BigInt(areaOfLandReforested),
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: ReforestationProjectsDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   areaOfLandReforested: BigInt(areaOfLandReforested),
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

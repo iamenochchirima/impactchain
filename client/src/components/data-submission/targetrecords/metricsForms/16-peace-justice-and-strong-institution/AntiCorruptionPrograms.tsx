@@ -148,18 +148,18 @@ const AntiCorruptionProgramsData = ({ setManualData, setUploadManually }) => {
       return;
     }
 
-    const newProgram: AntiCorruptionProgramsDataType = {
-      programName,
-      startDate:BigInt(new Date(startDate).getTime()),
-      duration,
-      location,
-      typeOfProgram,
-      natureOfAntiCorruptionMeasures,
-      dataVerification:false,
-      supportingFiles:urls,
-      created:BigInt(Date.now()),
-    };
-    setPrograms([...programs, newProgram]);
+    // const newProgram: AntiCorruptionProgramsDataType = {
+    //   programName,
+    //   startDate:BigInt(new Date(startDate).getTime()),
+    //   duration,
+    //   location,
+    //   typeOfProgram,
+    //   natureOfAntiCorruptionMeasures,
+    //   dataVerification:false,
+    //   supportingFiles:urls,
+    //   created:BigInt(Date.now()),
+    // };
+    // setPrograms([...programs, newProgram]);
     setProgramName("");
     setStartDate("");
     setDuration("");

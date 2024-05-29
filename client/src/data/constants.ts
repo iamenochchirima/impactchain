@@ -3,7 +3,6 @@ export type TargetOption = {
   name: string;
   icon: string;
   color: string;
-  shadow: string;
   rectangle: string;
   emoji: string;
   metrics: TargetOptionMetric[];
@@ -30,7 +29,6 @@ export const targetOptions: TargetOption[] = [
     name: "No Poverty",
     icon: "/target/18.svg",
     color: "#E5243B",
-    shadow:'229,36,59,0',
     rectangle: "#c44c5b",
     emoji: "/targetIcons/1.svg",
     category: "Social",

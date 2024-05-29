@@ -75,7 +75,8 @@ export type GraphsData =  LineGraphData | BarGraphData | PieChartData | null;
 
 
 export type TestimonialType = {
-  testimonials: Testimonials;
+  projectName: string;
+  testimonials: Testimonials[];
   location: string;
   startDate: string;
   duration: string;

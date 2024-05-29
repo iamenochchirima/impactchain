@@ -1,13 +1,21 @@
+import { Metric } from "../../../../utils/types";
+
 export type LineGraphData = {
   name: string;
   data: number[];
+  description: string;
   categories: string[];
+  x_label: string;
+  y_label: string;
 };
 
 export type BarGraphData = {
   name: string;
   data: xisVals[];
+  description: string;
   categories: string[];
+  x_label: string;
+  y_label: string;
 };
 
 export type xisVals = {
@@ -41,35 +49,36 @@ export type MetricReportData = {
     1?: {
       typeOfGraph: "line" | "bar" | "pie";
       name: string;
-      x_label: string;
-      y_label: string;
       graph: GraphsData
     };
     2?: {
       typeOfGraph: "line" | "bar" | "pie";
       name: string;
-      x_label: string;
-      y_label: string;
       graph: GraphsData
     };
     3?: {
       typeOfGraph: "line" | "bar" | "pie";
       name: string;
-      x_label: string;
-      y_label: string;
       graph: GraphsData
     };
   };
   aiOverview: any;
 };
 
+export type GraphLabel = {
+  x_label: string;
+  y_label: string;
+};
+
 export type GraphsData =  LineGraphData | BarGraphData | PieChartData | null;
 
 
 export type FullReportData = {
+  companyName: string;
   overview : any;
   overalGraph: LineGraphData;
   specificMetrics: MetricReportData[];
+  rawMetrics: Metric[];
   overalImpact: number;
   participants: number;
   avgPrograms: number;

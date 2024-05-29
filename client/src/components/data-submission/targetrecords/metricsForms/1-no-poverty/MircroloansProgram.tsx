@@ -11,6 +11,13 @@ import { ManualData } from "../../MetricRecords";
 import { IoMdAdd } from "react-icons/io";
 import Program from "../support/Program";
 
+type Testimonial = {
+  description: string;
+  file: File | null;
+};
+
+const MAX_FILE_SIZE = 4 * 1024 * 1024;
+
 const MicroloansProgram = ({ setManualData, setUploadManually }) => {
   const [saving, setSaving] = useState(false);
   const [supportFiles, setSupportFiles] = useState<File[] | null>(null);

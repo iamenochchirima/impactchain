@@ -14,7 +14,7 @@ import {
   testpeopleAssistedOut,
   testsustainableAgricultureInvestments,
 } from "./test";
-import { MetricReportData, LineGraphData } from "./types";
+import { MetricReportData, LineGraphData, GraphLabel } from "./types";
 export const getMetricsReportData = async (
   metricsWithDataForPeriod: Metric[],
   periodOfTime: string
@@ -52,24 +52,35 @@ export const getMetricsReportData = async (
           locations.push(location);
         }
       }
-        // Get the average number of participants at the data.valueKey
+
       avgParticipants += metric.data.reduce(
         (acc, cur) => acc + Number(cur[valueKey]),
         0
       );
+      
+      const lineGraphLabels: GraphLabel = {
+        x_label: "Time",
+        y_label: "Number of Beneficiaries",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "Time",
+        y_label: "Number of Beneficiaries",
+      };
 
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
-
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -146,19 +157,29 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
 
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
-
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -239,11 +260,22 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -322,11 +354,21 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -404,11 +446,21 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -482,17 +534,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -543,17 +606,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -603,17 +677,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -663,17 +748,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -723,17 +819,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -784,17 +891,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -844,17 +962,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -905,17 +1034,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -966,17 +1106,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1027,17 +1178,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1088,6 +1250,15 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       // TODO: Add pie chart data
       const pieChartData = getPieChartData(
         periodOfTime,
@@ -1133,17 +1304,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1194,17 +1376,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1254,17 +1447,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1315,17 +1519,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1376,17 +1591,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1437,17 +1663,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1498,17 +1735,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1559,17 +1807,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1620,17 +1879,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1681,17 +1951,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1742,17 +2023,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1803,17 +2095,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1864,17 +2167,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1925,17 +2239,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -1986,17 +2311,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -2047,17 +2383,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -2108,17 +2455,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -2169,17 +2527,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -2230,17 +2599,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -2291,17 +2671,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -2352,17 +2743,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -2413,17 +2815,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -2474,17 +2887,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -2535,17 +2959,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -2596,17 +3031,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -2657,17 +3103,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -2718,17 +3175,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -2779,17 +3247,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -2839,17 +3318,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -2899,17 +3389,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -2960,17 +3461,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -3021,17 +3533,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -3082,18 +3605,29 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
 
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -3144,17 +3678,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -3205,17 +3750,28 @@ export const getMetricsReportData = async (
         (acc, cur) => acc + Number(cur.valueKey),
         0
       );
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       const barGraphData = getTimeBarGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        barGraphLabels
       );
 
       if (lineGraphData) {
@@ -3257,11 +3813,19 @@ export const getMetricsReportData = async (
   const avgDurationCount = avgDuration.reduce((acc, cur) => {
     acc[cur] = (acc[cur] || 0) + 1;
     return acc;
-  },);
+  });
 
   const locationCount = locations.length;
 
-  return { metricsData, allLineGraphData, averageImpact, avgParticipantsCount, avgProgramsCount, avgDurationCount, locationCount};
+  return {
+    metricsData,
+    allLineGraphData,
+    averageImpact,
+    avgParticipantsCount,
+    avgProgramsCount,
+    avgDurationCount,
+    locationCount,
+  };
 };
 
 export const getMetricsGraphsData = async (
@@ -3282,11 +3846,21 @@ export const getMetricsGraphsData = async (
       const valueKey = "numberOfBeneficiaries";
       const graphName = "Job Training and Educational Programs";
 
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3300,11 +3874,21 @@ export const getMetricsGraphsData = async (
       const valueKey = "amountDisbursed";
       const graphName = "Microloans or grants provided program";
 
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3316,12 +3900,23 @@ export const getMetricsGraphsData = async (
        *******************************/
     } else if (metric.key === "peopleAssistedOutOfPoverty") {
       const valueKey = "numberOfPeopleAssisted";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "People assisted out of poverty";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3333,12 +3928,23 @@ export const getMetricsGraphsData = async (
        ********************************/
     } else if (metric.key === "foodDonation") {
       const valueKey = "numberOfBeneficiaries";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Food Donation";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3350,12 +3956,23 @@ export const getMetricsGraphsData = async (
        * ******************************/
     } else if (metric.key === "sustainableAgriculture") {
       const valueKey = "totalInvestment";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Sustainable Agriculture";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3363,12 +3980,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "peopleFedWithNutritiousFood") {
       const valueKey = "numberOfBeneficiaries";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "People with regular nutritious food";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3376,12 +4004,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "healthcareFunding") {
       const valueKey = "amountFunded";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Healthcare Funding";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3389,12 +4028,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "healthCheckups") {
       const valueKey = "totalParticipantss";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Health check-ups or vaccination drives";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3402,12 +4052,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "peopleAccessingHealthcare") {
       const valueKey = "numberOfBeneficiaries";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "People accessing healthcare services";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3415,12 +4076,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "schoolsBuilt") {
       const valueKey = "numberOfSchoolsSupported";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Schools built or supported";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3428,12 +4100,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "educationalGrants") {
       const valueKey = "totalAmountAwarded";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Educational grants";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3441,12 +4124,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "studentsBenefiting") {
       const valueKey = "totalStudentsBenefited";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Students benefiting from educational programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3454,12 +4148,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "womensEmpowerment") {
       const valueKey = "numberOfParticipants";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Women's Empowerment Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3468,23 +4173,44 @@ export const getMetricsGraphsData = async (
     } else if (metric.key === "genderEqualityWorkshops") {
       const valueKey = "numberOfParticipants";
       const graphName = "Gender Equality Workshops";
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
       if (lineGraphData) {
         allLineGraphData.push(lineGraphData);
       }
     } else if (metric.key === "workplaceGenderEquality") {
       const valueKey = "numberOfPolicies";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Workplace Gender Equality Policies";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3494,11 +4220,21 @@ export const getMetricsGraphsData = async (
       const valueKey = "numberOfFacilities";
       const graphName = "Sanitation Facilities Provided";
 
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3506,12 +4242,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "waterConservation") {
       const valueKey = "waterSaved";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Water Conservation Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3519,12 +4266,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "peopleWithAccessToWater") {
       const valueKey = "numberOfBeneficiaries";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "People with Access to Clean Water Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3532,12 +4290,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "renewableEnergyProjects") {
       const valueKey = "numberOfProjects";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Renewable Energy Projects";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3545,12 +4314,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "energyEfficientSystems") {
       const valueKey = "numberOfSystemsInstalled";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Energy Efficient Systems Installed";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3558,12 +4338,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "energyConsumptionReduction") {
       const valueKey = "reductionInEnergyConsumption";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Energy Consumption Reduction Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3571,12 +4362,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "jobCreation") {
       const valueKey = "jobsCreated";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Job Creation Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3584,12 +4386,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "vocationalTraining") {
       const valueKey = "totalParticipants";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Vocational Training Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3597,12 +4410,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "employmentImprovements") {
       const valueKey = "numberOfBeneficiaries";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Employment Improvements Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3610,12 +4434,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "stemEducation") {
       const valueKey = "totalParticipants";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "STEM Education Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3623,12 +4458,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "sustainableInfrastructure") {
       const valueKey = "numberOfProjects";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Sustainable Infrastructure Projects";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3636,12 +4482,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "peopleBenefitingFromInfrastructure") {
       const valueKey = "totalBeneficiaries";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "People Benefiting from Infrastructure Projects";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3649,12 +4506,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "marginalizedCommunitySupport") {
       const valueKey = "numberOfBeneficiaries";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Marginalized Community Support Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3662,12 +4530,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "inclusionPolicies") {
       const valueKey = "numberOfPolicies";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Inclusion Policies Implemented";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3675,12 +4554,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "beneficiariesOfInequalityReduction") {
       const valueKey = "totalBeneficiaries";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Beneficiaries of Inequality Reduction Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3688,12 +4578,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "urbanSustainability") {
       const valueKey = "numberOfProjects";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Urban Sustainability Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3701,12 +4602,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "affordableHousing") {
       const valueKey = "numberOfHousingUnitsSupported";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Affordable Housing Projects";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3714,12 +4626,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "urbanLivingConditions") {
       const valueKey = "numberOfAreasImproved";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Urban Living Conditions Improvement Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3727,12 +4650,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "wasteReduction") {
       const valueKey = "totalWasteReduced";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Waste Reduction Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3740,12 +4674,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "sustainableSupplyChain") {
       const valueKey = "supplyChainImproved";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Sustainable Supply Chain Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3753,12 +4698,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "resourceFootprintReduction") {
       const valueKey = "reductionInResourceFootprint";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Resource Footprint Reduction Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3766,12 +4722,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "carbonEmissionReduction") {
       const valueKey = "reductionInEmission";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Carbon Emission Reduction Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3779,12 +4746,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "renewableEnergyInvestment") {
       const valueKey = "amountInvested";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Renewable Energy Investment Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3792,12 +4770,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "reforestationProjects") {
       const valueKey = "areaOfLandReforested";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Reforestation Program";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3805,12 +4794,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "marineEcosystemProtection") {
       const valueKey = "areaOfEcosystemProtected";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Marine Ecosystem Protection Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3818,12 +4818,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "oceanPollutionReduction") {
       const valueKey = "reductionInPollution";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Ocean Pollution Reduction Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3831,12 +4842,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "sustainableFishing") {
       const valueKey = "numberOfSustainableFishingProjects";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Sustainable Fishing Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3844,12 +4866,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "landConservation") {
       const valueKey = "areaOfLandConserved";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Land Conservation Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3857,12 +4890,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "endangeredSpeciesProtection") {
       const valueKey = "numberOfSpeciesProtected";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Endangered Species Protection Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3870,12 +4914,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "landRehabilitation") {
       const valueKey = "areaOfLandRehabilitated";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Land Rehabilitation Programs";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3883,12 +4938,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "antiCorruptionPrograms") {
       const valueKey = "numberOfPrograms";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Anti-Corruption Programs Implemented";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3896,12 +4962,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "humanRightsInitiatives") {
       const valueKey = "numberOfInitiatives";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Human Rights Initiatives Implemented";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3909,12 +4986,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "communityPeacePrograms") {
       const valueKey = "numberOfPrograms";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Community Peace Programs Implemented";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3922,12 +5010,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "collaborativeSDGProjects") {
       const valueKey = "numberOfProjects";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Collaborative SDG Projects Implemented";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3935,12 +5034,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "globalPartnershipFinancialContributions") {
       const valueKey = "amountContributed";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "Global Partnership Financial Contributions";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {
@@ -3948,12 +5058,23 @@ export const getMetricsGraphsData = async (
       }
     } else if (metric.key === "sdgAdvocacy") {
       const valueKey = "numberOfCampaigns";
+
+      const lineGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
+
+      const barGraphLabels: GraphLabel = {
+        x_label: "",
+        y_label: "",
+      };
       const graphName = "SDG Advocacy Campaigns Implemented";
       const lineGraphData = getLineGraphData(
         periodOfTime,
         metric.data,
         graphName,
-        valueKey
+        valueKey,
+        lineGraphLabels
       );
 
       if (lineGraphData) {

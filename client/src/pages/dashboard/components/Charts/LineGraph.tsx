@@ -17,7 +17,7 @@ type Props = {
   graphKey: string;
 };
 
-const LineGraph: FC<Props> = ({ data, graphKey }) => {
+const LineGraph: FC<Props> = ({ data, graphKey}) => {
   const {reportPromptResponse} = useSelector((state: RootState) => state.app);
   const [state, setState] = useState<LineGraphState>({
     series: [
@@ -96,6 +96,14 @@ const LineGraph: FC<Props> = ({ data, graphKey }) => {
               height={350}
             />
           </div>
+          <div className="">
+        <h3>
+          Key
+        </h3>
+        X: {data.x_label}
+        <br />
+        Y: {data.y_label}
+      </div>
         </div>
       </div>
     </div>

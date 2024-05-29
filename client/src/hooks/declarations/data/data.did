@@ -1,73 +1,122 @@
 type email = text;
 type WorkplaceGenderEqualityPoliciesData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
+   numberOfPolicies: nat;
+   objectives: text;
+   plannedInitiatives: text;
    policyName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    typeOfPolicy: text;
  };
 type WomensEmpowermentProgramData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
    numberOfParticipants: nat;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    typeOfProgram: text;
  };
 type WaterSanitationAccessData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
    numberOfBeneficiaries: nat;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    totalFundsAllocated: nat;
-   typeOfSupport: text;
  };
 type WaterConservationInitiativesData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    totalFunding: nat;
    typeOfInitiative: text;
+   waterSaved: nat;
  };
 type WasteReductionRecyclingData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    recyclingProcessInvolved: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    totalWasteReduced: nat;
  };
 type VocationalTrainingProgramsData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    totalParticipants: nat;
    typeOfTraining: text;
  };
@@ -86,131 +135,219 @@ type UserRecord =
  };
 type UrbanSustainabilityProjectsData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
-   projectName: text;
-   projectScope: text;
-   startDate: int;
-   supportingFiles: vec text;
-   totalFunding: nat;
-   typeOfProject: text;
-   typeOfSustainabilityFeatures: text;
- };
-type UrbanLivingConditionsData = 
- record {
-   created: int;
-   dataVerification: bool;
-   duration: text;
-   location: text;
-   numberOfAreasImproved: nat;
+   notableAchievements: text;
+   numberOfProjects: nat;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
+   typeOfProject: text;
+ };
+type UrbanLivingConditionsData = 
+ record {
+   challenges: text;
+   communityImpact: text;
+   created: int;
+   dataVerification: bool;
+   description: text;
+   duration: text;
+   futureObjectives: text;
+   location: text;
+   notableAchievements: text;
+   numberOfAreasImproved: nat;
+   objectives: text;
+   plannedInitiatives: text;
+   programName: text;
+   startDate: int;
+   supportingFiles: vec text;
+   testimonials: vec Testimonials;
+ };
+type Testimonials = 
+ record {
+   description: text;
+   image: text;
  };
 type SustainableSupplyChainInvestmentData = 
  record {
    amountInvested: nat;
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
+   numberOfsupplyChainImproved: text;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
-   supplyChainImproved: text;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
+   typeOfInvestment: text;
  };
 type SustainableInfrastructureData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
-   projectName: text;
+   notableAchievements: text;
+   numberOfProjects: nat;
+   objectives: text;
+   plannedInitiatives: text;
+   programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    typeOfInfrastructure: text;
  };
 type SustainableFishingSupportData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
+   dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
+   numberOfSustainableFishingProjects: nat;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    typeOfSupport: text;
  };
 type SustainableAgricultureInvestment = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
    numberOfProjects: nat;
+   objectives: text;
+   plannedInitiatives: text;
    projectName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    totalInvestment: nat;
    typeOfInvestment: text;
  };
 type StudentsBenefitingData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
    educationalLevel: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    totalStudentsBenefited: nat;
    typeOfBenefits: text;
  };
 type SchoolsSupportedData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
    numberOfSchoolsSupported: nat;
+   objectives: text;
+   plannedInitiatives: text;
    projectName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    typeOfSupport: text;
  };
 type SanitationFacilitiesData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
    facilityDescription: text;
    facilityName: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
+   objectives: text;
+   plannedInitiatives: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    totalInvestment: nat;
    typeOfFacility: text;
  };
 type STEMInnovationEducationData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    totalParticipants: nat;
    typeOfProgram: text;
  };
 type SDGAdvocacyCampaignsData = 
  record {
-   campaignName: text;
    created: int;
    dataVerification: bool;
    duration: text;
+   numberOfCampaigns: nat;
+   programName: text;
    scopeOfCampaign: text;
    startDate: int;
    supportingFiles: vec text;
@@ -223,110 +360,180 @@ type Result =
  };
 type RenewableEnergyProjectsData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
    numberOfProjects: nat;
-   projectName: text;
+   objectives: text;
+   plannedInitiatives: text;
+   programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    typeOfRenewableEnergy: text;
  };
 type RenewableEnergyInvestmentData = 
  record {
    amountInvested: nat;
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
-   numberOfProjects: nat;
+   notableAchievements: text;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    typeOfRenewableEnergyInvestemt: text;
  };
 type ReforestationProjectsData = 
  record {
    areaOfLandReforested: nat;
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
+   objectives: text;
+   plannedInitiatives: text;
    projectName: text;
    startDate: int;
    supportingFiles: vec text;
-   typeOfProject: text;
+   testimonials: vec Testimonials;
  };
 type PeopleBenefitingFromInfrastructureData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    totalBeneficiaries: nat;
    typeOfInfrastructure: text;
  };
 type PeopleAssistedOutOfPoverty = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
    numberOfPeopleAssisted: nat;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
  };
 type OrganizationalResourceFootprintReductionData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    reductionInResourceFootprint: float64;
    startDate: int;
    supportingFiles: vec text;
-   typeOfResources: text;
+   testimonials: vec Testimonials;
+   typeOfResource: text;
  };
 type OceanPollutionReductionData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    reductionInPollution: float64;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    typesOfPollutantsTargeted: text;
  };
 type NutritiousFoodProgram = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
    numberOfBeneficiaries: nat;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
  };
 type MicroloanProgram = 
  record {
    amountDisbursed: nat64;
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
    numberOfLoans: nat;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    typeOfSupport: text;
  };
 type Metrics9 = 
@@ -893,98 +1100,162 @@ type Matrics15 =
 type MarineEcosystemProtectionData = 
  record {
    areaOfEcosystemProtected: nat;
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    typeOfEcosystem: text;
  };
 type MarginalizedCommunitySupportData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
+   numberOfBeneficiaries: nat;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
    targetCommunity: text;
+   testimonials: vec Testimonials;
    totalFunding: nat;
    typeOfSupport: text;
  };
 type LandRehabilitationData = 
  record {
    areaOfLandRehabilitated: nat;
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
-   typeOfLand: text;
-   typeOfRehabilitation: text;
+   testimonials: vec Testimonials;
  };
 type LandConservationReforestationData = 
  record {
    areaOfLandConserved: nat;
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    typeOfLandConservation: text;
    typeOfLandUse: text;
  };
 type JobTrainingProgram = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
    numberOfBeneficiaries: nat;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
  };
 type JobCreationInitiativesData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    jobsCreated: nat;
    jobsSectors: text;
    location: text;
+   notableAchievements: text;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
  };
 type InequalityReductionBeneficiariesData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    totalBeneficiaries: nat;
    typeOfInequalityAddressed: text;
  };
 type InclusionPoliciesData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
+   numberOfPolicies: nat;
+   objectives: text;
+   plannedInitiatives: text;
    policyName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    typeOfPolicy: text;
  };
 type ImpactTargets = 
@@ -1117,88 +1388,145 @@ type IOTDevice =
  };
 type HumanRightsInitiativesData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
+   numberOfInitiatives: nat;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    scopeOfHumanRightsActivities: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    typeOfInitiative: text;
  };
 type HealthcareFunding = 
  record {
    amountFunded: nat64;
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
    numberOfProjects: nat;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    typeOfFunding: text;
  };
 type HealthcareAccessData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
    numberOfBeneficiaries: nat;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
  };
 type HealthServicesData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    totalParticipants: nat;
    typeOfService: text;
  };
 type GlobalPartnershipFinancialContributionsData = 
  record {
    amountContributed: nat64;
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    sourceOfFunds: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    typeOfContribution: text;
  };
 type GenderEqualityWorkshopsData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
    numberOfParticipants: nat;
+   objectives: text;
+   plannedInitiatives: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    typeOfWorkshop: text;
    workshopDescription: text;
    workshopName: text;
  };
 type FoodDonation = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
    numberOfBeneficiaries: nat;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    typeOfFoodDonated: text;
    volumeOfDonatedFood: nat;
  };
@@ -1212,115 +1540,187 @@ type EnergyEfficientSystemsData =
    programName: text;
    startDate: int;
    supportingFiles: vec text;
-   totalCost: nat;
+   typeOfSystem: text;
  };
 type EnergyConsumptionReductionData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
    measurementsUnitsUsed: text;
+   notableAchievements: text;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    reductionInEnergyConsumption: nat;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
  };
 type EndangeredSpeciesProtectionData = 
  record {
+   challenges: text;
+   communityImpact: text;
    conservationMeasures: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
    numberofSpeciesProtected: nat;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    typeOfSpecies: text;
  };
 type EmploymentConditionsImprovementData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
    numberOfBeneficiaries: nat;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    typeOfImprovement: text;
  };
 type EducationalGrantsData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    totalAmountAwarded: nat64;
    typeOfGrant: text;
  };
 type CommunityPeaceProgramsData = 
  record {
+   challenges: text;
    communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    typeOfProgram: text;
  };
 type CollaborativeSDGProjectsData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
-   projectName: text;
-   scopeOfCollaborativeEfforts: text;
+   notableAchievements: text;
+   numberOfProjects: nat;
+   objectives: text;
+   plannedInitiatives: text;
+   programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    typeOfCollaboration: text;
  };
 type CarbonEmissionReductionData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    reductionInEmission: float64;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    typeOfEmissionReduced: text;
  };
 type AntiCorruptionProgramsData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
    natureOfAntiCorruptionMeasures: text;
+   notableAchievements: text;
+   numberOfPrograms: nat;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    typeOfProgram: text;
  };
 type AffordableHousingSupportData = 
  record {
+   challenges: text;
+   communityImpact: text;
    created: int;
    dataVerification: bool;
+   description: text;
    duration: text;
+   futureObjectives: text;
    location: text;
+   notableAchievements: text;
    numberOfHousingUnitsSupported: nat;
+   objectives: text;
+   plannedInitiatives: text;
    programName: text;
    startDate: int;
    supportingFiles: vec text;
+   testimonials: vec Testimonials;
    totalFunding: nat;
  };
 service : {

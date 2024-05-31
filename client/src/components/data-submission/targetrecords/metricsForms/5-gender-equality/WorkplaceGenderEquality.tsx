@@ -211,7 +211,7 @@ const WorkplaceGenderEqualityPoliciesData = ({ setManualData, setUploadManually 
     setDuration("");
     setLocation("");
     setTypeOfPolicy("");
-    setNumberOfPolicies(0);
+    setNumberOfPolicies("");
     setDescription("");
     setObjectives("");
     setChallenges("");

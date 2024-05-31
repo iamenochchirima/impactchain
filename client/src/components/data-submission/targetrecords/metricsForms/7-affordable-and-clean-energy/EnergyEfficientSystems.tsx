@@ -234,7 +234,6 @@ const EnergyEfficientSystemsData = ({ setManualData, setUploadManually }) => {
     setTestimonials([]);
     setTestimonialDescription("");
     setTestimonialFile(null);
-    setGoal("");
     setEfficiencyRate("");
     setSupportFiles(null);
     setShowForm(false);

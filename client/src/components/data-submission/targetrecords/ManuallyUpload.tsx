@@ -156,7 +156,7 @@ const ManuallyUpload: FC<Props> = ({
                   {...{ setManualData, setUploadManually }}
                 />
               )} 
-              {/* {metric.key === "renewableEnergyProjects" && (
+              {metric.key === "renewableEnergyProjects" && (
                 <RenewableEnergyProjects
                   {...{ setManualData, setUploadManually }}
                 />
@@ -310,7 +310,7 @@ const ManuallyUpload: FC<Props> = ({
                 <SDGAdvocacyCampaigns
                   {...{ setManualData, setUploadManually }}
                 />
-              )}  */}
+              )} 
             </div>
           </div>
         </div>

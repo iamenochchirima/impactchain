@@ -13,7 +13,8 @@ import {
 import { ManualData } from "../../MetricRecords";
 import { IoMdAdd } from "react-icons/io";
 import Program from "../support/Program";
-import Testimonial from "../support/Testimonial";
+import AddTestimonial from "../support/AddTestimonial";
+import { toastError } from "../../../../utils";
 
 type Testimonial = {
   description: string;
@@ -27,7 +28,7 @@ const SustainableAgriculture = ({ setManualData, setUploadManually }) => {
   const [supportFiles, setSupportFiles] = useState<File[] | null>(null);
   const { storageInitiated } = useSelector((state: RootState) => state.app);
   const [countDown, setCountDown] = useState<number>(0);
-  const [projectName, setProgramName] = useState<string>("");
+  const [programName, setProgramName] = useState<string>("");
   const [startDate, setStartDate] = useState<string>("");
   const [duration, setDuration] = useState<string>("");
   const [programLocation, setProgramLocation] = useState<string>("");
@@ -122,7 +123,7 @@ const SustainableAgriculture = ({ setManualData, setUploadManually }) => {
   const handleSave = async () => {
     setSaving(true);
     if (
-      projectName === "" ||
+      programName === "" ||
       startDate === "" ||
       duration === "" ||
       programLocation === "" ||
@@ -192,7 +193,7 @@ const SustainableAgriculture = ({ setManualData, setUploadManually }) => {
       return;
     }
     const newProgram: SustainableAgricultureType = {
-      projectName,
+      programName,
       startDate: BigInt(new Date(startDate).getTime()),
       duration,
       location: programLocation,
@@ -270,15 +271,6 @@ const SustainableAgriculture = ({ setManualData, setUploadManually }) => {
     setTestimonialFile(null);
   };
 
-  const toastError = (message: string) => {
-    toast.error(message, {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-    });
-  };
-
   return (
     <div>
       <div className="">
@@ -334,10 +326,10 @@ const SustainableAgriculture = ({ setManualData, setUploadManually }) => {
             </label>
             <input
               className={styles.formInput}
-              id="projectName"
+              id="programName"
               type="text"
               placeholder="Enter the name of the sustainable agriculture investment program."
-              value={projectName}
+              value={programName}
               onChange={(e) => setProgramName(e.target.value)}
               required
             />
@@ -554,73 +546,18 @@ const SustainableAgriculture = ({ setManualData, setUploadManually }) => {
 
           {/* Testimonials */}
 
-          <div className={styles.testimonialDiv}>
-            <h3 className={styles.testimonialTitle}>
-              {" "}
-              Add Testimonials (Optional)
-            </h3>
-            {testimonials.length > 0 && (
-              <div className={styles.testmoCardDiv}>
-                {testimonials.map((testimonial, index) => (
-                  <Testimonial
-                    {...{ testimonial, handleRemoveTestimonial, index }}
-                  />
-                ))}
-              </div>
-            )}
-            <div className={styles.inputDiv}>
-              <label htmlFor={styles.testimonialLabel}>
-                Please provide a description of the testimonial.
-              </label>
-              <textarea
-                className={styles.textAreaInput}
-                id="testimonialDescription"
-                placeholder="Provide a description of the testimonial."
-                value={testimonialDescription}
-                onChange={(e) => setTestimonialDescription(e.target.value)}
-                required
-              />
-            </div>
-            {testimonialFile && (
-                <div className={styles.testimoUploadDiv}>
-                  <p className={styles.testimoFileName}>
-                    {testimonialFile.name}
-                  </p>
-                </div>
-              )}
-            <div className={styles.inputDiv}>
-              <input
-                type="file"
-                id="testimonialFile"
-                onChange={handleTestimonialFileChange}
-                accept="image/*"
-                className="hidden"
-              />
-              <button>
-                <label
-                  htmlFor="testimonialFile"
-                  className={styles.roundedButton}
-                >
-                  {testimonialFile ? "Change File" : "Upload Testimonial Image, Max 4MB"}
-                </label>
-              </button>
-             
-            </div>
-            <div className={styles.testmoButtonDiv}>
-              {testimonialDescription && testimonialFile && (
-                <button
-                  onClick={handleCancelTestimonial}
-                  className={styles.testimoCancelBtn}
-                >Cancel</button>
-              )}
-              <button
-                onClick={handleAddTestimonial}
-                className={styles.roundedButton}
-              >
-                Add
-              </button>
-            </div>
-          </div>
+          <AddTestimonial
+            {...{
+              testimonials,
+              handleCancelTestimonial,
+              setTestimonialDescription,
+              testimonialDescription,
+              handleRemoveTestimonial,
+              testimonialFile,
+              handleTestimonialFileChange,
+              handleAddTestimonial,
+            }}
+          />
 
           <hr className="mt-10" />
 

@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { UserRecord } from "../hooks/declarations/data/data.did";
 import { ImpactTargetType } from "../utils/types";
 
@@ -34,3 +35,27 @@ export const isDataIncomplete = (info: UserRecord, impactTargets: ImpactTargetTy
   }
   return "ok";
 };
+
+
+export const toastError = (message: string) => {
+  toast.error(message, {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+  });
+};
+
+export interface Fields {
+  [key: string]: string;
+}
+
+export const findEmptyFields = (fields: Fields): string[] => {
+  const emptyFields: string[] = [];
+  for (const [key, value] of Object.entries(fields)) {
+    if (value === "") {
+      emptyFields.push(key);
+    }
+  }
+  return emptyFields;
+}

@@ -89,7 +89,7 @@ const ManuallyUpload: FC<Props> = ({
               {metric.key === "foodDonation" && (
                 <FoodDonation {...{ setManualData, setUploadManually }} />
               )}
-              {/* {metric.key === "sustainableAgriculture" && (
+               {metric.key === "sustainableAgriculture" && (
                 <SustainableAgriculture
                   {...{ setManualData, setUploadManually }}
                 />
@@ -102,6 +102,7 @@ const ManuallyUpload: FC<Props> = ({
                {metric.key === "healthcareFunding" && (
                 <HealthcareFunding {...{ setManualData, setUploadManually }} />
               )}
+   
               {metric.key === "healthCheckups" && (
                 <HealthCheckups {...{ setManualData, setUploadManually }} />
               )}
@@ -119,6 +120,7 @@ const ManuallyUpload: FC<Props> = ({
                   {...{ setManualData, setUploadManually }}
                 />
               )}
+                   
               {metric.key === "studentsBenefiting" && (
                 <StudentsBenefitingData
                   {...{ setManualData, setUploadManually }}
@@ -153,7 +155,7 @@ const ManuallyUpload: FC<Props> = ({
                 <PeopleWithWaterAndSanitationAccess
                   {...{ setManualData, setUploadManually }}
                 />
-              )} */}
+              )} 
               {/* {metric.key === "renewableEnergyProjects" && (
                 <RenewableEnergyProjects
                   {...{ setManualData, setUploadManually }}

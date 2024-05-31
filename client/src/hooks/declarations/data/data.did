@@ -252,7 +252,7 @@ type SustainableAgricultureInvestment =
    numberOfProjects: nat;
    objectives: text;
    plannedInitiatives: text;
-   projectName: text;
+   programName: text;
    startDate: int;
    supportingFiles: vec text;
    testimonials: vec Testimonials;
@@ -278,7 +278,6 @@ type StudentsBenefitingData =
    supportingFiles: vec text;
    testimonials: vec Testimonials;
    totalStudentsBenefited: nat;
-   typeOfBenefits: text;
  };
 type SchoolsSupportedData = 
  record {
@@ -294,7 +293,7 @@ type SchoolsSupportedData =
    numberOfSchoolsSupported: nat;
    objectives: text;
    plannedInitiatives: text;
-   projectName: text;
+   programName: text;
    startDate: int;
    supportingFiles: vec text;
    testimonials: vec Testimonials;
@@ -308,7 +307,6 @@ type SanitationFacilitiesData =
    dataVerification: bool;
    description: text;
    duration: text;
-   facilityDescription: text;
    futureObjectives: text;
    location: text;
    notableAchievements: text;
@@ -412,7 +410,7 @@ type ReforestationProjectsData =
    notableAchievements: text;
    objectives: text;
    plannedInitiatives: text;
-   projectName: text;
+   programName: text;
    startDate: int;
    supportingFiles: vec text;
    testimonials: vec Testimonials;
@@ -1252,7 +1250,7 @@ type InclusionPoliciesData =
    numberOfPolicies: nat;
    objectives: text;
    plannedInitiatives: text;
-   policyName: text;
+   programName: text;
    startDate: int;
    supportingFiles: vec text;
    testimonials: vec Testimonials;
@@ -1507,7 +1505,6 @@ type GenderEqualityWorkshopsData =
    supportingFiles: vec text;
    testimonials: vec Testimonials;
    typeOfWorkshop: text;
-   workshopDescription: text;
  };
 type FoodDonation = 
  record {

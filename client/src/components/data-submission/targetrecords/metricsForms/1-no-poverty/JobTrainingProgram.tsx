@@ -6,11 +6,15 @@ import { RootState } from "../../../../../redux/store";
 import "react-datepicker/dist/react-datepicker.css";
 import { styles } from "../../../../../styles/styles";
 import FilesInput from "../support/FilesInput";
-import { JobTrainingProgram as JobTrainingProgramType, Testimonials } from "../../../../../hooks/declarations/data/data.did";
+import {
+  JobTrainingProgram as JobTrainingProgramType,
+  Testimonials,
+} from "../../../../../hooks/declarations/data/data.did";
 import { ManualData } from "../../MetricRecords";
 import { IoMdAdd } from "react-icons/io";
 import Program from "../support/Program";
-import Testimonial from "../support/Testimonial";
+import AddTestimonial from "../support/AddTestimonial";
+import { toastError } from "../../../../utils";
 
 type Testimonial = {
   description: string;
@@ -259,15 +263,6 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
     setTestimonialFile(null);
   };
 
-  const toastError = (message: string) => {
-    toast.error(message, {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-    });
-  };
-
   return (
     <div>
       <div className="">
@@ -379,7 +374,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
               className={styles.formInput}
               id="numberOfBeneficiaries"
               type="number"
-              placeholder="Indicate the number of participants involved in these programs."
+              placeholder="Indicate the number of participants involved in this program."
               value={numberOfBeneficiaries}
               onChange={(e) => setNumberOfParticipants(e.target.value)}
               required
@@ -482,9 +477,7 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
               required
             />
           </div>
-
           <hr />
-
           <div className="">
             <div className={styles.goalDiv}>
               <h3 className={styles.goalTitle}>
@@ -508,73 +501,18 @@ const JobTrainingProgram = ({ setManualData, setUploadManually }) => {
 
           {/* Testimonials */}
 
-          <div className={styles.testimonialDiv}>
-            <h3 className={styles.testimonialTitle}>
-              {" "}
-              Add Testimonials (Optional)
-            </h3>
-            {testimonials.length > 0 && (
-              <div className={styles.testmoCardDiv}>
-                {testimonials.map((testimonial, index) => (
-                  <Testimonial
-                    {...{ testimonial, handleRemoveTestimonial, index }}
-                  />
-                ))}
-              </div>
-            )}
-            <div className={styles.inputDiv}>
-              <label htmlFor={styles.testimonialLabel}>
-                Please provide a description of the testimonial.
-              </label>
-              <textarea
-                className={styles.textAreaInput}
-                id="testimonialDescription"
-                placeholder="Provide a description of the testimonial."
-                value={testimonialDescription}
-                onChange={(e) => setTestimonialDescription(e.target.value)}
-                required
-              />
-            </div>
-            {testimonialFile && (
-                <div className={styles.testimoUploadDiv}>
-                  <p className={styles.testimoFileName}>
-                    {testimonialFile.name}
-                  </p>
-                </div>
-              )}
-            <div className={styles.inputDiv}>
-              <input
-                type="file"
-                id="testimonialFile"
-                onChange={handleTestimonialFileChange}
-                accept="image/*"
-                className="hidden"
-              />
-              <button>
-                <label
-                  htmlFor="testimonialFile"
-                  className={styles.roundedButton}
-                >
-                  {testimonialFile ? "Change File" : "Upload Testimonial Image, Max 4MB"}
-                </label>
-              </button>
-             
-            </div>
-            <div className={styles.testmoButtonDiv}>
-              {testimonialDescription && testimonialFile && (
-                <button
-                  onClick={handleCancelTestimonial}
-                  className={styles.testimoCancelBtn}
-                >Cancel</button>
-              )}
-              <button
-                onClick={handleAddTestimonial}
-                className={styles.roundedButton}
-              >
-                Add
-              </button>
-            </div>
-          </div>
+          <AddTestimonial
+            {...{
+              testimonials,
+              handleCancelTestimonial,
+              setTestimonialDescription,
+              testimonialDescription,
+              handleRemoveTestimonial,
+              testimonialFile,
+              handleTestimonialFileChange,
+              handleAddTestimonial,
+            }}
+          />
 
           <hr className="mt-10" />
 

@@ -90,6 +90,8 @@ export interface GlobalState {
   currentMetricInfo: CurrentMetricInfo | null;
 
   currentSDGInfo : CurrentSDGInfoType | null;
+
+  settingsUploadModelMetric: Metric | null;
 }
 
 const initialState: GlobalState = {
@@ -125,6 +127,8 @@ const initialState: GlobalState = {
 
   currentMetricInfo: null,
   currentSDGInfo: null,
+
+  settingsUploadModelMetric: null,
 };
 
 export const appSlice = createSlice({
@@ -253,6 +257,13 @@ export const appSlice = createSlice({
     ) => {
       state.currentSDGInfo = action.payload.currentSDGInfo;
     },
+
+    setSettingsUploadModelMetric: (
+      state: GlobalState,
+      action: PayloadAction<Metric | null>
+    ) => {
+      state.settingsUploadModelMetric = action.payload;
+    }
   },
 });
 
@@ -283,6 +294,7 @@ export const {
   setMetricReportPromptModal,
   setMetricAnanlyticsModal,
   setCurrentSDGInfo,
+  setSettingsUploadModelMetric,
 } = appSlice.actions;
 
 export default appSlice.reducer;

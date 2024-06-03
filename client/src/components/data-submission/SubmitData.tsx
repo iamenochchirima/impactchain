@@ -9,7 +9,7 @@ import Metrics from "./metrics/Metrics";
 import { TargetRecords } from "./targetrecords/TargetRecords";
 import { useEffect, useState } from "react";
 
-type GradientStyle = {
+export type GradientStyle = {
   backgroundImage: string;
 }
 

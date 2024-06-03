@@ -1,15 +1,54 @@
-import { FC } from "react";
-import { useSelector } from "react-redux";
+import { FC, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../../redux/store";
+import { useAuth } from "../../../../../hooks/AppContext";
+import { UserRecord } from "../../../../../hooks/declarations/data/data.did";
+import {
+  setCurrentSDGInfo,
+  setImpactTargets,
+  setUserRecord,
+} from "../../../../../redux/slices/app";
+import { toastSuccess } from "../../../../../components/utils";
 
 type Props = {
   setShowWarning: (showWarning: boolean) => void;
 };
 
 const RemoveWarning: FC<Props> = ({ setShowWarning }) => {
-  const { currentSDGInfo, metricsUpdated } = useSelector(
+  const { currentSDGInfo, userRecord, impactTargets } = useSelector(
     (state: RootState) => state.app
   );
+  const [loading, setLoading] = useState<boolean>(false);
+  const { dataActor } = useAuth();
+  const dispatch = useDispatch();
+
+  const handleRemoveSDG = async () => {
+    if (!userRecord || !currentSDGInfo || !impactTargets) {
+      console.error("Some data is missing");
+      return;
+    }
+    try {
+      setLoading(true);
+      const newImpactTargets = impactTargets.filter(
+        (t) => t.id !== currentSDGInfo.target.id
+      );
+      const updatedImpactTargets = { ...userRecord.impactTargets };
+      updatedImpactTargets[`ImpactTarget${currentSDGInfo.target.id}`] = [];
+      const updatedUserRecord: UserRecord = {
+        ...userRecord,
+        impactTargets: updatedImpactTargets,
+      };
+      await dataActor?.updateUserRecord(updatedUserRecord);
+      toastSuccess("SDG removed successfully");
+      dispatch(setUserRecord(updatedUserRecord));
+      dispatch(setImpactTargets(newImpactTargets));
+      dispatch(setCurrentSDGInfo({ currentSDGInfo: null }));
+      setShowWarning(false);
+    } catch (error) {
+      setLoading(false);
+      console.log("Error removing SDG", error);
+    }
+  };
 
   return (
     <div
@@ -62,12 +101,15 @@ const RemoveWarning: FC<Props> = ({ setShowWarning }) => {
                 </div>
               </div>
             </div>
-            <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+            <div className="bg-gray-50 px-4 py-3 sm:flex items-center sm:flex-row-reverse sm:px-6">
               <button
                 type="button"
+                onClick={handleRemoveSDG}
                 className=" w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
               >
-                <span>Remove</span>
+                <span>
+                  {loading ? "Removing..." : "Remove SDG"}
+                </span>
               </button>
               <button
                 type="button"

@@ -20,7 +20,8 @@ import { UserRecord } from "../../../hooks/declarations/data/data.did";
 import { getTargetMetrics } from "../../../utils/targets";
 import Bubbles from "../../Bubbles";
 
-const bubbleText="Now that you have selected your key metrics, the next step is to collect the corresponding data. This information will be used to track your progress against the chosen SDGs and generate detailed reports.";
+const bubbleText =
+  "Now that you have selected your key metrics, the next step is to collect the corresponding data. This information will be used to track your progress against the chosen SDGs and generate detailed reports.";
 
 type Props = {
   target: TargetOption;
@@ -43,7 +44,9 @@ const TargetRecordsCard: FC<Props> = ({
     backgroundImage: `linear-gradient(to top, #354b5b, ${target.color} 50%, ${target.color})`,
   });
   const { dataActor } = useAuth();
-  const { userRecord, nextTarget } = useSelector((state: RootState) => state.app);
+  const { userRecord, nextTarget } = useSelector(
+    (state: RootState) => state.app
+  );
   const [impact, setImpact] = useState<ImpactTargetType | undefined>(undefined);
   const dispatch = useDispatch();
   const [metrics, setMetrics] = useState<Metric[]>([]);
@@ -162,7 +165,7 @@ const TargetRecordsCard: FC<Props> = ({
 
   return (
     <>
-      <div className="flex flex-col items-center   px-6 py-2 min-w-min max-w-full mr-16 ">
+      <div className="flex flex-col items-center px-6 py-2 min-w-min max-w-full mr-16 ">
         <div className="md:text-xl text-3xl font-bold text-white mt-4 bg-gra text-center font-TelegraphBold flex gap-3 items-center">
           <span>How do you record your data for {target.name}</span>
           <img
@@ -174,7 +177,7 @@ const TargetRecordsCard: FC<Props> = ({
         <div className="mt-5">
           <span
             className={`text-white text-xl font-bold mt-4 text-center font-TelegraphBold ${
-              saving? "opacity-50 cursor-not-allowed" : ""
+              saving ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >
             {impactIndex + 1} of {impactTargets.length}
@@ -200,39 +203,39 @@ const TargetRecordsCard: FC<Props> = ({
           )}
         </div>
         <div className="w-full flex justify-between my-4">
-          <Bubbles {...{bubbleText}} />
+          <Bubbles {...{ bubbleText }} />
           <div>
-          <div className="flex flex-row gap-2">
-          <button
-            className={`bg-custom-green px-4 py-1 rounded-xl text-black font-bold font-TelegraphUltraLight`}
-            onClick={handleBack}
-          >
-            <span className="">Back</span>
-          </button>
-
-          <div className="">
-            {currentIndex > 0 && (
+            <div className="flex flex-row gap-2">
               <button
-                onClick={handlePrevious}
-                className="px-4 py-1 text-custom-green font-bold"
+                className={`bg-custom-green px-4 py-1 rounded-xl text-black font-bold font-TelegraphUltraLight`}
+                onClick={handleBack}
               >
-                <span>Previous</span>
+                <span className="">Back</span>
               </button>
-            )}
 
-            <button
-              className={` bg-custom-green px-4 py-1 rounded-xl text-black font-bold font-TelegraphUltraLight`}
-              disabled={saving}
-              onClick={handleNext}
-            >
-              <span className="">
-                {finished
-                  ? `${saving ? "Saving" : "Finish"}`
-                  : `${saving ? "Saving" : "Next"}`}
-              </span>
-            </button>
-          </div>
-          </div>
+              <div className="">
+                {currentIndex > 0 && (
+                  <button
+                    onClick={handlePrevious}
+                    className="px-4 py-1 text-custom-green font-bold"
+                  >
+                    <span>Previous</span>
+                  </button>
+                )}
+
+                <button
+                  className={` bg-custom-green px-4 py-1 rounded-xl text-black font-bold font-TelegraphUltraLight`}
+                  disabled={saving}
+                  onClick={handleNext}
+                >
+                  <span className="">
+                    {finished
+                      ? `${saving ? "Saving" : "Finish"}`
+                      : `${saving ? "Saving" : "Next"}`}
+                  </span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

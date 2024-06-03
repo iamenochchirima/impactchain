@@ -46,6 +46,15 @@ export const toastError = (message: string) => {
   });
 };
 
+export const toastSuccess = (message: string) => {
+  toast.success(message, {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+  });
+};
+
 export interface Fields {
   [key: string]: string;
 }

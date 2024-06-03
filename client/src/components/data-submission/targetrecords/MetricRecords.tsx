@@ -15,11 +15,7 @@ export type ManualData = {
   data: any[];
 };
 
-const MetricRecords: FC<Props> = ({
-  metric,
-  metrics,
-  setMetrics,
-}) => {
+const MetricRecords: FC<Props> = ({ metric, metrics, setMetrics }) => {
   const [uploadManually, setUploadManually] = useState<boolean>(false);
   const [manualData, setManualData] = useState<ManualData | null>(null);
 
@@ -27,7 +23,6 @@ const MetricRecords: FC<Props> = ({
     setUploadManually(false);
     setManualData(null);
   }, [metric]);
-  
 
   useEffect(() => {
     if (manualData) {
@@ -37,13 +32,10 @@ const MetricRecords: FC<Props> = ({
         goal: [manualData.goal],
       };
       setMetrics(
-        metrics.map((m) =>
-          m.name === metric.name ? updatedMetric : m
-        )
+        metrics.map((m) => (m.name === metric.name ? updatedMetric : m))
       );
     }
   }, [manualData]);
-
 
   return (
     <div className="text-white px-5 py-3 flex flex-col items-center border-x border-y rounded-xl border-green-200 font-TelegraphRegular">
@@ -52,14 +44,22 @@ const MetricRecords: FC<Props> = ({
         <button
           onClick={() => setUploadManually(true)}
           disabled={manualData !== null}
-          className=" flex items-center gap-2 bg-white px-4 py-2 text-black rounded-xl"
+          className="flex items-center gap-2 bg-white px-4 py-2 text-black rounded-xl"
         >
-          {metric.data.length > 0 ? <IoCheckmark size={20} /> : <IoMdAdd size={20} />}
-         <span> {metric.data.length > 0 ? "Data recorded" : "Record your data"}</span>
+          {metric.data.length > 0 ? (
+            <IoCheckmark size={20} />
+          ) : (
+            <IoMdAdd size={20} />
+          )}
+          <span>
+            {metric.data.length > 0 ? "Data recorded" : "Record your data"}
+          </span>
         </button>
       </div>
 
-      {uploadManually && <ManuallyUpload {...{ setUploadManually, setManualData, metric }} />}
+      {uploadManually && (
+        <ManuallyUpload {...{ setUploadManually, setManualData, metric }} />
+      )}
     </div>
   );
 };

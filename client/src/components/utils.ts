@@ -55,6 +55,15 @@ export const toastSuccess = (message: string) => {
   });
 };
 
+export const toastWarning = (message: string) => {
+  toast.warn(message, {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+  });
+};
+
 export interface Fields {
   [key: string]: string;
 }

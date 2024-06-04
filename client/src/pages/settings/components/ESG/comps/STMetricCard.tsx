@@ -5,8 +5,9 @@ import { SeletectedMetric } from "../../../../../components/data-submission/metr
 import STMetricItem from "./STMetricItem";
 import { UserRecord } from "../../../../../hooks/declarations/data/data.did";
 import { ImpactTargetType, Metric } from "../../../../../utils/types";
-import { setImpactTargets } from "../../../../../redux/slices/app";
+import { CurrentSDGInfoType, setCurrentSDGInfo, setImpactTargets } from "../../../../../redux/slices/app";
 import { getTargetMetrics } from "../../../../../utils/targets";
+import {  targetOptions } from "../../../../../data/constants";
 
 
 
@@ -14,7 +15,7 @@ type Props = {
   record: UserRecord | null;
   setRecord: (record: UserRecord) => void;
   setUploadManually: (uploadManually: boolean) => void;
-  uploadedMetricKey: string;
+  uploadedMetricKey: string[];
 }
 
 const STMetricCard : FC<Props> = ({record, setRecord, setUploadManually, uploadedMetricKey}) => {
@@ -57,6 +58,16 @@ const STMetricCard : FC<Props> = ({record, setRecord, setUploadManually, uploade
       ...currentSDGInfo.target,
       metrics: _updatedmetrics,
     };
+    const targetOP = targetOptions.find((t) => t.id === Number(currentSDGInfo.target.id));
+    if (!targetOP) {
+      console.error("Target Option is null");
+      return;
+    }
+    const value : CurrentSDGInfoType = {
+      targetOption: targetOP,
+      target: updatedTarget,
+    };
+    dispatch(setCurrentSDGInfo({currentSDGInfo: value}));
     const updatedTargets = impactTargets.map((t) =>
       t.id === currentSDGInfo.target.id ? updatedTarget : t
     );

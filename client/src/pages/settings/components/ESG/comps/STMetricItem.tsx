@@ -18,7 +18,7 @@ type Props = {
   ) => void;
   selectedMetrics: SeletectedMetric[];
   setUploadManually: (uploadManually: boolean) => void;
-  uploadedMetricKey: string;
+  uploadedMetricKey: string[];
 };
 
 const STMetricItem: FC<Props> = ({
@@ -85,6 +85,13 @@ const STMetricItem: FC<Props> = ({
     setUploadManually(true);
   };
 
+  const checkIfMetricDataUploaded = () => {
+    if (uploadedMetricKey && uploadedMetricKey.includes(m.key)) {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <div className="flex flex-col  bg-gray-700 p-2 rounded gap-3 text-white hover:cursor-pointer">
       <h3 className="leading-tight">{m.description}</h3>
@@ -99,7 +106,7 @@ const STMetricItem: FC<Props> = ({
           }  px-10 py-1.5 flex flex-col rounded-xl text-black font-bold`}
           disabled={!selectedButton}
         >
-          {uploadedMetricKey && uploadedMetricKey === m.key && (
+          {checkIfMetricDataUploaded() && (
             <span className="text-white text-xs font-extralight">
               Data uploaded
             </span>

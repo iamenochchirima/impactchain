@@ -5,6 +5,7 @@ import { RootState } from "../../../../../redux/store";
 import { AiOutlineClose } from "react-icons/ai";
 import {
   setCurrentSDGInfo,
+  setImpactTargets,
   setMetricsUpdated,
   setUserRecord,
 } from "../../../../../redux/slices/app";
@@ -13,7 +14,13 @@ import { UserRecord } from "../../../../../hooks/declarations/data/data.did";
 import { useAuth } from "../../../../../hooks/AppContext";
 import ManuallyUpload from "../../../../../components/data-submission/targetrecords/ManuallyUpload";
 import { ManualData } from "../../../../../components/data-submission/targetrecords/MetricRecords";
-import { Metric } from "../../../../../utils/types";
+import { ImpactTargetType, Metric } from "../../../../../utils/types";
+import { getTargetMetrics } from "../../../../../utils/targets";
+import {
+  toastError,
+  toastSuccess,
+  toastWarning,
+} from "../../../../../components/utils";
 
 type GradientStyle = {
   backgroundImage: string;
@@ -25,9 +32,9 @@ const SDGInfo = () => {
   const [showWarning, setShowWarning] = useState(false);
   const {
     currentSDGInfo,
-    metricsUpdated,
     userRecord,
     settingsUploadModelMetric,
+    impactTargets,
   } = useSelector((state: RootState) => state.app);
   const [metrics, setMetrics] = useState<Metric[]>([]);
   useEffect(() => {
@@ -38,11 +45,12 @@ const SDGInfo = () => {
 
   const [record, setRecord] = useState<UserRecord | null>(null);
   const [manualData, setManualData] = useState<ManualData | null>(null);
-  const [uploadedMetricKey, setUploadedMetricKey] = useState<string>("");
+  const [uploadedMetricKey, setUploadedMetricKey] = useState<string[]>([]);
   const [uploadManually, setUploadManually] = useState<boolean>(false);
   const [gradientStyle, setGradientStyle] = useState<GradientStyle>({
     backgroundImage: "",
   });
+  const [saving, setSaving] = useState<boolean>(false);
 
   useEffect(() => {
     if (userRecord) {
@@ -67,35 +75,90 @@ const SDGInfo = () => {
   };
 
   const handleSave = async () => {
-    if (!record) {
-      console.error("Record is null");
+    if (!record || !impactTargets || !currentSDGInfo) {
+      console.error("Record, impactTargets or currentSDGInfo is null");
       return;
     }
+    const impact = impactTargets.find((t) => t.id === currentSDGInfo.target.id);
+    if (!impact) {
+      console.error("Impact not found");
+      return;
+    }
+    const metrics = impact.metrics;
+    const metricsWithNoData = metrics.filter((m) => m.data.length === 0);
+    const names = metricsWithNoData.map((m) => m.name);
+    if (metricsWithNoData.length > 0) {
+      console.log("Metrics with no data", metricsWithNoData);
+      toastError(
+        `Please upload data for ${names.join(", ")} to save or remove them.`
+      );
+      return;
+    }
+    setSaving(true);
     await dataActor?.updateUserRecord(record);
-    dispatch(setUserRecord(record));
+    setUploadedMetricKey([]);
+    toastSuccess("Record updated successfully");
+    setSaving(false);
   };
 
   useEffect(() => {
-    if (manualData) {
+    if (manualData && currentSDGInfo && impactTargets && record) {
       if (!settingsUploadModelMetric) {
         console.error("Metric not found");
         return;
       }
 
-      const updatedData = settingsUploadModelMetric.data.concat(manualData.data);
+      const updatedData = settingsUploadModelMetric.data.concat(
+        manualData.data
+      );
       const updatedMetric: Metric = {
         ...settingsUploadModelMetric,
         data: updatedData,
         goal: [manualData.goal],
       };
-      setUploadedMetricKey(settingsUploadModelMetric.key);
-      setMetrics(
-        metrics.map((m) =>
-          m.name === settingsUploadModelMetric.name ? updatedMetric : m
-        )
+      setUploadedMetricKey((prev) => {
+        if (prev.includes(settingsUploadModelMetric.key)) {
+          return prev;
+        }
+        return [...prev, settingsUploadModelMetric.key];
+      });
+      const updatedMetrics = metrics.map((m) =>
+        m.name === settingsUploadModelMetric.name ? updatedMetric : m
       );
+      setMetrics(updatedMetrics);
+      const updatedTarget: ImpactTargetType = {
+        ...currentSDGInfo.target,
+        metrics: updatedMetrics,
+      };
+      dispatch(
+        setCurrentSDGInfo({
+          currentSDGInfo: { ...currentSDGInfo, target: updatedTarget },
+        })
+      );
+      const updatedTargets = impactTargets.map((t) =>
+        t.id === currentSDGInfo.target.id ? updatedTarget : t
+      );
+      dispatch(setImpactTargets(updatedTargets));
+      const updatedImpactTargets = { ...record.impactTargets };
+      updatedTargets.forEach((target) => {
+        const metrics = getTargetMetrics(target);
+        updatedImpactTargets[`ImpactTarget${target.id}`] = [
+          {
+            id: target.id,
+            name: target.name,
+            metrics: metrics,
+          },
+        ];
+      });
+      const updatedRecord: UserRecord = {
+        ...record,
+        impactTargets: updatedImpactTargets,
+      };
+      setRecord(updatedRecord);
     }
   }, [manualData]);
+
+  console.log("Impact Targets", impactTargets);
 
   return (
     <>
@@ -121,7 +184,14 @@ const SDGInfo = () => {
               </div>
 
               <div className="w-3/4 flex flex-col justify-center items-center pt-10">
-                <STMetricCard {...{ record, setRecord, setUploadManually,  uploadedMetricKey}} />
+                <STMetricCard
+                  {...{
+                    record,
+                    setRecord,
+                    setUploadManually,
+                    uploadedMetricKey,
+                  }}
+                />
               </div>
 
               <div className="pb-20 w-full flex  justify-center mt-4 gap-10 ">
@@ -131,14 +201,14 @@ const SDGInfo = () => {
                 >
                   Remove SDG
                 </button>
-                {metricsUpdated || manualData && (
-                  <button
-                    onClick={handleSave}
-                    className="bg-custom-green rounded-3xl px-5 py-2 text-black"
-                  >
-                    Save
-                  </button>
-                )}
+
+                <button
+                  onClick={handleSave}
+                  disabled={saving}
+                  className="bg-custom-green rounded-3xl px-5 py-2 text-black"
+                >
+                  {saving ? "Saving..." : "Save"}
+                </button>
               </div>
               {showWarning && <RemoveWarning {...{ setShowWarning }} />}
             </div>

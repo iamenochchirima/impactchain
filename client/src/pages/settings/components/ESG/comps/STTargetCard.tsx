@@ -4,12 +4,12 @@ import { RootState } from "../../../../../redux/store";
 
 const   STTargetCard = ({ target, setSelectedTargets }) => {
   const [selectedButton, setSelectedButton] = useState<boolean>(false);
-  const { impactTargets } = useSelector((state: RootState) => state.app);
+  const { localImpactTargets } = useSelector((state: RootState) => state.app);
 
   useEffect(() => {
-    if (impactTargets) {
-      if (impactTargets.length > 0) {
-        const _innerTargets = impactTargets
+    if (localImpactTargets) {
+      if (localImpactTargets.length > 0) {
+        const _innerTargets = localImpactTargets
         const _sortedTargets = [..._innerTargets].sort(
           (a, b) => Number(a.id) - Number(b.id)
         );
@@ -27,7 +27,7 @@ const   STTargetCard = ({ target, setSelectedTargets }) => {
         }
       }
     }
-  }, [impactTargets, target, setSelectedButton]);
+  }, [localImpactTargets, target, setSelectedButton]);
 
   const handleClicked = () => {
     setSelectedButton(!selectedButton);

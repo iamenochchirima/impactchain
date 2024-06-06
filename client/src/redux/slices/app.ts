@@ -89,9 +89,14 @@ export interface GlobalState {
 
   currentMetricInfo: CurrentMetricInfo | null;
 
-  currentSDGInfo : CurrentSDGInfoType | null;
+  currentSDGInfo: CurrentSDGInfoType | null;
 
   settingsUploadModelMetric: Metric | null;
+
+  // Settings Data upload
+  showThisModal: string;
+  localImpactTargets: ImpactTargetType[] | null;
+  localRecord: UserRecord | null;
 }
 
 const initialState: GlobalState = {
@@ -129,6 +134,11 @@ const initialState: GlobalState = {
   currentSDGInfo: null,
 
   settingsUploadModelMetric: null,
+
+  // Settings Data upload
+  showThisModal: "",
+  localImpactTargets: null,
+  localRecord: null,
 };
 
 export const appSlice = createSlice({
@@ -263,6 +273,22 @@ export const appSlice = createSlice({
       action: PayloadAction<Metric | null>
     ) => {
       state.settingsUploadModelMetric = action.payload;
+    },
+
+    // Settings Data upload
+    setShowThisModal: (state: GlobalState, action: PayloadAction<string>) => {
+      state.showThisModal = action.payload;
+    },
+
+    setLocalImpactTargets: (
+      state: GlobalState,
+      action: PayloadAction<ImpactTargetType[] | null>
+    ) => {
+      state.localImpactTargets = action.payload;
+    },
+
+    setLocalRecord: (state: GlobalState, action: PayloadAction<UserRecord | null>) => {
+      state.localRecord = action.payload;
     }
   },
 });
@@ -295,6 +321,9 @@ export const {
   setMetricAnanlyticsModal,
   setCurrentSDGInfo,
   setSettingsUploadModelMetric,
+  setShowThisModal,
+  setLocalImpactTargets,
+  setLocalRecord,
 } = appSlice.actions;
 
 export default appSlice.reducer;

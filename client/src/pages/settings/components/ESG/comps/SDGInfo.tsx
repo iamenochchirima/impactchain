@@ -158,8 +158,6 @@ const SDGInfo = () => {
     }
   }, [manualData]);
 
-  console.log("Impact Targets", impactTargets);
-
   return (
     <>
       <div className="fixed z-50 inset-0 text-cyan-700 overflow-y-auto bg-black bg-opacity-75">

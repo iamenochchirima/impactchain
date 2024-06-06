@@ -38,7 +38,7 @@ const TargetCard = ({ target, setSelectedTargets }) => {
         (prev || []).filter((t) => t.id !== target.id)
       );
     }
-  };
+  }
 
   return (
     <button onClick={handleClicked}>

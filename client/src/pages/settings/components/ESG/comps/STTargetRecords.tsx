@@ -1,13 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { TargetOption, targetOptions } from "../../../../../data/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { setNextTarget, setPreviousTarget } from "../../../../../redux/slices/app";
+import {
+  setNextTarget,
+  setPreviousTarget,
+} from "../../../../../redux/slices/app";
 import { RootState } from "../../../../../redux/store";
-import TargetRecordsCard from "../../../../../components/data-submission/targetrecords/TargetRecordsCard";
+import STTargetRecordsCard from "./STTargetRecordsCard";
 
-export const TargetRecords = () => {
+
+export const STTargetRecords= () => {
+
+  const { localImpactTargets } = useSelector((state: RootState) => state.app);
   const dispatch = useDispatch();
-  const { impactTargets, nextTarget, previousTarget } = useSelector(
+  const { nextTarget, previousTarget } = useSelector(
     (state: RootState) => state.app
   );
   const [targets, setTargets] = useState<TargetOption[]>([]);
@@ -15,10 +21,11 @@ export const TargetRecords = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [finished, setFinished] = useState(false);
   useEffect(() => {
-    if (impactTargets) {
-      const filteredTargets = impactTargets.filter(
+    if (localImpactTargets) {
+      const filteredTargets = localImpactTargets.filter(
         (target) => target.metrics?.length > 0
       );
+
       const _sortedTargets = [...filteredTargets].sort(
         (a, b) => Number(a.id) - Number(b.id)
       );
@@ -29,7 +36,7 @@ export const TargetRecords = () => {
       });
       setTargets(matchingTargetOption);
     }
-  }, [impactTargets]);
+  }, [localImpactTargets]);
 
   useEffect(() => {
     setDisplayedTargets(targets.slice(currentIndex, currentIndex + 1));
@@ -57,19 +64,36 @@ export const TargetRecords = () => {
   }, [currentIndex, targets]);
 
   return (
-    <div>
-      {impactTargets && (
-        <div  className="flex flex-col justify-center items-center">
-          {displayedTargets.map((target, index) => {
-            return (
-              <TargetRecordsCard
-                {...{ target, impactTargets, currentIndex, finished }}
-                key={index}
-              />
-            );
-          })}
+    <div className="fixed z-50 inset-0 text-cyan-700 overflow-y-auto bg-black bg-opacity-75">
+      <div className=" flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-TelegraphRegular">
+        <div
+          className={
+            "bg-custom-gray rounded-xl w-3/4 px-6 py-2 min-w-min max-w-full space-y-8"
+          }
+        >
+          <div className="w-full justify-center items-center flex flex-col">
+            <div>
+              {localImpactTargets && (
+                <div className="flex flex-col justify-center items-center">
+                  {displayedTargets.map((target, index) => {
+                    return (
+                      <STTargetRecordsCard
+                        {...{
+                          target,
+                          localImpactTargets,
+                          currentIndex,
+                          finished,
+                        }}
+                        key={index}
+                      />
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };

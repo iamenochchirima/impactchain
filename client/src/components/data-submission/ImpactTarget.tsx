@@ -125,7 +125,6 @@ const ImpactTarget = () => {
         dispatch(setUserRecord(data));
         dispatch(setImpactTargets(targets));
         dispatch(setDataComponent("Metrics"));
-        dispatch(setUserRecord(data));
         setLoading(false);
       } catch (error) {
         setLoading(false);

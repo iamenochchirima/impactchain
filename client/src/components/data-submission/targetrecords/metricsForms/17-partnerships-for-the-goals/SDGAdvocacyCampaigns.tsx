@@ -343,15 +343,27 @@ const SDGAdvocacyCampaignsData = ({ setManualData, setUploadManually }) => {
             />
           </div>
           <div className={styles.inputDiv}>
-            <label htmlFor={styles.inputLabel}>How long has the program been running?</label>
-            <input
-              className={styles.formInput}
+            <label htmlFor={styles.inputLabel}>
+              How long has the program been running?
+            </label>
+            <select
+              className={styles.formSelectInput}
               id="duration"
-              type="text"
-              placeholder="Provide the duration that the campaign has been running."
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
-            />
+              required
+            >
+              <option value="">
+              Provide the duration that the program has been running.
+              </option>
+              <option value="1Month">0-1 Month</option>
+              <option value="3Months">1 -3 Months</option>
+              <option value="6Months">3-6 Months</option>
+              <option value="1Year">6-12 Months</option>
+              <option value="3Years">1-3 Years</option>
+              <option value="5Years">3-5 Years</option>
+              <option value="5+Years">5+ Years</option>
+            </select>
           </div>
           <div className={styles.inputDiv}>
             <label htmlFor={styles.inputLabel}>Where is this program located? (City and Country)</label>

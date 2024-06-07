@@ -97,6 +97,8 @@ export interface GlobalState {
   showThisModal: string;
   localImpactTargets: ImpactTargetType[] | null;
   localRecord: UserRecord | null;
+
+  selectedSDGDetails: ImpactTargetType | null;
 }
 
 const initialState: GlobalState = {
@@ -139,6 +141,8 @@ const initialState: GlobalState = {
   showThisModal: "",
   localImpactTargets: null,
   localRecord: null,
+
+  selectedSDGDetails: null,
 };
 
 export const appSlice = createSlice({
@@ -289,7 +293,14 @@ export const appSlice = createSlice({
 
     setLocalRecord: (state: GlobalState, action: PayloadAction<UserRecord | null>) => {
       state.localRecord = action.payload;
-    }
+    },
+
+    setSelectedSDGDetails: (
+      state: GlobalState,
+      action: PayloadAction<ImpactTargetType | null>
+    ) => {
+      state.selectedSDGDetails = action.payload;
+    },
   },
 });
 
@@ -324,6 +335,7 @@ export const {
   setShowThisModal,
   setLocalImpactTargets,
   setLocalRecord,
+  setSelectedSDGDetails,
 } = appSlice.actions;
 
 export default appSlice.reducer;

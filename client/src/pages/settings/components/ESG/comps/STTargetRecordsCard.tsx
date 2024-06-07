@@ -2,12 +2,10 @@ import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   TargetRecordStateType,
-  setDataComponent,
   setImpactTargets,
   setLocalImpactTargets,
   setLocalRecord,
   setNextTarget,
-  setShowDataForm,
   setShowThisModal,
   setTargetRecord,
   setUserRecord,

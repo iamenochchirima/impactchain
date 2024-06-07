@@ -1,8 +1,9 @@
-import { ApexOptions } from 'apexcharts';
-import React, { FC, useState } from 'react';
-import ReactApexChart from 'react-apexcharts';
-import { LineGraphData } from '../../analytics/components/utils/types';
-
+import { ApexOptions } from "apexcharts";
+import React, { FC, useState } from "react";
+import ReactApexChart from "react-apexcharts";
+import { LineGraphData } from "../../analytics/components/utils/types";
+import ReportPeriod from "../../analytics/components/main-report/ReportPeriod";
+import { getDashboardChatTimeTitle } from "../../analytics/components/utils/utils";
 
 interface MainChartState {
   series: {
@@ -13,9 +14,10 @@ interface MainChartState {
 
 type Props = {
   graph: LineGraphData;
-}
+  timePeriod: string;
+};
 
-const MainChart: FC<Props> = ({graph}) => {
+const MainChart: FC<Props> = ({ graph, timePeriod }) => {
   const [state, setState] = useState<MainChartState>({
     series: [
       {
@@ -28,26 +30,30 @@ const MainChart: FC<Props> = ({graph}) => {
   const [options, setOptions] = useState<ApexOptions>({
     legend: {
       show: false,
-      position: 'top',
-      horizontalAlign: 'left',
+      position: "top",
+      horizontalAlign: "left",
     },
-    colors: ['#3C50E0', '#80CAEE'],
+    colors: ["#3C50E0", "#80CAEE"],
     chart: {
-      fontFamily: 'Satoshi, sans-serif',
+      fontFamily: "Satoshi, sans-serif",
       height: 335,
-      type: 'area',
+      type: "area",
       dropShadow: {
         enabled: true,
-        color: '#623CEA14',
+        color: "#623CEA14",
         top: 10,
         blur: 4,
         left: 0,
         opacity: 0.1,
       },
-  
+
       toolbar: {
         show: false,
       },
+    },
+    tooltip: {
+      theme: "dark",
+      x: { show: true },
     },
     responsive: [
       {
@@ -69,16 +75,16 @@ const MainChart: FC<Props> = ({graph}) => {
     ],
     stroke: {
       width: [2, 2],
-      curve: 'straight',
+      curve: "straight",
     },
     // labels: {
     //   show: false,
     //   position: "top",
     // },
     grid: {
-      borderColor: '#6B7280',
+      borderColor: "#6B7280",
       row: {
-        colors: ['transparent', 'transparent'],
+        colors: ["transparent", "transparent"],
         opacity: 0.5,
       },
       xaxis: {
@@ -98,8 +104,8 @@ const MainChart: FC<Props> = ({graph}) => {
     },
     markers: {
       size: 1,
-      colors: '#fff',
-      strokeColors: ['#3056D3', '#80CAEE'],
+      colors: "#fff",
+      strokeColors: ["#3056D3", "#80CAEE"],
       strokeWidth: 3,
       strokeOpacity: 0.9,
       strokeDashArray: 0,
@@ -111,41 +117,40 @@ const MainChart: FC<Props> = ({graph}) => {
       },
     },
     xaxis: {
-      type: 'category',
+      type: "category",
       categories: graph.categories,
       axisBorder: {
         show: false,
-        color: '#6B7280',
+        color: "#6B7280",
       },
       axisTicks: {
         show: false,
       },
       labels: {
         style: {
-          colors: '#fff',
-          fontSize: '12px',
-          fontFamily: 'Satoshi, sans-serif',
+          colors: "#fff",
+          fontSize: "12px",
+          fontFamily: "Satoshi, sans-serif",
         },
-      }
+      },
     },
     yaxis: {
       title: {
         style: {
-          fontSize: '0px',
+          fontSize: "0px",
         },
       },
       labels: {
         style: {
-          colors: '#fff',
-          fontSize: '12px',
-          fontFamily: 'Satoshi, sans-serif',
+          colors: "#fff",
+          fontSize: "12px",
+          fontFamily: "Satoshi, sans-serif",
         },
       },
-      min: 0,
+      min: -100,
       max: 100,
     },
-  }
-  )
+  });
 
   const handleReset = () => {
     setState((prevState) => ({
@@ -157,18 +162,9 @@ const MainChart: FC<Props> = ({graph}) => {
   return (
     <div className="col-span-12 border-x border-y rounded-xl border-custom-green p-4 text-white bg-custom-gray px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-8">
       <div className="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
-        <div className="flex w-full max-w-45 justify-end">
-          <div className="inline-flex items-center rounded-md bg-whiter p-1.5 dark:bg-meta-4">
-            <button className="rounded py-1 px-3 text-xs font-medium shadow-card hover:bg-gray-500 hover:shadow-card dark:bg-boxdark dark:text-white dark:hover:bg-boxdark">
-              Day
-            </button>
-            <button className="rounded py-1 px-3 text-xs font-medium hover:bg-gray-500 hover:shadow-card dark:text-white dark:hover:bg-boxdark">
-              Week
-            </button>
-            <button className="rounded py-1 px-3 text-xs font-medium hover:bg-gray-500 hover:shadow-card dark:text-white dark:hover:bg-boxdark">
-              Month
-            </button>
-          </div>
+        <div className="flex  w-full max-w-45 justify-between">
+          <span className="font-bold text-xl">Impact Performance Trend</span>
+          <span>{getDashboardChatTimeTitle(timePeriod)}</span>
         </div>
       </div>
 
@@ -181,6 +177,10 @@ const MainChart: FC<Props> = ({graph}) => {
             height={350}
           />
         </div>
+      </div>
+      <div className="text-sm flex text-custom-green flex-col">
+        <span>Y: Impact % change</span>
+        <span>X: Time</span>
       </div>
     </div>
   );

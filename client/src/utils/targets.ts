@@ -77,9 +77,6 @@ export const getImpactTargetsArray = (targets: ImpactTargets) => {
     const impactTarget = targets[key as keyof ImpactTargets];
 
     if (impactTarget.length > 0) {
-      console.log(
-        `Processing ${key} with ID: ${impactTarget[0]?.name} and Name: ${impactTarget[0]?.name}`
-      );
       const metrics = getMetricsArray(impactTarget[0]?.metrics);
       const target: ImpactTargetType = {
         id: Number(impactTarget[0]?.id ?? 0),

@@ -100,7 +100,7 @@ const Header = () => {
       {currentSDGInfo && <SDGInfo/>}
       <div className="fixed bg-black z-40 left-64 right-0">
         <div className="pt-4">
-          <div className=" h-4 flex items-center justify-end bg-custom-gray mx-10 py-10 rounded-xl border border-green-700">
+          <div className=" h-4 flex items-center justify-end bg-custom-gray ml-10 mr-[23px] py-10 rounded-xl border border-green-700">
             <div className="flex items-center justify-between gap-2">
               <Link to="/askai">
                 <img src="/smiley.svg" alt="smiley" className="h-10 w-10" />

@@ -7,7 +7,6 @@ const TartgetsCharts = () => {
 
   return (
     <div
-      //  style={gridStyle}
       className="flex flex-wrap -m-2"
     >
       {impactTargets?.map((target, index) => (

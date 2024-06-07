@@ -111,7 +111,7 @@ if (userRecord && impactTargets) {
           <span>Generate Report</span>
         </button>
       </div>
-      {graph && <MainChart {...{graph}} />}
+      {graph && <MainChart {...{graph, timePeriod}} />}
       <TargetsCircles />
       <TartgetsCharts />
     </div>

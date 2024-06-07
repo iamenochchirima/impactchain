@@ -281,7 +281,7 @@ export const mergeLineGraphData = (graphs: LineGraphData[], lables: GraphLabel):
         ? 100
         : 0;
 
-    mergedData.push(averagePercentageChange);
+    mergedData.push(Math.round(averagePercentageChange));
     mergedCategories.push(combinedCategory);
   }
 
@@ -293,6 +293,7 @@ export const mergeLineGraphData = (graphs: LineGraphData[], lables: GraphLabel):
     y_label: lables.y_label,
   };
 };
+
 
 export const getLineGraphData = (
   periodOfTime: string,

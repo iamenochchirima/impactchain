@@ -8,16 +8,12 @@ import { setLocalImpactTargets, setLocalRecord, setShowThisModal } from "../../.
 import { AiOutlineClose } from "react-icons/ai";
 import TargetsMetricCard from "./TargetsMetricCard";
 
-type Props = {
-  handleCancel: () => void;
-};
+
 
 const bubbleText =
   "Under each SDG, tick the boxes next to, up to three metrics you plan to monitor. You can change your selections at any time to reflect shifts in your sustainability focus";
 
-const STMetrics: FC<Props> = ({
-  handleCancel,
-}) => {
+const STMetrics = () => {
   const { metricsUpdated, localImpactTargets, localRecord } = useSelector(
     (state: RootState) => state.app
   );
@@ -120,6 +116,10 @@ const STMetrics: FC<Props> = ({
       console.error("Error saving localRecord", error);
       setSaving(false);
     }
+  };
+
+  const handleCancel = () => {
+    dispatch(setShowThisModal(""));
   };
 
   return (

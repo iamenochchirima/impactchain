@@ -1,11 +1,12 @@
 import { ApexOptions } from "apexcharts";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import { ChartData, getData } from "../../utils/utils";
 import { IoIosArrowDown } from "react-icons/io";
-import { targetOptions } from "../../../../data/constants";
+import { metricValueKeyPairs, targetOptions } from "../../../../data/constants";
 import { Tooltip } from "react-tooltip";
-import { ImpactTargetType } from "../../../../utils/types";
+import { ImpactTargetType, Metric } from "../../../../utils/types";
+import { calculateImpact } from "../../../analytics/components/utils/processGraphsData";
 
 interface ChartThreeState {
   series: number[];
@@ -15,8 +16,16 @@ type Props = {
   target: ImpactTargetType;
 };
 
+
+type ImpactData = {
+  metric: Metric
+  impact: number;
+};
+
 const ChartThree: React.FC<Props> = ({ target }) => {
   const data: ChartData = getData(target);
+  const [periodOfTime, setPeriodOfTime] = useState("1Year");
+  const [metricsImpact, setMetricsImpact] = useState<ImpactData[]>([]);
 
   const options: ApexOptions = {
     chart: {
@@ -65,14 +74,6 @@ const ChartThree: React.FC<Props> = ({ target }) => {
     series: data.percentArray,
   });
 
-  const handleReset = () => {
-    setState({
-      series: data.percentArray,
-    });
-  };
-
-  handleReset;
-
   const truncateEnd = (text: string, maxLength: number): string => {
     if (text.length <= maxLength) {
       return text;
@@ -81,6 +82,38 @@ const ChartThree: React.FC<Props> = ({ target }) => {
   };
 
   const matchingTarget = targetOptions.find((t) => t.name === target.name);
+
+  useEffect(() => {
+if (target) {
+     setMetricsImpact(getMetricsImpact(target.metrics));
+    }
+  }, [target]);  
+
+
+  const getMetricsImpact = (metrics: Metric[]) => {
+    const data: ImpactData[] = [];
+
+    for (const metric of metrics) {
+      const valueKey = metricValueKeyPairs.find(
+        (pair) => pair.key === metric.key
+      );
+      if (!valueKey) {
+        console.log("No value key found for metric", metric);
+        continue;
+      }
+      const impact = calculateImpact(
+        metric.data,
+        valueKey.valueKey,
+        periodOfTime
+      );
+      const value = {
+        metric: metric,
+        impact,
+      };
+      data.push(value);
+    }
+    return data;
+  };
 
   return (
     <div
@@ -110,10 +143,10 @@ const ChartThree: React.FC<Props> = ({ target }) => {
               id=""
               className="relative z-10 inline-flex appearance-none bg-transparent py-1 pl-3 pr-8 text-sm font-medium outline-none"
             >
-              <option value="" className="dark:bg-boxdark">
+              <option value="1Month" className="dark:bg-boxdark">
                 Monthly
               </option>
-              <option value="" className="dark:bg-boxdark">
+              <option value="1Year" className="dark:bg-boxdark">
                 Yearly
               </option>
             </select>

@@ -88,8 +88,8 @@ const Report = () => {
   return (
     <div className="fixed z-50  inset-0 text-white overflow-y-auto bg-black bg-opacity-75">
       <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-TelegraphRegular">
-        <div className="bg-custom-gray fixed rounded-xl mx-10 w-[90%] sm:w-3/4 md:w-[60%] px-6 py-2 min-w-min max-w-full ">
-          <div className="mb-10">
+        <div className="llg:h-screen flex flex-col justify-center items-center  w-full rounded-xl px-3 py-2 space-y-8">
+          <div className="mb-10 w-[90%] sm:w-3/4 md:w-[70%] bg-custom-gray p-4 rounded-xl">
             <div className="flex justify-between items-center">
               <img
               src={
